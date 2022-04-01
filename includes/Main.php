@@ -2,6 +2,8 @@
 
 namespace MatrixAddons\DocumentEngine;
 
+use MatrixAddons\DocumentEngine\Hooks\Template;
+
 final class Main
 {
     private static $instances = [];
@@ -26,6 +28,8 @@ final class Main
     public function load_helpers()
     {
         include_once DOCUMENT_ENGINE_ABSPATH . 'includes/Helpers/main.php';
+        include_once DOCUMENT_ENGINE_ABSPATH . 'includes/Helpers/template.php';
+        include_once DOCUMENT_ENGINE_ABSPATH . 'includes/Helpers/settings.php';
 
     }
 
@@ -39,11 +43,12 @@ final class Main
         add_action('init', [$this, 'init_plugin']);
 
         Assets::init();
-       /* Block::init();
-        Migration::init();
-        PostTypes\Maps::init();
-        Meta\Maps::init();
-        Api::init();*/
+        new Template();
+        /* Block::init();
+         Migration::init();
+         PostTypes\Maps::init();
+         Meta\Maps::init();
+         Api::init();*/
 
         if (is_admin()) {
             new \MatrixAddons\DocumentEngine\Admin\Main();
@@ -67,6 +72,26 @@ final class Main
     public function __wakeup()
     {
         throw new \Exception("Cannot unserialize singleton");
+    }
+
+    public function plugin_path()
+    {
+        return untrailingslashit(plugin_dir_path(DOCUMENT_ENGINE_FILE));
+    }
+
+    public function template_path()
+    {
+        return apply_filters('document_engine_template_path', 'document_engine/');
+    }
+
+    /**
+     * Get the template path.
+     *
+     * @return string
+     */
+    public function plugin_template_path()
+    {
+        return apply_filters('document_engine_plugin_template_path', $this->plugin_path() . '/templates/');
     }
 
     public static function getInstance()

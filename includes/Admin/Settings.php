@@ -1,7 +1,7 @@
 <?php
 namespace MatrixAddons\DocumentEngine\Admin;
 
-use MatrixAddons\DocumentEngine\Admin\Settings\General;use MatrixAddons\DocumentEngine\Admin\Settings\Header;
+use MatrixAddons\DocumentEngine\Admin\Settings\PDF;
 
 class Settings {
 
@@ -34,7 +34,7 @@ class Settings {
 			if ( empty( self::$settings ) ) {
 				$settings = array();
 
-				$settings[] = new General();
+				$settings[] = new PDF();
 
 
 				self::$settings = apply_filters( 'document_engine_get_settings_pages', $settings );
