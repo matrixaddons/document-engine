@@ -1,8 +1,8 @@
 {
-  "name": "dk-pdf",
-  "version": "1.9.2",
+  "name": "ddocument-engine",
+  "version": "1.0.0",
   "description": "WordPress to PDF made easy.",
-  "author": "Emili Castells",
+  "author": "matrixaddons",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",

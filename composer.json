@@ -1,6 +1,17 @@
 {
-    "name": "dinamiko/dk-pdf",
-    "require": {
-        "mpdf/mpdf": "^8.0"
+  "name": "matrixaddons/document-engine",
+  "description": "WordPress to PDF",
+  "authors": [
+    {
+      "name": "matrixaddons"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MatrixAddons\\DocumentEngine\\": "./includes"
+    }
+  },
+  "require": {
+    "mpdf/mpdf": "^8.0"
+  }
 }
