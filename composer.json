@@ -1,0 +1,6 @@
+{
+    "name": "dinamiko/dk-pdf",
+    "require": {
+        "mpdf/mpdf": "^8.0"
+    }
+}
