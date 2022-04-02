@@ -60,7 +60,7 @@ class Template
 
             ob_start();
 
-            document_engine_get_template('button.php');
+            document_engine_get_template('pdf-button.php');
 
 
             return ob_get_clean() . $c;
@@ -70,7 +70,7 @@ class Template
 
             ob_start();
 
-            $content = document_engine_get_template('button.php');
+            $content = document_engine_get_template('pdf-button.php');
 
             return $c . ob_get_clean();
 

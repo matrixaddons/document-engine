@@ -2,27 +2,17 @@
 
 if (!defined('ABSPATH')) exit;
 
-/**
- * displays pdf button
- */
-
-
-/**
- * output the pdf
- */
-function document_engine_output_pdf($query)
+function document_engine_generate_pdf($query)
 {
 
-    $pdf = sanitize_text_field(get_query_var('pdf'));
+    $pdf = sanitize_text_field(get_query_var('generate_pdf'));
 
     if ($pdf) {
 
-        require_once realpath(__DIR__ . '/..') . '/vendor/autoload.php';
-
         // page orientation
-        $document_engine_page_orientation = get_option('document_engine_page_orientation', '');
+        $page_orientation = document_engine_pdf_page_orientation();
 
-        if ($document_engine_page_orientation == 'horizontal') {
+        if ($page_orientation == 'horizontal') {
 
             $format = apply_filters('document_engine_pdf_format', 'A4') . '-L';
 
@@ -33,15 +23,15 @@ function document_engine_output_pdf($query)
         }
 
         // font size
-        $document_engine_font_size = get_option('document_engine_font_size', '12');
+        $document_engine_font_size = document_engine_pdf_page_font_size();
         $document_engine_font_family = '';
 
         // margins
-        $document_engine_margin_left = get_option('document_engine_margin_left', '15');
-        $document_engine_margin_right = get_option('document_engine_margin_right', '15');
-        $document_engine_margin_top = get_option('document_engine_margin_top', '50');
-        $document_engine_margin_bottom = get_option('document_engine_margin_bottom', '30');
-        $document_engine_margin_header = get_option('document_engine_margin_header', '15');
+        $document_engine_margin_left = document_engine_pdf_page_margin_left();
+        $document_engine_margin_right = document_engine_pdf_page_margin_right();
+        $document_engine_margin_top = document_engine_pdf_page_margin_top();
+        $document_engine_margin_bottom = document_engine_pdf_page_margin_bottom();
+        $document_engine_margin_header = document_engine_pdf_page_margin_header();
 
         // fonts
         $mpdf_default_config = (new Mpdf\Config\ConfigVariables())->getDefaults();
@@ -66,22 +56,22 @@ function document_engine_output_pdf($query)
             'fontdata' => $document_engine_mpdf_font_data,
         ]);
 
+
         // creating and setting the pdf
         $mpdf = new \Mpdf\Mpdf($mpdf_config);
 
-        // encrypts and sets the PDF document permissions
-        // https://mpdf.github.io/reference/mpdf-functions/setprotection.html
-        $enable_protection = get_option('document_engine_enable_protection');
 
-        if ($enable_protection == 'on') {
-            $grant_permissions = get_option('document_engine_grant_permissions');
+        $enable_protection = document_engine_pdf_page_enable_protection();
+
+        if ($enable_protection == 'yes') {
+            $grant_permissions = document_engine_pdf_page_protected_permissions();
             $mpdf->SetProtection($grant_permissions);
         }
 
         // keep columns
-        $keep_columns = get_option('document_engine_keep_columns');
+        $keep_columns = document_engine_pdf_page_keep_columns();
 
-        if ($keep_columns == 'on') {
+        if ($keep_columns == 'yes') {
             $mpdf->keepColumns = true;
         }
 
@@ -91,23 +81,31 @@ function document_engine_output_pdf($query)
         $mpdf->autoScriptToLang = true;
         $mpdf->autoLangToFont = true;
         */
-
         // header
-        $pdf_header_html = document_engine_get_template('dkpdf-header');
+        ob_start();
+        document_engine_get_template('pdf-header.php');
+        $pdf_header_html = ob_get_clean();
         $mpdf->SetHTMLHeader($pdf_header_html);
 
         // footer
-        $pdf_footer_html = document_engine_get_template('dkpdf-footer');
+        ob_start();
+        document_engine_get_template('pdf-footer.php');
+        $pdf_footer_html = ob_get_clean();
         $mpdf->SetHTMLFooter($pdf_footer_html);
 
         $mpdf->WriteHTML(apply_filters('document_engine_before_content', ''));
-        $mpdf->WriteHTML(document_engine_get_template('dkpdf-index'));
+        ob_start();
+        document_engine_get_template('pdf-index.php');
+        $main_html = ob_get_clean();
+
+        $mpdf->WriteHTML($main_html);
         $mpdf->WriteHTML(apply_filters('document_engine_after_content', ''));
 
         // action to do (open or download)
-        $pdfbutton_action = sanitize_option('document_engine_pdfbutton_action', get_option('document_engine_pdfbutton_action', 'open'));
+        $pdfbutton_action = document_engine_pdf_button_action();
 
         global $post;
+
         $title = apply_filters('document_engine_pdf_filename', get_the_title($post->ID));
 
         $mpdf->SetTitle($title);
@@ -122,25 +120,15 @@ function document_engine_output_pdf($query)
             $mpdf->Output($title . '.pdf', 'D');
 
         }
-
         exit;
 
     }
 
 }
 
-add_action('wp', 'document_engine_output_pdf');
-
-/**
- * returs a template
- * @param string template name
- */
+add_action('wp', 'document_engine_generate_pdf');
 
 
-/**
- * returns an array of active post, page, attachment and custom post types
- * @return array
- */
 function document_engine_get_post_types()
 {
 
@@ -189,7 +177,7 @@ function document_engine_get_pdf_permissions()
 function document_engine_set_query_vars($query_vars)
 {
 
-    $query_vars[] = 'pdf';
+    $query_vars[] = 'generate_pdf';
 
     return $query_vars;
 

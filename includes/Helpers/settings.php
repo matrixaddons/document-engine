@@ -137,3 +137,9 @@ if (!function_exists('document_engine_pdf_page_keep_columns')) {
         return 'yes' === (get_option('document_engine_pdf_page_keep_columns', 'no'));
     }
 }
+if (!function_exists('document_engine_pdf_page_enable_protection')) {
+    function document_engine_pdf_page_enable_protection()
+    {
+        return 'yes' === (get_option('document_engine_pdf_page_enable_protection', 'no'));
+    }
+}
