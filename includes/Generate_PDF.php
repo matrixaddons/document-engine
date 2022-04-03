@@ -2,6 +2,10 @@
 
 namespace MatrixAddons\DocumentEngine;
 
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
+use Mpdf\Mpdf;
+
 class Generate_PDF
 {
     public static function generate()
@@ -13,7 +17,7 @@ class Generate_PDF
 
             return;
         }
-        if (get_post_status($pdf_post_id) !== 'public') {
+        if (get_post_status($pdf_post_id) !== 'publish') {
             return;
         }
         // page orientation
@@ -42,16 +46,16 @@ class Generate_PDF
         $document_engine_margin_header = document_engine_pdf_page_margin_header();
 
         // fonts
-        $mpdf_default_config = (new Mpdf\Config\ConfigVariables())->getDefaults();
-        $document_engine_mpdf_font_dir = apply_filters('document_engine_mpdf_font_dir', $mpdf_default_config['fontDir']);
+        $mpdf_default_config = (new ConfigVariables())->getDefaults();
+        $document_engine_pdf_font_dir = apply_filters('document_engine_pdf_font_dir', $mpdf_default_config['fontDir']);
 
-        $mpdf_default_font_config = (new Mpdf\Config\FontVariables())->getDefaults();
-        $document_engine_mpdf_font_data = apply_filters('document_engine_mpdf_font_data', $mpdf_default_font_config['fontdata']);
+        $mpdf_default_font_config = (new FontVariables())->getDefaults();
+        $document_engine_pdf_font_data = apply_filters('document_engine_pdf_font_data', $mpdf_default_font_config['fontdata']);
 
-        $document_engine_mpdf_temp_dir = document_engine()->get_tmp_pdf_dir(true, true);
+        $document_engine_pdf_temp_dir = document_engine()->get_tmp_pdf_dir(true, true);
 
-        $mpdf_config = apply_filters('document_engine_mpdf_config', [
-            'tempDir' => $document_engine_mpdf_temp_dir,
+        $mpdf_config = apply_filters('document_engine_pdf_config', [
+            'tempDir' => $document_engine_pdf_temp_dir,
             'default_font_size' => $document_engine_font_size,
             'format' => $format,
             'margin_left' => $document_engine_margin_left,
@@ -59,13 +63,13 @@ class Generate_PDF
             'margin_top' => $document_engine_margin_top,
             'margin_bottom' => $document_engine_margin_bottom,
             'margin_header' => $document_engine_margin_header,
-            'fontDir' => $document_engine_mpdf_font_dir,
-            'fontdata' => $document_engine_mpdf_font_data,
+            'fontDir' => $document_engine_pdf_font_dir,
+            'fontdata' => $document_engine_pdf_font_data,
         ]);
 
 
         // creating and setting the pdf
-        $mpdf = new \Mpdf\Mpdf($mpdf_config);
+        $mpdf = new Mpdf($mpdf_config);
 
 
         $enable_protection = document_engine_pdf_page_enable_protection();

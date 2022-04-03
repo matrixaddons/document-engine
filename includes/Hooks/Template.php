@@ -98,10 +98,11 @@ class Template
 
             return;
         }
-        if (get_post_status($pdf_post_id) !== 'public') {
+        
+        if (get_post_status($pdf_post_id) !== 'publish') {
             return;
         }
-        
+
         Generate_PDF::generate();
     }
 }

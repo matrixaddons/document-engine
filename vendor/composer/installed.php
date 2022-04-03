@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '13cd806386743a7fd836f50e56b9cf4b8d9bf890',
+        'reference' => '7ca8d25c14c329afd7b599fb24a14d9de0dff85f',
         'name' => 'matrixaddons/document-engine',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '13cd806386743a7fd836f50e56b9cf4b8d9bf890',
+            'reference' => '7ca8d25c14c329afd7b599fb24a14d9de0dff85f',
             'dev_requirement' => false,
         ),
         'mpdf/mpdf' => array(
