@@ -203,7 +203,7 @@ class PDF extends Setting_Base
                 array(
                     'title' => __('Header Logo', 'document-engine'),
                     'id' => 'document_engine_pdf_header_logo',
-                    'type' => 'number',
+                    'type' => 'image',
                     'default' => '0',
                 ),
                 array(

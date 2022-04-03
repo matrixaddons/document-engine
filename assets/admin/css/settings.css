@@ -1,3 +1,7 @@
+.document-engine-hide {
+    display: none !important;
+}
+
 .textarea-wrap {
     display: none;
 }
@@ -25,5 +29,133 @@ textarea#document_engine_pdf_footer_text {
 
 .document-engine-multicheckbox input[type="checkbox"] {
     margin: 0;
-    margin-right:5px;
+    margin-right: 5px;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap {
+    width: 100%;
+    display: inline-block;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .matrixaddons-image-field-add {
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px 0px 20px 0px;
+    background: #FFFFFF;
+    border: 1px dashed #074771;
+    border-radius: 4px;
+    width: 400px;
+    float: left;
+    margin-right: 20px;
+
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    width: 193px;
+}
+
+.field-container {
+    width: calc(100% - 193px);
+    float: right;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 4px;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container .image-overlay {
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    display: none;
+    position: absolute;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    border-radius: 4px;
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 7, 63, 0.7)), to(rgba(0, 7, 63, 0.7)));
+    background: -o-linear-gradient(bottom, rgba(0, 7, 63, 0.7), rgba(0, 7, 63, 0.7));
+    background: linear-gradient(0deg, rgba(0, 7, 63, 0.7), rgba(0, 7, 63, 0.7));
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container a.document-engine-remove-image {
+    color: #fff;
+    cursor: pointer;
+    width: 13%;
+    height: 13%;
+    min-width: 16px;
+    min-height: 16px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .image-container:hover .image-overlay {
+    display: flex;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .matrixaddons-field .matrixaddons-title {
+    position: relative;
+    width: 30%;
+    float: left;
+}
+
+.document-engine-image-field .matrixaddons-image-field-wrap .matrixaddons-field .matrixaddons-fieldset {
+    float: right;
+    width: calc(70% - 20px);
 }

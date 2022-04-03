@@ -57,7 +57,6 @@ class Settings {
 			do_action( 'document_engine_update_options' );
 
 			self::add_message( __( 'Your settings have been saved.', 'document-engine' ) );
-			self::check_download_folder_protection();
 
 			// Clear any unwanted data and flush rules.
 			update_option( 'document_engine_queue_flush_rewrite_rules', 'yes' );
@@ -274,6 +273,58 @@ class Settings {
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
 									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo $description; // WPCS: XSS ok. ?>
+							</td>
+						</tr>
+						<?php
+						break;
+
+					case 'image':
+						$option_value = absint(self::get_option( $value['id'], $value['default'] ));
+						$hidden_style = $value['type'] === 'hidden' ? 'style="display:none"': '';
+						?><tr valign="top" <?php echo $hidden_style ?>>
+							<th scope="row" class="titledesc">
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+							</th>
+							<td class="document-engine-image-field forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
+								<input
+									name="<?php echo esc_attr( $value['id'] ); ?>"
+									id="<?php echo esc_attr( $value['id'] ); ?>"
+									type="hidden"
+									style="<?php echo esc_attr( $value['css'] ); ?>"
+									value="<?php echo esc_attr( $option_value ); ?>"
+									class="<?php echo esc_attr( $value['class'] ); ?>"
+									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
+									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo $description; // WPCS: XSS ok. ?>
+
+
+									<div class="matrixaddons-image-field-wrap">
+                                        <a class="matrixaddons-image-field-add <?php echo $option_value > 1 ? 'document-engine-hide' : ''; ?>" href="#"
+                                           data-uploader-title="Add new image"
+                                           data-uploader-button-text="Add new image">
+                                            <img src="<?php echo esc_url(DOCUMENT_ENGINE_ASSETS_URI) ?>images/upload-image.png">
+                                            <h3>Drop your file here, or <span>browse</span></h3>
+                                            <p>Supports: JPG, JPEG, PNG</p>
+                                        </a>
+                                        <div class="image-container<?php echo $option_value < 1 ? ' document-engine-hide' : ''; ?>">
+                                            <?php
+
+                                            if ($option_value > 0) {
+                                                $image_src = wp_get_attachment_image_url($option_value, 'full');
+
+                                                ?>
+                                                <div class="image-wrapper" data-url="<?php echo esc_url_raw($image_src) ?>">
+                                                    <div class="image-content"><img
+                                                                src="<?php echo esc_url_raw($image_src) ?>"
+                                                                alt="">
+                                                        <div class="image-overlay"><a
+                                                                    class="matrixaddons-image-delete document-engine-remove-image dashicons dashicons-trash"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+			                    </div>
 							</td>
 						</tr>
 						<?php
@@ -796,6 +847,9 @@ class Settings {
                         $allowed_html = $option['allowed_html'] ?? array();
 						$value = wp_kses( trim( $raw_value ), $allowed_html);
 						break;
+                    case 'image':
+						$value = absint($raw_value);
+						break;
 					case 'select':
 						$allowed_values = empty( $option['options'] ) ? array() : array_map( 'strval', array_keys( $option['options'] ) );
 						if ( empty( $option['default'] ) && empty( $allowed_values ) ) {
@@ -859,33 +913,5 @@ class Settings {
 			return true;
 		}
 
-		/**
-		 * Checks which method we're using to serve downloads.
-		 *
-		 * If using force or x-sendfile, this ensures the .htaccess is in place.
-		 */
-		public static function check_download_folder_protection() {
-			$upload_dir      = wp_upload_dir();
-			$downloads_url   = $upload_dir['basedir'] . '/document-engine';
-			$download_method = get_option( 'document_engine_file_download_method' );
 
-			if ( 'redirect' === $download_method ) {
-
-				// Redirect method - don't protect.
-				if ( file_exists( $downloads_url . '/.htaccess' ) ) {
-					unlink( $downloads_url . '/.htaccess' ); // @codingStandardsIgnoreLine
-				}
-			} else {
-
-				// Force method - protect, add rules to the htaccess file.
-				if ( ! file_exists( $downloads_url . '/.htaccess' ) ) {
-					$file_handle = @fopen( $downloads_url . '/.htaccess', 'w' ); // @codingStandardsIgnoreLine
-					if ( $file_handle ) {
-						fwrite( $file_handle, 'deny from all' ); // @codingStandardsIgnoreLine
-						fclose( $file_handle ); // @codingStandardsIgnoreLine
-					}
-				}
-			}
-		}
-	}
-
+}
