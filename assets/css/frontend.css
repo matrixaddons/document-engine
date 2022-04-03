@@ -1,4 +1,4 @@
-.dkpdf-button-container {
+.document-engine-pdf-button-container {
     width: 100% !important;
     float: none;
     padding-top: 10px;
@@ -8,22 +8,22 @@
     margin: 0 auto;
 }
 
-a.dkpdf-button {
+a.document-engine-pdf-button {
     display: inline-block;
 }
 
-a.dkpdf-button:link, a.dkpdf-button:visited {
+a.document-engine-pdf-button:link, a.document-engine-pdf-button:visited {
 
 }
 
-a.dkpdf-button:hover {
+a.document-engine-pdf-button:hover {
 
 }
 
-a.dkpdf-button span.dkpdf-button-icon {
+a.document-engine-pdf-button span.document-engine-pdf-button-icon {
     font-size: 140%;
     margin-right: 5px;
 }
 
-.dkpdf-content {
+.document-engine-pdf-content {
 }

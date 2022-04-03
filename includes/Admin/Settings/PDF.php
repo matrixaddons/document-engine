@@ -35,6 +35,7 @@ class PDF extends Setting_Base
             '' => __('Button', 'document-engine'),
             'header_footer' => __('Header & Footer', 'document-engine'),
             'page' => __('Page', 'document-engine'),
+            'style' => __('Style', 'document-engine'),
         );
 
         return apply_filters('document_engine_get_sections_' . $this->id, $sections);
@@ -161,6 +162,35 @@ class PDF extends Setting_Base
 
             );
 
+        } else if ('style' === $current_section) {
+            $settings = array(
+                array(
+                    'title' => __('PDF Style', 'document-engine'),
+                    'type' => 'title',
+                    'desc' => '',
+                    'id' => 'document_engine_pdf_style',
+                ),
+                array(
+                    'title' => __('Use current theme\'s CSS', 'document-engine'),
+                    'desc' => __(' Includes the stylesheet from current theme, but is overridden by PDF Custom CSS and plugins adding its own stylesheets.', 'document-engine'),
+                    'id' => 'document_engine_pdf_use_theme_style',
+                    'type' => 'checkbox',
+                    'default' => 'no'
+                ),
+
+                array(
+                    'title' => __('Custom CSS', 'document-engine'),
+                    'id' => 'document_engine_pdf_custom_css',
+                    'type' => 'textarea',
+                    'default' => ''
+                ),
+                array(
+                    'type' => 'sectionend',
+                    'id' => 'document_engine_pdf_style',
+                ),
+
+            );
+
         } else if ('header_footer' === $current_section) {
             $settings = array(
                 array(
@@ -182,7 +212,7 @@ class PDF extends Setting_Base
                     'default' => 'no'
                 ),
                 array(
-                    'title' => __('Show Pagination', 'document-engine'),
+                    'title' => __('Show Page Number', 'document-engine'),
                     'id' => 'document_engine_pdf_header_show_pagination',
                     'type' => 'checkbox',
                     'default' => 'no'
@@ -211,7 +241,7 @@ class PDF extends Setting_Base
                     'default' => 'no'
                 ),
                 array(
-                    'title' => __('Show Pagination', 'document-engine'),
+                    'title' => __('Show Page Number', 'document-engine'),
                     'id' => 'document_engine_pdf_footer_show_pagination',
                     'type' => 'checkbox',
                     'default' => 'no'

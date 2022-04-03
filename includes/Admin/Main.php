@@ -51,6 +51,17 @@ final class Main
 
         add_action('admin_menu', array($this, 'admin_menu'));
 
+        add_filter('plugin_action_links_' . plugin_basename(DOCUMENT_ENGINE_FILE), array($this, 'setting_link'));
+
+
+    }
+
+    public function setting_link($links)
+    {
+
+        $settings_link = '<a href="admin.php?page=document-engine-settings">' . __('Settings', 'document-engine') . '</a>';
+        array_push($links, $settings_link);
+        return $links;
 
     }
 
@@ -106,8 +117,7 @@ final class Main
      */
     public function init()
     {
-
-
+        Assets::init();
     }
 
 

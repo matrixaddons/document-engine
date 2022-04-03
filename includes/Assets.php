@@ -12,17 +12,21 @@ class Assets
 
     public function register_assets()
     {
-        wp_register_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', array(), '4.3.0');
+        wp_register_style(
+            'document-engine-font-awesome', // Handle.
+            DOCUMENT_ENGINE_ASSETS_URI . 'vendor/font-awesome/css/fontawesome.min.css',
+            array(),
+            DOCUMENT_ENGINE_VERSION
+        );
 
-        wp_register_style( 'dkpdf-frontend', plugins_url( 'dk-pdf/assets/css/frontend.css' ), array(), DKPDF_VERSION );
+        wp_register_style(
+            'document-engine-frontend', // Handle.
+            DOCUMENT_ENGINE_ASSETS_URI . 'css/frontend.css',
+            array('document-engine-font-awesome'),
+            DOCUMENT_ENGINE_VERSION
+        );
+        wp_enqueue_style('document-engine-frontend');
 
-        wp_register_script( 'dkpdf-frontend', plugins_url( 'dk-pdf/assets/js/frontend.js' ), array( 'jquery' ), DKPDF_VERSION, true );
-
-        wp_enqueue_style( 'font-awesome' );
-
-        wp_enqueue_style( 'dkpdf-frontend' );
-
-        wp_enqueue_script( 'dkpdf-frontend' );
 
     }
 }

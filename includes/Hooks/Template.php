@@ -2,17 +2,20 @@
 
 namespace MatrixAddons\DocumentEngine\Hooks;
 
-use MatrixAddons\DocumentEngine\Loader;
+use MatrixAddons\DocumentEngine\Generate_PDF;
 
 class Template
 {
     public function __construct()
     {
         add_filter('the_content', array($this, 'button'));
+        add_filter('query_vars', array($this, 'set_query_vars'));
+        add_action('wp', array($this, 'generate_pdf'));
+
 
     }
 
-    function button($content)
+    public function button($content)
     {
         if (!is_singular()) {
             return;
@@ -23,7 +26,7 @@ class Template
 
 
         // if is generated pdf don't show pdf button
-        $pdf = get_query_var('generate_pdf');
+        $pdf = get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG);
 
         if ($pdf) {
 
@@ -70,7 +73,7 @@ class Template
 
             ob_start();
 
-            $content = document_engine_get_template('pdf-button.php');
+            document_engine_get_template('pdf-button.php');
 
             return $c . ob_get_clean();
 
@@ -79,4 +82,26 @@ class Template
 
     }
 
+    public function set_query_vars($query_vars)
+    {
+        $query_vars[] = DOCUMENT_ENGINE_QUERY_VAR_SLUG;
+
+        return $query_vars;
+
+    }
+
+    public function generate_pdf($query)
+    {
+        $pdf_post_id = sanitize_text_field(get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG));
+
+        if (absint($pdf_post_id) < 1) {
+
+            return;
+        }
+        if (get_post_status($pdf_post_id) !== 'public') {
+            return;
+        }
+        
+        Generate_PDF::generate();
+    }
 }

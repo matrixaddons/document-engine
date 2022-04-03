@@ -36,9 +36,21 @@ if (!function_exists('document_engine_pdf_button_alignment')) {
     }
 }
 if (!function_exists('document_engine_pdf_header_logo')) {
-    function document_engine_pdf_header_logo()
+    function document_engine_pdf_header_logo($url = true)
     {
-        return absint(get_option('document_engine_pdf_header_logo', 0));
+        $image_id = absint(get_option('document_engine_pdf_header_logo', 0));
+
+        if ($image_id < 1) {
+            return null;
+        }
+        if (!$url) {
+            return $image_id;
+        }
+        $image_url = wp_get_attachment_url($image_id, 'full');
+        if ($image_url !== '') {
+            return $image_url;
+        }
+        return null;
     }
 }
 
@@ -141,5 +153,17 @@ if (!function_exists('document_engine_pdf_page_enable_protection')) {
     function document_engine_pdf_page_enable_protection()
     {
         return 'yes' === (get_option('document_engine_pdf_page_enable_protection', 'no'));
+    }
+}
+if (!function_exists('document_engine_pdf_use_theme_style')) {
+    function document_engine_pdf_use_theme_style()
+    {
+        return 'yes' === (get_option('document_engine_pdf_use_theme_style', 'no'));
+    }
+}
+if (!function_exists('document_engine_pdf_custom_css')) {
+    function document_engine_pdf_custom_css()
+    {
+        return sanitize_text_field(get_option('document_engine_pdf_custom_css', ''));
     }
 }
