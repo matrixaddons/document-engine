@@ -27,7 +27,7 @@ if (!defined('DOCUMENT_ENGINE_FILE')) {
 
 // Define DOCUMENT_ENGINE_VERSION.
 if (!defined('DOCUMENT_ENGINE_VERSION')) {
-    define('DOCUMENT_ENGINE_VERSION', '1.0.4');
+    define('DOCUMENT_ENGINE_VERSION', '1.0.0');
 }
 
 // Define DOCUMENT_ENGINE_PLUGIN_URI.
