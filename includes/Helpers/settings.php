@@ -110,7 +110,7 @@ if (!function_exists('document_engine_pdf_footer_show_pagination')) {
 if (!function_exists('document_engine_pdf_page_orientation')) {
     function document_engine_pdf_page_orientation()
     {
-        return sanitize_text_field(get_option('document_engine_pdf_page_orientation', 'horizontal'));
+        return sanitize_text_field(get_option('document_engine_pdf_page_orientation', 'vertical'));
     }
 }
 if (!function_exists('document_engine_pdf_page_font_size')) {
