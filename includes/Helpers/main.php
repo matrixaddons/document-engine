@@ -2,14 +2,20 @@
 
 if (!defined('ABSPATH')) exit;
 
-function document_engine_generate_pdf($query)
+function document_engine_pdf_is_valid_post_type()
 {
-    
+    $pdf_post_id = sanitize_text_field(get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG));
+
+    if (absint($pdf_post_id) < 1) {
+
+        return false;
+    }
+    if (get_post_status($pdf_post_id) !== 'publish') {
+        return false;
+    }
+    return true;
 
 }
-
-add_action('wp', 'document_engine_generate_pdf');
-
 
 function document_engine_get_post_types()
 {

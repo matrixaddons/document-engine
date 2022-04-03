@@ -24,25 +24,17 @@ class Template
             return $content;
         }
 
+        if (document_engine_pdf_is_valid_post_type()) {
 
-        // if is generated pdf don't show pdf button
-        $pdf = get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG);
+            remove_shortcode('document_engine_pdf_button');
 
-        if ($pdf) {
-
-            remove_shortcode('dkpdf-button');
-
-            $content = str_replace("[dkpdf-button]", "", $content);
-
-            return $content;
+            return str_replace("[document_engine_pdf_button]", "", $content);
 
         }
-
 
         global $post;
 
         $option_post_types = array_keys(document_engine_pdf_post_type());
-
 
         if (!in_array(get_post_type($post), $option_post_types)) {
 
@@ -55,6 +47,12 @@ class Template
         $button_position = document_engine_pdf_button_position();
 
 
+        $button_args = array(
+            'button_text' => document_engine_pdf_button_text(),
+            'button_alignment' => document_engine_pdf_button_alignment(),
+            'button_icon' => 'fa fa-file-pdf'
+        );
+
         if ($button_position == '') {
             return $c;
         }
@@ -63,7 +61,7 @@ class Template
 
             ob_start();
 
-            document_engine_get_template('pdf-button.php');
+            document_engine_get_template('pdf-button.php', $button_args);
 
 
             return ob_get_clean() . $c;
@@ -73,7 +71,7 @@ class Template
 
             ob_start();
 
-            document_engine_get_template('pdf-button.php');
+            document_engine_get_template('pdf-button.php', $button_args);
 
             return $c . ob_get_clean();
 
@@ -92,14 +90,8 @@ class Template
 
     public function generate_pdf($query)
     {
-        $pdf_post_id = sanitize_text_field(get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG));
 
-        if (absint($pdf_post_id) < 1) {
-
-            return;
-        }
-        
-        if (get_post_status($pdf_post_id) !== 'publish') {
+        if (!document_engine_pdf_is_valid_post_type()) {
             return;
         }
 

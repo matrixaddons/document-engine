@@ -11,14 +11,8 @@ class Generate_PDF
     public static function generate()
     {
 
-        $pdf_post_id = sanitize_text_field(get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG));
-
-        if (absint($pdf_post_id) < 1) {
-
-            return;
-        }
-        if (get_post_status($pdf_post_id) !== 'publish') {
-            return;
+        if (!document_engine_pdf_is_valid_post_type()) {
+           return;
         }
         // page orientation
         $page_orientation = document_engine_pdf_page_orientation();

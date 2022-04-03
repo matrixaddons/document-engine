@@ -41,6 +41,7 @@ final class Main
     public function dispatch_hook()
     {
         add_action('init', [$this, 'init_plugin']);
+        add_action('init', array('\MatrixAddons\DocumentEngine\Shortcodes', 'init'));
 
         Assets::init();
         new Template();
