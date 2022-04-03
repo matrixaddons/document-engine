@@ -27,7 +27,7 @@
 
         <?php
 
-            wp_kses(document_engine_pdf_custom_css(), array());
+           echo  wp_kses(document_engine_pdf_custom_css(), array());
 
         ?>
 

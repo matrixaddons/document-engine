@@ -322,6 +322,7 @@ class Settings {
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<?php echo $description; // WPCS: XSS ok. ?>
 
+
                             <?php
 
                             $editor = isset($value['editor']) ? (boolean)$value['editor'] : false;
@@ -358,6 +359,7 @@ class Settings {
 									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
 									><?php echo esc_textarea( $option_value ); // WPCS: XSS ok. ?></textarea>
 									<?php } ?>
+									<div class="textarea-wrap" id="<?php echo esc_attr($value['id']) ?>_textarea_wrap"></div>
 							</td>
 						</tr>
 						<?php
@@ -534,7 +536,7 @@ class Settings {
  							?>
 								<tr valign="top" class="<?php echo esc_attr( implode( ' ', $visibility_class ) ); ?>">
 									<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ); ?></th>
-									<td class="forminp forminp-checkbox">
+									<td class="forminp forminp-multi-checkbox document-engine-multicheckbox">
 
                             <?php $checkbox_options = isset($value['options']) ? $value['options']: array();
 
@@ -791,7 +793,8 @@ class Settings {
 
 						break;
 					case 'textarea':
-						$value = wp_kses_post( trim( $raw_value ) );
+                        $allowed_html = $option['allowed_html'] ?? array();
+						$value = wp_kses( trim( $raw_value ), $allowed_html);
 						break;
 					case 'select':
 						$allowed_values = empty( $option['options'] ) ? array() : array_map( 'strval', array_keys( $option['options'] ) );
@@ -803,7 +806,7 @@ class Settings {
 						$value   = in_array( $raw_value, $allowed_values, true ) ? $raw_value : $default;
 						break;
 					case 'multiselect':
-						$value = array_filter( array_map( 'document_engine_clean', (array) $raw_value ) );
+						$value = array_filter( array_map( 'sanitize_text_field', (array) $raw_value ) );
 						break;
 					default:
 						$value = sanitize_text_field( $raw_value );

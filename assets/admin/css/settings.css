@@ -1,0 +1,29 @@
+.textarea-wrap {
+    display: none;
+}
+
+.document-engine-pdf-custom-css {
+    display: none;
+}
+
+textarea#document_engine_pdf_footer_text {
+    height: 200px;
+    width: 500px;
+    padding: 10px;
+}
+
+#document_engine_pdf_custom_css_textarea_wrap {
+    height: 350px;
+    display: block;
+}
+
+.document-engine-multicheckbox {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.document-engine-multicheckbox input[type="checkbox"] {
+    margin: 0;
+    margin-right:5px;
+}

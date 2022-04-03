@@ -12,7 +12,7 @@ class Generate_PDF
     {
 
         if (!document_engine_pdf_is_valid_post_type()) {
-           return;
+            return;
         }
         // page orientation
         $page_orientation = document_engine_pdf_page_orientation();

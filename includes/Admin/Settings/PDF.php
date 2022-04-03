@@ -146,7 +146,7 @@ class PDF extends Setting_Base
                     'title' => __('Protected PDF permissions', 'document-engine'),
                     'id' => 'document_engine_pdf_page_protected_permissions',
                     'type' => 'multicheckbox',
-                    'options' => document_engine_get_pdf_permissions()
+                    'options' => document_engine_get_available_pdf_permissions()
                 ),
                 array(
                     'title' => __('Keep columns', 'document-engine'),
@@ -182,6 +182,7 @@ class PDF extends Setting_Base
                     'title' => __('Custom CSS', 'document-engine'),
                     'id' => 'document_engine_pdf_custom_css',
                     'type' => 'textarea',
+                    'class' => 'document-engine-pdf-custom-css',
                     'default' => ''
                 ),
                 array(
@@ -207,12 +208,15 @@ class PDF extends Setting_Base
                 ),
                 array(
                     'title' => __('Show Post Title', 'document-engine'),
+                    'desc' => __('Show post title on pdf header', 'document-engine'),
                     'id' => 'document_engine_pdf_header_show_post_title',
                     'type' => 'checkbox',
                     'default' => 'no'
                 ),
                 array(
                     'title' => __('Show Page Number', 'document-engine'),
+                    'desc' => __('Show page number on pdf header', 'document-engine'),
+
                     'id' => 'document_engine_pdf_header_show_pagination',
                     'type' => 'checkbox',
                     'default' => 'no'
@@ -232,16 +236,36 @@ class PDF extends Setting_Base
                 array(
                     'title' => __('Footer text', 'document-engine'),
                     'id' => 'document_engine_pdf_footer_text',
+                    'desc' => __('HTML tags supports: a, br, em, strong, hr, p, h1 to h4', 'document-engine'),
                     'type' => 'textarea',
+                    'allowed_html' => array(
+                        'a' => array(
+                            'href' => array(),
+                            'target' => array()
+                        ),
+                        'br' => array(),
+                        'em' => array(),
+                        'strong' => array(),
+                        'hr' => array(),
+                        'p' => array(),
+                        'h1' => array(),
+                        'h2' => array(),
+                        'h3' => array(),
+                        'h4' => array(),
+                        'h5' => array(),
+                        'h6' => array(),
+                    )
                 ),
                 array(
                     'title' => __('Show Post Title', 'document-engine'),
+                    'desc' => __('Show post title on pdf footer', 'document-engine'),
                     'id' => 'document_engine_pdf_footer_show_post_title',
                     'type' => 'checkbox',
                     'default' => 'no'
                 ),
                 array(
                     'title' => __('Show Page Number', 'document-engine'),
+                    'desc' => __('Show page number on pdf footer', 'document-engine'),
                     'id' => 'document_engine_pdf_footer_show_pagination',
                     'type' => 'checkbox',
                     'default' => 'no'
@@ -254,7 +278,7 @@ class PDF extends Setting_Base
             );
 
         } else {
-            $post_types_arr = document_engine_get_post_types();
+            $post_types_arr = document_engine_get_available_post_types();
 
             $settings = array(
                 array(
