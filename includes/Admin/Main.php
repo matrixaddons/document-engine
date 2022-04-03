@@ -67,7 +67,7 @@ final class Main
 
     function admin_menu()
     {
-        $settings_page = add_menu_page('Document Engine', 'Document Engine', 'manage_options', 'document-engine-settings', array($this, 'settings'));
+        $settings_page = add_menu_page('Documents Engine', 'Documents', 'manage_options', 'document-engine-settings', array($this, 'settings'), DOCUMENT_ENGINE_ASSETS_URI . 'images/menu-icon.svg', 25);
 
         add_action('load-' . $settings_page, array($this, 'settings_page_init'));
 
