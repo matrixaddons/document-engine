@@ -154,8 +154,7 @@ if (!function_exists('document_engine_pdf_page_protected_permissions')) {
     function document_engine_pdf_page_protected_permissions()
     {
         $permissions = (get_option('document_engine_pdf_page_protected_permissions', array()));
-        $permissions = is_array($permissions) ? $permissions : array();
-        return $permissions;
+        return is_array($permissions) ? $permissions : array();
     }
 }
 

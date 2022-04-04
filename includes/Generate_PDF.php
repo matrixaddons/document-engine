@@ -69,7 +69,8 @@ class Generate_PDF
         $enable_protection = document_engine_pdf_page_enable_protection();
 
         if ($enable_protection == 'yes') {
-            $grant_permissions = document_engine_pdf_page_protected_permissions();
+            $grant_permissions = array_keys(document_engine_pdf_page_protected_permissions());
+            
             $mpdf->SetProtection($grant_permissions);
         }
 

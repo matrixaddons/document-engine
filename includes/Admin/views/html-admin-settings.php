@@ -19,6 +19,7 @@ if (!$tab_exists) {
 }
 ?>
 <div class="wrap document-engine-admin-setting-page-wrap">
+    <h1 class="screen-reader-text"><?php echo esc_html($current_tab_label); ?></h1>
     <form method="<?php echo esc_attr(apply_filters('document_engine_settings_form_method_tab_' . $current_tab, 'post')); ?>"
           id="mainform" action="" enctype="multipart/form-data">
         <nav class="nav-tab-wrapper document-engine-nav-tab-wrapper">
@@ -32,7 +33,7 @@ if (!$tab_exists) {
 
             ?>
         </nav>
-        <h1 class="screen-reader-text"><?php echo esc_html($current_tab_label); ?></h1>
+
         <?php
         do_action('document_engine_sections_' . $current_tab);
 
