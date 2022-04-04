@@ -3,5 +3,5 @@ node_modules
 ## Uncomment line below if you prefer to
 ## keep compiled files out of version control
 # build/
-geo-maps.zip
-geo-maps.tar
+document-engine.tar
+document-engine.zip

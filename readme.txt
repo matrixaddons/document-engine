@@ -1,4 +1,4 @@
-=== Document Engine  ===
+=== Document Engine - WordPress to PDF  ===
 Contributors:
 Tags: wp to pdf, wordpress to pdf, acrobat, pdf, post to pdf, generate pdf, mpdf, generate, convert, create, convert pdf, create pdf
 Requires at least: 5.4
@@ -14,11 +14,14 @@ WordPress to PDF
 
 **WordPress To PDF Plugin**
 
-Document Engine is WordPress to PDF plugin that convert any post to PDF format
+Document Engine is WordPress to PDF plugin that convert any post type to PDF format
 
 = Features =
-* Download as PDF
-* Customize pdf document
+* Download PDF of any custom post type
+* Configurable PDF header/footer and main page
+* Custom CSS options for PDF
+* Awesome shortcodes to show hide content etc on pdf document
+* Easy setup process
 
 
 == Installation ==
@@ -26,6 +29,24 @@ Document Engine is WordPress to PDF plugin that convert any post to PDF format
 Install Document Engine for WordPress either via the WordPress plugin directory or by uploading the files to your server at wp-content/plugins.
 
 
+== Shortcodes ==
+Available Shortcodes
+* Shortcode to show the Download PDF button *
+<pre>[document_engine_pdf_button]</pre>
+
+* Shortcode to remove content from the PDF document *
+<pre>[document_engine_pdf_remove]Your Hidden Content for PDF goes Here [/document_engine_pdf_remove]</pre>
+
+* Shortcode to Page break on pdf *
+<pre>[document_engine_pdf_page_break]</pre>
+
+* Shortcode to show Columns on PDF *
+<pre>[document_engine_pdf_columns]Your content for column on PDF document [/document_engine_pdf_columns]</pre>
+
+* Shortcode to Break column on PDF document *
+<pre>[document_engine_pdf_column_break]</pre>
+
+* Note: You can use above shortcodes to make more customizable pdf template. Your website appearance will not change by above shortcodes. It just modify the PDF document. *
 == Screenshots ==
 
 
