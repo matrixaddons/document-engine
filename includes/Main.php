@@ -45,11 +45,7 @@ final class Main
 
         Assets::init();
         new Template();
-        /* Block::init();
- Migration::init();
- PostTypes\Maps::init();
- Meta\Maps::init();
- Api::init();*/
+
 
         if (is_admin()) {
             new \MatrixAddons\DocumentEngine\Admin\Main();
