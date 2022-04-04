@@ -1,15 +1,6 @@
 <?php
-/**
- * dkpdf-footer.php
- * This template is used to display content in PDF Footer
- *
- * Do not edit this template directly,
- * copy this template and paste in your theme inside a directory named dkpdf
- */
-?>
-
-<?php
 global $post;
+
 
 $pdf_footer_text = document_engine_pdf_footer_text();
 

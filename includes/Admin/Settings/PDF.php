@@ -150,7 +150,7 @@ class PDF extends Setting_Base
                 ),
                 array(
                     'title' => __('Keep columns', 'document-engine'),
-                    'desc' => __(' Columns will be written successively (dkpdf-columns shortcode). i.e. there will be no balancing of the length of columns.', 'document-engine'),
+                    'desc' => __(' Columns will be written successively ([document_engine_pdf_columns] shortcode). i.e. there will be no balancing of the length of columns.', 'document-engine'),
                     'id' => 'document_engine_pdf_page_keep_columns',
                     'type' => 'checkbox',
                     'default' => 'no'
