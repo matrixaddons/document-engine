@@ -70,8 +70,10 @@ class Generate_PDF
 
         if ($enable_protection == 'yes') {
             $grant_permissions = array_keys(document_engine_pdf_page_protected_permissions());
-            
-            $mpdf->SetProtection($grant_permissions);
+
+            if (count($grant_permissions) > 0) {
+                $mpdf->SetProtection($grant_permissions);
+            }
         }
 
         // keep columns
