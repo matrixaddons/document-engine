@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
 <?php
 
 $document_engine_post_id = get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG);
