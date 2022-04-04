@@ -1,4 +1,4 @@
-=== Document Engine - WordPress to PDF  ===
+=== Document Engine - WordPress to PDF, Download as PDF document of any WordPress Post Types, Download Post as PDF  ===
 Contributors: matrixaddons
 Tags: wp to pdf, wordpress to pdf, acrobat, pdf, post to pdf, generate pdf, mpdf, generate, convert, create, convert pdf, create pdf
 Requires at least: 5.4
