@@ -47,7 +47,15 @@ Available Shortcodes
 <pre>[document_engine_pdf_column_break]</pre>
 
 * Note: You can use above shortcodes to make more customizable pdf template. Your website appearance will not change by above shortcodes. It just modify the PDF document. *
+
+
 == Screenshots ==
+1. Download PDF button settings
+2. PDF header & footer settings
+3. PDF page content settings
+4. Style Setting for PDF document
+5. Frontend View of Download PDF
+6. Downloaded PDF
 
 
 == Changelog ==
