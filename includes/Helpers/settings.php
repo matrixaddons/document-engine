@@ -183,3 +183,15 @@ if (!function_exists('document_engine_pdf_custom_css')) {
         return sanitize_text_field(get_option('document_engine_pdf_custom_css', ''));
     }
 }
+if (!function_exists('document_engine_pdf_header_font_size')) {
+    function document_engine_pdf_header_font_size()
+    {
+        return absint(get_option('document_engine_pdf_header_font_size', 0));
+    }
+}
+if (!function_exists('document_engine_pdf_footer_font_size')) {
+    function document_engine_pdf_footer_font_size()
+    {
+        return absint(get_option('document_engine_pdf_footer_font_size', 0));
+    }
+}

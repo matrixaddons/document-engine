@@ -222,6 +222,13 @@ class PDF extends Setting_Base
                     'default' => 'no'
                 ),
                 array(
+                    'title' => __('Header font Size', 'document-engine'),
+                    'desc' => __('Font Size in (pt). Leave it blank to use default page font size', 'document-engine'),
+                    'id' => 'document_engine_pdf_header_font_size',
+                    'type' => 'number',
+                    'default' => ''
+                ),
+                array(
                     'type' => 'sectionend',
                     'id' => 'document_engine_pdf_header_options',
                 ),
@@ -269,6 +276,13 @@ class PDF extends Setting_Base
                     'id' => 'document_engine_pdf_footer_show_pagination',
                     'type' => 'checkbox',
                     'default' => 'no'
+                ),
+                array(
+                    'title' => __('Footer font Size', 'document-engine'),
+                    'desc' => __('Font Size in (pt). Leave it blank to use default page font size', 'document-engine'),
+                    'id' => 'document_engine_pdf_footer_font_size',
+                    'type' => 'number',
+                    'default' => ''
                 ),
                 array(
                     'type' => 'sectionend',

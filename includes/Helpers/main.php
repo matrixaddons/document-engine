@@ -61,3 +61,12 @@ if (!function_exists('document_engine_get_available_pdf_permissions')) {
 
     }
 }
+
+if (!function_exists('document_engine_pdf_css')) {
+
+    function document_engine_pdf_css()
+    {
+        include_once DOCUMENT_ENGINE_ABSPATH . 'includes/Helpers/css.php';
+
+    }
+}

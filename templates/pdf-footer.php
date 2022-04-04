@@ -22,8 +22,8 @@ $pdf_footer_show_pagination = document_engine_pdf_footer_show_pagination();
 // only enter here if any of the settings exists
 if ($pdf_footer_text !== '' || $pdf_footer_show_pagination) { ?>
 
-    <div style="width:100%;float:left;padding-top:10px;">
-        <div style="float:right;text-align:right;">
+    <div class="document-engine-pdf-footer-wrap">
+        <div class="document-engine-pdf-footer-content">
 
             <?php
             // check if Footer show title exists

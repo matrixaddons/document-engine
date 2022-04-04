@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Document Engine
  * Plugin URI: https://wordpress.org/plugins/document-engine
- * Description: WordPress to PDF
+ * Description: WordPress to PDF plugin that convert any post type to PDF format
  * Author: matrixaddons
  * Author URI: https://profiles.wordpress.org/matrixaddons
  * Version: 1.0.0

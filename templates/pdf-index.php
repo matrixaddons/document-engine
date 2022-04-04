@@ -6,32 +6,9 @@
     if (document_engine_pdf_use_theme_style() == 'yes') {
         wp_head();
     }
+    document_engine_pdf_css();
+
     ?>
-    <style type="text/css">
-        body {
-            background: #FFF;
-            font-size: 100%;
-        }
-
-        /* fontawesome compatibility */
-        .fa {
-            font-family: fontawesome;
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            transform: translate(0, 0);
-        }
-
-        <?php
-
-           echo  wp_kses(document_engine_pdf_custom_css(), array());
-
-        ?>
-
-    </style>
 
 </head>
 

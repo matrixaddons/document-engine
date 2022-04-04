@@ -1,5 +1,5 @@
 === Document Engine - WordPress to PDF  ===
-Contributors:
+Contributors: matrixaddons
 Tags: wp to pdf, wordpress to pdf, acrobat, pdf, post to pdf, generate pdf, mpdf, generate, convert, create, convert pdf, create pdf
 Requires at least: 5.4
 Tested up to: 5.9
@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-WordPress to PDF
+Document Engine is WordPress to PDF plugin that convert any post type to PDF format
 
 == Description ==
 

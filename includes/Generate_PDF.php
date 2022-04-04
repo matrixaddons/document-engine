@@ -90,6 +90,7 @@ class Generate_PDF
         ob_start();
         document_engine_get_template('pdf-header.php');
         $pdf_header_html = ob_get_clean();
+
         $mpdf->SetHTMLHeader($pdf_header_html);
 
         // footer
@@ -101,6 +102,7 @@ class Generate_PDF
         $mpdf->WriteHTML(apply_filters('document_engine_before_content', ''));
         ob_start();
         document_engine_get_template('pdf-index.php');
+
         $main_html = ob_get_clean();
 
         $mpdf->WriteHTML($main_html);
