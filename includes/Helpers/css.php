@@ -26,7 +26,6 @@ $footer_font_size = $footer_font_size > 0 ? $footer_font_size . 'pt' : 'inherit'
     .document-engine-pdf-header-wrap {
         width: 100%;
         float: left;
-        color: red;
         font-size: <?php echo esc_attr($header_font_size) ?>;
     }
 
