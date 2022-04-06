@@ -1,9 +1,10 @@
 <html>
 <head>
     <?php
+
     wp_enqueue_style('document-engine-theme-css', get_bloginfo('stylesheet_url'), array(), DOCUMENT_ENGINE_VERSION);
 
-    if (document_engine_pdf_use_theme_style() == 'yes') {
+    if (document_engine_pdf_use_theme_style()) {
         wp_head();
     }
     document_engine_pdf_css();
