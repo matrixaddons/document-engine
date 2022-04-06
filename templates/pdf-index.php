@@ -1,7 +1,7 @@
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="<?php echo get_bloginfo('stylesheet_url'); ?>" media="all"/>
     <?php
+    wp_enqueue_style('document-engine-theme-css', get_bloginfo('stylesheet_url'), array(), DOCUMENT_ENGINE_VERSION);
 
     if (document_engine_pdf_use_theme_style() == 'yes') {
         wp_head();

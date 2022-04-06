@@ -212,6 +212,7 @@ class Settings {
 				$description       = $field_description['description'];
 				$tooltip_html      = $field_description['tooltip_html'];
 
+				$hidden_class = $value['type'] === 'hidden' ? 'document-engine-hide': '';
 				// Switch based on type.
 				switch ( $value['type'] ) {
 
@@ -257,8 +258,8 @@ class Settings {
 					case 'hidden':
 					case 'tel':
 						$option_value = self::get_option( $value['id'], $value['default'] );
-						$hidden_style = $value['type'] === 'hidden' ? 'style="display:none"': '';
-						?><tr valign="top" <?php echo $hidden_style ?>>
+
+						?><tr valign="top" class="<?php echo esc_attr($hidden_class) ?>">
 							<th scope="row" class="titledesc">
 								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
 							</th>
@@ -271,8 +272,8 @@ class Settings {
 									value="<?php echo esc_attr( $option_value ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
-									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo $description; // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo esc_html($description); // WPCS: XSS ok. ?>
 							</td>
 						</tr>
 						<?php
@@ -280,8 +281,7 @@ class Settings {
 
 					case 'image':
 						$option_value = absint(self::get_option( $value['id'], $value['default'] ));
-						$hidden_style = $value['type'] === 'hidden' ? 'style="display:none"': '';
-						?><tr valign="top" <?php echo $hidden_style ?>>
+						?><tr valign="top" class="<?php echo esc_attr($hidden_class) ?>">
 							<th scope="row" class="titledesc">
 								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
 							</th>
@@ -626,9 +626,9 @@ class Settings {
 									class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
 									value="1"
 									<?php checked( $multi_checkbox_option_value, 'yes' ); ?>
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
-								/> <?php echo $multi_checkbox_title; // WPCS: XSS ok. ?>
-							</label> <?php echo $tooltip_html; // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
+								/> <?php echo esc_html($multi_checkbox_title); // WPCS: XSS ok. ?>
+							</label> <?php echo esc_html($tooltip_html); // WPCS: XSS ok. ?>
 						<?php
 
   										?>
