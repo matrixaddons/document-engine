@@ -294,8 +294,8 @@ class Settings {
 									value="<?php echo esc_attr( $option_value ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
-									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo $description; // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo esc_html($description); // WPCS: XSS ok. ?>
 
 
 									<div class="matrixaddons-image-field-wrap">
@@ -349,8 +349,8 @@ class Settings {
 									value="<?php echo esc_attr( $option_value ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?> document-engine-colorpicker document-engine-hide"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
-									/>&lrm; <?php echo $description; // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
+									/>&lrm; <?php echo esc_html($description); // WPCS: XSS ok. ?>
 									<div class="wp-picker-container document-engine-color-picker-container">
                                         <button type="button" class="button wp-color-result document-engine-color-picker-button" aria-expanded="false" style="background-color:<?php echo esc_attr($option_value) ?>;">
                                         <span class="wp-color-result-text">Select Color</span>
@@ -371,7 +371,7 @@ class Settings {
 								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
-								<?php echo $description; // WPCS: XSS ok. ?>
+								<?php echo esc_html($description); // WPCS: XSS ok. ?>
 
 
                             <?php
@@ -452,7 +452,7 @@ class Settings {
 										<?php
 									}
 									?>
-								</select> <?php echo $description; // WPCS: XSS ok. ?>
+								</select> <?php echo esc_html($description); // WPCS: XSS ok. ?>
 							</td>
 						</tr>
 						<?php
@@ -469,7 +469,7 @@ class Settings {
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<fieldset>
-									<?php echo $description; // WPCS: XSS ok. ?>
+									<?php echo esc_html($description); // WPCS: XSS ok. ?>
 									<ul>
 									<?php
 									foreach ( $value['options'] as $key => $val ) {
@@ -544,9 +544,9 @@ class Settings {
 									class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
 									value="1"
 									<?php checked( $option_value, 'yes' ); ?>
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
-								/> <?php echo $description; // WPCS: XSS ok. ?>
-							</label> <?php echo $tooltip_html; // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
+								/> <?php echo esc_html($description); // WPCS: XSS ok. ?>
+							</label> <?php echo esc_html($tooltip_html); // WPCS: XSS ok. ?>
 						<?php
 
 						if ( ! isset( $value['checkboxgroup'] ) || 'end' === $value['checkboxgroup'] ) {
@@ -664,7 +664,7 @@ class Settings {
 								<label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
 							</th>
 							<td class="forminp">
-								<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'document-engine' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); // WPCS: XSS ok. ?> <?php echo $description; // WPCS: XSS ok. ?>
+								<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'document-engine' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); // WPCS: XSS ok. ?> <?php echo esc_html($description); // WPCS: XSS ok. ?>
 							</td>
 						</tr>
 						<?php
