@@ -45,7 +45,7 @@ class ColumnsShortcode
             $equal_columns = (boolean)($shortcode_attributes['equal_columns']);
             $vAlign = $equal_columns == true ? 'vAlign="justify"' : '';
             $gap = absint($shortcode_attributes['gap']);
-            echo '<columns column-count="' . $columns . '" ' . $vAlign . ' column-gap="' . $gap . '" />' . do_shortcode($content) . '<columns column-count="1">';
+            echo '<columns column-count="' . esc_attr($columns) . '" ' . esc_attr($vAlign) . ' column-gap="' . esc_attr($gap) . '" />' . do_shortcode($content) . '<columns column-count="1">';
         } else {
             remove_shortcode('document_engine_pdf_column_break');
             add_shortcode('document_engine_pdf_column_break', '__return_false');

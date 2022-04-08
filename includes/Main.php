@@ -187,10 +187,10 @@ final class Main
 
         foreach ($files as $file) {
             if (wp_mkdir_p($file['base']) && !file_exists(trailingslashit($file['base']) . $file['file'])) {
-                $file_handle = @fopen(trailingslashit($file['base']) . $file['file'], 'w'); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fopen
+                $file_handle = @fopen(trailingslashit($file['base']) . $file['file'], 'w');
                 if ($file_handle) {
-                    fwrite($file_handle, $file['content']); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
-                    fclose($file_handle); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
+                    fwrite($file_handle, $file['content']);
+                    fclose($file_handle);
                     if (!$has_created_dir) {
                         $has_created_dir = true;
                     }

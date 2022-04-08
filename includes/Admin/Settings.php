@@ -261,7 +261,7 @@ class Settings {
 
 						?><tr valign="top" class="<?php echo esc_attr($hidden_class) ?>">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<input
@@ -272,8 +272,8 @@ class Settings {
 									value="<?php echo esc_attr( $option_value ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
-									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo esc_html($description); // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); . ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo esc_html($description); . ?>
 							</td>
 						</tr>
 						<?php
@@ -283,7 +283,7 @@ class Settings {
 						$option_value = absint(self::get_option( $value['id'], $value['default'] ));
 						?><tr valign="top" class="<?php echo esc_attr($hidden_class) ?>">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="document-engine-image-field forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<input
@@ -294,8 +294,8 @@ class Settings {
 									value="<?php echo esc_attr( $option_value ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
-									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo esc_html($description); // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); . ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo esc_html($description); . ?>
 
 
 									<div class="matrixaddons-image-field-wrap">
@@ -337,7 +337,7 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">&lrm;
 								<input
@@ -349,8 +349,8 @@ class Settings {
 									value="<?php echo esc_attr( $option_value ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?> document-engine-colorpicker document-engine-hide"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
-									/>&lrm; <?php echo esc_html($description); // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); . ?>
+									/>&lrm; <?php echo esc_html($description); . ?>
 									<div class="wp-picker-container document-engine-color-picker-container">
                                         <button type="button" class="button wp-color-result document-engine-color-picker-button" aria-expanded="false" style="background-color:<?php echo esc_attr($option_value) ?>;">
                                         <span class="wp-color-result-text">Select Color</span>
@@ -368,10 +368,10 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
-								<?php echo esc_html($description); // WPCS: XSS ok. ?>
+								<?php echo esc_html($description); . ?>
 
 
                             <?php
@@ -407,8 +407,8 @@ class Settings {
 									style="<?php echo esc_attr( $value['css'] ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
-									><?php echo esc_textarea( $option_value ); // WPCS: XSS ok. ?></textarea>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); . ?>
+									><?php echo esc_textarea( $option_value ); . ?></textarea>
 									<?php } ?>
 									<div class="textarea-wrap" id="<?php echo esc_attr($value['id']) ?>_textarea_wrap"></div>
 							</td>
@@ -424,7 +424,7 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<select
@@ -432,7 +432,7 @@ class Settings {
 									id="<?php echo esc_attr( $value['id'] ); ?>"
 									style="<?php echo esc_attr( $value['css'] ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
-									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
+									<?php echo implode( ' ', $custom_attributes ); . ?>
 									<?php echo 'multiselect' === $value['type'] ? 'multiple="multiple"' : ''; ?>
 									>
 									<?php
@@ -452,7 +452,7 @@ class Settings {
 										<?php
 									}
 									?>
-								</select> <?php echo esc_html($description); // WPCS: XSS ok. ?>
+								</select> <?php echo esc_html($description); . ?>
 							</td>
 						</tr>
 						<?php
@@ -465,11 +465,11 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<fieldset>
-									<?php echo esc_html($description); // WPCS: XSS ok. ?>
+									<?php echo esc_html($description); . ?>
 									<ul>
 									<?php
 									foreach ( $value['options'] as $key => $val ) {
@@ -481,7 +481,7 @@ class Settings {
 												type="radio"
 												style="<?php echo esc_attr( $value['css'] ); ?>"
 												class="<?php echo esc_attr( $value['class'] ); ?>"
-												<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
+												<?php echo implode( ' ', $custom_attributes ); . ?>
 												<?php checked( $key, $option_value ); ?>
 												/> <?php echo esc_html( $val ); ?></label>
 										</li>
@@ -544,9 +544,9 @@ class Settings {
 									class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
 									value="1"
 									<?php checked( $option_value, 'yes' ); ?>
-									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
-								/> <?php echo esc_html($description); // WPCS: XSS ok. ?>
-							</label> <?php echo esc_html($tooltip_html); // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); . ?>
+								/> <?php echo esc_html($description); . ?>
+							</label> <?php echo esc_html($tooltip_html); . ?>
 						<?php
 
 						if ( ! isset( $value['checkboxgroup'] ) || 'end' === $value['checkboxgroup'] ) {
@@ -626,9 +626,9 @@ class Settings {
 									class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
 									value="1"
 									<?php checked( $multi_checkbox_option_value, 'yes' ); ?>
-									<?php echo esc_attr(implode( ' ', $custom_attributes )); // WPCS: XSS ok. ?>
-								/> <?php echo esc_html($multi_checkbox_title); // WPCS: XSS ok. ?>
-							</label> <?php echo esc_html($tooltip_html); // WPCS: XSS ok. ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); . ?>
+								/> <?php echo esc_html($multi_checkbox_title); . ?>
+							</label> <?php echo esc_html($tooltip_html); . ?>
 						<?php
 
   										?>
@@ -661,10 +661,10 @@ class Settings {
 						?>
 						<tr valign="top" class="single_select_page">
 							<th scope="row" class="titledesc">
-								<label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+								<label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp">
-								<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'document-engine' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); // WPCS: XSS ok. ?> <?php echo esc_html($description); // WPCS: XSS ok. ?>
+								<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'document-engine' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); . ?> <?php echo esc_html($description); . ?>
 							</td>
 						</tr>
 						<?php
@@ -689,7 +689,7 @@ class Settings {
 							?>
 						<tr valign="top" class="single_select_page">
 							<th scope="row" class="titledesc">
-                            <label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; // WPCS: XSS ok. ?></label>
+                            <label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; . ?></label>
 							</th>
 							<td class="forminp">
 								<div class="document-engine-setting-tab-options">
