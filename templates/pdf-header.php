@@ -19,7 +19,7 @@ if ($image_url !== '' || $pdf_header_show_title || $pdf_header_show_pagination) 
         if ($image_url !== null) { ?>
 
             <div class="document-engine-pdf-header-image">
-                <img src="<?php echo $image_url; ?>"/>
+                <img src="<?php echo esc_url_raw($image_url); ?>"/>
             </div>
 
         <?php }

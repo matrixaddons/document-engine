@@ -20,7 +20,7 @@ if ($pdf_footer_text !== '' || $pdf_footer_show_pagination) { ?>
             // check if Footer show title exists
             if ($pdf_footer_text) {
 
-                echo $pdf_footer_text;
+                echo esc_html($pdf_footer_text);
 
             }
 
