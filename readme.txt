@@ -1,10 +1,10 @@
-=== Document Engine - WordPress to PDF, Download as PDF document of any WordPress Post Types, Download Post as PDF, PDF Viewer, PDF Block ===
+=== WordPress to PDF, Download as PDF document of any WordPress Post Types, Download Post as PDF, PDF Viewer, PDF Block, View PDF on WordPress - Document Engine ===
 Contributors: matrixaddons
-Tags: wp to pdf, wordpress to pdf, acrobat, pdf, post to pdf, generate pdf, mpdf, generate, convert, create, convert pdf, create pdf
+Tags: wordpress to pdf, pdf maker, generate pdf, create pdf, pdf viewer
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -14,7 +14,7 @@ Document Engine is WordPress to PDF plugin that convert any post type to PDF for
 
 **WordPress To PDF Plugin | PDF Viewer Block**
 
-Document Engine is WordPress to PDF plugin that convert any post type to PDF format & can view pdf document with PDF Viewer block
+Document Engine is WordPress to PDF plugin that convert any post type to PDF format & you can view pdf document with PDF Viewer block
 
 = Features =
 * Download PDF of any custom post type
@@ -31,7 +31,8 @@ Install Document Engine for WordPress either via the WordPress plugin directory 
 
 
 == Shortcodes ==
-Available Shortcodes
+Available Shortcodes For PDF Download
+
 * Shortcode to show the Download PDF button *
 <pre>[document_engine_pdf_button]</pre>
 
@@ -49,6 +50,8 @@ Available Shortcodes
 
 * Note: You can use above shortcodes to make more customizable pdf template. Your website appearance will not change by above shortcodes. It just modify the PDF document. *
 
+== PDF Viewer Block ==
+
 
 == Screenshots ==
 1. Download PDF button settings
@@ -62,5 +65,5 @@ Available Shortcodes
 
 == Changelog ==
 
-= 1.0.1 - 2022-04-03 =
+= 1.0.1 - 2022-04-12 =
 - initial release
