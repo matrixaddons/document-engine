@@ -18,8 +18,8 @@ class PDF extends Setting_Base
      */
     public function __construct()
     {
-        $this->id = 'pdf';
-        $this->label = __('PDF Settings', 'document-engine');
+        $this->id = 'pdf_downloads';
+        $this->label = __('PDF Download Settings', 'document-engine');
 
         parent::__construct();
     }
