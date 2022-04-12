@@ -20,7 +20,23 @@ if ($pdf_footer_text !== '' || $pdf_footer_show_pagination) { ?>
             // check if Footer show title exists
             if ($pdf_footer_text) {
 
-                echo esc_html($pdf_footer_text);
+                echo wp_kses($pdf_footer_text, array(
+                    'a' => array(
+                        'href' => array(),
+                        'target' => array()
+                    ),
+                    'br' => array(),
+                    'em' => array(),
+                    'strong' => array(),
+                    'hr' => array(),
+                    'p' => array(),
+                    'h1' => array(),
+                    'h2' => array(),
+                    'h3' => array(),
+                    'h4' => array(),
+                    'h5' => array(),
+                    'h6' => array(),
+                ));
 
             }
 
