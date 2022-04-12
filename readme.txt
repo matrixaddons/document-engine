@@ -33,22 +33,22 @@ Install Document Engine for WordPress either via the WordPress plugin directory 
 == Shortcodes ==
 Available Shortcodes For PDF Download
 
-* Shortcode to show the Download PDF button *
+* Shortcode to show the Download PDF button
 <pre>[document_engine_pdf_button]</pre>
 
 * Shortcode to remove content from the PDF document *
 <pre>[document_engine_pdf_remove]Your Hidden Content for PDF goes Here [/document_engine_pdf_remove]</pre>
 
-* Shortcode to Page break on pdf *
+* Shortcode to Page break on pdf
 <pre>[document_engine_pdf_page_break]</pre>
 
-* Shortcode to show Columns on PDF *
+* Shortcode to show Columns on PDF
 <pre>[document_engine_pdf_columns]Your content for column on PDF document [/document_engine_pdf_columns]</pre>
 
-* Shortcode to Break column on PDF document *
+* Shortcode to Break column on PDF document
 <pre>[document_engine_pdf_column_break]</pre>
 
-* Note: You can use above shortcodes to make more customizable pdf template. Your website appearance will not change by above shortcodes. It just modify the PDF document. *
+* Note: You can use above shortcodes to make more customizable pdf template. Your website appearance will not change by above shortcodes. It just modify the PDF document.
 
 == PDF Viewer Block ==
 * You can use PDF viewer block to show any pdf document on your WordPress site
