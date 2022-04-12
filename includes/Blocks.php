@@ -25,7 +25,7 @@ class Blocks
             $categories,
             array(
                 'slug' => 'document-engine',
-                'title' => __('Document Engine', 'yatra'),
+                'title' => __('Document Engine', 'document-engine'),
             )
         );
         return $categories;
