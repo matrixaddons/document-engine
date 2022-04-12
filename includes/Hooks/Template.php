@@ -77,6 +77,7 @@ class Template
 
         }
 
+        return $content;
 
     }
 
