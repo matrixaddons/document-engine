@@ -1,8 +1,8 @@
 <html>
 <head>
-    <?php
+    <link type="text/css" rel="stylesheet" href="<?php echo get_bloginfo('stylesheet_url'); ?>" media="all"/>
 
-    wp_enqueue_style('document-engine-theme-css', get_bloginfo('stylesheet_url'), array(), DOCUMENT_ENGINE_VERSION);
+    <?php
 
     if (document_engine_pdf_use_theme_style()) {
         wp_head();
