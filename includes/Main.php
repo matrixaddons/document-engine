@@ -44,6 +44,7 @@ final class Main
         add_action('init', array('\MatrixAddons\DocumentEngine\Shortcodes', 'init'));
 
         Assets::init();
+        Blocks::init();
         new Template();
 
 
