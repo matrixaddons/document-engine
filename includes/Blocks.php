@@ -13,8 +13,22 @@ class Blocks
     {
         $self = self::get_instance();
 
+        add_filter('block_categories_all', array($self, 'register_category'), 10, 2);
+
         add_action('init', [$self, 'register_block']);
 
+    }
+
+    public function register_category($categories, $context)
+    {
+        array_push(
+            $categories,
+            array(
+                'slug' => 'document-engine',
+                'title' => __('Document Engine', 'yatra'),
+            )
+        );
+        return $categories;
     }
 
     public function register_block()

@@ -1,6 +1,6 @@
 import {registerBlockType} from "@wordpress/blocks";
 import {InspectorControls, useBlockProps, MediaPlaceholder} from "@wordpress/block-editor";
-import {Panel, PanelBody, RangeControl, ToggleControl, SelectControl} from '@wordpress/components';
+import {Panel, PanelBody, RangeControl, TextControl, SelectControl} from '@wordpress/components';
 import {__} from '@wordpress/i18n';
 import Icon from "../components/Icon";
 import ServerSideRender from '@wordpress/server-side-render';
@@ -52,7 +52,14 @@ const Edit = (props) => {
                                     onSelect={onSelectMedia}
                                     allowedTypes={['application/pdf']}
                                 />
-                                : ''}
+                                : <
+                                    TextControl
+                                    label={__('PDF URL', 'document-engine')}
+                                    value={attributes.pdf_url}
+                                    onChange={(pdf_url) => setAttributes({pdf_url: pdf_url})}
+                                    min={1}
+                                    max={2000}
+                                />}
                             <SelectControl
                                 label={__('Width Unit', 'document-engine')}
                                 value={attributes.width_unit}
@@ -96,4 +103,6 @@ registerBlockType('document-engine/pdf', {
     icon: Icon,
     keywords: [__("pdf"), __("pdf viewer"), __("pdf wordpress"), __("document engine")],
     edit: Edit,
+    category: 'document-engine',
+
 });
