@@ -51,6 +51,7 @@ Available Shortcodes For PDF Download
 * Note: You can use above shortcodes to make more customizable pdf template. Your website appearance will not change by above shortcodes. It just modify the PDF document. *
 
 == PDF Viewer Block ==
+* You can use PDF viewer block to show any pdf document on your WordPress site
 
 
 == Screenshots ==
