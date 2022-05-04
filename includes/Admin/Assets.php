@@ -21,7 +21,8 @@ class Assets
             return;
         }
 
-
+        wp_enqueue_media();
+        
         wp_register_style(
             'document-engine-admin-settings', // Handle.
             DOCUMENT_ENGINE_ASSETS_URI . 'admin/css/settings.css',
