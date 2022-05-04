@@ -303,7 +303,7 @@ class Settings {
                                            data-uploader-title="Add new image"
                                            data-uploader-button-text="Add new image">
                                             <img src="<?php echo esc_url(DOCUMENT_ENGINE_ASSETS_URI) ?>images/upload-image.png">
-                                            <h3>Drop your file here, or <span>browse</span></h3>
+                                            <h3>Click here to browse file</h3>
                                             <p>Supports: JPG, JPEG, PNG</p>
                                         </a>
                                         <div class="image-container<?php echo $option_value < 1 ? ' document-engine-hide' : ''; ?>">
