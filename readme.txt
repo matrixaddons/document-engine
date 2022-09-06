@@ -2,9 +2,9 @@
 Contributors: matrixaddons
 Tags: wordpress to pdf, pdf maker, generate pdf, create pdf, pdf viewer
 Requires at least: 5.4
-Tested up to: 5.9
+Tested up to: 6.2.0
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -66,8 +66,8 @@ Available Shortcodes For PDF Download
 
 == Changelog ==
 
-= 1.0.2 - 2022-05-04 =
-- Fixed - WP_enque_media issue resolved
+= 1.0.3 - 2022-09-06 =
+- Fixed - WordPress compatibility issue fixed
 
 == Frequently Asked Questions ==
 
