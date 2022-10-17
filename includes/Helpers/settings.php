@@ -46,7 +46,8 @@ if (!function_exists('document_engine_pdf_header_logo')) {
         if (!$url) {
             return $image_id;
         }
-        $image_url = wp_get_attachment_url($image_id, 'full');
+        $image_url = document_engine_get_attachment_image_url($image_id);
+        
         if ($image_url !== '') {
             return $image_url;
         }

@@ -70,3 +70,11 @@ if (!function_exists('document_engine_pdf_css')) {
 
     }
 }
+if (!function_exists('document_engine_get_attachment_image_url')) {
+    function document_engine_get_attachment_image_url($image_id)
+    {
+        $src = $image_id > 0 ? wp_get_attachment_image_url($image_id, 'full') : '';
+
+        return apply_filters('document_engine_get_attachment_image_url', $src, $image_id);
+    }
+}

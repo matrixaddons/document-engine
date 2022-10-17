@@ -292,7 +292,7 @@ class Settings {
 									type="hidden"
 									style="<?php echo esc_attr( $value['css'] ); ?>"
 									value="<?php echo esc_attr( $option_value ); ?>"
-									class="<?php echo esc_attr( $value['class'] ); ?>"
+									class="document-engine-image-field-input <?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 									<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
 									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo ($description); ?>

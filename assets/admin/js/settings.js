@@ -46,7 +46,7 @@
                 imageField.find('.image-wrapper').attr('data-url', '');
                 imageField.find('.image-container, .field-container').addClass('document-engine-hide');
                 imageField.find('.matrixaddons-image-field-add').removeClass('document-engine-hide');
-                imageField.find('#document_engine_pdf_header_logo').val(0).trigger('change');
+                imageField.find('.document-engine-image-field-input').val(0).trigger('change');
 
             });
         },
@@ -86,7 +86,7 @@
                     wrapper.find('.matrixaddons-image-field-add').addClass('document-engine-hide');
                     selected_list_node.find('.image-wrapper').remove();
                     selected_list_node.append(imageHtml);
-                    wrapper.find('#document_engine_pdf_header_logo').val(attachment_id).trigger('change');
+                    wrapper.find('.document-engine-image-field-input').val(attachment_id).trigger('change');
                 }
             });
 

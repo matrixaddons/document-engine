@@ -27,6 +27,8 @@ class Generate_PDF
 
         }
 
+        add_filter('document_engine_get_attachment_image_url', array(__CLASS__, 'modify_attachment_src'), 10, 2);
+
         // font size
         $document_engine_font_size = document_engine_pdf_page_font_size();
 
@@ -62,9 +64,7 @@ class Generate_PDF
         ]);
 
 
-        // creating and setting the pdf
-        $mpdf = new Mpdf($mpdf_config);
-
+        $mpdf = apply_filters('document_engine_pdf_mpdf_instance', new Mpdf($mpdf_config));
 
         $enable_protection = document_engine_pdf_page_enable_protection();
 
@@ -133,6 +133,14 @@ class Generate_PDF
         exit;
 
 
+    }
+
+    public static function modify_attachment_src($src, $image_id)
+    {
+        if (absint($image_id) < 1) {
+            return $src;
+        }
+        return wp_get_original_image_path($image_id);
     }
 
 
