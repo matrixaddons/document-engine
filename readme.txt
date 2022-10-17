@@ -4,7 +4,7 @@ Tags: wordpress to pdf, pdf maker, generate pdf, create pdf, pdf viewer
 Requires at least: 5.4
 Tested up to: 6.0.2
 Requires PHP: 5.6
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -14,7 +14,7 @@ Document Engine is WordPress to PDF plugin that convert any post type to PDF for
 
 **WordPress To PDF Plugin | PDF Viewer Block**
 
-Document Engine is WordPress to PDF plugin that convert any post type to PDF format & you can view pdf document with PDF Viewer block
+[Document Engine]( https://matrixaddons.com/downloads/document-engine-wordpress-to-pdf-plugin/?utm_source=wordpress&utm_medium=wppage&utm_campaign=wporg) is WordPress to PDF plugin that convert any post type to PDF format & you can view pdf document with PDF Viewer block
 
 = Features =
 * Download PDF of any custom post type
@@ -24,6 +24,13 @@ Document Engine is WordPress to PDF plugin that convert any post type to PDF for
 * Easy setup process
 * PDF viewer gutenberg block
 
+= Premium Features - Document Engine Pro =
+* Text Watermark on PDF
+* Image Watermark On PDF
+* Text Watermark Angle
+* Image Watermark size and positions
+
+[View Document Engine Pro](https://matrixaddons.com/downloads/document-engine-pro/?utm_source=addons&utm_medium=viewall&utm_campaign=wporg)
 
 == Installation ==
 
@@ -66,8 +73,9 @@ Available Shortcodes For PDF Download
 
 == Changelog ==
 
-= 1.0.3 - 2022-09-06 =
+= 1.0.4 - 2022-10-17 =
 - Fixed - WordPress compatibility issue fixed
+- Fixed - Premium plugin compatibility & local image issue fixed
 
 == Frequently Asked Questions ==
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Document Engine
- * Plugin URI: https://wordpress.org/plugins/document-engine
+ * Plugin URI: https://matrixaddons.com/downloads/document-engine-wordpress-to-pdf-plugin/
  * Description: WordPress to PDF plugin that convert any post type to PDF document & PDF viewer block
  * Author: matrixaddons
  * Author URI: https://profiles.wordpress.org/matrixaddons
