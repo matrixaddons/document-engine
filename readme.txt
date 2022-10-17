@@ -29,6 +29,7 @@ Document Engine is WordPress to PDF plugin that convert any post type to PDF for
 * Image Watermark On PDF
 * Text Watermark Angle
 * Image Watermark size and positions
+* Text/Image Watermark Transparency ( Alpha )
 
 [View Document Engine Pro](https://matrixaddons.com/downloads/document-engine-pro/?utm_source=addons&utm_medium=viewall&utm_campaign=wporg)
 
