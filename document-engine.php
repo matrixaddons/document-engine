@@ -2,10 +2,10 @@
 /**
  * Plugin Name: Document Engine
  * Plugin URI: https://matrixaddons.com/downloads/document-engine-wordpress-to-pdf-plugin/
- * Description: WordPress to PDF plugin that convert any post type to PDF document & PDF viewer block
+ * Description: Convert any post type to PDF document & PDF viewer block
  * Author: matrixaddons
  * Author URI: https://profiles.wordpress.org/matrixaddons
- * Version: 1.0.6
+ * Version: 1.0.7
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
@@ -27,7 +27,7 @@ if (!defined('DOCUMENT_ENGINE_FILE')) {
 
 // Define DOCUMENT_ENGINE_VERSION.
 if (!defined('DOCUMENT_ENGINE_VERSION')) {
-    define('DOCUMENT_ENGINE_VERSION', '1.0.6');
+    define('DOCUMENT_ENGINE_VERSION', '1.0.7');
 }
 
 // Define DOCUMENT_ENGINE_PLUGIN_URI.

@@ -1,10 +1,10 @@
-=== WordPress to PDF, Download as PDF document of any WordPress Post Types, Download Post as PDF, PDF Viewer, PDF Block, View PDF on WordPress - Document Engine ===
+=== Download Post as PDF, WordPress to PDF, Download as PDF document of any WordPress Post Types, PDF Viewer, PDF Block, View PDF on WordPress - Document Engine ===
 Contributors: matrixaddons
 Tags: wordpress to pdf, pdf maker, generate pdf, create pdf, pdf viewer
 Requires at least: 5.4
-Tested up to: 6.0.2
+Tested up to: 6.0.3
 Requires PHP: 5.6
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -74,9 +74,8 @@ Available Shortcodes For PDF Download
 
 == Changelog ==
 
-= 1.0.6 - 2022-10-17 =
+= 1.0.7 - 2022-10-20 =
 - Fixed - WordPress compatibility issue fixed
-- Fixed - Premium plugin compatibility & local image issue fixed
 
 == Frequently Asked Questions ==
 
