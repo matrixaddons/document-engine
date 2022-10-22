@@ -261,7 +261,7 @@ class Settings {
 
 						?><tr valign="top" class="<?php echo esc_attr($hidden_class) ?>">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<input
@@ -273,7 +273,7 @@ class Settings {
 									class="<?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 									<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
-									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo ($description); ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 							</td>
 						</tr>
 						<?php
@@ -283,7 +283,7 @@ class Settings {
 						$option_value = absint(self::get_option( $value['id'], $value['default'] ));
 						?><tr valign="top" class="<?php echo esc_attr($hidden_class) ?>">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="document-engine-image-field forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<input
@@ -295,7 +295,7 @@ class Settings {
 									class="document-engine-image-field-input <?php echo esc_attr( $value['class'] ); ?>"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 									<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
-									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo ($description); ?>
+									/><?php echo esc_html( $value['suffix'] ); ?> <?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 
 
 									<div class="matrixaddons-image-field-wrap">
@@ -337,7 +337,7 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">&lrm;
 								<input
@@ -350,7 +350,7 @@ class Settings {
 									class="<?php echo esc_attr( $value['class'] ); ?> document-engine-colorpicker document-engine-hide"
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 									<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
-									/>&lrm; <?php echo ($description); ?>
+									/>&lrm; <?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 									<div class="wp-picker-container document-engine-color-picker-container">
                                         <button type="button" class="button wp-color-result document-engine-color-picker-button" aria-expanded="false" style="background-color:<?php echo esc_attr($option_value) ?>;">
                                         <span class="wp-color-result-text">Select Color</span>
@@ -368,11 +368,10 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
-								<?php echo ($description); ?>
-
+								<?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 
                             <?php
 
@@ -424,7 +423,7 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<select
@@ -432,7 +431,7 @@ class Settings {
 									id="<?php echo esc_attr( $value['id'] ); ?>"
 									style="<?php echo esc_attr( $value['css'] ); ?>"
 									class="<?php echo esc_attr( $value['class'] ); ?>"
-									<?php echo implode( ' ', $custom_attributes ); ?>
+									<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
 									<?php echo 'multiselect' === $value['type'] ? 'multiple="multiple"' : ''; ?>
 									>
 									<?php
@@ -452,7 +451,7 @@ class Settings {
 										<?php
 									}
 									?>
-								</select> <?php echo ($description); ?>
+								</select> <?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 							</td>
 						</tr>
 						<?php
@@ -465,11 +464,11 @@ class Settings {
 						?>
 						<tr valign="top">
 							<th scope="row" class="titledesc">
-								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<fieldset>
-									<?php echo ($description); ?>
+									<?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 									<ul>
 									<?php
 									foreach ( $value['options'] as $key => $val ) {
@@ -481,7 +480,7 @@ class Settings {
 												type="radio"
 												style="<?php echo esc_attr( $value['css'] ); ?>"
 												class="<?php echo esc_attr( $value['class'] ); ?>"
-												<?php echo implode( ' ', $custom_attributes ); ?>
+												<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
 												<?php checked( $key, $option_value ); ?>
 												/> <?php echo esc_html( $val ); ?></label>
 										</li>
@@ -545,7 +544,7 @@ class Settings {
 									value="1"
 									<?php checked( $option_value, 'yes' ); ?>
 									<?php echo esc_attr(implode( ' ', $custom_attributes )); ?>
-								/> <?php echo ($description); ?>
+								/> <?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 							</label> <?php echo esc_html($tooltip_html); ?>
 						<?php
 
@@ -661,10 +660,10 @@ class Settings {
 						?>
 						<tr valign="top" class="single_select_page">
 							<th scope="row" class="titledesc">
-								<label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+								<label><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp">
-								<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'document-engine' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); ?> <?php echo ($description); ?>
+								<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'document-engine' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); ?> <?php echo wp_kses($description, array('p'=>array('class'=>array(), 'style'=>array()), 'span'=>array('class'=>array(), 'style'=>array()))); ?>
 							</td>
 						</tr>
 						<?php
@@ -682,14 +681,14 @@ class Settings {
                                 }
                             }
 							$repeator_value= is_array($repeator_value) ? $repeator_value : array();
-							$all_tab_configs = document_engine_tour_tab_default_configurations();
+							$all_tab_configs = array();
 							$all_tab_keys = array_keys($all_tab_configs);
 
 
 							?>
 						<tr valign="top" class="single_select_page">
 							<th scope="row" class="titledesc">
-                            <label><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></label>
+                            <label><?php echo esc_html( $value['title'] ); ?> <?php echo esc_html($tooltip_html); ?></label>
 							</th>
 							<td class="forminp">
 								<div class="document-engine-setting-tab-options">

@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Document Engine 1.0.8\n"
+"Project-Id-Version: Document Engine 1.0.9\n"
 "Report-Msgid-Bugs-To: matrixaddons@gmail.com\n"
-"POT-Creation-Date: 2022-10-21 01:38:09+00:00\n"
+"POT-Creation-Date: 2022-10-22 03:10:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -253,11 +253,11 @@ msgstr ""
 msgid "Your settings have been saved."
 msgstr ""
 
-#: includes/Admin/Settings.php:667
+#: includes/Admin/Settings.php:666
 msgid "Select a page&hellip;"
 msgstr ""
 
-#: includes/Admin/Settings.php:733
+#: includes/Admin/Settings.php:732
 msgid "Add New"
 msgstr ""
 
