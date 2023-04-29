@@ -67,9 +67,22 @@ final class Main
 
     function admin_menu()
     {
+
         $settings_page = add_menu_page('Documents Engine', 'Documents', 'manage_options', 'document-engine-settings', array($this, 'settings'), DOCUMENT_ENGINE_ASSETS_URI . 'images/menu-icon.svg', 25);
 
         add_action('load-' . $settings_page, array($this, 'settings_page_init'));
+
+        if(!defined('DOCUMENT_ENGINE_PRO_FILE')) {
+            add_submenu_page(
+                'document-engine-settings',
+                esc_html__('Upgrade to Pro', 'document-engine'),
+                '<span style="color:#e27730">' . esc_html__('Upgrade to Pro', 'document-engine') . '</span>',
+                'manage_options',
+                esc_url('https://matrixaddons.com/downloads/document-engine-pro/?utm_campaign=freeplugin&utm_medium=admin-menu&utm_source=WordPress&utm_content=Upgrade+to+Pro'),
+                '',
+                35
+            );
+        }
 
     }
 
