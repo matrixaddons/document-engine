@@ -3,7 +3,7 @@
  * Plugin Name: Document Engine
  * Plugin URI: https://matrixaddons.com/downloads/document-engine-wordpress-to-pdf-plugin/
  * Description: Convert any post type to PDF document & PDF viewer block
- * Author: matrixaddons
+ * Author: MatrixAddons
  * Author URI: https://profiles.wordpress.org/matrixaddons
  * Version: 1.1
  * License: GPL2+

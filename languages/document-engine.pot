@@ -1,20 +1,24 @@
-# Copyright (C) 2022 matrixaddons
+# Copyright (C) 2023 MatrixAddons
 # This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Document Engine 1.0.9\n"
+"Project-Id-Version: Document Engine 1.1\n"
 "Report-Msgid-Bugs-To: matrixaddons@gmail.com\n"
-"POT-Creation-Date: 2022-10-22 03:10:19+00:00\n"
+"POT-Creation-Date: 2023-12-17 13:43:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
 "Last-Translator: matrixaddons <matrixaddons@gmail.com>\n"
 "Language-Team: matrixaddons <matrixaddons@gmail.com>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: includes/Admin/Main.php:62
 msgid "Settings"
+msgstr ""
+
+#: includes/Admin/Main.php:78 includes/Admin/Main.php:79
+msgid "Upgrade to Pro"
 msgstr ""
 
 #: includes/Admin/Settings/PDF.php:22
@@ -321,7 +325,7 @@ msgid "Convert any post type to PDF document & PDF viewer block"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "matrixaddons"
+msgid "MatrixAddons"
 msgstr ""
 
 #. Author URI of the plugin/theme

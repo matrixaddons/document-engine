@@ -1,5 +1,5 @@
-=== Document Engine - Download Posts as PDF, PDF Embedder ===
-Contributors: matrixaddons
+=== Document Engine - Download Posts as PDF, PDF Embedder, WordPress to PDF ===
+Contributors: MatrixAddons
 Tags: wordpress to pdf, pdf maker, generate pdf, create pdf, pdf viewer
 Requires at least: 5.4
 Tested up to: 6.4
