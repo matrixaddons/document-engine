@@ -18,7 +18,7 @@ class Template
     public function button($content)
     {
         if (!is_singular()) {
-            return;
+            return $content;
         }
         if (is_archive() || is_front_page() || is_home()) {
             return $content;
