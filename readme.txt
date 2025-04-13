@@ -1,10 +1,10 @@
-=== Document Engine - Download Posts as PDF, PDF Embedder, WordPress to PDF ===
+=== Document Engine - Download Posts as PDF, PDF Embedder, Posts to PDF ===
 Contributors: MatrixAddons
 Tags: wordpress to pdf, pdf maker, generate pdf, create pdf, pdf viewer
 Requires at least: 5.4
-Tested up to: 6.4
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.1.1
+Stable tag: 1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -77,8 +77,8 @@ Available Shortcodes For PDF Download
 
 == Changelog ==
 
-= 1.1.1 - 2024-06-21 =
-- Fixed - PDF icon color grayscale
+= 1.2 - 2025-04-13 =
+- Fixed - Setting page design
 
 == Frequently Asked Questions ==
 
