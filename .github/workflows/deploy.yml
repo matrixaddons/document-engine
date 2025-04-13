@@ -1,7 +1,10 @@
 name: Deploy to WordPress.org
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "*.*"
+      - "v*.*.*"
+  workflow_dispatch:
 jobs:
   tag:
     name: New Released For WordPress.org
