@@ -5,7 +5,7 @@
  * Description: Convert any post type to PDF document & PDF viewer block
  * Author: MatrixAddons
  * Author URI: https://profiles.wordpress.org/matrixaddons
- * Version: 1.2
+ * Version: 1.3
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
@@ -27,7 +27,7 @@ if (!defined('DOCUMENT_ENGINE_FILE')) {
 
 // Define DOCUMENT_ENGINE_VERSION.
 if (!defined('DOCUMENT_ENGINE_VERSION')) {
-    define('DOCUMENT_ENGINE_VERSION', '1.2');
+    define('DOCUMENT_ENGINE_VERSION', '1.3');
 }
 
 // Define DOCUMENT_ENGINE_PLUGIN_URI.
