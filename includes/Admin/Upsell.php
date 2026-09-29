@@ -17,7 +17,6 @@ class Upsell
     public static function init()
     {
         if (defined('DOCUMENT_ENGINE_PRO_FILE')) {
-            add_action('admin_notices', array(__CLASS__, 'outdated_pro_notice'));
             return;
         }
         add_action('admin_menu', array(__CLASS__, 'menu'), 30);
@@ -209,22 +208,5 @@ class Upsell
                 'url' => self::url('access'),
             ),
         )) . ');', 'before');
-    }
-
-    /**
-     * Pro 1.x (watermarks only) with free 2.x: offer the upgrade.
-     */
-    public static function outdated_pro_notice()
-    {
-        if (!defined('DOCUMENT_ENGINE_PRO_VERSION') || version_compare(DOCUMENT_ENGINE_PRO_VERSION, '2.0.0', '>=') || !current_user_can('install_plugins')) {
-            return;
-        }
-        $screen = get_current_screen();
-        if (!$screen || !Assets::is_product_screen($screen->id)) {
-            return;
-        }
-        echo '<div class="notice notice-info"><p><strong>' . esc_html__('Document Engine Pro 2 is available for your licence.', 'document-engine') . '</strong> '
-            . esc_html__('It adds access control, private files, analytics, versions and more. Enter your licence key to update in one step.', 'document-engine')
-            . ' <a class="button button-primary" href="' . esc_url(ProPage::url() . '#install-pro') . '">' . esc_html__('Update Pro', 'document-engine') . '</a></p></div>';
     }
 }

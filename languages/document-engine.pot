@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-29T15:13:57+00:00\n"
+"POT-Creation-Date: 2026-09-29T15:16:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -326,8 +326,8 @@ msgstr ""
 #: includes/Admin/DocsContent.php:505
 #: includes/Admin/DocsContent.php:533
 #: includes/Admin/ProPage.php:169
-#: includes/Admin/UI.php:86
-#: includes/Admin/Upsell.php:158
+#: includes/Admin/UI.php:85
+#: includes/Admin/Upsell.php:157
 msgid "Pro"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 #: includes/Admin/Dashboard.php:62
 #: includes/Admin/Settings/General.php:16
 #: includes/Admin/Settings/General.php:29
-#: includes/Admin/UI.php:89
+#: includes/Admin/UI.php:88
 #: includes/Documents/PostType.php:44
 #: includes/Documents/PostType.php:46
 #: includes/Helpers/documents.php:60
@@ -523,7 +523,7 @@ msgid "Docs"
 msgstr ""
 
 #: includes/Admin/Docs.php:185
-msgid "How to set up and use Document Engine. Everything here describes this version of the plugin."
+msgid "How to set up and use Document Engine."
 msgstr ""
 
 #: includes/Admin/Docs.php:188
@@ -544,7 +544,7 @@ msgstr ""
 
 #: includes/Admin/Docs.php:217
 #: includes/Admin/Main.php:61
-#: includes/Admin/UI.php:94
+#: includes/Admin/UI.php:93
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -2060,7 +2060,7 @@ msgid "File"
 msgstr ""
 
 #: includes/Admin/Documents.php:116
-#: includes/Admin/Upsell.php:130
+#: includes/Admin/Upsell.php:129
 msgid "Activity"
 msgstr ""
 
@@ -2581,7 +2581,7 @@ msgid "Your own fields (reference, department, dates…) as columns, filters and
 msgstr ""
 
 #: includes/Admin/ProPage.php:103
-#: includes/Admin/Upsell.php:89
+#: includes/Admin/Upsell.php:88
 msgid "Search inside PDF, Word, Excel and PowerPoint files"
 msgstr ""
 
@@ -3334,171 +3334,159 @@ msgstr ""
 msgid "Help for this screen"
 msgstr ""
 
-#: includes/Admin/UI.php:88
+#: includes/Admin/UI.php:87
 msgid "Product links"
 msgstr ""
 
-#: includes/Admin/Upsell.php:36
+#: includes/Admin/Upsell.php:35
 msgid "Decide who can open each document and keep files private. Available in Pro."
 msgstr ""
 
-#: includes/Admin/Upsell.php:50
+#: includes/Admin/Upsell.php:49
 msgid "Access control & private files"
 msgstr ""
 
-#: includes/Admin/Upsell.php:51
+#: includes/Admin/Upsell.php:50
 msgid "Decide who can open every document — by role, by person, or for a whole category — and keep the files out of public reach."
 msgstr ""
 
-#: includes/Admin/Upsell.php:53
+#: includes/Admin/Upsell.php:52
 msgid "Restrict documents or entire categories to logged-in users, roles or named people"
 msgstr ""
 
-#: includes/Admin/Upsell.php:54
+#: includes/Admin/Upsell.php:53
 msgid "Protected storage: files move out of the public uploads folder"
 msgstr ""
 
-#: includes/Admin/Upsell.php:55
+#: includes/Admin/Upsell.php:54
 msgid "Expiring share links for people without an account"
 msgstr ""
 
-#: includes/Admin/Upsell.php:56
+#: includes/Admin/Upsell.php:55
 msgid "Secure viewer with per-reader watermarks; no download, print or copy"
 msgstr ""
 
-#: includes/Admin/Upsell.php:61
+#: includes/Admin/Upsell.php:60
 msgid "Activity & analytics"
 msgstr ""
 
-#: includes/Admin/Upsell.php:62
+#: includes/Admin/Upsell.php:61
 msgid "See who opened and downloaded what, and when — with a full audit log you can export."
 msgstr ""
 
-#: includes/Admin/Upsell.php:64
+#: includes/Admin/Upsell.php:63
 msgid "Views, downloads, people and blocked requests over time"
 msgstr ""
 
-#: includes/Admin/Upsell.php:65
+#: includes/Admin/Upsell.php:64
 msgid "Per-document history and top documents"
 msgstr ""
 
-#: includes/Admin/Upsell.php:66
+#: includes/Admin/Upsell.php:65
 msgid "Filterable audit log with CSV export and retention settings"
 msgstr ""
 
-#: includes/Admin/Upsell.php:67
+#: includes/Admin/Upsell.php:66
 msgid "Privacy-friendly: no IP addresses stored"
 msgstr ""
 
-#: includes/Admin/Upsell.php:72
+#: includes/Admin/Upsell.php:71
 msgid "Email gate & leads"
 msgstr ""
 
-#: includes/Admin/Upsell.php:73
+#: includes/Admin/Upsell.php:72
 msgid "Ask for a name and email before a download, with consent — and send leads to your CRM."
 msgstr ""
 
-#: includes/Admin/Upsell.php:75
+#: includes/Admin/Upsell.php:74
 msgid "Per document or site-wide"
 msgstr ""
 
-#: includes/Admin/Upsell.php:76
+#: includes/Admin/Upsell.php:75
 msgid "Consent checkbox and spam protection built in"
 msgstr ""
 
-#: includes/Admin/Upsell.php:77
+#: includes/Admin/Upsell.php:76
 msgid "Webhook to Zapier, Make or your CRM; CSV export"
 msgstr ""
 
-#: includes/Admin/Upsell.php:78
+#: includes/Admin/Upsell.php:77
 msgid "Returning visitors are remembered"
 msgstr ""
 
-#: includes/Admin/Upsell.php:83
+#: includes/Admin/Upsell.php:82
 msgid "Bulk import, versions & more"
 msgstr ""
 
-#: includes/Admin/Upsell.php:84
+#: includes/Admin/Upsell.php:83
 msgid "Move a whole archive in at once and keep every document current."
 msgstr ""
 
-#: includes/Admin/Upsell.php:86
+#: includes/Admin/Upsell.php:85
 msgid "Drag in hundreds of files or import a spreadsheet"
 msgstr ""
 
-#: includes/Admin/Upsell.php:87
+#: includes/Admin/Upsell.php:86
 msgid "Versions: replace a file without changing its link, restore any time"
 msgstr ""
 
-#: includes/Admin/Upsell.php:88
+#: includes/Admin/Upsell.php:87
 msgid "Review and expiry dates with reminder emails"
 msgstr ""
 
-#: includes/Admin/Upsell.php:104
-#: includes/Admin/Upsell.php:108
+#: includes/Admin/Upsell.php:103
+#: includes/Admin/Upsell.php:107
 msgid "Document Engine Pro"
 msgstr ""
 
-#: includes/Admin/Upsell.php:104
+#: includes/Admin/Upsell.php:103
 msgid "Pro feature"
 msgstr ""
 
-#: includes/Admin/Upsell.php:130
+#: includes/Admin/Upsell.php:129
 msgid "Import"
 msgstr ""
 
-#: includes/Admin/Upsell.php:132
-#: includes/Admin/Upsell.php:144
+#: includes/Admin/Upsell.php:131
+#: includes/Admin/Upsell.php:143
 msgid "Available in Document Engine Pro."
 msgstr ""
 
-#: includes/Admin/Upsell.php:167
+#: includes/Admin/Upsell.php:166
 msgid "See plans and pricing"
 msgstr ""
 
-#: includes/Admin/Upsell.php:168
+#: includes/Admin/Upsell.php:167
 msgid "Compare free and Pro"
 msgstr ""
 
-#: includes/Admin/Upsell.php:180
-#: includes/Admin/Upsell.php:200
+#: includes/Admin/Upsell.php:179
+#: includes/Admin/Upsell.php:199
 msgid "Access & security"
 msgstr ""
 
-#: includes/Admin/Upsell.php:201
+#: includes/Admin/Upsell.php:200
 msgid "Control who can open this document and prove who read it."
 msgstr ""
 
-#: includes/Admin/Upsell.php:203
+#: includes/Admin/Upsell.php:202
 msgid "Members, roles or named people only"
 msgstr ""
 
-#: includes/Admin/Upsell.php:204
+#: includes/Admin/Upsell.php:203
 msgid "Private file storage and expiring share links"
 msgstr ""
 
-#: includes/Admin/Upsell.php:205
+#: includes/Admin/Upsell.php:204
 msgid "Watermarked secure viewer"
 msgstr ""
 
-#: includes/Admin/Upsell.php:206
+#: includes/Admin/Upsell.php:205
 msgid "\"I have read and understood\" confirmations"
 msgstr ""
 
-#: includes/Admin/Upsell.php:208
+#: includes/Admin/Upsell.php:207
 msgid "See what Pro adds"
-msgstr ""
-
-#: includes/Admin/Upsell.php:226
-msgid "Document Engine Pro 2 is available for your licence."
-msgstr ""
-
-#: includes/Admin/Upsell.php:227
-msgid "It adds access control, private files, analytics, versions and more. Enter your licence key to update in one step."
-msgstr ""
-
-#: includes/Admin/Upsell.php:228
-msgid "Update Pro"
 msgstr ""
 
 #: includes/Admin/views/html-admin-settings.php:42

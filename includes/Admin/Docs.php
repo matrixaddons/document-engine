@@ -182,7 +182,7 @@ class Docs
             }
         }
 
-        UI::page_start(__('Documentation', 'document-engine'), esc_html__('How to set up and use Document Engine. Everything here describes this version of the plugin.', 'document-engine'), array(), 'dengine-docs-page');
+        UI::page_start(__('Documentation', 'document-engine'), esc_html__('How to set up and use Document Engine.', 'document-engine'), array(), 'dengine-docs-page');
         ?>
         <div class="dengine-docs">
             <nav class="dengine-docs__nav" aria-label="<?php esc_attr_e('Documentation sections', 'document-engine'); ?>">

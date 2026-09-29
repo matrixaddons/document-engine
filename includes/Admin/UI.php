@@ -82,7 +82,6 @@ class UI
             <div class="dengine-a-top__brand">
                 <?php echo self::logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 <span class="dengine-a-top__name"><?php echo esc_html(DOCUMENT_ENGINE_BRAND); ?></span>
-                <span class="dengine-a-pill"><?php echo esc_html(DOCUMENT_ENGINE_VERSION); ?></span>
                 <?php if (self::is_pro()) : ?><span class="dengine-a-pill dengine-a-pill--pro"><?php esc_html_e('Pro', 'document-engine'); ?></span><?php endif; ?>
             </div>
             <nav class="dengine-a-top__links" aria-label="<?php esc_attr_e('Product links', 'document-engine'); ?>">
