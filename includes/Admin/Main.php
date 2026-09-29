@@ -50,6 +50,22 @@ final class Main
         add_action('admin_menu', array($this, 'admin_menu'), 9);
 
         add_filter('plugin_action_links_' . plugin_basename(DOCUMENT_ENGINE_FILE), array($this, 'setting_link'));
+        add_filter('plugin_row_meta', array($this, 'row_meta'), 10, 2);
+    }
+
+    /**
+     * "Free vs Pro" (free sites only) and "Docs" under the plugin's description on the Plugins screen.
+     */
+    public function row_meta($links, $file)
+    {
+        if ($file !== plugin_basename(DOCUMENT_ENGINE_FILE) || !current_user_can('edit_dengine_documents')) {
+            return $links;
+        }
+        if (!defined('DOCUMENT_ENGINE_PRO_FILE')) {
+            $links[] = '<a href="' . esc_url(ProPage::url()) . '">' . esc_html__('Free vs Pro', 'document-engine') . '</a>';
+        }
+        $links[] = '<a href="' . esc_url(Docs::url()) . '">' . esc_html__('Docs', 'document-engine') . '</a>';
+        return $links;
     }
 
     public function setting_link($links)
@@ -58,7 +74,7 @@ final class Main
         array_unshift($links, $settings_link);
 
         if (!defined('DOCUMENT_ENGINE_PRO_FILE')) {
-            $links[] = '<a href="' . esc_url(ProPage::url()) . '" style="color:#1d7a3a;font-weight:600">' . esc_html__('Upgrade to Pro', 'document-engine') . '</a>';
+            $links[] = '<a href="' . esc_url(ProPage::url() . '#pricing') . '" style="color:#1d7a3a;font-weight:600">' . esc_html__('Upgrade to Pro', 'document-engine') . '</a>';
         }
         return $links;
     }

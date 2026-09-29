@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-29T15:16:54+00:00\n"
+"POT-Creation-Date: 2026-09-29T15:22:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -518,6 +518,7 @@ msgid "Documentation"
 msgstr ""
 
 #: includes/Admin/Docs.php:27
+#: includes/Admin/Main.php:67
 #: includes/Admin/UI.php:78
 msgid "Docs"
 msgstr ""
@@ -543,8 +544,8 @@ msgid "These features come with Document Engine Pro, an add-on to this plugin. Y
 msgstr ""
 
 #: includes/Admin/Docs.php:217
-#: includes/Admin/Main.php:61
-#: includes/Admin/UI.php:93
+#: includes/Admin/Main.php:77
+#: includes/Admin/UI.php:96
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -2181,22 +2182,24 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: includes/Admin/Main.php:57
-#: includes/Admin/Main.php:75
+#: includes/Admin/Main.php:65
+#: includes/Admin/Main.php:103
+#: includes/Admin/Main.php:104
+#: includes/Admin/ProPage.php:149
+#: includes/Admin/UI.php:90
+msgid "Free vs Pro"
+msgstr ""
+
+#: includes/Admin/Main.php:73
+#: includes/Admin/Main.php:91
 #: includes/Admin/views/html-admin-settings.php:58
 msgid "Settings"
 msgstr ""
 
 #. translators: %s: plugin name
-#: includes/Admin/Main.php:74
+#: includes/Admin/Main.php:90
 #, php-format
 msgid "%s Settings"
-msgstr ""
-
-#: includes/Admin/Main.php:87
-#: includes/Admin/Main.php:88
-#: includes/Admin/ProPage.php:149
-msgid "Free vs Pro"
 msgstr ""
 
 #: includes/Admin/Migrate.php:33
