@@ -1,15 +1,48 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Document Engine demo",
+    "description": "A document library with search, multi-select filters and the built-in PDF viewer, filled with sample documents.",
+    "author": "matrixaddons",
+    "categories": [
+      "Content",
+      "Media"
+    ]
+  },
   "landingPage": "/document-library/",
-  "preferredVersions": { "php": "8.3", "wp": "latest" },
-  "features": { "networking": true },
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
   "steps": [
-    { "step": "login", "username": "admin", "password": "password" },
-    { "step": "installPlugin", "pluginData": { "resource": "wordpress.org/plugins", "slug": "document-engine" }, "options": { "activate": true } },
-    { "step": "setSiteOptions", "options": { "permalink_structure": "/%postname%/", "document_engine_single_related": "yes" } },
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "document-engine"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "permalink_structure": "/%postname%/",
+        "document_engine_single_related": "yes"
+      }
+    },
     {
       "step": "runPHP",
-      "code": "<?php require '/wordpress/wp-load.php'; require_once ABSPATH . 'wp-admin/includes/image.php'; require_once ABSPATH . 'wp-admin/includes/file.php'; require_once ABSPATH . 'wp-admin/includes/media.php'; wp_set_current_user(1); $cats = array(); foreach (array('Policies', 'Meeting minutes', 'Reports') as $c) { $t = wp_insert_term($c, 'dengine_category'); $cats[$c] = is_wp_error($t) ? 0 : (int)$t['term_id']; } $docs = array(array('Privacy policy', 'Policies', 'How we collect, use and protect personal information.'), array('Health and safety policy', 'Policies', 'Responsibilities and arrangements for health and safety at work.'), array('Council meeting minutes – September', 'Meeting minutes', 'Minutes of the full council meeting, including decisions on the budget.'), array('Council meeting minutes – August', 'Meeting minutes', 'Minutes of the August meeting and the planning committee report.'), array('Annual report 2026', 'Reports', 'Our year in numbers: services, finances and priorities for next year.')); foreach ($docs as $d) { $pdf = new MatrixAddons\\DocumentEngine\\Vendor\\Mpdf\\Mpdf(array('tempDir' => get_temp_dir())); $html = ''; for ($i = 1; $i <= 3; $i++) { $html .= '<bookmark content=\"Section ' . $i . '\" /><h1>' . esc_html($d[0]) . '</h1><h2>Section ' . $i . '</h2><p>' . esc_html($d[2]) . ' This is a sample document created for the Document Engine demo. Try the search box in the viewer toolbar, the page thumbnails and the outline.</p>' . ($i < 3 ? '<pagebreak />' : ''); } $pdf->WriteHTML($html); $file = get_temp_dir() . sanitize_title($d[0]) . '.pdf'; $pdf->Output($file, 'F'); $att = media_handle_sideload(array('name' => basename($file), 'tmp_name' => $file), 0); if (is_wp_error($att)) { continue; } $id = wp_insert_post(array('post_type' => 'dengine_document', 'post_status' => 'publish', 'post_title' => $d[0], 'post_excerpt' => $d[2], 'meta_input' => array('_dengine_file_id' => $att))); wp_set_object_terms($id, array($cats[$d[1]]), 'dengine_category'); $doc = MatrixAddons\\DocumentEngine\\Documents\\Document::get($id); if ($doc) { $doc->sync_file_meta(); } } wp_insert_post(array('post_type' => 'page', 'post_status' => 'publish', 'post_title' => 'Document library', 'post_name' => 'document-library', 'post_content' => '<!-- wp:document-engine/library {\"filters\":[\"category\",\"type\",\"year\",\"sort\"]} /-->' . \"\\n\" . '<!-- wp:document-engine/documents {\"mode\":\"recent\",\"title\":\"Latest documents\"} /-->'));"
+      "code": "<?php require '/wordpress/wp-load.php'; require_once ABSPATH . 'wp-admin/includes/image.php'; require_once ABSPATH . 'wp-admin/includes/file.php'; require_once ABSPATH . 'wp-admin/includes/media.php'; wp_set_current_user(1); $cats = array(); foreach (array('Policies', 'Meeting minutes', 'Reports') as $c) { $t = wp_insert_term($c, 'dengine_category'); $cats[$c] = is_wp_error($t) ? 0 : (int)$t['term_id']; } $docs = array(array('Privacy policy', 'Policies', 'How we collect, use and protect personal information.'), array('Health and safety policy', 'Policies', 'Responsibilities and arrangements for health and safety at work.'), array('Council meeting minutes – September', 'Meeting minutes', 'Minutes of the full council meeting, including decisions on the budget.'), array('Council meeting minutes – August', 'Meeting minutes', 'Minutes of the August meeting and the planning committee report.'), array('Annual report 2026', 'Reports', 'Our year in numbers: services, finances and priorities for next year.')); foreach ($docs as $d) { $pdf = new MatrixAddons\\DocumentEngine\\Vendor\\Mpdf\\Mpdf(array('tempDir' => get_temp_dir())); $html = ''; for ($i = 1; $i <= 3; $i++) { $html .= '<bookmark content=\"Section ' . $i . '\" /><h1>' . esc_html($d[0]) . '</h1><h2>Section ' . $i . '</h2><p>' . esc_html($d[2]) . ' This is a sample document created for the Document Engine demo. Try the search box in the viewer toolbar, the page thumbnails and the outline.</p>' . ($i < 3 ? '<pagebreak />' : ''); } $pdf->WriteHTML($html); $file = get_temp_dir() . sanitize_title($d[0]) . '.pdf'; $pdf->Output($file, 'F'); $att = media_handle_sideload(array('name' => basename($file), 'tmp_name' => $file), 0); if (is_wp_error($att)) { continue; } $id = wp_insert_post(array('post_type' => 'dengine_document', 'post_status' => 'publish', 'post_title' => $d[0], 'post_excerpt' => $d[2], 'meta_input' => array('_dengine_file_id' => $att))); wp_set_object_terms($id, array($cats[$d[1]]), 'dengine_category'); $doc = MatrixAddons\\DocumentEngine\\Documents\\Document::get($id); if ($doc) { $doc->sync_file_meta(); } } wp_insert_post(array('post_type' => 'page', 'post_status' => 'publish', 'post_title' => 'Document library', 'post_name' => 'document-library', 'post_content' => '<!-- wp:document-engine/library {\"filters\":[\"category\",\"type\",\"year\",\"sort\"],\"multiFilters\":true} /-->' . \"\\n\" . '<!-- wp:document-engine/documents {\"mode\":\"recent\",\"title\":\"Latest documents\"} /-->'));"
     }
   ]
 }

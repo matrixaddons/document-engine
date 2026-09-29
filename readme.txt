@@ -25,9 +25,7 @@ It is built for the block editor, works with any theme, and the free plugin has 
 * **Viewer features other plugins charge for.** Search inside PDFs, page thumbnails and outline, clickable links, links to a page (`#page=4`), print, download and full screen.
 * **One link per document, for good.** Every download goes through the document's own link: downloads are counted (bots and link previews are ignored), and replacing the file keeps the same link, so emails and printed QR codes never break.
 * **Switch without losing anything.** Move from Document Library (Barn2), Download Monitor or WordPress Download Manager in a few clicks. Their shortcodes keep working and their old download links redirect.
-* **Help inside WordPress.** Step-by-step documentation under Documents → Docs, with a "Help for this screen" link on every screen.
 * **Accessibility first.** Keyboard and screen-reader friendly libraries and viewer, checked with automated WCAG 2.1 AA tests, plus an optional "Request an accessible version" form.
-* **Grows with you.** When you need members-only documents, private files, analytics or read-and-confirm, the Pro add-on plugs into the same screens. Nothing to migrate.
 
 = Document library =
 
@@ -78,7 +76,6 @@ Document Engine copies your documents from **Document Library (Barn2)**, **Downl
 * **Command palette** (Ctrl/Cmd + K): add a document or jump to any document from anywhere in the admin.
 * **Documents list** with file type and size, category and download counts, and filters by category and file type.
 * **Roles**: choose which roles manage all documents, publish their own, or only draft.
-* **A short menu**: related screens share one item with tabs (Categories and Tags, Reports, Tools).
 * **Documentation built in** under Documents → Docs.
 * **Multilingual**: WPML and Polylang configuration included.
 * **Ready for AI assistants**: the WordPress Abilities API lets assistants search and read your library, only ever returning documents the signed-in user may open.
@@ -87,7 +84,7 @@ Document Engine copies your documents from **Document Library (Barn2)**, **Downl
 
 The free plugin publishes documents. **Pro controls who can open them, proves who read them, and keeps them up to date**, for councils, schools, HR teams, intranets, client portals and member sites.
 
-Pro is an add-on: install it next to the free plugin and its features appear in the same screens. Your documents, pages and settings stay exactly as they are.
+Pro is an add-on: install it next to the free plugin and its features appear in the same screens. Your documents, pages and settings stay exactly as they are. [See Document Engine Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=intro#features)
 
 **Pro is for you if you need to…**
 
@@ -101,6 +98,8 @@ Pro is an add-on: install it next to the free plugin and its features appear in 
 * **Move hundreds of files in at once** from a spreadsheet, and keep them current with versions, review dates and automatic expiry.
 
 = Everything Pro adds =
+
+Screenshots and details of every feature are on the [Document Engine Pro page](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=features#features).
 
 **Access control**
 
@@ -152,15 +151,17 @@ Pro is an add-on: install it next to the free plugin and its features appear in 
 * **Plus**: 5 websites, $149 a year or $379 lifetime.
 * **Agency**: 25 websites and priority support, $249 a year or $599 lifetime.
 
-[See Pro plans and pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro)
+Every plan has a 14-day money-back guarantee ([refund policy](https://mantrabrain.com/refund-policy/)). If a licence expires, Pro keeps working; only updates and support stop.
+
+[See Pro plans and pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=plans#pricing)
 
 = Free vs Pro =
 
-**Free, for everyone:** documents and document pages, table/grid/folder libraries, instant search, multi-select filters with counts, preview popup, the PDF viewer with search, thumbnails and outline, QR codes, Post to PDF with watermarks, blocks, shortcodes and Elementor widgets, migration from other plugins, accessible-format requests, command palette, AI abilities (read-only) and built-in documentation.
+**Free** is a complete document library: libraries, search and filters, the PDF viewer, document pages, Post to PDF, blocks, shortcodes, Elementor widgets and migration, with no limits.
 
-**Pro adds:** members-only documents and private files, tracked share links, My Documents, the secure viewer and stamped downloads, email gate and leads, abuse protection, activity and reading analytics, search insights, read-and-confirm, versions, review and expiry dates, custom fields, PDF accessibility checks, search inside files, PDF thumbnails, bulk and CSV import, ZIP downloads, submissions, handbook PDFs, notifications, the AI assistant, extra AI abilities and WP-CLI.
+**Pro** adds control, proof and scale: who can open each document, private files, the secure viewer, read-and-confirm, analytics, versions, custom fields and bulk import.
 
-The full side-by-side list is in the plugin under **Documents → Free vs Pro**.
+The full side-by-side list is in the plugin under **Documents → Free vs Pro** and on our website: [compare Free and Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=compare#compare).
 
 = Privacy =
 
@@ -173,11 +174,13 @@ The free plugin works without any external service. It only contacts one in thes
 * **Google Docs Viewer** (`docs.google.com`): only for PDF Viewer blocks created with version 1, on sites upgraded from version 1, until you switch on *Documents → Settings → PDF Viewer → Version 1 blocks*. The visitor's browser loads Google's viewer, which fetches the PDF's address. New installs never use it. [Google Terms of Service](https://policies.google.com/terms), [Google Privacy Policy](https://policies.google.com/privacy).
 * **MatrixAddons licence server** (`store.mantrabrain.com`): only when an administrator enters a Pro licence key on *Documents → Free vs Pro* to install Pro. The licence key and your site's address are sent to check the licence and download Pro. [Terms and Conditions](https://mantrabrain.com/terms-and-conditions/), [Privacy Policy](https://mantrabrain.com/privacy-policy/).
 * **Files you link to**: documents or viewers that point to a file on another website load that file from that website.
+* **Images in Post to PDF**: when a post includes images or stylesheets from another website, your server fetches them from that website while it builds the PDF (local and private addresses are refused).
 
 = Documentation and support =
 
 * Built-in documentation: **Documents → Docs** in your WordPress admin.
-* Questions about the free plugin: the support forum here on WordPress.org.
+* Questions about the free plugin: the [support forum](https://wordpress.org/support/plugin/document-engine/) here on WordPress.org.
+* Document Engine Pro: [features, plans and FAQ](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=support) and [pre-sales questions](https://matrixaddons.com/contact-us/). Pro customers get email support (priority support on the Agency plan).
 
 == Installation ==
 
@@ -205,7 +208,7 @@ Not to publish documents. The free plugin is a complete library with the viewer,
 
 = How do I upgrade to Pro? =
 
-Buy Pro, then either upload the Pro plugin from your account, or enter your licence key at the bottom of **Documents → Free vs Pro** and it installs in one step. Keep the free plugin active; Pro builds on it, and nothing needs to be moved or set up again.
+Choose a plan on the [Document Engine Pro page](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=faq#pricing), then either upload the Pro plugin from your account, or enter your licence key at the bottom of **Documents → Free vs Pro** and it installs in one step. Keep the free plugin active; Pro builds on it, and nothing needs to be moved or set up again.
 
 = Can I keep documents private? =
 
@@ -243,7 +246,9 @@ Nothing is deleted unless you choose to: turn on **Documents → Settings → Ad
 
 In your admin under **Documents → Docs**: getting started, every feature, settings, how-to guides, troubleshooting and developer notes, with search.
 
-== Shortcodes ==
+= Which shortcodes are there? =
+
+Every block has a shortcode for classic themes and page builders:
 
 * `[document_engine_library layout="table|grid|folders" categories="slug" file_types="pdf,word" per_page="20" filters="category,tag,type,year,author,sort" multi_filters="yes"]`
 * `[document_engine_search page="123"]`
