@@ -26,9 +26,35 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
     return;
 }
 
-if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
-    require_once dirname(__FILE__) . '/vendor/autoload.php';
-}
+/*
+ * Class loading. The plugin's own classes live in includes/ (MatrixAddons\DocumentEngine\Foo\Bar => includes/Foo/Bar.php).
+ * Bundled libraries live in vendor-prefixed/ under the MatrixAddons\DocumentEngine\Vendor namespace (renamed by Strauss
+ * so they never clash with other plugins); their autoloader is only loaded the first time one is used.
+ */
+spl_autoload_register(function ($class) {
+    $prefix = 'MatrixAddons\DocumentEngine\\';
+    if (strpos($class, $prefix) !== 0) {
+        return;
+    }
+    static $vendor = null;
+    if (strpos($class, $prefix . 'Vendor\\') === 0) {
+        if ($vendor === null) {
+            $vendor = false;
+            $file = __DIR__ . '/vendor-prefixed/autoload.php';
+            if (file_exists($file)) {
+                $vendor = require $file;
+            }
+        }
+        if ($vendor && method_exists($vendor, 'loadClass')) {
+            $vendor->loadClass($class);
+        }
+        return;
+    }
+    $file = __DIR__ . '/includes/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+    if (is_readable($file)) {
+        require $file;
+    }
+});
 
 // Define DOCUMENT_ENGINE_PLUGIN_FILE.
 if (!defined('DOCUMENT_ENGINE_FILE')) {
