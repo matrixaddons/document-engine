@@ -85,50 +85,74 @@ Document Engine copies your documents from **Document Library (Barn2)**, **Downl
 
 = Document Engine Pro =
 
-Pro is an add-on for organisations that need to **control who opens what, prove who read what, and manage documents at scale**. It adds to the same screens; your documents and settings stay as they are.
+The free plugin publishes documents. **Pro controls who can open them, proves who read them, and keeps them up to date**, for councils, schools, HR teams, intranets, client portals and member sites.
 
-**Control access**
+Pro is an add-on: install it next to the free plugin and its features appear in the same screens. Your documents, pages and settings stay exactly as they are.
 
-* Members-only documents by **role, named people or a whole category**.
-* **Private file storage**: restricted files move out of the public uploads folder, with a Site Health test that checks they really are private.
-* **Share links** for people without an account: expiring, named per recipient, with open tracking and an email on first open.
-* **Secure viewer**: no download, print or copy buttons, and the reader's name, email and date on every page. **Stamped PDF downloads**.
-* **Email gate**: ask for a name and email (with consent) before a download, with leads export and a webhook.
-* **Abuse protection**: daily per-person document limits and Cloudflare Turnstile on public forms.
+**Pro is for you if you need to…**
 
-**Prove and measure**
+* **Publish staff-only or members-only documents** without a membership plugin: restrict a document, or a whole category, to logged-in users, chosen roles or named people.
+* **Stop files being shared by their address**: restricted files move out of the public uploads folder and are only served to people allowed to open them.
+* **Send a document to someone outside your site**, such as an auditor, a board member or a client, with a link that expires and tells you when they opened it.
+* **Make staff confirm they've read a policy**, with deadlines, reminders and evidence you can export for an inspection or audit.
+* **See which documents people read**, for how long, and what they search for but can't find.
+* **Collect leads** before a download (name, email, consent), for brochures, reports and whitepapers.
+* **Keep a register of documents** with your own fields (reference number, department, review date) that visitors can filter and sort by.
+* **Move hundreds of files in at once** from a spreadsheet, and keep them current with versions, review dates and automatic expiry.
 
-* **Activity log** of views, downloads and blocked attempts, with charts, CSV export and a retention period. No IP addresses are stored.
+= Everything Pro adds =
+
+**Access control**
+
+* **Members-only documents** by logged-in users, roles or named people, per document or for a whole category (sub-categories follow).
+* Restricted documents shown **with a lock** or **hidden** from people who can't open them, and left out of site search, feeds and file-content search.
+* **Private file storage** for restricted files, with a **Site Health test** that checks the folder really is private (and shows the nginx rule when it isn't).
+* **Share links** for people without an account: expiring, **named per recipient**, with **open tracking**, an optional **email on first open**, and one-click revoke.
+* **"My documents" block**: a client or staff area listing the documents shared with the signed-in person, with what's new since their last visit.
+
+**Secure viewing and downloads**
+
+* **Secure viewer**: read-only, with no download, print or copy buttons, and the **reader's name, email and date watermarked on every page**.
+* **Stamped PDF downloads**: every downloaded PDF carries the reader's details.
+* **Email gate**: name and email (and optionally organisation) with your consent text before a download; returning visitors pass straight through. Leads are listed, exported to CSV, emailed to you or sent to a webhook, and deleted after a retention period you choose.
+* **Abuse protection**: a daily limit on how many different documents one person can open, and **Cloudflare Turnstile** on the email gate, request and submission forms.
+
+**Proof and insight**
+
+* **Activity log** of views, downloads, blocked attempts, leads and share-link opens, with charts, top documents, filters and **CSV export**. No IP addresses are stored; entries are deleted after your retention period.
 * **Reading analytics**: time spent on each page of a PDF and how far people read.
-* **Search insights**: what visitors search for, and what they can't find.
-* **Read and confirm**: "I have read and understood" with roles, deadlines, reminders, new rounds after a change, a Required Reading block and evidence export.
+* **Search insights**: what visitors search for, and the searches that found nothing.
+* **Read and confirm**: ask chosen roles to confirm "I have read and understood", with **deadlines, reminder emails, a Required Reading block**, new rounds after an important change, and an **evidence export** (who, when, the statement they confirmed and a fingerprint of the file).
+* Views in the last 30 days and access status right in the documents list.
 
-**Keep documents current**
+**Keeping documents current**
 
-* **Versions**: replace a file without changing its link, see the history and restore. Upload a new version straight from the documents list.
-* **Review and expiry dates** with a daily reminder email; expired documents are unpublished automatically.
-* **Custom fields** (reference number, department, dates…) as library columns, filters and sort options, including fields from Advanced Custom Fields.
-* **PDF accessibility check** that flags untagged or scanned PDFs.
+* **Versions**: replace a file without changing its link, see the history and restore any version. **Upload a new version from the documents list** (or drop a file onto a row).
+* **Review-by and expiry dates**, with a daily email of documents due for review; expired documents are unpublished automatically.
+* **Custom fields** (text, number, date, choice list, yes/no, link, email) shown as **library columns, filters with counts and sort options**, on document pages and in search. Works with **Advanced Custom Fields**.
+* **PDF accessibility check** that flags untagged, scanned or untitled PDFs in the documents list.
 
-**Work at scale**
+**Scale and automation**
 
 * **Search inside PDF, Word, Excel and PowerPoint files**, in libraries and site search.
-* **Bulk upload and CSV import**, including updates by ID and custom fields.
-* **ZIP download** of several documents at once.
-* **"My documents"** page listing what's shared with each signed-in person.
-* **Front-end submissions** with moderation.
-* **Handbook PDF**: many posts in one PDF with a cover and contents.
-* **Notifications**: signed webhooks, Slack or Microsoft Teams messages, and email subscriptions by category.
-* **AI assistant** that suggests titles, summaries, categories and tags, using the AI provider connected to WordPress.
-* **WP-CLI** commands.
+* **Automatic PDF thumbnails** for grid layouts (when your server can make PDF previews).
+* **Bulk upload** (drag and drop many files) and **CSV import**, including updates by ID and custom-field columns.
+* **ZIP download**: visitors select several documents in a library and download them as one ZIP.
+* **Front-end submissions**: chosen roles upload documents from a page, with allowed file types, a size limit and moderation.
+* **Handbook PDF**: many posts in one PDF with a cover and table of contents, for admins or visitors (`[document_engine_handbook]`).
+* **Notifications**: signed webhooks (for Zapier, Make or your own system), **Slack or Microsoft Teams** messages, and **email subscriptions** by category with a Subscribe block and one-click unsubscribe.
+* **AI assistant** in the editor that suggests a title, summary, categories and tags from the file's text, using the AI provider connected to WordPress (no extra keys).
+* **More for AI agents**: abilities to read a document's text (never for secure documents) and to list documents due for review.
+* **WP-CLI**: list, import, stats, reindex, protect and share.
+* Personal data **export and erase** for leads, activity, searches, reading sessions and acknowledgements, and **automatic updates** with an active licence.
 
-[Compare Free and Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine)
+[See Pro plans and pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro)
 
 = Free vs Pro =
 
 **Free, for everyone:** documents and document pages, table/grid/folder libraries, instant search, multi-select filters with counts, preview popup, the PDF viewer with search, thumbnails and outline, QR codes, Post to PDF with watermarks, blocks, shortcodes and Elementor widgets, migration from other plugins, accessible-format requests, command palette, AI abilities (read-only) and built-in documentation.
 
-**Pro adds:** members-only documents and private files, share links, the secure viewer and stamped downloads, email gate, activity and reading analytics, search insights, read-and-confirm, versions, review and expiry dates, custom fields, search inside files, bulk and CSV import, ZIP downloads, My Documents, submissions, handbook PDFs, notifications, the AI assistant, abuse protection and WP-CLI.
+**Pro adds:** members-only documents and private files, tracked share links, My Documents, the secure viewer and stamped downloads, email gate and leads, abuse protection, activity and reading analytics, search insights, read-and-confirm, versions, review and expiry dates, custom fields, PDF accessibility checks, search inside files, PDF thumbnails, bulk and CSV import, ZIP downloads, submissions, handbook PDFs, notifications, the AI assistant, extra AI abilities and WP-CLI.
 
 The full side-by-side list is in the plugin under **Documents → Free vs Pro**.
 
@@ -168,6 +192,14 @@ No. There's no limit on documents, libraries, downloads or time, and no ads. Pro
 = Does the PDF viewer use Google? =
 
 No. Document Engine includes its own viewer (PDF.js) and never contacts Google. The only exception is PDF Viewer blocks created with version 1 on sites that upgraded: they keep Google's viewer until you switch on *Documents → Settings → PDF Viewer → Version 1 blocks* (see "External services").
+
+= Do I need Pro? =
+
+Not to publish documents. The free plugin is a complete library with the viewer, search, filters and Post to PDF. You need Pro when documents must be limited to certain people, when you need proof of who read something, or when you manage enough documents to want versions, review dates, custom fields, bulk import and analytics.
+
+= How do I upgrade to Pro? =
+
+Buy Pro, then either upload the Pro plugin from your account, or enter your licence key at the bottom of **Documents → Free vs Pro** and it installs in one step. Keep the free plugin active; Pro builds on it, and nothing needs to be moved or set up again.
 
 = Can I keep documents private? =
 
