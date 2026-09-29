@@ -15,7 +15,14 @@ defined('ABSPATH') || exit;
 class ProInstaller
 {
     const ITEM_NAME = 'Document Engine Pro';
+    /** EDD download ID of Document Engine Pro on store.mantrabrain.com. */
+    const ITEM_ID = 39061;
     const PRO_SLUG = 'document-engine-pro';
+
+    public static function item_id()
+    {
+        return defined('DOCUMENT_ENGINE_PRO_ITEM_ID') ? (int)DOCUMENT_ENGINE_PRO_ITEM_ID : self::ITEM_ID;
+    }
 
     public static function init()
     {
@@ -35,8 +42,8 @@ class ProInstaller
             'item_name' => self::ITEM_NAME,
             'url' => home_url(),
         );
-        if (defined('DOCUMENT_ENGINE_PRO_ITEM_ID')) {
-            $body['item_id'] = (int)DOCUMENT_ENGINE_PRO_ITEM_ID;
+        if (self::item_id()) {
+            $body['item_id'] = self::item_id();
         }
         $response = wp_remote_post(self::store_url(), array('timeout' => 20, 'body' => $body));
         if (is_wp_error($response)) {

@@ -146,6 +146,12 @@ Pro is an add-on: install it next to the free plugin and its features appear in 
 * **WP-CLI**: list, import, stats, reindex, protect and share.
 * Personal data **export and erase** for leads, activity, searches, reading sessions and acknowledgements, and **automatic updates** with an active licence.
 
+**Plans** (every plan includes every Pro feature):
+
+* **Personal**: 1 website, $79 a year or $199 lifetime.
+* **Plus**: 5 websites, $149 a year or $379 lifetime.
+* **Agency**: 25 websites and priority support, $249 a year or $599 lifetime.
+
 [See Pro plans and pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro)
 
 = Free vs Pro =

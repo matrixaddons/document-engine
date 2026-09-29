@@ -29,6 +29,34 @@ class ProPage
     }
 
     /**
+     * Pro plans (same as store.mantrabrain.com): EDD price IDs 1-3 yearly, 4-6 lifetime.
+     * Every plan includes every Pro feature; plans differ in sites and support.
+     */
+    public static function plans()
+    {
+        return apply_filters('document_engine_pro_plans', array(
+            array('name' => __('Personal', 'document-engine'), 'sites' => __('1 website', 'document-engine'), 'yearly' => 79, 'lifetime' => 199, 'yearly_id' => 1, 'lifetime_id' => 4, 'support' => __('Email support', 'document-engine'), 'featured' => false),
+            array('name' => __('Plus', 'document-engine'), 'sites' => __('5 websites', 'document-engine'), 'yearly' => 149, 'lifetime' => 379, 'yearly_id' => 2, 'lifetime_id' => 5, 'support' => __('Email support', 'document-engine'), 'featured' => true),
+            array('name' => __('Agency', 'document-engine'), 'sites' => __('25 websites', 'document-engine'), 'yearly' => 249, 'lifetime' => 599, 'yearly_id' => 3, 'lifetime_id' => 6, 'support' => __('Priority support', 'document-engine'), 'featured' => false),
+        ));
+    }
+
+    /**
+     * Straight to the store's checkout with a plan in the cart.
+     */
+    public static function checkout_url($price_id)
+    {
+        return add_query_arg(array(
+            'edd_action' => 'add_to_cart',
+            'download_id' => ProInstaller::item_id(),
+            'edd_options[price_id]' => (int)$price_id,
+            'utm_source' => 'wp-admin',
+            'utm_medium' => 'plugin',
+            'utm_campaign' => 'free-vs-pro',
+        ), trailingslashit(ProInstaller::store_url()) . 'checkout/');
+    }
+
+    /**
      * Pro features, grouped. Also used by the docs/upsell cards.
      */
     public static function features()
@@ -127,7 +155,7 @@ class ProPage
                     <p class="dengine-a-card__desc"><?php esc_html_e('Pro installs next to this plugin. Your documents, pages and settings stay exactly as they are.', 'document-engine'); ?></p>
                 </div>
                 <div class="dengine-a-vs__actions">
-                    <a class="dengine-a-btn dengine-a-btn--primary" href="<?php echo esc_url(self::store_url()); ?>" target="_blank" rel="noopener"><?php esc_html_e('Upgrade to Pro', 'document-engine'); ?><?php echo UI::icon('external', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+                    <a class="dengine-a-btn dengine-a-btn--primary" href="#pricing"><?php esc_html_e('See plans', 'document-engine'); ?></a>
                     <a class="dengine-a-btn dengine-a-btn--secondary" href="#install-pro"><?php esc_html_e('I have a licence key', 'document-engine'); ?></a>
                 </div>
             </div>
@@ -153,6 +181,29 @@ class ProPage
                 </div>
             </section>
         <?php endforeach; ?>
+        <section class="dengine-a-plans" id="pricing" aria-labelledby="dengine-plans-title">
+            <h3 class="dengine-a-plans__title" id="dengine-plans-title"><?php esc_html_e('Pro plans', 'document-engine'); ?></h3>
+            <p class="dengine-a-page__desc"><?php esc_html_e('Every plan includes every Pro feature. Plans differ only in the number of websites and the support.', 'document-engine'); ?></p>
+            <div class="dengine-a-plans__grid">
+                <?php foreach (self::plans() as $plan) : ?>
+                    <div class="dengine-a-plan<?php echo !empty($plan['featured']) ? ' is-featured' : ''; ?>">
+                        <?php if (!empty($plan['featured'])) : ?><span class="dengine-a-plan__badge"><?php esc_html_e('Most popular', 'document-engine'); ?></span><?php endif; ?>
+                        <h4 class="dengine-a-plan__name"><?php echo esc_html($plan['name']); ?></h4>
+                        <p class="dengine-a-plan__sites"><?php echo esc_html($plan['sites']); ?> · <?php echo esc_html($plan['support']); ?></p>
+                        <p class="dengine-a-plan__price"><strong>$<?php echo esc_html(number_format_i18n($plan['yearly'])); ?></strong> <span><?php esc_html_e('per year', 'document-engine'); ?></span></p>
+                        <a class="dengine-a-btn <?php echo !empty($plan['featured']) ? 'dengine-a-btn--primary' : 'dengine-a-btn--secondary'; ?>" href="<?php echo esc_url(self::checkout_url($plan['yearly_id'])); ?>" target="_blank" rel="noopener"><?php
+                            /* translators: %s: plan name */
+                            echo esc_html(sprintf(__('Buy %s', 'document-engine'), $plan['name']));
+                        ?></a>
+                        <p class="dengine-a-plan__lifetime"><?php
+                            /* translators: %s: lifetime price */
+                            echo esc_html(sprintf(__('or $%s once, for life', 'document-engine'), number_format_i18n($plan['lifetime'])));
+                        ?> <a href="<?php echo esc_url(self::checkout_url($plan['lifetime_id'])); ?>" target="_blank" rel="noopener"><?php esc_html_e('Buy lifetime', 'document-engine'); ?><span class="screen-reader-text"> <?php echo esc_html($plan['name']); ?></span></a></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <p class="dengine-a-sub dengine-a-plans__note"><?php esc_html_e('Prices in US dollars. Secure checkout on store.mantrabrain.com.', 'document-engine'); ?> <a href="https://mantrabrain.com/refund-policy/" target="_blank" rel="noopener"><?php esc_html_e('Refund policy', 'document-engine'); ?></a></p>
+        </section>
         <?php ProInstaller::form(); ?>
         <?php
         UI::page_end();

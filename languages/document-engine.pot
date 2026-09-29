@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-29T15:01:36+00:00\n"
+"POT-Creation-Date: 2026-09-29T15:13:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -325,7 +325,7 @@ msgstr ""
 #: includes/Admin/DocsContent.php:469
 #: includes/Admin/DocsContent.php:505
 #: includes/Admin/DocsContent.php:533
-#: includes/Admin/ProPage.php:141
+#: includes/Admin/ProPage.php:169
 #: includes/Admin/UI.php:86
 #: includes/Admin/Upsell.php:158
 msgid "Pro"
@@ -544,7 +544,6 @@ msgstr ""
 
 #: includes/Admin/Docs.php:217
 #: includes/Admin/Main.php:61
-#: includes/Admin/ProPage.php:130
 #: includes/Admin/UI.php:94
 msgid "Upgrade to Pro"
 msgstr ""
@@ -1811,7 +1810,7 @@ msgstr ""
 
 #: includes/Admin/DocsContent.php:465
 #: includes/Admin/DocsContent.php:466
-#: includes/Admin/ProPage.php:141
+#: includes/Admin/ProPage.php:169
 msgid "Free"
 msgstr ""
 
@@ -2196,7 +2195,7 @@ msgstr ""
 
 #: includes/Admin/Main.php:87
 #: includes/Admin/Main.php:88
-#: includes/Admin/ProPage.php:121
+#: includes/Admin/ProPage.php:149
 msgid "Free vs Pro"
 msgstr ""
 
@@ -2351,358 +2350,435 @@ msgstr ""
 msgid "Unknown source."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:46
+#: includes/Admin/ProInstaller.php:53
 msgid "The licence server could not be reached. Please try again in a few minutes."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:49
+#: includes/Admin/ProInstaller.php:56
 msgid "Unexpected answer from the licence server."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:55
+#: includes/Admin/ProInstaller.php:62
 msgid "This licence has expired. Renew it to install Pro."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:56
-#: includes/Admin/ProInstaller.php:57
+#: includes/Admin/ProInstaller.php:63
+#: includes/Admin/ProInstaller.php:64
 msgid "This licence has been disabled."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:58
+#: includes/Admin/ProInstaller.php:65
 msgid "We couldn't find that licence key. Please check it and try again."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:59
+#: includes/Admin/ProInstaller.php:66
 msgid "That licence key isn't valid for this site."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:60
+#: includes/Admin/ProInstaller.php:67
 msgid "That key is for a different product."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:61
+#: includes/Admin/ProInstaller.php:68
 msgid "This licence is already used on its maximum number of sites. Deactivate it elsewhere or upgrade your plan."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:63
+#: includes/Admin/ProInstaller.php:70
 msgid "The licence could not be activated."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:90
-#: includes/Admin/ProInstaller.php:105
+#: includes/Admin/ProInstaller.php:97
+#: includes/Admin/ProInstaller.php:112
 msgid "Activate Pro"
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:90
+#: includes/Admin/ProInstaller.php:97
 msgid "Already bought Pro?"
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:91
+#: includes/Admin/ProInstaller.php:98
 msgid "Enter your licence key and we'll install and activate Pro for you. Your documents and settings stay as they are."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:98
+#: includes/Admin/ProInstaller.php:105
 msgid "Ask a site administrator to install Pro — your account can't install plugins."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:103
-#: includes/Admin/ProInstaller.php:104
+#: includes/Admin/ProInstaller.php:110
+#: includes/Admin/ProInstaller.php:111
 msgid "Licence key"
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:105
+#: includes/Admin/ProInstaller.php:112
 msgid "Install Pro"
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:107
+#: includes/Admin/ProInstaller.php:114
 msgid "You'll find the key in your purchase email and your account on our store."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:111
+#: includes/Admin/ProInstaller.php:118
 msgid "Installing…"
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:131
+#: includes/Admin/ProInstaller.php:138
 msgid "You cannot install plugins."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:135
+#: includes/Admin/ProInstaller.php:142
 msgid "Please enter your licence key."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:159
+#: includes/Admin/ProInstaller.php:166
 msgid "Your licence is active, but the download link could not be fetched. Download Pro from your store account and upload it in Plugins → Add New."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:165
+#: includes/Admin/ProInstaller.php:172
 msgid "The download link did not come from our store, so it was not installed."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:172
+#: includes/Admin/ProInstaller.php:179
 msgid "WordPress can't write plugin files on this server. Download Pro from your store account and upload it in Plugins → Add New."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:187
+#: includes/Admin/ProInstaller.php:194
 msgid "Pro could not be installed."
 msgstr ""
 
-#: includes/Admin/ProInstaller.php:201
+#: includes/Admin/ProInstaller.php:208
 msgid "Document Engine Pro is installed and active. Welcome aboard!"
 msgstr ""
 
-#: includes/Admin/ProPage.php:37
-msgid "Control who sees what"
+#: includes/Admin/ProPage.php:38
+msgid "Personal"
 msgstr ""
 
 #: includes/Admin/ProPage.php:38
-msgid "Restrict documents and categories to logged-in users, roles, specific people or a password"
+msgid "1 website"
+msgstr ""
+
+#: includes/Admin/ProPage.php:38
+#: includes/Admin/ProPage.php:39
+msgid "Email support"
 msgstr ""
 
 #: includes/Admin/ProPage.php:39
-msgid "Protected storage: files move out of the public uploads folder and are only served through signed, expiring links"
+msgid "Plus"
+msgstr ""
+
+#: includes/Admin/ProPage.php:39
+msgid "5 websites"
 msgstr ""
 
 #: includes/Admin/ProPage.php:40
+msgid "Agency"
+msgstr ""
+
+#: includes/Admin/ProPage.php:40
+msgid "25 websites"
+msgstr ""
+
+#: includes/Admin/ProPage.php:40
+msgid "Priority support"
+msgstr ""
+
+#: includes/Admin/ProPage.php:65
+msgid "Control who sees what"
+msgstr ""
+
+#: includes/Admin/ProPage.php:66
+msgid "Restrict documents and categories to logged-in users, roles, specific people or a password"
+msgstr ""
+
+#: includes/Admin/ProPage.php:67
+msgid "Protected storage: files move out of the public uploads folder and are only served through signed, expiring links"
+msgstr ""
+
+#: includes/Admin/ProPage.php:68
 msgid "Secure viewer: hide download and print, block copying, and stamp each page with the viewer's name, email and time"
 msgstr ""
 
-#: includes/Admin/ProPage.php:41
+#: includes/Admin/ProPage.php:69
 msgid "Email gate: ask for name and email (with consent) before a download, with CSV export and webhooks"
 msgstr ""
 
-#: includes/Admin/ProPage.php:43
+#: includes/Admin/ProPage.php:71
 msgid "Know what happens"
 msgstr ""
 
-#: includes/Admin/ProPage.php:44
+#: includes/Admin/ProPage.php:72
 msgid "Audit log of every view, download and denied request, per user, with CSV export and retention settings"
 msgstr ""
 
-#: includes/Admin/ProPage.php:45
+#: includes/Admin/ProPage.php:73
 msgid "Analytics dashboard: trends, top documents, most active users"
 msgstr ""
 
-#: includes/Admin/ProPage.php:47
+#: includes/Admin/ProPage.php:75
 msgid "Keep documents current"
 msgstr ""
 
-#: includes/Admin/ProPage.php:48
+#: includes/Admin/ProPage.php:76
 msgid "Versions: upload a new file without changing the link, see history and restore"
 msgstr ""
 
-#: includes/Admin/ProPage.php:49
+#: includes/Admin/ProPage.php:77
 msgid "Expiry and review dates with reminder emails"
 msgstr ""
 
-#: includes/Admin/ProPage.php:50
+#: includes/Admin/ProPage.php:78
 msgid "Search inside PDF, Word, Excel and PowerPoint files and automatic PDF thumbnails"
 msgstr ""
 
-#: includes/Admin/ProPage.php:52
+#: includes/Admin/ProPage.php:80
 msgid "Work faster"
 msgstr ""
 
-#: includes/Admin/ProPage.php:53
+#: includes/Admin/ProPage.php:81
 msgid "Bulk import by drag and drop or CSV"
 msgstr ""
 
-#: includes/Admin/ProPage.php:54
-#: includes/Admin/ProPage.php:76
+#: includes/Admin/ProPage.php:82
+#: includes/Admin/ProPage.php:104
 msgid "Download several documents as one ZIP"
 msgstr ""
 
-#: includes/Admin/ProPage.php:55
+#: includes/Admin/ProPage.php:83
 msgid "Front-end document submission with moderation"
 msgstr ""
 
-#: includes/Admin/ProPage.php:56
+#: includes/Admin/ProPage.php:84
 msgid "Handbook PDF: combine many posts into one PDF with a cover and contents"
 msgstr ""
 
-#: includes/Admin/ProPage.php:57
+#: includes/Admin/ProPage.php:85
 msgid "Watermarks (text or image) on generated PDFs"
 msgstr ""
 
-#: includes/Admin/ProPage.php:58
-#: includes/Admin/ProPage.php:112
+#: includes/Admin/ProPage.php:86
+#: includes/Admin/ProPage.php:140
 msgid "WP-CLI commands"
 msgstr ""
 
-#: includes/Admin/ProPage.php:70
+#: includes/Admin/ProPage.php:98
 msgid "Documents and libraries"
 msgstr ""
 
-#: includes/Admin/ProPage.php:71
+#: includes/Admin/ProPage.php:99
 msgid "Documents with their own pages, file details and a download counter"
 msgstr ""
 
-#: includes/Admin/ProPage.php:72
+#: includes/Admin/ProPage.php:100
 msgid "Libraries as a table, grid or folders, with instant search"
 msgstr ""
 
-#: includes/Admin/ProPage.php:73
+#: includes/Admin/ProPage.php:101
 msgid "Filters by category, tag, file type, year and author, with multi-select and counts"
 msgstr ""
 
-#: includes/Admin/ProPage.php:74
+#: includes/Admin/ProPage.php:102
 msgid "Your own fields (reference, department, dates…) as columns, filters and sort options, including ACF fields"
 msgstr ""
 
-#: includes/Admin/ProPage.php:75
+#: includes/Admin/ProPage.php:103
 #: includes/Admin/Upsell.php:89
 msgid "Search inside PDF, Word, Excel and PowerPoint files"
 msgstr ""
 
-#: includes/Admin/ProPage.php:77
+#: includes/Admin/ProPage.php:105
 msgid "Bulk upload and CSV import, including updates by ID"
 msgstr ""
 
-#: includes/Admin/ProPage.php:78
+#: includes/Admin/ProPage.php:106
 msgid "\"My documents\" page for clients or staff"
 msgstr ""
 
-#: includes/Admin/ProPage.php:80
+#: includes/Admin/ProPage.php:108
 msgid "Viewing"
 msgstr ""
 
-#: includes/Admin/ProPage.php:81
+#: includes/Admin/ProPage.php:109
 msgid "Built-in PDF viewer with search, thumbnails, outline and links"
 msgstr ""
 
-#: includes/Admin/ProPage.php:82
+#: includes/Admin/ProPage.php:110
 msgid "Preview popup for PDFs, images, audio and video"
 msgstr ""
 
-#: includes/Admin/ProPage.php:83
+#: includes/Admin/ProPage.php:111
 msgid "QR code for every document"
 msgstr ""
 
-#: includes/Admin/ProPage.php:84
+#: includes/Admin/ProPage.php:112
 msgid "Secure viewer: no download or print, a watermark with the reader's name on every page"
 msgstr ""
 
-#: includes/Admin/ProPage.php:85
+#: includes/Admin/ProPage.php:113
 msgid "Downloaded PDFs stamped with the reader's details"
 msgstr ""
 
-#: includes/Admin/ProPage.php:87
+#: includes/Admin/ProPage.php:115
 msgid "Access and sharing"
 msgstr ""
 
-#: includes/Admin/ProPage.php:88
+#: includes/Admin/ProPage.php:116
 msgid "Draft, private and password-protected documents"
 msgstr ""
 
-#: includes/Admin/ProPage.php:89
+#: includes/Admin/ProPage.php:117
 msgid "Members-only documents by role, person or whole category"
 msgstr ""
 
-#: includes/Admin/ProPage.php:90
+#: includes/Admin/ProPage.php:118
 msgid "Private file storage, so file addresses can't be shared"
 msgstr ""
 
-#: includes/Admin/ProPage.php:91
+#: includes/Admin/ProPage.php:119
 msgid "Expiring share links, named per recipient, with open tracking"
 msgstr ""
 
-#: includes/Admin/ProPage.php:92
+#: includes/Admin/ProPage.php:120
 msgid "Email gate: name and email before download, with leads export"
 msgstr ""
 
-#: includes/Admin/ProPage.php:93
+#: includes/Admin/ProPage.php:121
 msgid "Daily download limits and Cloudflare Turnstile on forms"
 msgstr ""
 
-#: includes/Admin/ProPage.php:95
+#: includes/Admin/ProPage.php:123
 msgid "Compliance and insight"
 msgstr ""
 
-#: includes/Admin/ProPage.php:96
+#: includes/Admin/ProPage.php:124
 msgid "Accessible format requests from visitors"
 msgstr ""
 
-#: includes/Admin/ProPage.php:97
+#: includes/Admin/ProPage.php:125
 msgid "Activity log: views, downloads and blocked attempts, with CSV export"
 msgstr ""
 
-#: includes/Admin/ProPage.php:98
+#: includes/Admin/ProPage.php:126
 msgid "Reading analytics: time per page and how far people read"
 msgstr ""
 
-#: includes/Admin/ProPage.php:99
+#: includes/Admin/ProPage.php:127
 msgid "Search insights: what visitors look for and don't find"
 msgstr ""
 
-#: includes/Admin/ProPage.php:100
+#: includes/Admin/ProPage.php:128
 msgid "Read and confirm, with reminders and evidence export"
 msgstr ""
 
-#: includes/Admin/ProPage.php:101
+#: includes/Admin/ProPage.php:129
 msgid "Version history, review dates and automatic expiry"
 msgstr ""
 
-#: includes/Admin/ProPage.php:103
+#: includes/Admin/ProPage.php:131
 msgid "Publishing and integrations"
 msgstr ""
 
-#: includes/Admin/ProPage.php:104
+#: includes/Admin/ProPage.php:132
 msgid "Post to PDF button with header, footer and watermarks"
 msgstr ""
 
-#: includes/Admin/ProPage.php:105
+#: includes/Admin/ProPage.php:133
 msgid "Blocks, shortcodes and Elementor widgets"
 msgstr ""
 
-#: includes/Admin/ProPage.php:106
+#: includes/Admin/ProPage.php:134
 msgid "Move from Download Monitor, WordPress Download Manager or Barn2"
 msgstr ""
 
-#: includes/Admin/ProPage.php:107
+#: includes/Admin/ProPage.php:135
 msgid "Command palette and read-only abilities for AI agents"
 msgstr ""
 
-#: includes/Admin/ProPage.php:108
+#: includes/Admin/ProPage.php:136
 msgid "Handbook PDF: many posts in one PDF with cover and contents"
 msgstr ""
 
-#: includes/Admin/ProPage.php:109
+#: includes/Admin/ProPage.php:137
 msgid "AI assistant that suggests titles, summaries and tags"
 msgstr ""
 
-#: includes/Admin/ProPage.php:110
+#: includes/Admin/ProPage.php:138
 msgid "Webhooks, Slack and Teams posts, email subscriptions"
 msgstr ""
 
-#: includes/Admin/ProPage.php:111
+#: includes/Admin/ProPage.php:139
 msgid "Front-end document submissions"
 msgstr ""
 
-#: includes/Admin/ProPage.php:119
+#: includes/Admin/ProPage.php:147
 msgid "Included"
 msgstr ""
 
-#: includes/Admin/ProPage.php:120
+#: includes/Admin/ProPage.php:148
 msgid "Not included"
 msgstr ""
 
-#: includes/Admin/ProPage.php:121
+#: includes/Admin/ProPage.php:149
 msgid "Everything in the free plugin stays free, with no limits on documents or time. Pro is an add-on for sites that need to control access, prove who read what, and manage documents at scale."
 msgstr ""
 
-#: includes/Admin/ProPage.php:126
+#: includes/Admin/ProPage.php:154
 msgid "Add Pro when you need it"
 msgstr ""
 
-#: includes/Admin/ProPage.php:127
+#: includes/Admin/ProPage.php:155
 msgid "Pro installs next to this plugin. Your documents, pages and settings stay exactly as they are."
 msgstr ""
 
-#: includes/Admin/ProPage.php:131
+#: includes/Admin/ProPage.php:158
+msgid "See plans"
+msgstr ""
+
+#: includes/Admin/ProPage.php:159
 msgid "I have a licence key"
 msgstr ""
 
-#: includes/Admin/ProPage.php:145
+#: includes/Admin/ProPage.php:173
 msgid "Learn more"
+msgstr ""
+
+#: includes/Admin/ProPage.php:185
+msgid "Pro plans"
+msgstr ""
+
+#: includes/Admin/ProPage.php:186
+msgid "Every plan includes every Pro feature. Plans differ only in the number of websites and the support."
+msgstr ""
+
+#: includes/Admin/ProPage.php:190
+msgid "Most popular"
+msgstr ""
+
+#: includes/Admin/ProPage.php:193
+msgid "per year"
+msgstr ""
+
+#. translators: %s: plan name
+#: includes/Admin/ProPage.php:196
+#, php-format
+msgid "Buy %s"
+msgstr ""
+
+#. translators: %s: lifetime price
+#: includes/Admin/ProPage.php:200
+#, php-format
+msgid "or $%s once, for life"
+msgstr ""
+
+#: includes/Admin/ProPage.php:201
+msgid "Buy lifetime"
+msgstr ""
+
+#: includes/Admin/ProPage.php:205
+msgid "Prices in US dollars. Secure checkout on store.mantrabrain.com."
+msgstr ""
+
+#: includes/Admin/ProPage.php:205
+msgid "Refund policy"
 msgstr ""
 
 #: includes/Admin/Settings.php:62
