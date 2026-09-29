@@ -1,10 +1,11 @@
+<?php defined('ABSPATH') || exit; ?>
 <div style="width:100%;float:left;">
     <?php
     $document_engine_post_id = get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG);
     // image
     $image = wp_get_attachment_image($document_engine_post_id, 'full');
 
-    echo $image ? $image : '';
+    echo $image ? wp_kses_post($image) : '';
 
     $thumb_img = get_post(get_post_thumbnail_id());
 

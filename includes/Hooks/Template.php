@@ -10,7 +10,8 @@ class Template
     {
         add_filter('the_content', array($this, 'button'));
         add_filter('query_vars', array($this, 'set_query_vars'));
-        add_action('wp', array($this, 'generate_pdf'));
+        // Late on template_redirect so membership/redirect plugins run first.
+        add_action('template_redirect', array($this, 'generate_pdf'), 99);
 
 
     }
@@ -56,6 +57,8 @@ class Template
         if ($button_position == '') {
             return $c;
         }
+
+        wp_enqueue_style('document-engine-frontend');
 
         if ($button_position == 'before') {
 

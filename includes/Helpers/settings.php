@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') || exit;
 if (!function_exists('document_engine_pdf_button_text')) {
     function document_engine_pdf_button_text()
     {
@@ -59,12 +60,6 @@ if (!function_exists('document_engine_pdf_header_show_post_title')) {
     function document_engine_pdf_header_show_post_title()
     {
         return 'yes' === (get_option('document_engine_pdf_header_show_post_title', 'no'));
-    }
-}
-if (!function_exists('document_engine_pdf_header_show_pagination')) {
-    function document_engine_pdf_header_show_pagination()
-    {
-        return 'yes' === (get_option('document_engine_pdf_header_show_pagination', 'no'));
     }
 }
 if (!function_exists('document_engine_pdf_header_show_pagination')) {
@@ -180,7 +175,8 @@ if (!function_exists('document_engine_pdf_use_theme_style')) {
 if (!function_exists('document_engine_pdf_custom_css')) {
     function document_engine_pdf_custom_css()
     {
-        return sanitize_text_field(get_option('document_engine_pdf_custom_css', ''));
+        // CSS is stored as plain text; tags are stripped so it can't break out of the <style> element.
+        return trim(wp_strip_all_tags((string)get_option('document_engine_pdf_custom_css', '')));
     }
 }
 if (!function_exists('document_engine_pdf_header_font_size')) {

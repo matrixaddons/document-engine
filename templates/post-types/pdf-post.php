@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') || exit;
 $document_engine_post_id = get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG);
 $post_type = get_post_type($document_engine_post_id);
 $args = array(

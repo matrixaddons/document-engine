@@ -1,102 +1,82 @@
+/* Document Engine settings: image picker, CSS editor, unsaved-changes bar. */
 (function ($) {
-    var DocumentEnginePDFSettings = {
-        init: function () {
+	var i18n = window.DocumentEngineSettings || {};
 
-            this.image_upload_frame = null;
-            this.initLib();
-            this.initMediaUploader();
-        },
-        initLib: function () {
-            if ($('.document-engine-pdf-custom-css').length) {
+	function initImages() {
+		$(document).on('click', '[data-dengine-image] [data-action]', function (event) {
+			event.preventDefault();
+			var $wrap = $(this).closest('[data-dengine-image]');
+			var $input = $wrap.find('input[type=hidden]');
+			var $preview = $wrap.find('.dengine-a-image__preview');
+			var $choose = $wrap.find('[data-action=choose]');
+			var $remove = $wrap.find('[data-action=remove]');
 
-                // ref: http://jsfiddle.net/deepumohanp/tGF6y/
+			if ($(this).data('action') === 'remove') {
+				$input.val('0').trigger('change');
+				$preview.attr('hidden', true).empty();
+				$remove.attr('hidden', true);
+				$choose.text(i18n.choose || 'Choose image');
+				return;
+			}
+			var frame = wp.media({ title: i18n.choose || 'Choose image', library: { type: 'image' }, multiple: false });
+			frame.on('select', function () {
+				var image = frame.state().get('selection').first().toJSON();
+				var url = image.sizes && image.sizes.medium ? image.sizes.medium.url : image.url;
+				$input.val(image.id).trigger('change');
+				$preview.removeAttr('hidden').html($('<img alt="">').attr('src', url));
+				$remove.removeAttr('hidden');
+				$choose.text(i18n.replace || 'Replace image');
+			});
+			frame.open();
+		});
+	}
 
-                var textarea = $('.document-engine-pdf-custom-css');
-                //$('.document-engine-pdf-custom-css').hide();
+	function initCode() {
+		if (!window.wp || !wp.codeEditor || !i18n.codeEditor) {
+			return;
+		}
+		$('textarea[data-code=css]').each(function () {
+			var textarea = this;
+			var editor = wp.codeEditor.initialize(textarea, i18n.codeEditor);
+			editor.codemirror.on('change', function () {
+				editor.codemirror.save();
+				$(textarea).trigger('change');
+			});
+		});
+	}
 
-                var editor = ace.edit("document_engine_pdf_custom_css_textarea_wrap");
-                editor.setTheme("ace/theme/twilight");
-                editor.getSession().setMode("ace/mode/css");
+	function initDirty() {
+		var $form = $('[data-dengine-settings]');
+		var $bar = $form.find('.dengine-a-savebar');
+		var $status = $bar.find('[data-dengine-status]');
+		var dirty = false;
+		if (!$form.length) {
+			return;
+		}
+		$status.text(i18n.saved || '');
+		$form.on('change input', ':input', function () {
+			if (!dirty) {
+				dirty = true;
+				$bar.addClass('is-dirty');
+				$status.text(i18n.unsaved || 'You have unsaved changes');
+			}
+		});
+		$form.on('submit', function () {
+			dirty = false;
+			$form.find('button[name=save]').attr('disabled', true).text(i18n.saving || 'Saving…');
+			// Disabled buttons are not submitted; keep the "save" flag.
+			$('<input type="hidden" name="save" value="1">').appendTo($form);
+		});
+		$(window).on('beforeunload', function () {
+			if (dirty) {
+				return i18n.unsaved || true;
+			}
+		});
+	}
 
-                editor.getSession().on('change', function (event, content) {
-                    $(editor.container).closest('td').find('textarea.document-engine-pdf-custom-css').val(editor.getSession().getValue()).trigger('change');
-
-                    //textarea.text(editor.getSession().getValue()).trigger('change');
-
-                });
-
-                editor.setValue($(editor.container).closest('td').find('textarea.document-engine-pdf-custom-css').val());
-
-                //$(editor.container).closest('td').find('textarea.document-engine-pdf-custom-css').val(editor.getSession().getValue()).trigger('change');
-                //textarea.text(editor.getSession().getValue()).trigger('change');
-
-            }
-
-        },
-        initMediaUploader: function () {
-            var _this = this;
-            $('body').on('click', '.document-engine-image-field .matrixaddons-image-field-add', function (event) {
-                event.preventDefault();
-                _this.uploadWindow($(this), $(this).closest('.document-engine-image-field'));
-            });
-            $('body').on('click', '.document-engine-remove-image', function (event) {
-
-                event.preventDefault();
-                var imageField = $(this).closest('.document-engine-image-field');
-                imageField.find('.image-wrapper').attr('data-url', '');
-                imageField.find('.image-container, .field-container').addClass('document-engine-hide');
-                imageField.find('.matrixaddons-image-field-add').removeClass('document-engine-hide');
-                imageField.find('.document-engine-image-field-input').val(0).trigger('change');
-
-            });
-        },
-        getImageElement: function (src) {
-            return '<div data-url="' + src + '" class="image-wrapper"><div class="image-content"><img src="' + src + '" alt=""><div class="image-overlay"><a class="matrixaddons-image-delete document-engine-remove-image dashicons dashicons-trash"></a></div></div></div>';
-        },
-        uploadWindow: function (uploadBtn, wrapper) {
-
-            var _this = this;
-            if (this.image_upload_frame) this.image_upload_frame.close();
-
-            this.image_upload_frame = wp.media.frames.file_frame = wp.media({
-                title: uploadBtn.data('uploader-title'),
-                button: {
-                    text: uploadBtn.data('uploader-button-text'),
-                },
-                multiple: false
-            });
-
-            this.image_upload_frame.on('select', function () {
-
-                var selection = _this.image_upload_frame.state().get('selection');
-                var selected_list_node = wrapper.find('.image-container');
-                var imageHtml = '';
-                var attachment_id = 0;
-                selection.map(function (attachment_object, i) {
-                    var attachment = attachment_object.toJSON();
-                    attachment_id = attachment.id;
-
-                    var attachment_url = attachment.sizes.full.url;
-                    imageHtml = _this.getImageElement(attachment_url);
-
-                });
-
-                if (attachment_id > 0) {
-                    wrapper.find('.image-container, .field-container').removeClass('document-engine-hide');
-                    wrapper.find('.matrixaddons-image-field-add').addClass('document-engine-hide');
-                    selected_list_node.find('.image-wrapper').remove();
-                    selected_list_node.append(imageHtml);
-                    wrapper.find('.document-engine-image-field-input').val(attachment_id).trigger('change');
-                }
-            });
-
-
-            this.image_upload_frame.open();
-        },
-    };
-
-    $(document).ready(function () {
-        DocumentEnginePDFSettings.init();
-
-    });
-}(jQuery));
+	$(function () {
+		initImages();
+		initCode();
+		initDirty();
+	});
+})(jQuery);

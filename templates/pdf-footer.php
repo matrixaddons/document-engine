@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') || exit;
 global $post;
 
 
@@ -46,7 +47,7 @@ if ($pdf_footer_text !== '' || $pdf_footer_show_pagination) { ?>
             // check if Footer show title is checked
             if ($pdf_footer_show_title) {
 
-                echo get_the_title($post->ID);
+                echo wp_kses_post(get_the_title($post->ID));
 
             }
 
@@ -56,7 +57,7 @@ if ($pdf_footer_text !== '' || $pdf_footer_show_pagination) { ?>
             // check if Footer show pagination is checked
             if ($pdf_footer_show_pagination) {
 
-                echo apply_filters('document_engine_pdf_footer_pagination', '| {PAGENO}');
+                echo wp_kses_post(apply_filters('document_engine_pdf_footer_pagination', '| {PAGENO}'));
 
             }
 

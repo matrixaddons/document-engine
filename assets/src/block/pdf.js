@@ -1,4 +1,4 @@
-import {registerBlockType} from "@wordpress/blocks";
+import {registerBlockType, createBlock} from "@wordpress/blocks";
 import {InspectorControls, useBlockProps, MediaPlaceholder} from "@wordpress/block-editor";
 import {Panel, PanelBody, RangeControl, TextControl, SelectControl} from '@wordpress/components';
 import {__} from '@wordpress/i18n';
@@ -98,11 +98,20 @@ const Edit = (props) => {
 
 registerBlockType('document-engine/pdf', {
     apiVersion: 2,
-    title: __('PDF Viewer', 'document-engine'),
-    description: __('This block is use to show the pdf file', 'document-engine'),
+    title: __('PDF Viewer (classic)', 'document-engine'),
+    description: __('Classic PDF viewer block from version 1. Use the new PDF Viewer block for new content; this one keeps working for existing pages.', 'document-engine'),
     icon: Icon,
     keywords: [__("pdf"), __("pdf viewer"), __("pdf wordpress"), __("document engine")],
     edit: Edit,
     category: 'document-engine',
-
+    supports: {inserter: false, html: false},
+    transforms: {
+        to: [{
+            type: 'block',
+            blocks: ['document-engine/viewer'],
+            transform: (attrs) => createBlock('document-engine/viewer', attrs.pdf_type === 'file' && attrs.pdf_id
+                ? {source: 'media', fileId: attrs.pdf_id, height: `${attrs.height_size || 1000}${attrs.height_unit === '%' ? 'vh' : (attrs.height_unit || 'px')}`}
+                : {source: 'url', url: attrs.pdf_url || '', height: `${attrs.height_size || 1000}${attrs.height_unit === '%' ? 'vh' : (attrs.height_unit || 'px')}`}),
+        }],
+    },
 });
