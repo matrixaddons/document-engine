@@ -1,9 +1,9 @@
 <?php
-
+defined('ABSPATH') || exit;
 global $post;
 ?>
 <div class="document-engine-pdf-button-container"
-     style="<?php echo apply_filters('document_engine_pdf_button_container_css', ''); ?> text-align:<?php echo esc_attr($button_alignment); ?> ">
+     style="<?php echo esc_attr(apply_filters('document_engine_pdf_button_container_css', '')); ?> text-align:<?php echo esc_attr($button_alignment); ?> ">
 
     <a class="document-engine-pdf-button button"
        href="<?php echo esc_url(add_query_arg(DOCUMENT_ENGINE_QUERY_VAR_SLUG, $post->ID)); ?>"

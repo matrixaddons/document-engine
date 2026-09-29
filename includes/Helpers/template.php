@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') || exit;
 if (!function_exists('document_engine_get_template')) {
 
     function document_engine_get_template($template_name, $args = array(), $template_path = '', $default_path = '')
@@ -16,7 +17,7 @@ if (!function_exists('document_engine_get_template')) {
         if ($filter_template !== $template) {
             if (!file_exists($filter_template)) {
                 /* translators: %s template */
-                _doing_it_wrong(__FUNCTION__, sprintf(__('%s does not exist.', 'document-engine'), '<code>' . $template . '</code>'), '1.0.1');
+                _doing_it_wrong(__FUNCTION__, sprintf(esc_html__('%s does not exist.', 'document-engine'), '<code>' . esc_html($template) . '</code>'), '1.0.1'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 return;
             }
             $template = $filter_template;
@@ -33,7 +34,7 @@ if (!function_exists('document_engine_get_template')) {
             if (isset($args['action_args'])) {
                 _doing_it_wrong(
                     __FUNCTION__,
-                    __('action_args should not be overwritten when calling document_engine_get_template.', 'document-engine'),
+                    esc_html__('action_args should not be overwritten when calling document_engine_get_template.', 'document-engine'),
                     '1.0.0'
                 );
                 unset($args['action_args']);
@@ -79,45 +80,47 @@ if (!function_exists('document_engine_locate_template')) {
 
 function document_engine_pdf_view_callback($settings = array())
 {
+    $settings = is_array($settings) ? $settings : array();
 
+    $width_unit = isset($settings['width_unit']) && $settings['width_unit'] === 'px' ? 'px' : '%';
 
-    ob_start();
+    $height_unit = isset($settings['height_unit']) && $settings['height_unit'] === '%' ? '%' : 'px';
 
-    $align = 'display: block; margin-left: auto; margin-right: auto;';
+    $width_size = isset($settings['width_size']) ? absint($settings['width_size']) : 100;
 
+    $height_size = isset($settings['height_size']) ? absint($settings['height_size']) : 1000;
 
-    $width_unit = $settings['width_unit'] ?? '%';
+    $width_size = $width_unit === "%" && $width_size > 100 ? 100 : $width_size;
 
-    $height_unit = $settings['height_unit'] ?? 'px';
+    $height_size = $height_unit === "%" && $height_size > 100 ? 100 : $height_size;
 
-    $width_size = $settings['width_size'] ?? '100';
+    $pdf_type = isset($settings['pdf_type']) ? $settings['pdf_type'] : 'url';
 
-    $height_size = $settings['height_size'] ?? '1000';
+    $pdf_url = $pdf_type === 'url' && isset($settings['pdf_url']) ? (string)$settings['pdf_url'] : '';
 
-    $width_size = $width_unit === "%" && absint($width_size) > 100 ? 100 : $width_size;
+    $file_id = 0;
 
-    $height_size = $height_unit === "%" && absint($height_size) > 100 ? 100 : $height_size;
-
-    $width = ' width: ' . esc_attr($width_size) . esc_attr($width_unit) . ';';
-
-    $height = ' height: ' . esc_attr($height_size) . esc_attr($height_unit) . ';';
-
-    $pdf_url = $settings['pdf_type'] === 'url' ? $settings['pdf_url'] : '';
-
-    if ($settings['pdf_type'] === "file") {
+    if ($pdf_type === "file") {
         $file_id = isset($settings['pdf_id']) ? absint($settings['pdf_id']) : 0;
 
-        $pdf_url = $file_id > 0 ? wp_get_attachment_url($file_id) : '';
-
+        $pdf_url = $file_id > 0 && \MatrixAddons\DocumentEngine\Documents\FileServer::can_embed_attachment($file_id) ? (string)wp_get_attachment_url($file_id) : '';
     }
 
     if ($pdf_url === '') {
-
-        echo '<h2>Invalid PDF Link</h2>';
-    } else {
-
-        echo '<iframe src="https://docs.google.com/viewer?url=' . esc_url_raw($pdf_url) . '&amp;embedded=true" style="' . $align . $width . $height . '" frameborder="1" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>';
+        return '<h2>' . esc_html__('Invalid PDF Link', 'document-engine') . '</h2>';
     }
 
-    return ob_get_clean();
+    if (\MatrixAddons\DocumentEngine\Blocks::legacy_uses_builtin_viewer()) {
+        return \MatrixAddons\DocumentEngine\Viewer\Viewer::render(array(
+            'fileId' => $file_id,
+            'url' => $file_id > 0 ? '' : $pdf_url,
+            'height' => $height_size . ($height_unit === '%' ? 'vh' : 'px'),
+            'width' => $width_size . $width_unit,
+        ));
+    }
+
+    // 1.x output: Google Docs viewer (sites switch to the built-in viewer in Settings → Viewer).
+    $style = 'display: block; margin-left: auto; margin-right: auto; width: ' . $width_size . $width_unit . '; height: ' . $height_size . $height_unit . ';';
+
+    return '<iframe src="' . esc_url('https://docs.google.com/viewer?url=' . rawurlencode($pdf_url) . '&embedded=true') . '" style="' . esc_attr($style) . '" frameborder="1" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>';
 }

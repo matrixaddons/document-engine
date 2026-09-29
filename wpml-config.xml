@@ -1,0 +1,58 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1">dengine_document</custom-type>
+    </custom-types>
+    <taxonomies>
+        <taxonomy translate="1">dengine_category</taxonomy>
+        <taxonomy translate="1">dengine_tag</taxonomy>
+    </taxonomies>
+    <custom-fields>
+        <!-- Each translation starts with the original file and can be given its own (a different PDF per language). -->
+        <custom-field action="copy-once">_dengine_file_id</custom-field>
+        <custom-field action="copy-once">_dengine_file_url</custom-field>
+        <custom-field action="copy-once">_dengine_file_type</custom-field>
+        <custom-field action="copy-once">_dengine_file_size</custom-field>
+        <custom-field action="copy">_dengine_link_behavior</custom-field>
+        <custom-field action="ignore">_dengine_downloads</custom-field>
+    </custom-fields>
+    <admin-texts>
+        <key name="document_engine_pdf_button_text"/>
+        <key name="document_engine_pdf_footer_text"/>
+    </admin-texts>
+    <gutenberg-blocks>
+        <gutenberg-block type="document-engine/download" translate="1">
+            <key name="label"/>
+            <key name="documentId" type="post-ids" sub-type="dengine_document"/>
+        </gutenberg-block>
+        <gutenberg-block type="document-engine/documents" translate="1">
+            <key name="title"/>
+            <key name="documentId" type="post-ids" sub-type="dengine_document"/>
+        </gutenberg-block>
+        <gutenberg-block type="document-engine/pdf-button" translate="1">
+            <key name="text"/>
+        </gutenberg-block>
+        <gutenberg-block type="document-engine/viewer" translate="1">
+            <key name="documentId" type="post-ids" sub-type="dengine_document"/>
+        </gutenberg-block>
+    </gutenberg-blocks>
+    <shortcodes>
+        <shortcode>
+            <tag>document_engine_pdf_button</tag>
+            <attributes>
+                <attribute>text</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>document_engine_document</tag>
+            <attributes>
+                <attribute>label</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>document_engine_documents</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+        </shortcode>
+    </shortcodes>
+</wpml-config>

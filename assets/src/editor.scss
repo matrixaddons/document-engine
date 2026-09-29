@@ -1,0 +1,92 @@
+/* Editor-only styles for Document Engine blocks. */
+
+.dengine-viewer-preview {
+	display: flex;
+	flex-direction: column;
+	height: min(var(--dengine-viewer-height, 480px), 520px);
+	min-height: 240px;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #525659;
+
+	&__bar {
+		display: flex;
+		justify-content: space-between;
+		padding: 8px 12px;
+		background: #f6f7f7;
+		border-bottom: 1px solid #dcdcde;
+		color: #50575e;
+		font-size: 13px;
+	}
+
+	&__page {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		width: min(70%, 420px);
+		margin: 16px auto;
+		padding: 16px;
+		background: #fff;
+		box-shadow: 0 1px 3px rgb(0 0 0 / .35);
+		text-align: center;
+		color: #1e1e1e;
+		overflow-wrap: anywhere;
+
+		svg { width: 40px; height: 40px; fill: #d93025; }
+		span { color: #50575e; font-size: 13px; }
+	}
+}
+
+.dengine-document-picker {
+	position: relative;
+
+	.components-spinner { position: absolute; right: 36px; top: 34px; margin: 0; }
+}
+
+.dengine-file-panel__current {
+	margin-bottom: 12px;
+	padding: 8px 10px;
+	border-radius: 4px;
+	background: #f6f7f7;
+	overflow-wrap: anywhere;
+}
+
+.wp-block-document-engine-library .dengine-library,
+.wp-block-document-engine-download .dengine-download {
+	margin-block: 0;
+}
+
+.dengine-pro-badge {
+	display: inline-block;
+	margin-left: 6px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: #1e1e1e;
+	color: #fff;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 16px;
+	vertical-align: 1px;
+}
+
+.dengine-ai__row {
+	padding: 10px 0;
+	border-top: 1px solid #e0e0e0;
+}
+
+.dengine-ai__label {
+	margin: 0;
+	color: #757575;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.dengine-ai__value {
+	margin: 4px 0 8px;
+	overflow-wrap: anywhere;
+}

@@ -1,17 +1,53 @@
 {
   "name": "matrixaddons/document-engine",
-  "description": "WordPress to PDF",
-  "authors": [
-    {
-      "name": "matrixaddons"
-    }
-  ],
+  "description": "Document library, PDF viewer and post to PDF for WordPress",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {
       "MatrixAddons\\DocumentEngine\\": "./includes"
-    }
+    },
+    "classmap": [
+      "vendor-prefixed/"
+    ]
   },
   "require": {
-    "mpdf/mpdf": "^8.0"
+    "php": ">=7.4",
+    "mpdf/mpdf": "^8.3"
+  },
+  "config": {
+    "platform": {
+      "php": "7.4.33"
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "platform-check": false
+  },
+  "extra": {
+    "strauss": {
+      "target_directory": "vendor-prefixed",
+      "namespace_prefix": "MatrixAddons\\DocumentEngine\\Vendor\\",
+      "classmap_prefix": "MatrixAddons_DocumentEngine_",
+      "constant_prefix": "DOCUMENT_ENGINE_VENDOR_",
+      "packages": [
+        "mpdf/mpdf"
+      ],
+      "delete_vendor_packages": true,
+      "include_modified_date": false,
+      "include_author": false
+    }
+  },
+  "scripts": {
+    "prefix-namespaces": [
+      "@php strauss.phar",
+      "@php tools/prune-vendor.php",
+      "@composer dump-autoload"
+    ],
+    "post-install-cmd": [
+      "@prefix-namespaces"
+    ],
+    "post-update-cmd": [
+      "@prefix-namespaces"
+    ]
   }
 }

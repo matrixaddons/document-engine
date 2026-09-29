@@ -1,0 +1,17 @@
+/.git
+/.github
+/.wordpress-org
+/node_modules
+/assets/src
+/tools
+/strauss.phar
+/package.json
+/package-lock.json
+/composer.json
+/composer.lock
+/webpack.config.js
+/.gitignore
+/.gitattributes
+/.distignore
+/document-engine.zip
+/document-engine-pro.zip

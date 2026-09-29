@@ -13,7 +13,22 @@ if (!function_exists('document_engine_pdf_is_valid_post_type')) {
         if (get_post_status($pdf_post_id) !== 'publish') {
             return false;
         }
-        return true;
+        // Only publicly viewable post types can be exported, and only when the visitor could read the post itself.
+        $post_type = get_post_type($pdf_post_id);
+        // Documents have their own files; their descriptions are never exported (access rules live on the file).
+        $can_generate = $post_type && !in_array($post_type, array('dengine_document', 'attachment'), true) && is_post_type_viewable($post_type) && !post_password_required($pdf_post_id);
+        // Only where the site offers PDFs: a post type ticked in Settings → Post to PDF, or a post with a Save as PDF block/shortcode.
+        if ($can_generate) {
+            // Same reading as the button itself (1.x and 2.x): the ticked post types are the option's keys.
+            $enabled = array_map('strval', array_keys(document_engine_pdf_post_type()));
+            $post = get_post($pdf_post_id);
+            $offered = in_array($post_type, $enabled, true)
+                || has_block('document-engine/pdf-button', $post)
+                || has_shortcode((string)$post->post_content, apply_filters('document_engine_pdf_button_shortcode_tag', 'document_engine_pdf_button'));
+            $can_generate = (bool)$offered;
+        }
+
+        return (bool)apply_filters('document_engine_pdf_can_generate', $can_generate, absint($pdf_post_id));
 
     }
 }
@@ -49,14 +64,14 @@ if (!function_exists('document_engine_get_available_pdf_permissions')) {
     function document_engine_get_available_pdf_permissions()
     {
         return array(
-            array('id' => 'copy', 'title' => 'Copy'),
-            array('id' => 'print', 'title' => 'Print'),
-            array('id' => 'print-highres', 'title' => 'Print Highres'),
-            array('id' => 'modify', 'title' => 'Modify'),
-            array('id' => 'annot-forms', 'title' => 'Annot Forms'),
-            array('id' => 'fill-forms', 'title' => 'Fill Forms'),
-            array('id' => 'extract', 'title' => 'Extract'),
-            array('id' => 'assemble', 'title' => 'Assemble')
+            array('id' => 'copy', 'title' => __('Copy text', 'document-engine')),
+            array('id' => 'print', 'title' => __('Print', 'document-engine')),
+            array('id' => 'print-highres', 'title' => __('Print in high quality', 'document-engine')),
+            array('id' => 'modify', 'title' => __('Edit', 'document-engine')),
+            array('id' => 'annot-forms', 'title' => __('Add comments', 'document-engine')),
+            array('id' => 'fill-forms', 'title' => __('Fill in forms', 'document-engine')),
+            array('id' => 'extract', 'title' => __('Extract for accessibility', 'document-engine')),
+            array('id' => 'assemble', 'title' => __('Rearrange pages', 'document-engine'))
         );
 
     }

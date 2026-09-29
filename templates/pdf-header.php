@@ -1,5 +1,5 @@
 <?php
-
+defined('ABSPATH') || exit;
 global $post;
 
 $image_url = document_engine_pdf_header_logo();
@@ -10,7 +10,7 @@ $pdf_header_show_pagination = document_engine_pdf_header_show_pagination();
 
 
 // only enter here if any of the settings exists
-if ($image_url !== '' || $pdf_header_show_title || $pdf_header_show_pagination) { ?>
+if (!empty($image_url) || $pdf_header_show_title || $pdf_header_show_pagination) { ?>
 
     <div class="document-engine-pdf-header-wrap">
 
@@ -32,7 +32,7 @@ if ($image_url !== '' || $pdf_header_show_title || $pdf_header_show_pagination) 
             // check if Header show title is checked
             if ($pdf_header_show_title) {
 
-                echo apply_filters('document_engine_pdf_header_title', get_the_title($post->ID));
+                echo wp_kses_post(apply_filters('document_engine_pdf_header_title', get_the_title($post->ID)));
 
             }
 
@@ -42,7 +42,7 @@ if ($image_url !== '' || $pdf_header_show_title || $pdf_header_show_pagination) 
             // check if Header show pagination is checked
             if ($pdf_header_show_pagination) {
 
-                echo apply_filters('document_engine_pdf_header_pagination', '| {PAGENO}');
+                echo wp_kses_post(apply_filters('document_engine_pdf_header_pagination', '| {PAGENO}'));
 
             }
 

@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') || exit;
 $header_font_size = document_engine_pdf_header_font_size();
 $header_font_size = $header_font_size > 0 ? $header_font_size . 'pt' : 'inherit';
 
@@ -59,5 +60,5 @@ $footer_font_size = $footer_font_size > 0 ? $footer_font_size . 'pt' : 'inherit'
         text-align: right;
     }
 
-    <?php echo  wp_kses(document_engine_pdf_custom_css(), array()); ?>
+    <?php echo document_engine_pdf_custom_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- tags stripped, CSS only. ?>
 </style>

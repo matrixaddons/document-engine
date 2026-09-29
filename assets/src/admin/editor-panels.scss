@@ -1,0 +1,331 @@
+/**
+ * Sidebar panels for documents in the block editor (free + Pro share these classes).
+ */
+
+.dengine-side {
+	display: grid;
+	gap: 16px;
+
+	// WordPress controls add their own bottom margins; the grid gap handles spacing here.
+	.components-base-control,
+	.components-toggle-control,
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+
+	.components-base-control__help {
+		margin-top: 6px;
+		margin-bottom: 0;
+	}
+
+	.components-notice {
+		margin: 0;
+	}
+}
+
+.dengine-side__section {
+	display: grid;
+	gap: 12px;
+	padding-top: 16px;
+	border-top: 1px solid #f0f0f0;
+
+	&:first-child {
+		padding-top: 0;
+		border-top: 0;
+	}
+}
+
+.dengine-side__heading {
+	margin: 0;
+	color: #757575;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.4;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+}
+
+.dengine-side__text {
+	margin: 0;
+	color: #50575e;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.dengine-side__checks {
+	display: grid;
+	gap: 8px;
+}
+
+.dengine-side__row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.dengine-side__link {
+	margin: 0;
+	font-size: 13px;
+}
+
+/* Summary chip at the top of a panel, e.g. "Public" or "Editors only". */
+.dengine-side__summary {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 12px;
+	border-radius: 8px;
+	background: #f6f7f7;
+	color: #1e1e1e;
+	font-size: 13px;
+	line-height: 1.4;
+
+	svg {
+		flex: none;
+		width: 18px;
+		height: 18px;
+		fill: currentColor;
+	}
+
+	&--public { background: #edfaef; color: #0a5c1f; }
+	&--restricted { background: #fcf9e8; color: #6b4e00; }
+	&--info { background: #f0f6fc; color: #0a4b78; }
+}
+
+/* File card */
+.dengine-filecard {
+	display: grid;
+	grid-template-columns: 40px minmax(0, 1fr);
+	gap: 4px 12px;
+	align-items: center;
+	padding: 12px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	background: #fff;
+
+	&__name {
+		overflow: hidden;
+		color: #1e1e1e;
+		font-size: 13px;
+		font-weight: 600;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&__meta {
+		color: #757575;
+		font-size: 12px;
+	}
+
+	&__text {
+		display: grid;
+		gap: 2px;
+		min-width: 0;
+	}
+
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		grid-column: 1 / -1;
+		gap: 12px;
+		align-items: center;
+		margin-top: 8px;
+		padding-top: 10px;
+		border-top: 1px solid #f0f0f0;
+	}
+
+	&__remove {
+		margin-left: auto !important;
+	}
+}
+
+/* Coloured file-type badge (matches the front-end file icons). */
+.dengine-filebadge {
+	--dengine-badge: #64748b;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	width: 34px;
+	height: 40px;
+	padding-bottom: 6px;
+	box-sizing: border-box;
+	border: 1.5px solid var(--dengine-badge);
+	border-radius: 4px 12px 4px 4px;
+	background: color-mix(in srgb, var(--dengine-badge) 9%, #fff);
+	color: var(--dengine-badge);
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: .02em;
+
+	&--pdf { --dengine-badge: #dc2626; }
+	&--word { --dengine-badge: #2563eb; }
+	&--sheet { --dengine-badge: #16a34a; }
+	&--slides { --dengine-badge: #ea580c; }
+	&--image { --dengine-badge: #9333ea; }
+	&--link { --dengine-badge: #0e7490; }
+}
+
+/* Empty state: add a file */
+.dengine-filedrop {
+	display: grid;
+	justify-items: center;
+	gap: 8px;
+	padding: 18px 12px;
+	border: 1.5px dashed #c3c4c7;
+	border-radius: 8px;
+	background: #fafafa;
+	text-align: center;
+
+	svg {
+		width: 28px;
+		height: 28px;
+		fill: #757575;
+	}
+
+	&__title {
+		margin: 0;
+		color: #1e1e1e;
+		font-size: 13px;
+		font-weight: 600;
+	}
+
+	&__hint {
+		margin: 0;
+		color: #757575;
+		font-size: 12px;
+	}
+}
+
+.dengine-side__or {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #757575;
+	font-size: 11px;
+	text-transform: uppercase;
+
+	&::before,
+	&::after {
+		content: "";
+		flex: 1;
+		height: 1px;
+		background: #e0e0e0;
+	}
+}
+
+/* AI suggestions */
+.dengine-suggest {
+	display: grid;
+	gap: 6px;
+	padding: 10px 12px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+
+	&__label {
+		margin: 0;
+		color: #757575;
+		font-size: 11px;
+		font-weight: 500;
+		text-transform: uppercase;
+	}
+
+	&__value {
+		margin: 0;
+		color: #1e1e1e;
+		font-size: 13px;
+		line-height: 1.45;
+		overflow-wrap: anywhere;
+	}
+
+	.components-button {
+		justify-self: start;
+	}
+}
+
+/* Pro preview (free only) */
+.dengine-side__pro {
+	display: grid;
+	gap: 10px;
+
+	ul {
+		display: grid;
+		gap: 6px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		position: relative;
+		padding-left: 20px;
+		color: #50575e;
+		font-size: 13px;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 5px;
+			left: 2px;
+			width: 8px;
+			height: 4px;
+			border-bottom: 2px solid #00a32a;
+			border-left: 2px solid #00a32a;
+			transform: rotate(-45deg);
+		}
+	}
+}
+
+.dengine-pro-badge {
+	display: inline-block;
+	margin-left: 6px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: #1e1e1e;
+	color: #fff;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 16px;
+	vertical-align: 1px;
+}
+
+.dengine-qr {
+	width: 160px;
+	padding: 8px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	background: #fff;
+
+	svg { display: block; width: 100%; height: auto; }
+}
+
+.dengine-sharelist {
+	display: grid;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 0 8px;
+		align-items: center;
+		padding: 8px 10px;
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+	}
+
+	&__label { overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+	&__meta { grid-column: 1; color: #757575; font-size: 12px; }
+
+	.components-button { grid-row: 1 / span 2; grid-column: 2; }
+}
+
+// Pro "Details" panel: one control per custom field.
+.dengine-side__fields {
+	display: grid;
+	gap: 16px;
+
+	.components-base-control { margin-bottom: 0; }
+}
