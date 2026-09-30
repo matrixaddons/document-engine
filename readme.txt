@@ -18,13 +18,28 @@ It is built for the block editor, works with any theme, and the free plugin has 
 
 **Made for** councils and public bodies, schools and universities, housing and community associations, intranets and HR teams, nonprofits, law and accounting firms, and member sites.
 
+[Live preview](https://wordpress.org/plugins/document-engine/?preview=1) · [Free vs Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#compare) · [Pro features](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#features) · [Pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pricing)
+
+= Free vs Pro at a glance =
+
+The free plugin is complete on its own. **Document Engine Pro** adds control, proof and scale for organisations, in the same screens.
+
+* **Document library.** Free: table, grid and folder layouts, instant search, multi-select filters with counts, preview popup. *Pro adds* custom-field columns and filters, search inside files and ZIP downloads.
+* **PDF viewer.** Free: self-hosted viewer with search, thumbnails, outline and links. *Pro adds* a secure view-only mode with the reader's name on every page, and reading analytics.
+* **Who can open what.** Free: drafts, private and password-protected documents. *Pro adds* members-only documents by role, person or category, private file storage and tracked share links.
+* **Records and compliance.** Free: download counts and accessible-format requests. *Pro adds* an audit log, read-and-confirm with evidence export, versions, and review and expiry dates.
+* **Post to PDF.** Free: a Download PDF button with header, footer, custom CSS and PDF permissions. *Pro adds* text and image watermarks and Handbook PDFs.
+* **Moving in and automation.** Free: migration from three plugins, blocks, shortcodes and Elementor widgets. *Pro adds* bulk and CSV import, submissions, webhooks, Slack and Teams, and WP-CLI.
+* **Support.** Free: the community forum. Pro: email support, priority on the Agency plan.
+
+[Compare every feature](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=glance#compare)
+
 = Why Document Engine =
 
 * **A real document library, free.** Table, grid and folder layouts with instant search, filters with counts, multi-select filters, sorting and shareable links, all in the free plugin.
 * **A private PDF viewer.** Built on PDF.js and served from your own site: no Google Docs viewer, no third-party requests, so it works on intranets and staging sites and helps with GDPR.
 * **Viewer features other plugins charge for.** Search inside PDFs, page thumbnails and outline, clickable links, links to a page (`#page=4`), print, download and full screen.
 * **One link per document, for good.** Every download goes through the document's own link: downloads are counted (bots and link previews are ignored), and replacing the file keeps the same link, so emails and printed QR codes never break.
-* **Switch without losing anything.** Move from Document Library (Barn2), Download Monitor or WordPress Download Manager in a few clicks. Their shortcodes keep working and their old download links redirect.
 * **Accessibility first.** Keyboard and screen-reader friendly libraries and viewer, checked with automated WCAG 2.1 AA tests, plus an optional "Request an accessible version" form.
 
 = Document library =
@@ -62,7 +77,7 @@ Every document gets a clean page with its file type, size, last update, categori
 
 * A **"Download PDF" button** on the post types you choose, placed before or after the content, or anywhere with the **Save as PDF block** or `[document_engine_pdf_button]`.
 * Header logo, title and page numbers, footer text, page orientation, margins, text size, custom CSS or your theme's styles.
-* Text and image **watermarks**, and optional **PDF protection** (print, copy and edit permissions).
+* Optional **PDF protection** (print, copy and edit permissions).
 * PDF-only shortcodes for page breaks, columns and content hidden from the PDF.
 * **Fast and safe**: generated PDFs are cached, each visitor has a per-minute limit, and only public content is exported (never private or password-protected posts).
 
@@ -133,11 +148,12 @@ Screenshots and details of every feature are on the [Document Engine Pro page](h
 
 **Scale and automation**
 
-* **Search inside PDF, Word, Excel and PowerPoint files**, in libraries and site search.
+* **Search inside PDF, Word, Excel, PowerPoint and OpenDocument files**, in libraries and site search.
 * **Automatic PDF thumbnails** for grid layouts (when your server can make PDF previews).
 * **Bulk upload** (drag and drop many files) and **CSV import**, including updates by ID and custom-field columns.
 * **ZIP download**: visitors select several documents in a library and download them as one ZIP.
 * **Front-end submissions**: chosen roles upload documents from a page, with allowed file types, a size limit and moderation.
+* **Watermarks on Post to PDF**: text or image, with placeholders such as {name} and {date}.
 * **Handbook PDF**: many posts in one PDF with a cover and table of contents, for admins or visitors (`[document_engine_handbook]`).
 * **Notifications**: signed webhooks (for Zapier, Make or your own system), **Slack or Microsoft Teams** messages, and **email subscriptions** by category with a Subscribe block and one-click unsubscribe.
 * **AI assistant** in the editor that suggests a title, summary, categories and tags from the file's text, using the AI provider connected to WordPress (no extra keys).
@@ -147,25 +163,13 @@ Screenshots and details of every feature are on the [Document Engine Pro page](h
 
 **Plans** (every plan includes every Pro feature):
 
-* **Personal**: 1 website, $79 a year or $199 lifetime.
-* **Plus**: 5 websites, $149 a year or $379 lifetime.
-* **Agency**: 25 websites and priority support, $249 a year or $599 lifetime.
+* **[Personal](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=plan-personal#pricing)**: 1 website, $79 a year or $199 lifetime.
+* **[Plus](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=plan-plus#pricing)**: 5 websites, $149 a year or $379 lifetime.
+* **[Agency](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=plan-agency#pricing)**: 25 websites and priority support, $249 a year or $599 lifetime.
 
 Every plan has a 14-day money-back guarantee ([refund policy](https://mantrabrain.com/refund-policy/)). If a licence expires, Pro keeps working; only updates and support stop.
 
 [See Pro plans and pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=plans#pricing)
-
-= Free vs Pro =
-
-**Free** is a complete document library: libraries, search and filters, the PDF viewer, document pages, Post to PDF, blocks, shortcodes, Elementor widgets and migration, with no limits.
-
-**Pro** adds control, proof and scale: who can open each document, private files, the secure viewer, read-and-confirm, analytics, versions, custom fields and bulk import.
-
-The full side-by-side list is in the plugin under **Documents → Free vs Pro** and on our website: [compare Free and Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=compare#compare).
-
-= Privacy =
-
-The free plugin stores documents, categories and tags as normal WordPress content, plus a download count per document. Accessible-format requests (when switched on) store the requester's name and email; they are included in WordPress's personal data export and erase tools. The plugin does not track visitors, set tracking cookies or send data to other services, apart from the optional cases listed under "External services".
 
 = External services =
 
@@ -175,12 +179,6 @@ The free plugin works without any external service. It only contacts one in thes
 * **MatrixAddons licence server** (`store.mantrabrain.com`): only when an administrator enters a Pro licence key on *Documents → Free vs Pro* to install Pro. The licence key and your site's address are sent to check the licence and download Pro. [Terms and Conditions](https://mantrabrain.com/terms-and-conditions/), [Privacy Policy](https://mantrabrain.com/privacy-policy/).
 * **Files you link to**: documents or viewers that point to a file on another website load that file from that website.
 * **Images in Post to PDF**: when a post includes images or stylesheets from another website, your server fetches them from that website while it builds the PDF (local and private addresses are refused).
-
-= Documentation and support =
-
-* Built-in documentation: **Documents → Docs** in your WordPress admin.
-* Questions about the free plugin: the [support forum](https://wordpress.org/support/plugin/document-engine/) here on WordPress.org.
-* Document Engine Pro: [features, plans and FAQ](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=support) and [pre-sales questions](https://matrixaddons.com/contact-us/). Pro customers get email support (priority support on the Agency plan).
 
 == Installation ==
 
@@ -242,9 +240,16 @@ Styles and scripts load only on pages that use them, the viewer loads when it sc
 
 Nothing is deleted unless you choose to: turn on **Documents → Settings → Advanced → When deleting the plugin** first if you want documents and settings removed. Files in your Media Library are never deleted.
 
-= Where is the documentation? =
+= Where is the documentation, and how do I get help? =
 
 In your admin under **Documents → Docs**: getting started, every feature, settings, how-to guides, troubleshooting and developer notes, with search.
+
+* Questions about the free plugin: the [support forum](https://wordpress.org/support/plugin/document-engine/) here on WordPress.org.
+* Document Engine Pro: [features, plans and FAQ](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=support) and [pre-sales questions](https://matrixaddons.com/contact-us/). Pro customers get email support (priority support on the Agency plan).
+
+= Does it track visitors? =
+
+The free plugin stores documents, categories and tags as normal WordPress content, plus a download count per document. Accessible-format requests (when switched on) store the requester's name and email; they are included in WordPress's personal data export and erase tools. The plugin does not track visitors, set tracking cookies or send data to other services, apart from the optional cases listed under "External services".
 
 = Which shortcodes are there? =
 

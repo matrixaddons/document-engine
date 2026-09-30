@@ -147,8 +147,9 @@ class DocsContent
                         array('p', __('Adds a "Download PDF" button to posts, pages or other post types that turns the content into a PDF, generated on your server.', 'document-engine')),
                         array('ul', array(
                             __('Choose where the button appears in Settings → Post to PDF → Button (post types, text, placement, alignment, download or open).', 'document-engine'),
-                            __('Header and footer (logo, title, page numbers), page size, margins and orientation, theme styles or custom CSS, text and image watermarks.', 'document-engine'),
+                            __('Header and footer (logo, title, page numbers), page size, margins and orientation, theme styles or custom CSS.', 'document-engine'),
                             __('Protection: optionally stop readers printing, copying or editing the PDF (PDF permissions).', 'document-engine'),
+                            __('Document Engine Pro adds text and image watermarks, with placeholders such as {name} and {date}, and Handbook PDFs that combine many posts.', 'document-engine'),
                             __('Content shortcodes: <code>[document_engine_pdf_remove]</code> hides content from the PDF, <code>[document_engine_pdf_page_break]</code> starts a new page, <code>[document_engine_pdf_columns]</code> and <code>[document_engine_pdf_column_break]</code> lay out columns.', 'document-engine'),
                         )),
                         array('note', __('PDFs are made only for published, public posts of the post types you ticked (or posts containing a Save as PDF block), never for private or password-protected posts. Images from internal network addresses are left out. Generated PDFs are cached, and each visitor can create a limited number per minute (Settings → Advanced → Performance).', 'document-engine')),

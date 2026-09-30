@@ -129,7 +129,8 @@ class ProPage
                 array(__('Version history, review dates and automatic expiry', 'document-engine'), false, true, 'versions'),
             ),
             __('Publishing and integrations', 'document-engine') => array(
-                array(__('Post to PDF button with header, footer and watermarks', 'document-engine'), true, true, 'post-to-pdf'),
+                array(__('Post to PDF button with header, footer, custom CSS and PDF permissions', 'document-engine'), true, true, 'post-to-pdf'),
+                array(__('Text and image watermarks on Post to PDF', 'document-engine'), false, true, 'post-to-pdf'),
                 array(__('Blocks, shortcodes and Elementor widgets', 'document-engine'), true, true, 'blocks'),
                 array(__('Move from Download Monitor, WordPress Download Manager or Barn2', 'document-engine'), true, true, 'migrate'),
                 array(__('Command palette and read-only abilities for AI agents', 'document-engine'), true, true, 'palette'),
