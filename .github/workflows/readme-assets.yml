@@ -1,0 +1,23 @@
+name: Update WordPress.org readme and assets
+on:
+  push:
+    branches: [master]
+    paths:
+      - readme.txt
+      - .wordpress-org/**
+concurrency:
+  group: wordpress-org-svn
+  cancel-in-progress: false
+jobs:
+  readme-assets:
+    name: Push readme.txt and .wordpress-org to WordPress.org
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: WordPress.org readme and assets update
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          IGNORE_OTHER_FILES: true

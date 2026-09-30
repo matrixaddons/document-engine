@@ -18,7 +18,7 @@ It is built for the block editor, works with any theme, and the free plugin has 
 
 **Made for** councils and public bodies, schools and universities, housing and community associations, intranets and HR teams, nonprofits, law and accounting firms, and member sites.
 
-[Live preview](https://wordpress.org/plugins/document-engine/?preview=1) · [Free vs Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#compare) · [Pro features](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pro) · [Pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pricing)
+[Try it live](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/matrixaddons/document-engine/master/.wordpress-org/blueprints/blueprint.json) · [Free vs Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#compare) · [Pro features](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pro) · [Pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pricing)
 
 = Free vs Pro at a glance =
 

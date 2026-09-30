@@ -4,6 +4,9 @@ on:
     types: [published]
 permissions:
   contents: write
+concurrency:
+  group: wordpress-org-svn
+  cancel-in-progress: false
 jobs:
   tag:
     name: New Released For WordPress.org
