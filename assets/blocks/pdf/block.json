@@ -9,5 +9,7 @@
 	"keywords": [
 		"pdf"
 	],
-	"textdomain": "document-engine"
+	"textdomain": "document-engine",
+	"editorScript": "document-engine-pdf-block",
+	"editorStyle": "document-engine-blocks-editor"
 }

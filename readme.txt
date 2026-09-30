@@ -4,7 +4,7 @@ Tags: document library, pdf viewer, embed pdf, download manager, document manage
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,6 +279,9 @@ All attributes are listed in **Documents → Docs → Developers**.
 
 == Changelog ==
 
+= 2.0.4 - 2026-09-30 =
+* Fixed - Blocks are listed again on WordPress.org, now with their names, descriptions and icons (each block.json declares its editor script).
+
 = 2.0.3 - 2026-09-30 =
 * Improved - Every block has a block.json with its name, description and icon, so they show properly in the block directory and on WordPress.org.
 * Improved - The classic PDF Viewer block from version 1 uses the current block API (existing content is unchanged).
@@ -332,6 +335,6 @@ All attributes are listed in **Documents → Docs → Developers**.
 
 == Upgrade Notice ==
 
-= 2.0.3 =
+= 2.0.4 =
 Adds a document library, a private built-in PDF viewer and a security fix. Existing shortcodes, settings and blocks keep working. Requires PHP 7.4 and WordPress 6.6.
 
