@@ -6,16 +6,14 @@
   "autoload": {
     "psr-4": {
       "MatrixAddons\\DocumentEngine\\": "./includes"
-    },
-    "classmap": [
-      "vendor-prefixed/"
-    ]
+    }
   },
   "require": {
     "php": ">=7.4",
     "mpdf/mpdf": "^8.3"
   },
   "config": {
+    "vendor-dir": ".composer",
     "platform": {
       "php": "7.4.33"
     },
@@ -25,7 +23,7 @@
   },
   "extra": {
     "strauss": {
-      "target_directory": "vendor-prefixed",
+      "target_directory": "vendor",
       "namespace_prefix": "MatrixAddons\\DocumentEngine\\Vendor\\",
       "classmap_prefix": "MatrixAddons_DocumentEngine_",
       "constant_prefix": "DOCUMENT_ENGINE_VENDOR_",
@@ -40,7 +38,7 @@
   "scripts": {
     "prefix-namespaces": [
       "@php strauss.phar",
-      "@php tools/prune-vendor.php",
+      "@prune-mpdf",
       "@composer dump-autoload"
     ],
     "post-install-cmd": [
@@ -48,6 +46,7 @@
     ],
     "post-update-cmd": [
       "@prefix-namespaces"
-    ]
+    ],
+    "prune-mpdf": "@php -r '$r=\"vendor/mpdf/mpdf\"; $b=chr(92); $q=chr(39); foreach (glob(\"$r/ttfonts/*\") as $f) { if (!preg_match(\"/^(DejaVu|fontawesome-webfont)/\", basename($f))) { unlink($f); } } foreach ([\"phpstan-baseline.neon\",\"phpunit.xml\",\".github\",\"utils\",\"CHANGELOG.md\",\"CREDITS.txt\",\"README.md\",\"SECURITY.md\"] as $j) { exec(\"rm -rf \" . escapeshellarg(\"$r/$j\")); } foreach ([\"src/Tag.php\",\"src/Tag/Tag.php\"] as $t) { $c = file_get_contents(\"$r/$t\"); file_put_contents(\"$r/$t\", str_replace(\"{$q}Mpdf{$b}Tag{$b}{$b}{$q}\", \"{$q}MatrixAddons{$b}DocumentEngine{$b}Vendor{$b}Mpdf{$b}Tag{$b}{$b}{$q}\", $c)); }'"
   }
 }

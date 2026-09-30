@@ -3,7 +3,6 @@
 /.wordpress-org
 /node_modules
 /assets/src
-/tools
 /strauss.phar
 /package.json
 /package-lock.json
@@ -15,5 +14,5 @@
 /.distignore
 /document-engine.zip
 /document-engine-pro.zip
-/vendor
+/.composer
 *.map

@@ -5,7 +5,7 @@
  * Description: Document library, self-hosted PDF viewer and post to PDF. Organise documents with search and filters, show PDFs without Google, and let visitors download any post as a branded PDF.
  * Author: MatrixAddons
  * Author URI: https://matrixaddons.com/
- * Version: 2.0.0
+ * Version: 2.0.1
  * Requires at least: 6.6
  * Requires PHP: 7.4
  * License: GPLv2 or later
@@ -28,7 +28,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
 
 /*
  * Class loading. The plugin's own classes live in includes/ (MatrixAddons\DocumentEngine\Foo\Bar => includes/Foo/Bar.php).
- * Bundled libraries live in vendor-prefixed/ under the MatrixAddons\DocumentEngine\Vendor namespace (renamed by Strauss
+ * Bundled libraries live in vendor/ under the MatrixAddons\DocumentEngine\Vendor namespace (renamed by Strauss
  * so they never clash with other plugins); their autoloader is only loaded the first time one is used.
  */
 spl_autoload_register(function ($class) {
@@ -40,7 +40,7 @@ spl_autoload_register(function ($class) {
     if (strpos($class, $prefix . 'Vendor\\') === 0) {
         if ($vendor === null) {
             $vendor = false;
-            $file = __DIR__ . '/vendor-prefixed/autoload.php';
+            $file = __DIR__ . '/vendor/autoload.php';
             if (file_exists($file)) {
                 $vendor = require $file;
             }
@@ -63,7 +63,7 @@ if (!defined('DOCUMENT_ENGINE_FILE')) {
 
 // Define DOCUMENT_ENGINE_VERSION.
 if (!defined('DOCUMENT_ENGINE_VERSION')) {
-    define('DOCUMENT_ENGINE_VERSION', '2.0.0');
+    define('DOCUMENT_ENGINE_VERSION', '2.0.1');
 }
 
 // Product name shown to users. Everything user-facing reads it from here.

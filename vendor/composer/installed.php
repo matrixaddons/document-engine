@@ -2,15 +2,15 @@
   'root' => 
   array (
     'name' => 'matrixaddons/document-engine',
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
-    'reference' => '037aadb8867c8142ea49b99bd3d7d0c4c6443aa0',
+    'pretty_version' => '1.0.0+no-version-set',
+    'version' => '1.0.0.0',
+    'reference' => NULL,
     'type' => 'wordpress-plugin',
     'install_path' => __DIR__ . '/../',
     'aliases' => 
     array (
     ),
-    'dev' => false,
+    'dev' => true,
   ),
   'versions' => 
   array (

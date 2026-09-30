@@ -64,7 +64,7 @@ class Generate_PDF
      */
     private static function load_library()
     {
-        $autoload = DOCUMENT_ENGINE_ABSPATH . 'vendor-prefixed/autoload.php';
+        $autoload = DOCUMENT_ENGINE_ABSPATH . 'vendor/autoload.php';
         if (file_exists($autoload)) {
             require_once $autoload;
         }

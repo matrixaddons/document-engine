@@ -1,14 +1,15 @@
 {
   "name": "document-engine",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "license": "GPL-2.0-or-later",
   "scripts": {
-    "build": "wp-scripts build && node tools/copy-pdfjs.mjs",
+    "build": "wp-scripts build && npm run pdfjs",
     "start": "wp-scripts start",
     "lint:js": "wp-scripts lint-js assets/src",
     "lint:css": "wp-scripts lint-style 'assets/src/**/*.scss'",
-    "makepot": "wp i18n make-pot . languages/document-engine.pot --exclude=node_modules,vendor,assets/src"
+    "makepot": "wp i18n make-pot . languages/document-engine.pot --exclude=node_modules,vendor,.composer,assets/src",
+    "pdfjs": "rm -rf assets/vendor/pdfjs && mkdir -p assets/vendor/pdfjs && cp node_modules/pdfjs-dist/legacy/build/pdf.min.mjs assets/vendor/pdfjs/pdf.min.js && cp node_modules/pdfjs-dist/legacy/build/pdf.worker.min.mjs assets/vendor/pdfjs/pdf.worker.min.js && cp -R node_modules/pdfjs-dist/cmaps node_modules/pdfjs-dist/standard_fonts assets/vendor/pdfjs/ && rsync -a --exclude='*quickjs*' node_modules/pdfjs-dist/wasm/ assets/vendor/pdfjs/wasm/ && cp node_modules/pdfjs-dist/LICENSE assets/vendor/pdfjs/LICENSE"
   },
   "devDependencies": {
     "@wordpress/scripts": "^30.0.0",

@@ -2,5 +2,5 @@ node_modules
 /strauss.phar
 document-engine.zip
 
-# Composer build folder (development only; the plugin ships vendor-prefixed/)
-/vendor/
+# Composer download folder (development only; the plugin ships vendor/, built by Strauss)
+/.composer/

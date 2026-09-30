@@ -4,7 +4,7 @@ Tags: document library, pdf viewer, embed pdf, download manager, document manage
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ It is built for the block editor, works with any theme, and the free plugin has 
 
 **Made for** councils and public bodies, schools and universities, housing and community associations, intranets and HR teams, nonprofits, law and accounting firms, and member sites.
 
-[Live preview](https://wordpress.org/plugins/document-engine/?preview=1) · [Free vs Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#compare) · [Pro features](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#features) · [Pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pricing)
+[Live preview](https://wordpress.org/plugins/document-engine/?preview=1) · [Free vs Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#compare) · [Pro features](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pro) · [Pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pricing)
 
 = Free vs Pro at a glance =
 
@@ -32,7 +32,7 @@ The free plugin is complete on its own. **Document Engine Pro** adds control, pr
 * **Moving in and automation.** Free: migration from three plugins, blocks, shortcodes and Elementor widgets. *Pro adds* bulk and CSV import, submissions, webhooks, Slack and Teams, and WP-CLI.
 * **Support.** Free: the community forum. Pro: email support, priority on the Agency plan.
 
-[Compare every feature](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=glance#compare)
+[Compare every feature](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=glance#compare) · [See what Pro adds](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=glance#pro) · [Pro plans from $79 a year](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=glance#pricing)
 
 = Why Document Engine =
 
@@ -99,7 +99,7 @@ Document Engine copies your documents from **Document Library (Barn2)**, **Downl
 
 The free plugin publishes documents. **Pro controls who can open them, proves who read them, and keeps them up to date**, for councils, schools, HR teams, intranets, client portals and member sites.
 
-Pro is an add-on: install it next to the free plugin and its features appear in the same screens. Your documents, pages and settings stay exactly as they are. [See Document Engine Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=intro#features)
+Pro is an add-on: install it next to the free plugin and its features appear in the same screens. Your documents, pages and settings stay exactly as they are. [See Document Engine Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=intro#pro)
 
 **Pro is for you if you need to…**
 
@@ -114,7 +114,7 @@ Pro is an add-on: install it next to the free plugin and its features appear in 
 
 = Everything Pro adds =
 
-Screenshots and details of every feature are on the [Document Engine Pro page](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=features#features).
+Screenshots and details of every feature are on the [Document Engine Pro page](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=features#pro).
 
 **Access control**
 
@@ -279,6 +279,11 @@ All attributes are listed in **Documents → Docs → Developers**.
 
 == Changelog ==
 
+= 2.0.1 - 2026-09-30 =
+* Improved - Bundled libraries now live in a single vendor folder (still under the plugin's own namespace, so they can't clash with other plugins).
+* Improved - Readme: Free vs Pro at a glance, and links to the Pro features, comparison and pricing.
+* Fixed - Post to PDF watermarks are correctly listed as a Pro feature on the Free vs Pro page and in the Docs.
+
 = 2.0.0 - 2026-09-29 =
 * New - Documents: post type with categories, tags, single pages, file type/size, download counter, open-or-download setting, and site search.
 * New - Document Library block and shortcode: table, grid and folder layouts, instant search, filters, sorting, pagination, shareable URLs.
@@ -308,7 +313,7 @@ All attributes are listed in **Documents → Docs → Developers**.
 * Security - Post to PDF only runs for the post types you enable (or posts with the Save as PDF block), never for attachments, and skips images from internal network addresses.
 * Security - Accessible-format request limits are per visitor, so one person can't block requests for everyone.
 * Improved - Faster admin and front end on large libraries (tested with 10,000 documents), and accessibility fixes in admin screens.
-* Improved - A single bundled library folder (vendor-prefixed); Composer's vendor folder is no longer shipped.
+* Improved - Bundled libraries (mPDF) live in one vendor folder under the plugin's own namespace, so they can't clash with other plugins.
 * Requirements - PHP 7.4+ and WordPress 6.6+.
 
 = 1.3 - 2025-08-26 =
@@ -319,5 +324,6 @@ All attributes are listed in **Documents → Docs → Developers**.
 
 == Upgrade Notice ==
 
-= 2.0.0 =
+= 2.0.1 =
 Adds a document library, a private built-in PDF viewer and a security fix. Existing shortcodes, settings and blocks keep working. Requires PHP 7.4 and WordPress 6.6.
+
