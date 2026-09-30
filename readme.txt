@@ -4,7 +4,7 @@ Tags: document library, pdf viewer, embed pdf, download manager, document manage
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,8 @@ It is built for the block editor, works with any theme, and the free plugin has 
 **Made for** councils and public bodies, schools and universities, housing and community associations, intranets and HR teams, nonprofits, law and accounting firms, and member sites.
 
 [Try it live](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/matrixaddons/document-engine/master/.wordpress-org/blueprints/blueprint.json) · [Documentation](https://matrixaddons.com/plugins/document-engine/docs/) · [Free vs Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#compare) · [Pro features](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pro) · [Pricing](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=links#pricing)
+
+https://www.youtube.com/watch?v=NBZIZHn3ZRQ
 
 = Free vs Pro at a glance =
 
@@ -100,6 +102,8 @@ Every document gets a clean page with its file type, size, last update, categori
 The free plugin publishes documents. **Pro controls who can open them, proves who read them, and keeps them up to date**, for councils, schools, HR teams, intranets, client portals and member sites.
 
 Pro is an add-on: install it next to the free plugin and its features appear in the same screens. Your documents, pages and settings stay exactly as they are. [See Document Engine Pro](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=intro#pro)
+
+https://www.youtube.com/watch?v=uDFXI3sFlT8
 
 **Pro is for you if you need to…**
 
@@ -278,6 +282,10 @@ All attributes are listed in **Documents → Docs → Developers**.
 10. Step-by-step documentation inside WordPress (Documents → Docs).
 
 == Changelog ==
+
+= 2.0.5 - 2026-09-30 =
+* Improved - The built-in help, settings texts and readme now match the plugin exactly: A4 pages with orientation, margins and text size; four Elementor widgets; which files search indexes; ZIP and secure-viewer limits; the webhook signature.
+* Improved - A link to the online documentation on the Docs screen, and videos of the free plugin and Pro in the readme.
 
 = 2.0.4 - 2026-09-30 =
 * Fixed - Blocks are listed again on WordPress.org, now with their names, descriptions and icons (each block.json declares its editor script).
