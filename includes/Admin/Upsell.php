@@ -163,7 +163,7 @@ class Upsell
                     <?php endforeach; ?>
                 </ul>
                 <p class="dengine-a-preview__actions">
-                    <a class="dengine-a-btn dengine-a-btn--primary" href="<?php echo esc_url(ProPage::store_url('preview-' . sanitize_key($feature['icon']))); ?>" target="_blank" rel="noopener"><?php esc_html_e('See plans and pricing', 'document-engine'); ?><?php echo UI::icon('external', 14); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+                    <a class="dengine-a-btn dengine-a-btn--primary" href="<?php echo esc_url(ProPage::store_url('preview-' . sanitize_key($feature['icon'])) . '#pricing'); ?>" target="_blank" rel="noopener"><?php esc_html_e('See plans and pricing', 'document-engine'); ?><?php echo UI::icon('external', 14); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
                     <a class="dengine-a-btn dengine-a-btn--secondary" href="<?php echo esc_url(ProPage::url()); ?>"><?php esc_html_e('Compare free and Pro', 'document-engine'); ?></a>
                 </p>
             </div>

@@ -74,7 +74,7 @@ final class Main
         array_unshift($links, $settings_link);
 
         if (!defined('DOCUMENT_ENGINE_PRO_FILE')) {
-            $links[] = '<a href="' . esc_url(ProPage::url() . '#pricing') . '" style="color:#1d7a3a;font-weight:600">' . esc_html__('Upgrade to Pro', 'document-engine') . '</a>';
+            $links[] = '<a href="' . esc_url(ProPage::store_url('plugins-row') . '#pricing') . '" target="_blank" rel="noopener" style="color:#1d7a3a;font-weight:600">' . esc_html__('Upgrade to Pro', 'document-engine') . '</a>';
         }
         return $links;
     }

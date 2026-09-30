@@ -93,7 +93,7 @@ class UI
                     <a href="<?php echo esc_url($link['url']); ?>" <?php echo strpos($link['url'], admin_url()) === 0 ? '' : 'target="_blank" rel="noopener"'; ?>><?php echo self::icon(isset($link['icon']) ? $link['icon'] : 'external', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo esc_html($link['label']); ?></a>
                 <?php endforeach; ?>
                 <?php if (!self::is_pro()) : ?>
-                    <a class="dengine-a-top__pro" href="<?php echo esc_url(ProPage::url() . '#pricing'); ?>"><?php echo self::icon('star', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e('Upgrade to Pro', 'document-engine'); ?></a>
+                    <a class="dengine-a-top__pro" href="<?php echo esc_url(ProPage::store_url('header') . '#pricing'); ?>" target="_blank" rel="noopener"><?php echo self::icon('star', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e('Upgrade to Pro', 'document-engine'); ?></a>
                 <?php endif; ?>
             </nav>
         </div>
