@@ -92,7 +92,7 @@ class DocsContent
                             __('<strong>Site search</strong> includes documents unless you switch it off in Settings → Documents.', 'document-engine'),
                             __('The documents list shows the file, category, downloads and last update, with filters for category and file type.', 'document-engine'),
                         )),
-                        array('note', __('Limitation: the free plugin does not restrict who can download a published document. Anyone with the link can download it. Use Pro access control for private documents.', 'document-engine')),
+                        array('note', __('Limitation: the free plugin does not restrict who can download a published document. Anyone with the link can download it. WordPress\'s own Password protected visibility is respected (the download asks for the password), but the file itself stays in the public uploads folder, so anyone who has its exact address could open it. Use Pro access control for private documents.', 'document-engine')),
                     )),
                     'library' => array(__('Document Library: search, filters and layouts', 'document-engine'), false, array(
                         array('p', __('The Document Library block (and shortcode, and Elementor widget) lists documents as a table, a grid of cards, or folders by category.', 'document-engine')),
@@ -131,7 +131,7 @@ class DocsContent
                             array(__('PDF Viewer', 'document-engine'), __('Show a PDF from a document, the Media Library or a URL.', 'document-engine')),
                             array(__('Save as PDF', 'document-engine'), __('The Post to PDF button, placed where you want it.', 'document-engine')),
                         ), array(__('Block', 'document-engine'), __('What it does', 'document-engine'))),
-                        array('p', __('Elementor users get Document Library, Document Download and PDF Viewer widgets with the same options.', 'document-engine')),
+                        array('p', __('Elementor users get four widgets with the same options: Document Library, Document List, Document Download and PDF Viewer.', 'document-engine')),
                     )),
                     'lists' => array(__('Document lists and related documents', 'document-engine'), false, array(
                         array('p', __('The Document List block and <code>[document_engine_documents]</code> show a few documents in a compact list: newest, recently updated, most downloaded, or related to a document (sharing its categories or tags).', 'document-engine')),
@@ -147,7 +147,7 @@ class DocsContent
                         array('p', __('Adds a "Download PDF" button to posts, pages or other post types that turns the content into a PDF, generated on your server.', 'document-engine')),
                         array('ul', array(
                             __('Choose where the button appears in Settings → Post to PDF → Button (post types, text, placement, alignment, download or open).', 'document-engine'),
-                            __('Header and footer (logo, title, page numbers), page size, margins and orientation, theme styles or custom CSS.', 'document-engine'),
+                            __('Header and footer (logo, title, page numbers), orientation, margins and text size (pages are A4), theme styles or custom CSS.', 'document-engine'),
                             __('Protection: optionally stop readers printing, copying or editing the PDF (PDF permissions).', 'document-engine'),
                             __('Document Engine Pro adds text and image watermarks, with placeholders such as {name} and {date}, and Handbook PDFs that combine many posts.', 'document-engine'),
                             __('Content shortcodes: <code>[document_engine_pdf_remove]</code> hides content from the PDF, <code>[document_engine_pdf_page_break]</code> starts a new page, <code>[document_engine_pdf_columns]</code> and <code>[document_engine_pdf_column_break]</code> lay out columns.', 'document-engine'),
@@ -156,11 +156,11 @@ class DocsContent
                     )),
                     'format-requests' => array(__('Accessible format requests', 'document-engine'), false, array(
                         array('p', __('When switched on (Settings → Documents → Accessibility → Format requests), document pages show a "Need this in another format?" link. Visitors choose a format (for example large print or plain text), leave their name and email, and the request is emailed to you.', 'document-engine')),
-                        array('p', __('Requests are listed in the Documents menu under Format requests (Reports → Format requests with Pro), with a count of open requests. Reply to the email with the alternative version, then mark the request done. Only editors and administrators can see requests.', 'document-engine')),
+                        array('p', __('Requests are listed under Documents → Reports → Format requests, with a count of open requests. Reply to the email with the alternative version, then mark the request done. Only editors and administrators can see requests.', 'document-engine')),
                         array('note', __('The form has spam protection (a time check, a hidden field and limits per visitor, per document and per day). Requests contain names and emails; they are included in WordPress\'s personal data export and erase tools.', 'document-engine')),
                     )),
                     'migrate' => array(__('Migrate from another plugin', 'document-engine'), false, array(
-                        array('p', __('Documents → Migrate (Documents → Tools → Migrate with Pro) copies documents from Download Monitor, WordPress Download Manager and Barn2 Document Library into Document Engine: titles, descriptions, categories, tags, files, download counts and dates.', 'document-engine')),
+                        array('p', __('Documents → Tools → Migrate copies documents from Download Monitor, WordPress Download Manager and Barn2 Document Library into Document Engine: titles, descriptions, categories, tags, files, download counts and dates.', 'document-engine')),
                         array('ul', array(
                             __('Run a preview first: it shows how many items will be copied and flags locked items (paid, email- or captcha-gated) that need attention.', 'document-engine'),
                             __('The original plugin\'s data is not changed. Running it again skips items already copied.', 'document-engine'),
@@ -210,7 +210,7 @@ class DocsContent
                         array('p', __('Give someone without an account access to one document for a limited time (Access & security panel → Share link). Name the link after the recipient to see when they opened it; optionally get an email on the first open. Revoke a link at any time. Links default to Settings → Access & Pro → Share links last (7 days).', 'document-engine')),
                     )),
                     'secure' => array(__('Secure viewer and stamped downloads', 'document-engine'), true, array(
-                        array('p', __('Secure mode shows a document in the viewer only: no download, print or copy buttons, and each page carries a watermark with the reader\'s name, email and date (pattern in Settings → Access & Pro → Secure viewer). Downloads of secure documents are blocked. Optionally, downloaded PDFs of other documents can be stamped with the reader\'s details.', 'document-engine')),
+                        array('p', __('Secure mode shows a PDF in the viewer only: no download, print or copy buttons, and each page carries a watermark with the reader\'s name, email and date (pattern in Settings → Access & Pro → Secure viewer). Downloads of secure documents are blocked. Only PDFs can be shown in secure mode; other secure files can be neither viewed nor downloaded. Optionally, downloaded PDFs of other documents can be stamped with the reader\'s details.', 'document-engine')),
                         array('note', __('A watermark discourages sharing and identifies leaks; no viewer can stop a determined person photographing a screen.', 'document-engine')),
                     )),
                     'gate' => array(__('Email gate and leads', 'document-engine'), true, array(
@@ -233,12 +233,12 @@ class DocsContent
                         )),
                     )),
                     'acks' => array(__('Read and confirm (acknowledgements)', 'document-engine'), true, array(
-                        array('p', __('Ask people to confirm they have read a document ("I have read and understood…"). Choose the roles who must confirm and a deadline; they see it on the document page and in the Required Reading block. Reports → Acknowledgements shows who has and has not confirmed, sends reminders, and exports evidence (name, time, statement, a fingerprint of the file).', 'document-engine')),
+                        array('p', __('Ask people to confirm they have read a document ("I have read and understood…"). In the document\'s <strong>Read & confirm</strong> panel, choose the roles who must confirm and a deadline; they see it on the document page and in the Required Reading block. Reports → Acknowledgements shows who has and has not confirmed, sends reminders, and exports evidence (name, time, statement, a fingerprint of the file).', 'document-engine')),
                         array('p', __('After an important change, start a new round from the Acknowledgements screen so everyone confirms again.', 'document-engine')),
                     )),
                     'notify' => array(__('Notifications, webhooks and subscriptions', 'document-engine'), true, array(
                         array('ul', array(
-                            __('Signed webhooks (HMAC) for events such as document published, new version, acknowledged, submitted and new lead.', 'document-engine'),
+                            __('Signed webhooks for events such as document published, new version, acknowledged, submitted and new lead. The <code>X-DocumentEngine-Signature</code> header is <code>sha256=</code> followed by the HMAC-SHA256 of the timestamp header, a full stop and the raw body (<code>timestamp.body</code>), keyed with the signing secret.', 'document-engine'),
                             __('Posts to a Slack or Microsoft Teams channel.', 'document-engine'),
                             __('Email subscriptions: logged-in people follow categories (Subscribe block) and get an email when a document is published there, with one-click unsubscribe.', 'document-engine'),
                         )),
@@ -263,11 +263,11 @@ class DocsContent
                             __('<strong>My Documents</strong> block: a client or staff area listing the documents shared with the logged-in person, with "New" since their last visit.', 'document-engine'),
                             __('<strong>Required Reading</strong> block: each person\'s documents to confirm, with deadlines.', 'document-engine'),
                             __('<strong>Handbook PDF</strong> (Documents → Tools → Handbook PDF, or <code>[document_engine_handbook]</code>): many posts in one PDF with a cover page and table of contents.', 'document-engine'),
-                            __('<strong>ZIP download</strong>: a Select column in library tables lets visitors download several documents as one ZIP.', 'document-engine'),
+                            __('<strong>ZIP download</strong>: a Select column in table libraries lets visitors download several documents as one ZIP (up to 100 files and 250 MB; needs the PHP zip extension).', 'document-engine'),
                         )),
                     )),
                     'ai' => array(__('AI assistant and file-content search', 'document-engine'), true, array(
-                        array('p', __('Search finds words inside PDF, Word, Excel and PowerPoint files, in libraries and site search. The AI assistant (Suggest details, in the editor) proposes a title, a short summary, categories and tags from the file\'s text, using the AI provider connected to your site in WordPress (no separate key). Restricted, private and password-protected documents are not sent to AI unless you allow it.', 'document-engine')),
+                        array('p', __('Search finds words inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), OpenDocument and plain text files up to 30 MB, in libraries and site search. Older .doc, .xls and .ppt files and files linked from other sites are not indexed. The AI assistant (Suggest details, in the editor\'s AI assistant panel) proposes a title, a short summary, categories and tags from the file\'s text for you to review. It needs an AI provider connected in WordPress (Settings → Connectors, WordPress 7.0 or newer); Pro holds no keys of its own. Restricted, private and password-protected documents are not sent to AI unless you allow it.', 'document-engine')),
                     )),
                     'protection' => array(__('Abuse protection', 'document-engine'), true, array(
                         array('p', __('Limit how many different documents one person can download or view per day (ZIP downloads included), and add Cloudflare Turnstile to the email gate, format request and submission forms (Settings → Access & Pro → Abuse protection).', 'document-engine')),
@@ -297,10 +297,10 @@ class DocsContent
                         ), array(__('Setting', 'document-engine'), __('Default', 'document-engine'), __('Effect', 'document-engine'))),
                     )),
                     'settings-viewer' => array(__('Settings → PDF Viewer', 'document-engine'), false, array(
-                        array('p', __('Default height (800px), initial zoom (fit width), and which toolbar buttons show: toolbar, download, print, full screen, search, sidebar. "Version 1 blocks" shows PDF blocks made with version 1 in the built-in viewer instead of Google\'s viewer. It is on for new installs; sites upgraded from version 1 keep Google\'s viewer until you switch it on (recommended: faster, and nothing is sent to Google).', 'document-engine')),
+                        array('p', __('Default height (800px), initial zoom (fit width), and which toolbar parts show: toolbar (page navigation and zoom, switched together), download, print, full screen, search, sidebar. "Version 1 blocks" shows PDF blocks made with version 1 in the built-in viewer instead of Google\'s viewer. It is on for new installs; sites upgraded from version 1 keep Google\'s viewer until you switch it on (recommended: faster, and nothing is sent to Google).', 'document-engine')),
                     )),
                     'settings-pdf' => array(__('Settings → Post to PDF', 'document-engine'), false, array(
-                        array('p', __('Button (post types, text, placement, alignment, download or open), Header & footer, Page & protection (orientation, text size, margins, PDF permissions), Style (theme styles, custom CSS) and Watermark. The button appears only on the post types you tick.', 'document-engine')),
+                        array('p', __('Button (post types, text, placement, alignment, download or open), Header & footer, Page & protection (orientation, text size, margins, PDF permissions), Style (theme styles, custom CSS) and, with Pro, Watermark. Pages are A4. The button appears only on the post types you tick.', 'document-engine')),
                     )),
                     'settings-advanced' => array(__('Settings → Advanced', 'document-engine'), false, array(
                         array('ul', array(
@@ -312,7 +312,7 @@ class DocsContent
                     'settings-pro' => array(__('Settings → Access & Pro, Fields, License', 'document-engine'), true, array(
                         array('table', array(
                             array(__('Access', 'document-engine'), __('Restricted documents in lists (lock or hide), protect files automatically (on), share link lifetime (7 days).', 'document-engine')),
-                            array(__('Secure viewer', 'document-engine'), __('Which documents use it (off / restricted / all), watermark pattern, block downloads, stamp downloads.', 'document-engine')),
+                            array(__('Secure viewer', 'document-engine'), __('Which documents use it (only where switched on / all restricted / all), watermark pattern, block downloads, stamp downloads.', 'document-engine')),
                             array(__('Activity log', 'document-engine'), __('Log activity, reading time, searches, logged-out visitors; keep entries for 365 days.', 'document-engine')),
                             array(__('Email gate', 'document-engine'), __('Default (off), organization field, heading, consent text, remember visitors (30 days), webhook, lead retention, new-lead email.', 'document-engine')),
                             array(__('Review & submissions', 'document-engine'), __('Review reminder emails and recipients; who can submit, new submission status, file types and size.', 'document-engine')),
@@ -419,7 +419,7 @@ class DocsContent
                         array('p', __('Pages with personal lists (My Documents, Required Reading) tell caching plugins not to cache them. For library pages that show restricted documents differently to members, exclude logged-in users from your page cache (most caching plugins do this by default).', 'document-engine')),
                     )),
                     'ts-search' => array(__('Search does not find words inside a file', 'document-engine'), true, array(
-                        array('p', __('File text is indexed in the background after upload; large files can take a minute. Run <code>wp dengine reindex</code> to rebuild it. Scanned PDFs (images of text) contain no text to index.', 'document-engine')),
+                        array('p', __('File text is indexed in the background after upload; large files can take a minute, and files over 30 MB are skipped. Run <code>wp dengine reindex</code> to rebuild it. Scanned PDFs (images of text), older .doc, .xls and .ppt files and files linked from other sites contain no text Pro can read.', 'document-engine')),
                     )),
                     'ts-license' => array(__('Pro licence or updates do not work', 'document-engine'), true, array(
                         array('p', __('Check the key in Settings → License (it shows the status and renewal date). If it says the key "has reached its site limit", deactivate it on another site or upgrade the licence. Your server must be able to reach the store over https. Pro keeps working without an active licence; only updates need one.', 'document-engine')),
@@ -442,7 +442,7 @@ class DocsContent
                         array('p', __('Yes. Version 1 shortcodes, the PDF block, settings and the settings page address are kept.', 'document-engine')),
                     )),
                     'faq-private' => array(__('Can I keep documents private with the free plugin?', 'document-engine'), false, array(
-                        array('p', __('You can keep documents as drafts or private posts (only editors see them), but a published document can be downloaded by anyone who has the link. Member-only access, private file storage and share links are Pro features.', 'document-engine')),
+                        array('p', __('You can keep documents as drafts or private posts (only editors see them), or password-protected (the download asks for the password). A published document without a password can be downloaded by anyone who has the link, and in every case the file stays in the public uploads folder, so anyone who has its exact address could open it. Member-only access, private file storage and share links are Pro features.', 'document-engine')),
                     )),
                     'faq-uninstall' => array(__('What happens when I uninstall?', 'document-engine'), false, array(
                         array('p', __('By default nothing is deleted, so you can reinstall without losing documents. To remove everything, turn on Settings → Advanced → When deleting the plugin before deleting it. Uploaded files in the Media Library are never deleted.', 'document-engine')),

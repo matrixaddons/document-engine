@@ -63,8 +63,8 @@ class ProPage
     {
         return apply_filters('document_engine_pro_features', array(
             __('Control who sees what', 'document-engine') => array(
-                __('Restrict documents and categories to logged-in users, roles, specific people or a password', 'document-engine'),
-                __('Protected storage: files move out of the public uploads folder and are only served through signed, expiring links', 'document-engine'),
+                __('Restrict documents and categories to logged-in users, roles or specific people', 'document-engine'),
+                __('Protected storage: files move out of the public uploads folder and are only served to people allowed to open them', 'document-engine'),
                 __('Secure viewer: hide download and print, block copying, and stamp each page with the viewer\'s name, email and time', 'document-engine'),
                 __('Email gate: ask for name and email (with consent) before a download, with CSV export and webhooks', 'document-engine'),
             ),
@@ -75,7 +75,7 @@ class ProPage
             __('Keep documents current', 'document-engine') => array(
                 __('Versions: upload a new file without changing the link, see history and restore', 'document-engine'),
                 __('Expiry and review dates with reminder emails', 'document-engine'),
-                __('Search inside PDF, Word, Excel and PowerPoint files and automatic PDF thumbnails', 'document-engine'),
+                __('Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and OpenDocument files, and automatic PDF thumbnails', 'document-engine'),
             ),
             __('Work faster', 'document-engine') => array(
                 __('Bulk import by drag and drop or CSV', 'document-engine'),
@@ -100,8 +100,8 @@ class ProPage
                 array(__('Libraries as a table, grid or folders, with instant search', 'document-engine'), true, true, 'library'),
                 array(__('Filters by category, tag, file type, year and author, with multi-select and counts', 'document-engine'), true, true, 'library'),
                 array(__('Your own fields (reference, department, dates…) as columns, filters and sort options, including ACF fields', 'document-engine'), false, true, 'fields'),
-                array(__('Search inside PDF, Word, Excel and PowerPoint files', 'document-engine'), false, true, 'ai'),
-                array(__('Download several documents as one ZIP', 'document-engine'), false, true, 'portal'),
+                array(__('Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and OpenDocument files', 'document-engine'), false, true, 'ai'),
+                array(__('Download several documents from a table library as one ZIP', 'document-engine'), false, true, 'portal'),
                 array(__('Bulk upload and CSV import, including updates by ID', 'document-engine'), false, true, 'import'),
                 array(__('"My documents" page for clients or staff', 'document-engine'), false, true, 'portal'),
             ),
@@ -109,7 +109,7 @@ class ProPage
                 array(__('Built-in PDF viewer with search, thumbnails, outline and links', 'document-engine'), true, true, 'viewer'),
                 array(__('Preview popup for PDFs, images, audio and video', 'document-engine'), true, true, 'preview'),
                 array(__('QR code for every document', 'document-engine'), true, true, 'qr'),
-                array(__('Secure viewer: no download or print, a watermark with the reader\'s name on every page', 'document-engine'), false, true, 'secure'),
+                array(__('Secure viewer for PDFs: no download or print, a watermark with the reader\'s name on every page', 'document-engine'), false, true, 'secure'),
                 array(__('Downloaded PDFs stamped with the reader\'s details', 'document-engine'), false, true, 'secure'),
             ),
             __('Access and sharing', 'document-engine') => array(
