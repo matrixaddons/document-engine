@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/viewer",
+	"title": "PDF Viewer",
+	"category": "document-engine",
+	"icon": "pdf",
+	"description": "Show a PDF with the built-in viewer: page navigation, zoom, full screen, download and print. Works on mobile and never sends your files to Google.",
+	"keywords": [
+		"pdf",
+		"embed",
+		"viewer",
+		"document",
+		"flipbook"
+	],
+	"textdomain": "document-engine"
+}

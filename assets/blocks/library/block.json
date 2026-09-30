@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/library",
+	"title": "Document Library",
+	"category": "document-engine",
+	"icon": "media-document",
+	"description": "A searchable list of your documents as a table, grid or folders, with filters by category, tag and file type.",
+	"keywords": [
+		"documents",
+		"files",
+		"downloads",
+		"library",
+		"table"
+	],
+	"textdomain": "document-engine"
+}

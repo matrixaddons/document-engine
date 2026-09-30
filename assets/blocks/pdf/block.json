@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/pdf",
+	"title": "PDF Viewer (classic)",
+	"category": "document-engine",
+	"icon": "pdf",
+	"description": "Classic PDF viewer block from version 1. Use the new PDF Viewer block for new content; this one keeps working for existing pages.",
+	"keywords": [
+		"pdf"
+	],
+	"textdomain": "document-engine"
+}

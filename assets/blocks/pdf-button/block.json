@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/pdf-button",
+	"title": "Save as PDF Button",
+	"category": "document-engine",
+	"icon": "media-text",
+	"description": "Lets visitors download the current page or post as a PDF.",
+	"keywords": [
+		"pdf",
+		"print",
+		"download",
+		"export"
+	],
+	"textdomain": "document-engine"
+}

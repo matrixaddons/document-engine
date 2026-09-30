@@ -97,7 +97,7 @@ const Edit = (props) => {
 }
 
 registerBlockType('document-engine/pdf', {
-    apiVersion: 2,
+    apiVersion: 3,
     title: __('PDF Viewer (classic)', 'document-engine'),
     description: __('Classic PDF viewer block from version 1. Use the new PDF Viewer block for new content; this one keeps working for existing pages.', 'document-engine'),
     icon: Icon,

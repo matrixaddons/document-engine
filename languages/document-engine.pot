@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Document Engine 2.0.2\n"
+"Project-Id-Version: Document Engine 2.0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/document-engine\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-30T03:13:50+00:00\n"
+"POT-Creation-Date: 2026-09-30T03:19:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -4559,4 +4559,183 @@ msgstr ""
 
 #: assets/build/document-editor.js:1
 msgid "Only people who can edit documents can open this document's page and download link. The file itself stays in the public uploads folder, so anyone who has its direct file address could still download it. Pro can move files of private documents to protected storage."
+msgstr ""
+
+#: assets/blocks/documents/block.json
+msgctxt "block title"
+msgid "Document List"
+msgstr ""
+
+#: assets/blocks/documents/block.json
+msgctxt "block description"
+msgid "A short list of the newest, recently updated, most downloaded or related documents."
+msgstr ""
+
+#: assets/blocks/documents/block.json
+msgctxt "block keyword"
+msgid "popular"
+msgstr ""
+
+#: assets/blocks/documents/block.json
+msgctxt "block keyword"
+msgid "recent"
+msgstr ""
+
+#: assets/blocks/documents/block.json
+msgctxt "block keyword"
+msgid "related"
+msgstr ""
+
+#: assets/blocks/documents/block.json
+msgctxt "block keyword"
+msgid "latest"
+msgstr ""
+
+#: assets/blocks/download/block.json
+msgctxt "block title"
+msgid "Document Download"
+msgstr ""
+
+#: assets/blocks/download/block.json
+msgctxt "block description"
+msgid "A download button or card for one document, with file type and size."
+msgstr ""
+
+#: assets/blocks/download/block.json
+#: assets/blocks/pdf-button/block.json
+msgctxt "block keyword"
+msgid "download"
+msgstr ""
+
+#: assets/blocks/download/block.json
+msgctxt "block keyword"
+msgid "file"
+msgstr ""
+
+#: assets/blocks/download/block.json
+msgctxt "block keyword"
+msgid "button"
+msgstr ""
+
+#: assets/blocks/library/block.json
+msgctxt "block title"
+msgid "Document Library"
+msgstr ""
+
+#: assets/blocks/library/block.json
+msgctxt "block description"
+msgid "A searchable list of your documents as a table, grid or folders, with filters by category, tag and file type."
+msgstr ""
+
+#: assets/blocks/library/block.json
+#: assets/blocks/search/block.json
+msgctxt "block keyword"
+msgid "documents"
+msgstr ""
+
+#: assets/blocks/library/block.json
+msgctxt "block keyword"
+msgid "files"
+msgstr ""
+
+#: assets/blocks/library/block.json
+msgctxt "block keyword"
+msgid "downloads"
+msgstr ""
+
+#: assets/blocks/library/block.json
+msgctxt "block keyword"
+msgid "library"
+msgstr ""
+
+#: assets/blocks/library/block.json
+msgctxt "block keyword"
+msgid "table"
+msgstr ""
+
+#: assets/blocks/pdf-button/block.json
+msgctxt "block title"
+msgid "Save as PDF Button"
+msgstr ""
+
+#: assets/blocks/pdf-button/block.json
+msgctxt "block description"
+msgid "Lets visitors download the current page or post as a PDF."
+msgstr ""
+
+#: assets/blocks/pdf-button/block.json
+#: assets/blocks/pdf/block.json
+#: assets/blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "pdf"
+msgstr ""
+
+#: assets/blocks/pdf-button/block.json
+msgctxt "block keyword"
+msgid "print"
+msgstr ""
+
+#: assets/blocks/pdf-button/block.json
+msgctxt "block keyword"
+msgid "export"
+msgstr ""
+
+#: assets/blocks/pdf/block.json
+msgctxt "block title"
+msgid "PDF Viewer (classic)"
+msgstr ""
+
+#: assets/blocks/pdf/block.json
+msgctxt "block description"
+msgid "Classic PDF viewer block from version 1. Use the new PDF Viewer block for new content; this one keeps working for existing pages."
+msgstr ""
+
+#: assets/blocks/search/block.json
+msgctxt "block title"
+msgid "Document Search"
+msgstr ""
+
+#: assets/blocks/search/block.json
+msgctxt "block description"
+msgid "A search box for your documents that you can place anywhere, such as the header or home page."
+msgstr ""
+
+#: assets/blocks/search/block.json
+msgctxt "block keyword"
+msgid "search"
+msgstr ""
+
+#: assets/blocks/search/block.json
+msgctxt "block keyword"
+msgid "find"
+msgstr ""
+
+#: assets/blocks/viewer/block.json
+msgctxt "block title"
+msgid "PDF Viewer"
+msgstr ""
+
+#: assets/blocks/viewer/block.json
+msgctxt "block description"
+msgid "Show a PDF with the built-in viewer: page navigation, zoom, full screen, download and print. Works on mobile and never sends your files to Google."
+msgstr ""
+
+#: assets/blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "embed"
+msgstr ""
+
+#: assets/blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "viewer"
+msgstr ""
+
+#: assets/blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "document"
+msgstr ""
+
+#: assets/blocks/viewer/block.json
+msgctxt "block keyword"
+msgid "flipbook"
 msgstr ""

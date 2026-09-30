@@ -5,7 +5,7 @@
  * Description: Document library, self-hosted PDF viewer and post to PDF. Organise documents with search and filters, show PDFs without Google, and let visitors download any post as a branded PDF.
  * Author: MatrixAddons
  * Author URI: https://matrixaddons.com/
- * Version: 2.0.2
+ * Version: 2.0.3
  * Requires at least: 6.6
  * Requires PHP: 7.4
  * License: GPLv2 or later
@@ -63,7 +63,7 @@ if (!defined('DOCUMENT_ENGINE_FILE')) {
 
 // Define DOCUMENT_ENGINE_VERSION.
 if (!defined('DOCUMENT_ENGINE_VERSION')) {
-    define('DOCUMENT_ENGINE_VERSION', '2.0.2');
+    define('DOCUMENT_ENGINE_VERSION', '2.0.3');
 }
 
 // Product name shown to users. Everything user-facing reads it from here.

@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/search",
+	"title": "Document Search",
+	"category": "document-engine",
+	"icon": "search",
+	"description": "A search box for your documents that you can place anywhere, such as the header or home page.",
+	"keywords": [
+		"search",
+		"find",
+		"documents"
+	],
+	"textdomain": "document-engine"
+}

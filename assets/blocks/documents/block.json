@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/documents",
+	"title": "Document List",
+	"category": "document-engine",
+	"icon": "list-view",
+	"description": "A short list of the newest, recently updated, most downloaded or related documents.",
+	"keywords": [
+		"popular",
+		"recent",
+		"related",
+		"latest"
+	],
+	"textdomain": "document-engine"
+}

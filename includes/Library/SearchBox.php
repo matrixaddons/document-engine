@@ -18,7 +18,7 @@ class SearchBox
     public static function register()
     {
         add_shortcode('document_engine_search', array(__CLASS__, 'shortcode'));
-        register_block_type('document-engine/search', array(
+        register_block_type(DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/search', array(
             'api_version' => 3,
             'editor_script' => 'document-engine-pdf-block',
             'editor_style' => 'document-engine-blocks-editor',

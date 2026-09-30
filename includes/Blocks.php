@@ -42,11 +42,13 @@ class Blocks
 
     public function register_block()
     {
+        // Titles, descriptions and icons live in assets/blocks/*/block.json (also read by WordPress.org);
+        // attributes and rendering stay here so existing content is unchanged.
         // 1.x block: kept with identical attributes so existing content keeps rendering.
         register_block_type(
-            'document-engine/pdf',
+            DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/pdf',
             array(
-                'api_version' => 2,
+                'api_version' => 3,
 
                 'editor_script' => 'document-engine-pdf-block',
 
@@ -59,7 +61,7 @@ class Blocks
             )
         );
 
-        register_block_type('document-engine/viewer', array(
+        register_block_type(DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/viewer', array(
             'api_version' => 3,
             'editor_script' => 'document-engine-pdf-block',
             'editor_style' => 'document-engine-blocks-editor',
@@ -82,7 +84,7 @@ class Blocks
             'render_callback' => array($this, 'render_viewer'),
         ));
 
-        register_block_type('document-engine/library', array(
+        register_block_type(DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/library', array(
             'api_version' => 3,
             'editor_script' => 'document-engine-pdf-block',
             'editor_style' => 'document-engine-blocks-editor',
@@ -112,7 +114,7 @@ class Blocks
             'render_callback' => array($this, 'render_library'),
         ));
 
-        register_block_type('document-engine/download', array(
+        register_block_type(DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/download', array(
             'api_version' => 3,
             'editor_script' => 'document-engine-pdf-block',
             'editor_style' => 'document-engine-blocks-editor',
@@ -126,7 +128,7 @@ class Blocks
             'render_callback' => array(Library::class, 'render_download'),
         ));
 
-        register_block_type('document-engine/documents', array(
+        register_block_type(DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/documents', array(
             'api_version' => 3,
             'editor_script' => 'document-engine-pdf-block',
             'editor_style' => 'document-engine-blocks-editor',
@@ -143,7 +145,7 @@ class Blocks
             'render_callback' => array(Lists::class, 'render'),
         ));
 
-        register_block_type('document-engine/pdf-button', array(
+        register_block_type(DOCUMENT_ENGINE_ABSPATH . 'assets/blocks/pdf-button', array(
             'api_version' => 3,
             'editor_script' => 'document-engine-pdf-block',
             'editor_style' => 'document-engine-blocks-editor',

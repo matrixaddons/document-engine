@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "document-engine/download",
+	"title": "Document Download",
+	"category": "document-engine",
+	"icon": "download",
+	"description": "A download button or card for one document, with file type and size.",
+	"keywords": [
+		"download",
+		"file",
+		"button"
+	],
+	"textdomain": "document-engine"
+}
