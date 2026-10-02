@@ -4,7 +4,7 @@ Tags: document library, pdf viewer, embed pdf, download manager, document manage
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.5
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,24 +38,24 @@ The free plugin is complete on its own. **Document Engine Pro** adds control, pr
 
 = Why Document Engine =
 
-* **A real document library, free.** Table, grid and folder layouts with instant search, filters with counts, multi-select filters, sorting and shareable links, all in the free plugin.
+* **A real document library, free.** Table, grid and folder layouts with instant search, filters with counts, multi-select filters, click-to-sort columns and shareable links, all in the free plugin.
 * **A private PDF viewer.** Built on PDF.js and served from your own site: no Google Docs viewer, no third-party requests, so it works on intranets and staging sites and helps with GDPR.
-* **Viewer features other plugins charge for.** Search inside PDFs, page thumbnails and outline, clickable links, links to a page (`#page=4`), print, download and full screen.
-* **One link per document, for good.** Every download goes through the document's own link: downloads are counted (bots and link previews are ignored), and replacing the file keeps the same link, so emails and printed QR codes never break.
-* **Accessibility first.** Keyboard and screen-reader friendly libraries and viewer, checked with automated WCAG 2.1 AA tests, plus an optional "Request an accessible version" form.
+* **A complete PDF viewer, free.** Search inside PDFs, page thumbnails and outline, clickable links, links to a page (`#page=4`), print, download and full screen.
+* **One link per document, for good.** Downloads are counted (bots ignored), and replacing the file keeps the same link, so emails and printed QR codes never break.
+* **Accessibility first.** Keyboard and screen-reader friendly libraries, viewer and admin screens, checked with automated WCAG 2.1 AA tests, plus an optional "Request an accessible version" form.
 
 = Document library =
 
 * **[Documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-documents-with-their-own-pages#feature-documents-with-their-own-pages)** with nested categories, tags, a description and their own page. Titles are filled in from the file name.
 * **[Document Library block](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-table-grid-or-folders#feature-table-grid-or-folders)** (and `[document_engine_library]` shortcode, and Elementor widget) with **table, grid and folder** layouts and a live preview in the editor.
 * **[Instant search](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-instant-search-and-filters#feature-instant-search-and-filters)** as visitors type, and it still works without JavaScript.
-* **Filters** by category (with document counts), tag, file type, year and author, plus sorting and pagination. Turn on **"Let visitors pick several"** to let people combine categories, tags or file types.
+* **Filters** by category and file type (with document counts), tag, year and author. Visitors **sort by clicking a column heading**; choose page numbers or a **"Load more" button**. Turn on **"Let visitors pick several"** to let people combine categories, tags or file types.
 * **Shareable filtered views**: every search and filter has its own address, so you can link straight to "all 2026 minutes".
 * **[Preview popup](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-preview-without-leaving-the-library#feature-preview-without-leaving-the-library)**: PDFs, images, audio and video open in a popup from the library, without leaving the page.
 * **Document Search block**: put a search box in your header or home page that shows results in your library.
 * **[Document List block](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-download-counts-and-lists#feature-download-counts-and-lists)**: newest, recently updated, most downloaded or related documents, and optional related documents under each document page.
 * **Document Download block**: one document as a card or a button, anywhere.
-* **Documents in your site search**, with file type and size.
+* **Documents in your site search**, with file type and size, and **downloads in Google Analytics** (GA4 `file_download` events).
 * **Download or open**: set it for the whole site, or per document.
 * **Any file type**: PDF, Word, Excel, PowerPoint, images, audio, video, archives, or a link to a file on another site (for example a Google Drive, Dropbox or OneDrive share link).
 * **Turn existing files into documents**: select them in Media → Library and choose *Create documents*.
@@ -63,7 +63,7 @@ The free plugin is complete on its own. **Document Engine Pro** adds control, pr
 
 = PDF viewer =
 
-* **[Self-hosted PDF.js viewer](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-a-private-pdf-viewer#feature-a-private-pdf-viewer)** with page navigation, zoom, fit to width or page, print, download and full screen. The download, print and full-screen buttons, search and the sidebar can each be switched off; page navigation and zoom switch off together with the toolbar.
+* **[Self-hosted PDF.js viewer](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-a-private-pdf-viewer#feature-a-private-pdf-viewer)** with page navigation, zoom, fit to width or page, print, download and full screen; each control can be switched off.
 * **[Search inside the PDF](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-viewer-tools-built-in#feature-viewer-tools-built-in)** with highlighted matches.
 * **Page thumbnails and outline** (bookmarks) sidebar.
 * **Clickable links** inside PDFs, including links to other pages of the same PDF.
@@ -73,19 +73,19 @@ The free plugin is complete on its own. **Document Engine Pro** adds control, pr
 
 = Document pages =
 
-Every document gets a clean page with its file type, size, last update, categories, a download button and, for PDFs, the viewer. Pages are indexed by search engines, and can be switched off if you only want the file links. Templates can be overridden in your theme.
+Every document gets a clean page with its file type, size, last update, categories, a download button and, for PDFs, the viewer. Pages are indexed by search engines and can be switched off. Templates can be overridden in your theme.
 
 = Post to PDF =
 
 * A **["Download PDF" button](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-any-post-as-a-pdf#feature-any-post-as-a-pdf)** on the post types you choose, placed before or after the content, or anywhere with the **Save as PDF block** or `[document_engine_pdf_button]`.
-* Header logo, title and page numbers, footer text, page orientation, margins, text size, custom CSS or your theme's styles.
+* Header logo, title and page numbers, footer text, **paper size** (A4, Letter, Legal, A5, A3), orientation, margins, text size, custom CSS or your theme's styles. Right-to-left languages are supported.
 * Optional **PDF protection** (print, copy and edit permissions).
 * PDF-only shortcodes for page breaks, columns and content hidden from the PDF.
 * **Fast and safe**: generated PDFs are cached, each visitor has a per-minute limit, and only public content is exported (never private or password-protected posts).
 
 = Moving from another plugin =
 
-[Document Engine copies your documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-move-in-one-click#feature-move-in-one-click) from **Document Library (Barn2)**, **Download Monitor** and **WordPress Download Manager**: titles, descriptions, categories, tags, files, download counts, dates and passwords. A preview shows what will be copied first, the original plugin's data is never changed, and running it again skips anything already moved. Afterwards the old shortcodes keep working and old download links redirect, so you can deactivate the old plugin.
+[Document Engine copies your documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-move-in-one-click#feature-move-in-one-click) from **Document Library (Barn2)**, **Download Monitor** and **WordPress Download Manager**: titles, descriptions, categories, tags, files, download counts, dates and passwords. You see a preview first, the original data is never changed, and old shortcodes and download links keep working afterwards.
 
 = For editors and admins =
 
@@ -133,6 +133,8 @@ Screenshots and details of every feature are on the [Document Engine Pro page](h
 * **[Secure viewer for PDFs](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-secure-viewer-and-stamped-copies#pro-secure-viewer-and-stamped-copies)**: read-only, with no download, print or copy buttons, and the **reader's name, email and date watermarked on every page**.
 * **[Stamped PDF downloads](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-secure-viewer-and-stamped-copies#pro-secure-viewer-and-stamped-copies)**: every downloaded PDF carries the reader's details.
 * **[Email gate](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-email-gate#pro-email-gate)**: name and email (and optionally organisation) with your consent text before a download; returning visitors pass straight through. Leads are listed, exported to CSV, emailed to you or sent to a webhook, and deleted after a retention period you choose.
+* **Accept terms**: everyone ticks "I agree" to your licence or disclaimer before opening a document; each acceptance is logged.
+* **Office previews** (opt-in): Word, Excel and PowerPoint files shown with Microsoft's viewer, on the document page and in the popup.
 * **[Abuse protection](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=compare-abuse#compare)**: a daily limit on how many different documents one person can open, and **Cloudflare Turnstile** on the email gate, request and submission forms.
 
 **Proof and insight**
@@ -152,7 +154,7 @@ Screenshots and details of every feature are on the [Document Engine Pro page](h
 
 **Scale and automation**
 
-* **[Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), OpenDocument and plain text files](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-search-inside-files#pro-search-inside-files)**, up to 30 MB, in libraries and site search (older .doc, .xls and .ppt files and files linked from other sites are not indexed).
+* **[Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), OpenDocument and plain text files](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-search-inside-files#pro-search-inside-files)**, up to 30 MB, in libraries and site search (not older .doc, .xls and .ppt files or linked files).
 * **Automatic PDF thumbnails** for grid layouts (when your server can make PDF previews).
 * **[Bulk upload](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-import-custom-fields-and-submissions#pro-import-custom-fields-and-submissions)** (drag and drop many files) and **CSV import**, including updates by ID and custom-field columns.
 * **[ZIP download](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-my-documents-zip-and-subscriptions#pro-my-documents-zip-and-subscriptions)**: visitors select several documents in a table library and download them as one ZIP (up to 100 files and 250 MB).
@@ -160,7 +162,7 @@ Screenshots and details of every feature are on the [Document Engine Pro page](h
 * **[Watermarks on Post to PDF](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-watermarks-on-post-to-pdf#pro-watermarks-on-post-to-pdf)**: text or image, with placeholders such as {name} and {date}.
 * **[Handbook PDF](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-handbook-pdfs#pro-handbook-pdfs)**: many posts in one PDF with a cover and table of contents, for admins or visitors (`[document_engine_handbook]`).
 * **[Notifications](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-webhooks-slack-teams-and-wp-cli#pro-webhooks-slack-teams-and-wp-cli)**: signed webhooks (for Zapier, Make or your own system), **Slack or Microsoft Teams** messages, and **email subscriptions** by category with a Subscribe block and one-click unsubscribe.
-* **AI assistant** in the editor that suggests a title, summary, categories and tags from the file's text for you to review. It needs an AI provider connected in WordPress (Settings → Connectors, WordPress 7.0 or newer); Pro holds no keys of its own.
+* **AI assistant** in the editor that suggests a title, summary, categories and tags from the file's text for you to review. It uses the AI provider connected in WordPress 7.0+ (Settings → Connectors); Pro stores no keys.
 * **More for AI agents**: abilities to read a document's text (never for secure documents) and to list documents due for review.
 * **[WP-CLI](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-webhooks-slack-teams-and-wp-cli#pro-webhooks-slack-teams-and-wp-cli)**: list, import, stats, reindex, protect and share.
 * Personal data **export and erase** for leads, activity, searches, reading sessions and acknowledgements, and **automatic updates** with an active licence.
@@ -234,7 +236,7 @@ Libraries use your theme's fonts and colours and adapt to the space they get. Bl
 
 = Is it accessible? =
 
-The library, filters and viewer are keyboard and screen-reader friendly, with labelled controls, live regions and visible focus, and the admin screens pass automated WCAG 2.1 AA checks. PDFs keep a text layer, so browser search and screen readers work. You can also switch on a "Request an accessible version" form (**Documents → Settings → Documents → Accessibility**).
+The library, filters and viewer are keyboard and screen-reader friendly, with labelled controls, live regions and visible focus, and the libraries, viewer and admin screens pass automated WCAG 2.1 AA checks. PDFs keep a text layer, so browser search and screen readers work. You can also switch on a "Request an accessible version" form (**Documents → Settings → Documents → Accessibility**).
 
 = Does it slow my site down? =
 
@@ -282,6 +284,18 @@ All attributes are listed in **Documents → Docs → Developers**.
 10. Step-by-step documentation inside WordPress (Documents → Docs).
 
 == Changelog ==
+
+= 2.1.0 - 2026-10-02 =
+* New - Sort a table library by clicking a column heading (title, date, updated, size, downloads); a second click reverses the order.
+* New - "Load more" pagination: adds the next documents below the ones already shown (block setting, or `pagination_style="load-more"`).
+* New - Post to PDF paper sizes: A4, US Letter, US Legal, A5 and A3. Sites in a right-to-left language get right-to-left PDFs.
+* New - Downloads appear in Google Analytics: a GA4 `file_download` event when the site loads GA4 or Tag Manager.
+* New - Dates in libraries can follow your site's date format (Settings → Documents → Dates).
+* Improved - The file type filter lists only the kinds of file your site has, with counts.
+* Improved - The Document Search block uses your library page automatically when none is chosen.
+* Improved - Typing a search updates the page address, so Back and shared links keep the search.
+* Fixed - Documents created in the block editor are saved with their file type and size (they showed no size and were missed by the file type filter). Existing documents are repaired on update.
+* Fixed - Add-ons are told when a document is saved from the block editor (Document Engine Pro uses this to protect restricted files).
 
 = 2.0.5 - 2026-09-30 =
 * Improved - The built-in help, settings texts and readme now match the plugin exactly: A4 pages with orientation, margins and text size; four Elementor widgets; which files search indexes; ZIP and secure-viewer limits; the webhook signature.
@@ -342,6 +356,9 @@ All attributes are listed in **Documents → Docs → Developers**.
 * Fixed - Setting page design
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+Click-to-sort columns, "Load more", PDF paper sizes and Google Analytics download events. Fixes the file type and size of documents created in the block editor. Recommended for Document Engine Pro users.
 
 = 2.0.4 =
 Adds a document library, a private built-in PDF viewer and a security fix. Existing shortcodes, settings and blocks keep working. Requires PHP 7.4 and WordPress 6.6.

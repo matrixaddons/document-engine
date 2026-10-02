@@ -13,6 +13,7 @@ class SearchBox
     public static function init()
     {
         add_action('init', array(__CLASS__, 'register'));
+        add_action('save_post', array(__CLASS__, 'flush_default_page'), 10, 2);
     }
 
     public static function register()
@@ -60,11 +61,38 @@ class SearchBox
         return 'dl';
     }
 
+    /**
+     * The first published page with a document library, used when no page is chosen.
+     */
+    public static function default_page()
+    {
+        $cached = get_transient('dengine_search_default_page');
+        if ($cached !== false) {
+            return get_post_status((int)$cached) === 'publish' ? (int)$cached : 0;
+        }
+        global $wpdb;
+        $id = (int)$wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'page' AND post_status = 'publish' AND (post_content LIKE '%<!-- wp:document-engine/library%' OR post_content LIKE '%[document_engine_library%') ORDER BY menu_order ASC, ID ASC LIMIT 1"
+        );
+        set_transient('dengine_search_default_page', $id, DAY_IN_SECONDS);
+        return $id;
+    }
+
+    public static function flush_default_page($post_id = 0, $post = null)
+    {
+        if (!$post || $post->post_type === 'page') {
+            delete_transient('dengine_search_default_page');
+        }
+    }
+
     public static function render($attrs)
     {
         $attrs = wp_parse_args($attrs, array('pageId' => 0, 'placeholder' => '', 'buttonText' => '', 'className' => ''));
         $page_id = absint($attrs['pageId']);
         if (!$page_id || get_post_status($page_id) !== 'publish') {
+            $page_id = self::default_page();
+        }
+        if (!$page_id) {
             return current_user_can('edit_pages') ? '<p class="dengine-notice">' . esc_html__('Choose the page with your document library for this search box.', 'document-engine') . '</p>' : '';
         }
         document_engine_enqueue_frontend();

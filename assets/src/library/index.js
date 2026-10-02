@@ -54,7 +54,7 @@ class Library {
 		return params;
 	}
 
-	async fetch(params, { push = true, scroll = false } = {}) {
+	async fetch(params, { push = true, replace = false, scroll = false } = {}) {
 		if (this.controller) {
 			this.controller.abort();
 		}
@@ -89,6 +89,9 @@ class Library {
 			this.results.innerHTML = data.html;
 			if (push) {
 				window.history.pushState({ dengineLibrary: this.config.id }, '', pageUrl.toString());
+			} else if (replace) {
+				// Typing a search: keep the URL shareable and Back-safe without one history entry per keystroke.
+				window.history.replaceState({ dengineLibrary: this.config.id }, '', pageUrl.toString());
 			}
 			if (scroll) {
 				const top = this.el.getBoundingClientRect().top + window.scrollY - 80;
@@ -107,6 +110,53 @@ class Library {
 		} finally {
 			this.results.setAttribute('aria-busy', 'false');
 			this.el.classList.remove('is-loading');
+		}
+	}
+
+	/**
+	 * "Load more": fetches the next page and appends its rows or cards, keeping the ones already shown.
+	 */
+	async loadMore(link) {
+		const page = link.getAttribute('data-page');
+		const request = new URL(settings.rest, window.location.href);
+		request.searchParams.set('atts', JSON.stringify(this.config.atts));
+		const pageUrl = new URL(window.location.href);
+		request.searchParams.set('_page', pageUrl.pathname + pageUrl.search);
+		this.params({ p: page }).forEach((value, key) => request.searchParams.set(key, value));
+		link.setAttribute('aria-disabled', 'true');
+		link.classList.add('is-loading');
+		try {
+			const response = await window.fetch(request.toString(), {
+				credentials: 'same-origin',
+				headers: settings.nonce ? { 'X-WP-Nonce': settings.nonce } : {},
+			});
+			if (!response.ok) {
+				throw new Error(String(response.status));
+			}
+			const data = await response.json();
+			const next = document.createElement('div');
+			next.innerHTML = data.html;
+			const list = this.results.querySelector('.dengine-table tbody, .dengine-grid');
+			const items = next.querySelectorAll('.dengine-table tbody > tr, .dengine-grid > *');
+			if (!list || !items.length) {
+				throw new Error('layout');
+			}
+			const first = items[0];
+			items.forEach((item) => list.appendChild(item));
+			const nav = this.results.querySelector('.dengine-pagination--more');
+			const newNav = next.querySelector('.dengine-pagination--more');
+			if (nav && newNav) {
+				nav.replaceWith(newNav);
+			}
+			// Move focus to the first new item so keyboard and screen reader users continue from there.
+			const target = first.querySelector('a, button') || first;
+			target.focus({ preventScroll: true });
+			if (window.DocumentEngineViewerBoot) {
+				window.DocumentEngineViewerBoot(this.results);
+			}
+			this.el.dispatchEvent(new CustomEvent('dengine:library-updated', { bubbles: true, detail: { library: this } }));
+		} catch (error) {
+			window.location.href = link.href;
 		}
 	}
 
@@ -154,7 +204,7 @@ class Library {
 			});
 			const search = this.form.querySelector('input[type="search"]');
 			if (search) {
-				const run = debounce(() => this.fetch(this.params(), { push: false }), 350);
+				const run = debounce(() => this.fetch(this.params(), { push: false, replace: true }), 350);
 				search.addEventListener('input', () => {
 					if (search.value.length === 0 || search.value.length >= 2) {
 						run();
@@ -177,6 +227,13 @@ class Library {
 				});
 				this.syncForm(params);
 				this.fetch(params, { scroll: true });
+				return;
+			}
+
+			const more = event.target.closest('a.dengine-load-more[data-page]');
+			if (more) {
+				event.preventDefault();
+				this.loadMore(more);
 				return;
 			}
 
@@ -219,6 +276,13 @@ class Library {
 			}
 			if (field.type === 'checkbox' && field.name.slice(-2) === '[]') {
 				field.checked = (params.get(field.name.slice(0, -2)) || '').split(',').includes(field.value);
+			} else if (field.tagName === 'SELECT' && params.get(field.name) && !field.querySelector(`option[value="${CSS.escape(params.get(field.name))}"]`)) {
+				// An order picked from a column heading that the dropdown doesn't list.
+				const option = document.createElement('option');
+				option.value = params.get(field.name);
+				option.textContent = (this.el.querySelector('th[aria-sort]:not([aria-sort="none"]) .dengine-sort') || {}).textContent || option.value;
+				field.appendChild(option);
+				field.value = option.value;
 			} else {
 				field.value = params.get(field.name) || '';
 			}

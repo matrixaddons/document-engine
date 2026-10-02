@@ -82,15 +82,8 @@ class Generate_PDF
         // page orientation
         $page_orientation = document_engine_pdf_page_orientation();
 
-        if ($page_orientation == 'horizontal') {
-
-            $format = apply_filters('document_engine_pdf_format', 'A4') . '-L';
-
-        } else {
-
-            $format = apply_filters('document_engine_pdf_format', 'A4');
-
-        }
+        $size = apply_filters('document_engine_pdf_format', document_engine_pdf_page_size());
+        $format = $page_orientation == 'horizontal' ? $size . '-L' : $size;
 
         add_filter('document_engine_get_attachment_image_url', array(__CLASS__, 'modify_attachment_src'), 10, 2);
 
@@ -124,6 +117,8 @@ class Generate_PDF
             'margin_header' => $document_engine_margin_header,
             'fontDir' => $document_engine_pdf_font_dir,
             'fontdata' => $document_engine_pdf_font_data,
+            // Right-to-left sites (Arabic, Hebrew, Persian) get right-to-left PDFs; the bundled DejaVu fonts cover those scripts.
+            'directionality' => is_rtl() ? 'rtl' : 'ltr',
         ]);
 
         $mpdf = apply_filters('document_engine_pdf_mpdf_instance', new Mpdf($mpdf_config));

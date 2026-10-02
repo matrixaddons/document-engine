@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Document Engine 2.0.3\n"
+"Project-Id-Version: Document Engine 2.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/document-engine\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-30T03:19:53+00:00\n"
+"POT-Creation-Date: 2026-10-02T12:58:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -75,9 +75,9 @@ msgstr ""
 #: includes/Accessibility/Requests.php:64
 #: includes/Accessibility/Requests.php:66
 #: includes/Accessibility/Requests.php:67
-#: includes/Admin/DocsContent.php:295
-#: includes/Admin/DocsContent.php:467
-#: includes/Admin/Settings/General.php:152
+#: includes/Admin/DocsContent.php:312
+#: includes/Admin/DocsContent.php:486
+#: includes/Admin/Settings/General.php:165
 msgid "Format requests"
 msgstr ""
 
@@ -258,7 +258,7 @@ msgid "Done"
 msgstr ""
 
 #: includes/Accessibility/Requests.php:364
-#: includes/Library/Library.php:674
+#: includes/Library/Library.php:764
 #: assets/build/document-editor.js:1
 msgid "Open"
 msgstr ""
@@ -284,7 +284,7 @@ msgstr ""
 #: includes/Accessibility/Requests.php:424
 #: includes/Accessibility/Requests.php:431
 #: includes/Accessibility/Requests.php:450
-#: includes/Admin/DocsContent.php:157
+#: includes/Admin/DocsContent.php:161
 msgid "Accessible format requests"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 
 #: includes/Accessibility/Requests.php:437
 #: includes/Integrations/Elementor/LibraryWidget.php:57
-#: includes/Library/Query.php:65
+#: includes/Library/Query.php:67
 msgid "Date"
 msgstr ""
 
@@ -317,14 +317,14 @@ msgid "Tools"
 msgstr ""
 
 #: includes/Admin/AppShell.php:288
-#: includes/Admin/Docs.php:222
-#: includes/Admin/Docs.php:242
-#: includes/Admin/DocsContent.php:468
-#: includes/Admin/DocsContent.php:469
-#: includes/Admin/DocsContent.php:470
-#: includes/Admin/DocsContent.php:506
-#: includes/Admin/DocsContent.php:534
-#: includes/Admin/ProPage.php:170
+#: includes/Admin/Docs.php:223
+#: includes/Admin/Docs.php:243
+#: includes/Admin/DocsContent.php:487
+#: includes/Admin/DocsContent.php:488
+#: includes/Admin/DocsContent.php:489
+#: includes/Admin/DocsContent.php:525
+#: includes/Admin/DocsContent.php:553
+#: includes/Admin/ProPage.php:174
 #: includes/Admin/UI.php:85
 #: includes/Admin/Upsell.php:157
 msgid "Pro"
@@ -396,7 +396,7 @@ msgstr ""
 
 #: includes/Admin/Dashboard.php:108
 #: includes/Integrations/Elementor/LibraryWidget.php:57
-#: includes/Library/Query.php:68
+#: includes/Library/Query.php:70
 msgid "Downloads"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgstr ""
 
 #: includes/Admin/Dashboard.php:123
 #: includes/Library/Lists.php:33
-#: includes/Library/Query.php:105
+#: includes/Library/Query.php:107
 msgid "Most downloaded"
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr ""
 
 #: includes/Admin/Dashboard.php:157
 #: includes/Library/Lists.php:32
-#: includes/Library/Query.php:104
+#: includes/Library/Query.php:106
 msgid "Recently updated"
 msgstr ""
 
@@ -500,7 +500,7 @@ msgstr ""
 #. translators: %s: number of downloads
 #. translators: %s: download count
 #: includes/Admin/Dashboard.php:209
-#: includes/Admin/Documents.php:169
+#: includes/Admin/Documents.php:205
 #: includes/Library/Lists.php:108
 #: templates/library/grid.php:25
 #, php-format
@@ -510,7 +510,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Admin/Docs.php:27
-#: includes/Admin/Docs.php:185
+#: includes/Admin/Docs.php:186
 msgid "Documentation"
 msgstr ""
 
@@ -521,37 +521,45 @@ msgid "Docs"
 msgstr ""
 
 #: includes/Admin/Docs.php:185
+msgid "Full documentation online"
+msgstr ""
+
+#: includes/Admin/Docs.php:185
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: includes/Admin/Docs.php:186
 msgid "How to set up and use Document Engine."
 msgstr ""
 
-#: includes/Admin/Docs.php:188
+#: includes/Admin/Docs.php:189
 msgid "Documentation sections"
 msgstr ""
 
-#: includes/Admin/Docs.php:190
+#: includes/Admin/Docs.php:191
 msgid "Search the documentation"
 msgstr ""
 
-#: includes/Admin/Docs.php:192
+#: includes/Admin/Docs.php:193
 msgid "Search docs…"
 msgstr ""
 
-#: includes/Admin/Docs.php:217
+#: includes/Admin/Docs.php:218
 msgid "These features come with Document Engine Pro, an add-on to this plugin. Your documents and settings stay as they are when you add it."
 msgstr ""
 
-#: includes/Admin/Docs.php:217
+#: includes/Admin/Docs.php:218
 #: includes/Admin/Main.php:77
 #: includes/Admin/UI.php:96
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: includes/Admin/Docs.php:239
+#: includes/Admin/Docs.php:240
 msgid "No articles match your search."
 msgstr ""
 
 #. translators: %d: number of matching articles
-#: includes/Admin/Docs.php:241
+#: includes/Admin/Docs.php:242
 #, php-format
 msgid "%d articles"
 msgstr ""
@@ -709,7 +717,7 @@ msgid "The documents list shows the file, category, downloads and last update, w
 msgstr ""
 
 #: includes/Admin/DocsContent.php:95
-msgid "Limitation: the free plugin does not restrict who can download a published document. Anyone with the link can download it. Use Pro access control for private documents."
+msgid "Limitation: the free plugin does not restrict who can download a published document. Anyone with the link can download it. WordPress's own Password protected visibility is respected (the download asks for the password), but the file itself stays in the public uploads folder, so anyone who has its exact address could open it. Use Pro access control for private documents."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:97
@@ -744,1420 +752,1493 @@ msgstr ""
 msgid "Several libraries on one page each keep their own search and filters."
 msgstr ""
 
+#: includes/Admin/DocsContent.php:106
+msgid "<strong>Sorting</strong>: visitors click the Title, Date, Updated, Size or Downloads heading of a table to sort; a second click reverses the order. Switch it off in the block settings (Sort by clicking column headings)."
+msgstr ""
+
 #: includes/Admin/DocsContent.php:107
-msgid "Folder view lists each category as a folder. When a visitor searches or filters, it switches to a flat result list."
+msgid "<strong>Pagination</strong>: page numbers, or a <strong>\"Load more\"</strong> button that adds the next documents below the ones already shown (block setting Pagination style, or <code>pagination_style=\"load-more\"</code>)."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:108
+msgid "<strong>Dates</strong> use a short format (Sep 25, 2026) or your site's date format: Settings → Documents → Dates."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:109
-msgid "PDF viewer"
+msgid "<strong>Google Analytics</strong>: if your site loads GA4 or Google Tag Manager, every download sends a <code>file_download</code> event with the document name."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:110
-msgid "A built-in viewer based on PDF.js, served from your own site (no third-party viewer). It is used on document pages, in the PDF Viewer block and <code>[document_engine_viewer]</code>, and in preview popups."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:112
-msgid "Page navigation, zoom (fit width, fit page, percentages), print, download, full screen."
+#: includes/Admin/DocsContent.php:111
+msgid "Folder view lists each category as a folder. When a visitor searches or filters, it switches to a flat result list."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:113
-msgid "Search inside the PDF (Ctrl/Cmd+F while the viewer has focus) with highlighted matches."
+msgid "PDF viewer"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:114
-msgid "A sidebar with page thumbnails and the PDF's outline (bookmarks)."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:115
-msgid "Clickable links inside PDFs, including links to other pages of the same PDF."
+msgid "A built-in viewer based on PDF.js, served from your own site (no third-party viewer). It is used on document pages, in the PDF Viewer block and <code>[document_engine_viewer]</code>, and in preview popups."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:116
-msgid "Deep links: add <code>#page=5</code> to a document page address to open the PDF at page 5."
+msgid "Page navigation, zoom (fit width, fit page, percentages), print, download, full screen."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:117
+msgid "Search inside the PDF (Ctrl/Cmd+F while the viewer has focus) with highlighted matches."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:118
-msgid "Defaults are in Settings → PDF Viewer. Each block can override height, zoom, starting page and the toolbar buttons."
+msgid "A sidebar with page thumbnails and the PDF's outline (bookmarks)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:119
-msgid "PDFs linked from another website only display if that site allows it (CORS). Upload the file, or use a document with an uploaded file, for reliable viewing."
+msgid "Clickable links inside PDFs, including links to other pages of the same PDF."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:121
-msgid "Preview popup"
+#: includes/Admin/DocsContent.php:120
+msgid "Deep links: add <code>#page=5</code> to a document page address to open the PDF at page 5."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:122
-msgid "With Settings → Documents → Library → <strong>View opens</strong> set to \"A preview popup\", the View button in libraries opens the document in a popup instead of going to its page: PDFs in the viewer, images, audio and video natively. The popup has Open page and Download buttons and closes with Esc."
+msgid "Defaults are in Settings → PDF Viewer. Each block can override height, zoom, starting page and the toolbar buttons."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:123
-msgid "The popup only shows documents the visitor may open. Other file types (Word, Excel…) have no View button."
+msgid "PDFs linked from another website only display if that site allows it (CORS). Upload the file, or use a document with an uploaded file, for reliable viewing."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:125
-msgid "Blocks and widgets"
+msgid "Preview popup"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:126
+msgid "With Settings → Documents → Library → <strong>View opens</strong> set to \"A preview popup\", the View button in libraries opens the document in a popup instead of going to its page: PDFs in the viewer, images, audio and video natively. The popup has Open page and Download buttons and closes with Esc."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:127
+msgid "The popup only shows documents the visitor may open. Other file types (Word, Excel…) have no View button."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:129
+msgid "Blocks and widgets"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:131
 #: includes/Integrations/Elementor/LibraryWidget.php:19
 msgid "Document Library"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:127
+#: includes/Admin/DocsContent.php:131
 msgid "Searchable, filterable list of documents (table, grid, folders)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:128
+#: includes/Admin/DocsContent.php:132
 #: includes/Integrations/Elementor/ListWidget.php:18
 msgid "Document List"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:128
+#: includes/Admin/DocsContent.php:132
 msgid "A short list: newest, recently updated, most downloaded, or related to a document."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:129
+#: includes/Admin/DocsContent.php:133
 #: includes/Integrations/Elementor/DownloadWidget.php:18
 msgid "Document Download"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:129
+#: includes/Admin/DocsContent.php:133
 msgid "One document as a card or a button."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:130
+#: includes/Admin/DocsContent.php:134
 msgid "Document Search"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:130
+#: includes/Admin/DocsContent.php:134
 msgid "A search box that sends visitors to a library page with their search applied."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:131
+#: includes/Admin/DocsContent.php:135
 #: includes/Admin/Settings/Viewer.php:16
 #: includes/Integrations/Elementor/ViewerWidget.php:18
 msgid "PDF Viewer"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:131
+#: includes/Admin/DocsContent.php:135
 msgid "Show a PDF from a document, the Media Library or a URL."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:132
+#: includes/Admin/DocsContent.php:136
 msgid "Save as PDF"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:132
+#: includes/Admin/DocsContent.php:136
 msgid "The Post to PDF button, placed where you want it."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:133
+#: includes/Admin/DocsContent.php:137
 msgid "Block"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:133
+#: includes/Admin/DocsContent.php:137
 msgid "What it does"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:134
-msgid "Elementor users get Document Library, Document Download and PDF Viewer widgets with the same options."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:136
-msgid "Document lists and related documents"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:137
-msgid "The Document List block and <code>[document_engine_documents]</code> show a few documents in a compact list: newest, recently updated, most downloaded, or related to a document (sharing its categories or tags)."
-msgstr ""
-
 #: includes/Admin/DocsContent.php:138
-msgid "Settings → Documents → <strong>Related documents</strong> adds a related list under each document page automatically."
+msgid "Elementor users get four widgets with the same options: Document Library, Document List, Document Download and PDF Viewer."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:140
-msgid "Search box for your header or sidebar"
+msgid "Document lists and related documents"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:141
-msgid "The Document Search block (or <code>[document_engine_search page=\"123\"]</code>) shows a search field anywhere. Choose the page that holds your library; searches land there with results already filtered. It finds the library on that page automatically."
+msgid "The Document List block and <code>[document_engine_documents]</code> show a few documents in a compact list: newest, recently updated, most downloaded, or related to a document (sharing its categories or tags)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:143
-msgid "QR codes"
+#: includes/Admin/DocsContent.php:142
+msgid "Settings → Documents → <strong>Related documents</strong> adds a related list under each document page automatically."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:144
+msgid "Search box for your header or sidebar"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:145
+msgid "The Document Search block (or <code>[document_engine_search page=\"123\"]</code>) shows a search field anywhere. Choose the page that holds your library; searches land there with results already filtered. If you do not choose one, it uses the first published page with a Document Library."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:147
+msgid "QR codes"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:148
 msgid "Every published document has a QR code in the editor sidebar (Document file panel → QR code → Show). Download it as PNG or SVG for printed notices, posters or meeting packs. The code points to the document's page."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:146
+#: includes/Admin/DocsContent.php:150
 #: includes/Admin/Settings/PDF.php:22
 msgid "Post to PDF"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:147
+#: includes/Admin/DocsContent.php:151
 msgid "Adds a \"Download PDF\" button to posts, pages or other post types that turns the content into a PDF, generated on your server."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:149
+#: includes/Admin/DocsContent.php:153
 msgid "Choose where the button appears in Settings → Post to PDF → Button (post types, text, placement, alignment, download or open)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:150
-msgid "Header and footer (logo, title, page numbers), page size, margins and orientation, theme styles or custom CSS."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:151
-msgid "Protection: optionally stop readers printing, copying or editing the PDF (PDF permissions)."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:152
-msgid "Document Engine Pro adds text and image watermarks, with placeholders such as {name} and {date}, and Handbook PDFs that combine many posts."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:153
-msgid "Content shortcodes: <code>[document_engine_pdf_remove]</code> hides content from the PDF, <code>[document_engine_pdf_page_break]</code> starts a new page, <code>[document_engine_pdf_columns]</code> and <code>[document_engine_pdf_column_break]</code> lay out columns."
+#: includes/Admin/DocsContent.php:154
+msgid "Header and footer (logo, title, page numbers), paper size (A4, US Letter, US Legal, A5 or A3), orientation, margins and text size, theme styles or custom CSS. Sites in a right-to-left language get right-to-left PDFs."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:155
-msgid "PDFs are made only for published, public posts of the post types you ticked (or posts containing a Save as PDF block), never for private or password-protected posts. Images from internal network addresses are left out. Generated PDFs are cached, and each visitor can create a limited number per minute (Settings → Advanced → Performance)."
+msgid "Protection: optionally stop readers printing, copying or editing the PDF (PDF permissions)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:158
-msgid "When switched on (Settings → Documents → Accessibility → Format requests), document pages show a \"Need this in another format?\" link. Visitors choose a format (for example large print or plain text), leave their name and email, and the request is emailed to you."
+#: includes/Admin/DocsContent.php:156
+msgid "Document Engine Pro adds text and image watermarks, with placeholders such as {name} and {date}, and Handbook PDFs that combine many posts."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:157
+msgid "Content shortcodes: <code>[document_engine_pdf_remove]</code> hides content from the PDF, <code>[document_engine_pdf_page_break]</code> starts a new page, <code>[document_engine_pdf_columns]</code> and <code>[document_engine_pdf_column_break]</code> lay out columns."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:159
-msgid "Requests are listed in the Documents menu under Format requests (Reports → Format requests with Pro), with a count of open requests. Reply to the email with the alternative version, then mark the request done. Only editors and administrators can see requests."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:160
-msgid "The form has spam protection (a time check, a hidden field and limits per visitor, per document and per day). Requests contain names and emails; they are included in WordPress's personal data export and erase tools."
+msgid "PDFs are made only for published, public posts of the post types you ticked (or posts containing a Save as PDF block), never for private or password-protected posts. Images from internal network addresses are left out. Generated PDFs are cached, and each visitor can create a limited number per minute (Settings → Advanced → Performance)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:162
+msgid "When switched on (Settings → Documents → Accessibility → Format requests), document pages show a \"Need this in another format?\" link. Visitors choose a format (for example large print or plain text), leave their name and email, and the request is emailed to you."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:163
+msgid "Requests are listed under Documents → Reports → Format requests, with a count of open requests. Reply to the email with the alternative version, then mark the request done. Only editors and administrators can see requests."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:164
+msgid "The form has spam protection (a time check, a hidden field and limits per visitor, per document and per day). Requests contain names and emails; they are included in WordPress's personal data export and erase tools."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:166
 #: includes/Admin/Migrate.php:33
 #: includes/Admin/Migrate.php:93
 msgid "Migrate from another plugin"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:163
-msgid "Documents → Migrate (Documents → Tools → Migrate with Pro) copies documents from Download Monitor, WordPress Download Manager and Barn2 Document Library into Document Engine: titles, descriptions, categories, tags, files, download counts and dates."
+#: includes/Admin/DocsContent.php:167
+msgid "Documents → Tools → Migrate copies documents from Download Monitor, WordPress Download Manager and Barn2 Document Library into Document Engine: titles, descriptions, categories, tags, files, download counts and dates."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:165
+#: includes/Admin/DocsContent.php:169
 msgid "Run a preview first: it shows how many items will be copied and flags locked items (paid, email- or captcha-gated) that need attention."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:166
+#: includes/Admin/DocsContent.php:170
 msgid "The original plugin's data is not changed. Running it again skips items already copied."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:167
+#: includes/Admin/DocsContent.php:171
 msgid "The old plugin's shortcodes keep working and its download links redirect to the new documents, so you can deactivate it afterwards."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:168
+#: includes/Admin/DocsContent.php:172
 msgid "Members-only items become drafts in the free plugin (Pro moves their files to private storage and applies the access rule)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:171
+#: includes/Admin/DocsContent.php:175
 msgid "Command palette and AI agents"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:172
+#: includes/Admin/DocsContent.php:176
 msgid "Press Ctrl/Cmd+K anywhere in the admin to add a document, open the library, dashboard or settings, or jump to a document by typing its title."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:173
+#: includes/Admin/DocsContent.php:177
 msgid "On WordPress 6.9+, the plugin registers two read-only abilities (Abilities API): search documents and get a document. AI assistants connected to your site (for example through the MCP adapter) can use them; they only ever return documents the signed-in user may open."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:175
+#: includes/Admin/DocsContent.php:179
 msgid "Who can manage documents"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:176
+#: includes/Admin/DocsContent.php:180
 msgid "Documents have their own permissions, separate from posts. In Settings → Advanced → Permissions choose which roles:"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:178
+#: includes/Admin/DocsContent.php:182
 msgid "<strong>Manage all documents</strong> (default: Administrator, Editor): edit and publish any document, manage categories, see requests."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:179
+#: includes/Admin/DocsContent.php:183
 msgid "<strong>Publish their own documents</strong> (default: Author)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:180
+#: includes/Admin/DocsContent.php:184
 msgid "<strong>Draft their own documents</strong> (default: Contributor): an editor publishes them."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:182
+#: includes/Admin/DocsContent.php:186
 msgid "Settings and migration need the Administrator's \"manage options\" permission."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:188
+#: includes/Admin/DocsContent.php:192
 msgid "Pro features"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:190
+#: includes/Admin/DocsContent.php:194
 msgid "What the Pro add-on adds, and where to find it."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:192
+#: includes/Admin/DocsContent.php:196
 msgid "Install Pro and activate your licence"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:194
+#: includes/Admin/DocsContent.php:198
 msgid "Buy Pro, then either download the Pro ZIP from your account and upload it under Plugins → Add New → Upload Plugin, or enter your licence key at the bottom of Documents → Free vs Pro to install it in one step."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:195
+#: includes/Admin/DocsContent.php:199
 msgid "Keep the free plugin active; Pro builds on it."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:196
+#: includes/Admin/DocsContent.php:200
 msgid "Enter the licence key in Documents → Settings → License. An active licence gives you updates from the Plugins screen."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:198
+#: includes/Admin/DocsContent.php:202
 msgid "Deactivating Pro returns the site to the free features. Pro data (access rules, logs, acknowledgements) stays in the database unless you delete it on uninstall."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:200
+#: includes/Admin/DocsContent.php:204
 msgid "Access control and private files"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:201
+#: includes/Admin/DocsContent.php:205
 msgid "Decide who can open each document: everyone, logged-in users, users with chosen roles, or named people. Set it per document (Access & security panel) or for a whole category (on the category screen); documents follow their categories unless they have their own rule."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:203
+#: includes/Admin/DocsContent.php:207
 msgid "Restricted documents are shown with a lock, or hidden from people who cannot open them (Settings → Access & Pro → Access)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:204
+#: includes/Admin/DocsContent.php:208
 msgid "<strong>Protected storage</strong>: files of restricted documents move to a private uploads folder, so the file address alone cannot be used to download them. A Site Health test checks that the folder really is private."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:205
+#: includes/Admin/DocsContent.php:209
 msgid "Logged-out visitors are asked to log in; logged-in people without access see a clear message."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:206
+#: includes/Admin/DocsContent.php:210
 msgid "Restricted documents are left out of site search, feeds, library results (when set to hide) and file-content search for people who cannot open them."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:209
+#: includes/Admin/DocsContent.php:213
 msgid "Share links"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:210
+#: includes/Admin/DocsContent.php:214
 msgid "Give someone without an account access to one document for a limited time (Access & security panel → Share link). Name the link after the recipient to see when they opened it; optionally get an email on the first open. Revoke a link at any time. Links default to Settings → Access & Pro → Share links last (7 days)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:212
+#: includes/Admin/DocsContent.php:216
 msgid "Secure viewer and stamped downloads"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:213
-msgid "Secure mode shows a document in the viewer only: no download, print or copy buttons, and each page carries a watermark with the reader's name, email and date (pattern in Settings → Access & Pro → Secure viewer). Downloads of secure documents are blocked. Optionally, downloaded PDFs of other documents can be stamped with the reader's details."
+#: includes/Admin/DocsContent.php:217
+msgid "Secure mode shows a PDF in the viewer only: no download, print or copy buttons, and each page carries a watermark with the reader's name, email and date (pattern in Settings → Access & Pro → Secure viewer). Downloads of secure documents are blocked. Only PDFs can be shown in secure mode; other secure files can be neither viewed nor downloaded. Optionally, downloaded PDFs of other documents can be stamped with the reader's details."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:214
+#: includes/Admin/DocsContent.php:218
 msgid "A watermark discourages sharing and identifies leaks; no viewer can stop a determined person photographing a screen."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:216
+#: includes/Admin/DocsContent.php:220
 msgid "Email gate and leads"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:217
+#: includes/Admin/DocsContent.php:221
 msgid "Ask for a name and email (and optionally organization) before a download, with your consent text. Switch it on per document or for all documents. Logged-in users and visitors who already filled the form (for a number of days) go straight through. Leads are listed under Reports → Leads, can be exported, sent to a webhook or emailed to you, and deleted after a retention period."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:219
-msgid "Activity, reading analytics and searches"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:221
-msgid "<strong>Reports → Activity</strong>: views, downloads, blocked attempts, leads and share-link opens, with a chart, top documents and a filterable audit log (CSV export)."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:222
-msgid "<strong>Reading analytics</strong>: for PDFs in the viewer, how long people spend on each page and how far they read. Filter the Activity page to one document to see it."
-msgstr ""
-
 #: includes/Admin/DocsContent.php:223
-msgid "<strong>Reports → Searches</strong>: what visitors search for in libraries, and which searches found nothing."
+msgid "Accept terms before opening"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:224
-msgid "The documents list shows views in the last 30 days next to downloads."
+msgid "Ask everyone, logged in or not, to tick \"I agree\" to your terms (a licence, disclaimer, embargo or confidentiality notice) before a document opens. Switch it on per document (Access & security → Accept terms) or for all documents, and set the heading, the terms and the checkbox text in Settings → Access & Pro → Email gate & terms."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:226
-msgid "No IP addresses are stored in these logs: visitors who are not logged in are identified by a hash that changes daily. Entries older than the retention period (default 365 days) are deleted automatically."
+msgid "The document page shows the terms instead of the viewer until they are accepted; direct file links go to the same form."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:227
+msgid "Each acceptance is recorded in the activity log (\"Accepted terms\") with the person or visitor and the date."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:228
-msgid "Versions, review and expiry dates"
+msgid "Acceptance is remembered per document. Changing the wording of the terms asks everyone again."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:230
-msgid "Replace a document's file and the old one is kept in its version history; links do not change. Restore any version."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:231
-msgid "From the documents list, use the \"Upload new version\" row action, or drop a file onto a row."
+#: includes/Admin/DocsContent.php:229
+msgid "Editors who can edit the document are never asked. With an email gate too, visitors give their details first, then accept the terms."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:232
-msgid "Give documents a review-by date and an expiry date. Expired documents are unpublished automatically; a daily email lists documents due for review."
+msgid "Office previews (Word, Excel, PowerPoint)"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:235
-msgid "Read and confirm (acknowledgements)"
+#: includes/Admin/DocsContent.php:233
+msgid "Switch on Settings → Access & Pro → Office previews to show Word, Excel and PowerPoint files on their document page and in the preview popup, using Microsoft's free Office Online viewer."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:234
+msgid "Microsoft downloads the file from your site to display it, so only documents anyone may open are previewed: restricted, secure-viewer, email-gate and terms documents never are. Files up to 10 MB (Word, PowerPoint) or 5 MB (Excel). Your site must be reachable from the internet, so previews don't appear on local or staging sites. Mention Microsoft in your privacy policy."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:236
-msgid "Ask people to confirm they have read a document (\"I have read and understood…\"). Choose the roles who must confirm and a deadline; they see it on the document page and in the Required Reading block. Reports → Acknowledgements shows who has and has not confirmed, sends reminders, and exports evidence (name, time, statement, a fingerprint of the file)."
+msgid "Activity, reading analytics and searches"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:237
-msgid "After an important change, start a new round from the Acknowledgements screen so everyone confirms again."
+#: includes/Admin/DocsContent.php:238
+msgid "<strong>Reports → Activity</strong>: views, downloads, blocked attempts, leads and share-link opens, with a chart, top documents and a filterable audit log (CSV export)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:239
-msgid "Notifications, webhooks and subscriptions"
+msgid "<strong>Reading analytics</strong>: for PDFs in the viewer, how long people spend on each page and how far they read. Filter the Activity page to one document to see it."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:240
+msgid "<strong>Reports → Searches</strong>: what visitors search for in libraries, and which searches found nothing."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:241
-msgid "Signed webhooks (HMAC) for events such as document published, new version, acknowledged, submitted and new lead."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:242
-msgid "Posts to a Slack or Microsoft Teams channel."
+msgid "The documents list shows views in the last 30 days next to downloads."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:243
-msgid "Email subscriptions: logged-in people follow categories (Subscribe block) and get an email when a document is published there, with one-click unsubscribe."
+msgid "No IP addresses are stored in these logs: visitors who are not logged in are identified by a hash that changes daily. Entries older than the retention period (default 365 days) are deleted automatically."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:246
-msgid "Front-end submissions"
+#: includes/Admin/DocsContent.php:245
+msgid "Versions, review and expiry dates"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:247
-msgid "The Submit Document block lets chosen roles upload documents from the front end. Submissions are saved as pending (or published) with allowed file types and a size limit (Settings → Access & Pro → Review & submissions)."
+msgid "Replace a document's file and the old one is kept in its version history; links do not change. Restore any version."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:248
+msgid "From the documents list, use the \"Upload new version\" row action, or drop a file onto a row."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:249
-msgid "Bulk and CSV import"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:250
-msgid "Documents → Tools → Import: drop many files at once to create one document per file, or import a CSV spreadsheet (title, file_url or attachment_id, category, tags, description, status, id, and cf:key columns for custom fields). Rows with an id update that document. Also available as <code>wp dengine import</code>."
+msgid "Give documents a review-by date and an expiry date. Expired documents are unpublished automatically; a daily email lists documents due for review."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:252
-msgid "Custom fields"
+msgid "Read and confirm (acknowledgements)"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:253
-msgid "Settings → Fields: add your own details to documents, such as a reference number, department or review date. Types: text, long text, number, date, choice list, yes/no, link, email."
+msgid "Ask people to confirm they have read a document (\"I have read and understood…\"). In the document's <strong>Read & confirm</strong> panel, choose the roles who must confirm and a deadline; they see it on the document page and in the Required Reading block. Reports → Acknowledgements shows who has and has not confirmed, sends reminders, and exports evidence (name, time, statement, a fingerprint of the file)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:255
-msgid "Edit them in the document sidebar's Details panel."
+#: includes/Admin/DocsContent.php:254
+msgid "After an important change, start a new round from the Acknowledgements screen so everyone confirms again."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:256
-msgid "Show them as library columns, filters (with counts) and sort options, on document pages, and in search."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:257
-msgid "Import them from CSV with <code>cf:key</code> columns (write \"-\" to clear a value)."
+msgid "Notifications, webhooks and subscriptions"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:258
-msgid "Use fields you already have in Advanced Custom Fields (ACF): add them from the Fields tab."
+msgid "Signed webhooks for events such as document published, new version, acknowledged, submitted and new lead. The <code>X-DocumentEngine-Signature</code> header is <code>sha256=</code> followed by the HMAC-SHA256 of the timestamp header, a full stop and the raw body (<code>timestamp.body</code>), keyed with the signing secret."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:261
-msgid "My documents, required reading and handbooks"
+#: includes/Admin/DocsContent.php:259
+msgid "Posts to a Slack or Microsoft Teams channel."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:260
+msgid "Email subscriptions: logged-in people follow categories (Subscribe block) and get an email when a document is published there, with one-click unsubscribe."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:263
-msgid "<strong>My Documents</strong> block: a client or staff area listing the documents shared with the logged-in person, with \"New\" since their last visit."
+msgid "Front-end submissions"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:264
-msgid "<strong>Required Reading</strong> block: each person's documents to confirm, with deadlines."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:265
-msgid "<strong>Handbook PDF</strong> (Documents → Tools → Handbook PDF, or <code>[document_engine_handbook]</code>): many posts in one PDF with a cover page and table of contents."
+msgid "The Submit Document block lets chosen roles upload documents from the front end. Submissions are saved as pending (or published) with allowed file types and a size limit (Settings → Access & Pro → Review & submissions)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:266
-msgid "<strong>ZIP download</strong>: a Select column in library tables lets visitors download several documents as one ZIP."
+msgid "Bulk and CSV import"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:267
+msgid "Documents → Tools → Import: drop many files at once to create one document per file, or import a CSV spreadsheet (title, file_url or attachment_id, category, tags, description, status, id, and cf:key columns for custom fields). Rows with an id update that document. Also available as <code>wp dengine import</code>."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:269
-msgid "AI assistant and file-content search"
+msgid "Custom fields"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:270
-msgid "Search finds words inside PDF, Word, Excel and PowerPoint files, in libraries and site search. The AI assistant (Suggest details, in the editor) proposes a title, a short summary, categories and tags from the file's text, using the AI provider connected to your site in WordPress (no separate key). Restricted, private and password-protected documents are not sent to AI unless you allow it."
+msgid "Settings → Fields: add your own details to documents, such as a reference number, department or review date. Types: text, long text, number, date, choice list, yes/no, link, email."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:272
-#: includes/Admin/DocsContent.php:322
-msgid "Abuse protection"
+msgid "Edit them in the document sidebar's Details panel."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:273
-msgid "Limit how many different documents one person can download or view per day (ZIP downloads included), and add Cloudflare Turnstile to the email gate, format request and submission forms (Settings → Access & Pro → Abuse protection)."
+msgid "Show them as library columns, filters (with counts) and sort options, on document pages, and in search."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:274
+msgid "Import them from CSV with <code>cf:key</code> columns (write \"-\" to clear a value)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:275
-msgid "WP-CLI"
+msgid "Use fields you already have in Advanced Custom Fields (ACF): add them from the Fields tab."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:278
+msgid "My documents, required reading and handbooks"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:280
+msgid "<strong>My Documents</strong> block: a client or staff area listing the documents shared with the logged-in person, with \"New\" since their last visit."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:281
+msgid "<strong>Required Reading</strong> block: each person's documents to confirm, with deadlines."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:282
-msgid "Configuration"
+msgid "<strong>Handbook PDF</strong> (Documents → Tools → Handbook PDF, or <code>[document_engine_handbook]</code>): many posts in one PDF with a cover page and table of contents."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:284
-msgid "What each settings tab controls, and the defaults."
+#: includes/Admin/DocsContent.php:283
+msgid "<strong>ZIP download</strong>: a Select column in table libraries lets visitors download several documents as one ZIP (up to 100 files and 250 MB; needs the PHP zip extension)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:286
+msgid "AI assistant and file-content search"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:287
+msgid "Search finds words inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx), OpenDocument and plain text files up to 30 MB, in libraries and site search. Older .doc, .xls and .ppt files and files linked from other sites are not indexed. The AI assistant (Suggest details, in the editor's AI assistant panel) proposes a title, a short summary, categories and tags from the file's text for you to review. It needs an AI provider connected in WordPress (Settings → Connectors, WordPress 7.0 or newer); Pro holds no keys of its own. Restricted, private and password-protected documents are not sent to AI unless you allow it."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:289
+#: includes/Admin/DocsContent.php:341
+msgid "Abuse protection"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:290
+msgid "Limit how many different documents one person can download or view per day (ZIP downloads included), and add Cloudflare Turnstile to the email gate, format request and submission forms (Settings → Access & Pro → Abuse protection)."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:292
+msgid "WP-CLI"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:299
+msgid "Configuration"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:301
+msgid "What each settings tab controls, and the defaults."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:303
 msgid "Settings → Documents"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:288
-#: includes/Admin/Settings/General.php:91
+#: includes/Admin/DocsContent.php:305
+#: includes/Admin/Settings/General.php:104
 #: templates/viewer/viewer.php:92
 msgid "Pages"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:288
-#: includes/Admin/DocsContent.php:290
-#: includes/Admin/DocsContent.php:292
-#: includes/Admin/DocsContent.php:294
+#: includes/Admin/DocsContent.php:305
+#: includes/Admin/DocsContent.php:307
+#: includes/Admin/DocsContent.php:309
+#: includes/Admin/DocsContent.php:311
 msgid "On"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:288
+#: includes/Admin/DocsContent.php:305
 msgid "Each document gets a page. Off: titles link straight to the file."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:289
-#: includes/Admin/Settings/General.php:98
+#: includes/Admin/DocsContent.php:306
+#: includes/Admin/Settings/General.php:111
 msgid "URL prefix"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:289
+#: includes/Admin/DocsContent.php:306
 msgid "Address of document pages. Changing it changes all document page addresses (file links stay the same)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:290
-#: includes/Admin/Settings/General.php:109
+#: includes/Admin/DocsContent.php:307
+#: includes/Admin/Settings/General.php:122
 msgid "PDF preview"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:290
+#: includes/Admin/DocsContent.php:307
 msgid "Shows the viewer on PDF document pages."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:291
-#: includes/Admin/Settings/General.php:116
+#: includes/Admin/DocsContent.php:308
+#: includes/Admin/Settings/General.php:129
 #: includes/Library/Lists.php:34
 #: includes/Library/Lists.php:231
 msgid "Related documents"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:291
-#: includes/Admin/DocsContent.php:295
+#: includes/Admin/DocsContent.php:308
+#: includes/Admin/DocsContent.php:312
 msgid "Off"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:291
+#: includes/Admin/DocsContent.php:308
 msgid "Adds a related list to document pages."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:292
-#: includes/Admin/Settings/General.php:123
+#: includes/Admin/DocsContent.php:309
+#: includes/Admin/Settings/General.php:136
 msgid "Site search"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:292
+#: includes/Admin/DocsContent.php:309
 msgid "Includes documents in WordPress search results."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:293
-#: includes/Admin/Settings/General.php:130
+#: includes/Admin/DocsContent.php:310
+#: includes/Admin/Settings/General.php:143
 #: includes/Admin/Settings/Viewer.php:60
 #: includes/Integrations/Elementor/ViewerWidget.php:54
 msgid "Download button"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:293
-#: includes/Admin/Documents.php:208
+#: includes/Admin/DocsContent.php:310
+#: includes/Admin/Documents.php:244
 #: includes/Assets.php:81
 #: includes/Integrations/Elementor/DownloadWidget.php:48
 #: includes/Integrations/Elementor/DownloadWidget.php:51
-#: includes/Library/Library.php:674
-#: includes/Library/Library.php:724
-#: includes/Library/Query.php:69
+#: includes/Library/Library.php:764
+#: includes/Library/Library.php:818
+#: includes/Library/Query.php:71
 #: templates/viewer/viewer.php:66
 msgid "Download"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:293
+#: includes/Admin/DocsContent.php:310
 msgid "Download the file, or open it in the browser."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:294
-#: includes/Admin/Settings/General.php:141
+#: includes/Admin/DocsContent.php:311
+#: includes/Admin/Settings/General.php:154
 msgid "Download counter"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:294
+#: includes/Admin/DocsContent.php:311
 msgid "Counts downloads (known bots are ignored)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:295
+#: includes/Admin/DocsContent.php:312
 msgid "Accessible format request form; requests go to the email you set."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:296
+#: includes/Admin/DocsContent.php:313
 msgid "Library: layout, per page, View button, View opens"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:296
+#: includes/Admin/DocsContent.php:313
 msgid "Table, 20, on, page"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:296
+#: includes/Admin/DocsContent.php:313
 msgid "Defaults for new libraries."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:297
+#: includes/Admin/DocsContent.php:314
+#: includes/Admin/Settings/General.php:86
+msgid "Dates"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:314
+msgid "Short"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:314
+msgid "Short dates (Sep 25, 2026) or your site's date format in libraries, lists and cards."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:315
 msgid "Setting"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:297
+#: includes/Admin/DocsContent.php:315
 #: includes/Integrations/Elementor/ViewerWidget.php:54
 #: includes/Integrations/Elementor/ViewerWidget.php:55
 msgid "Default"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:297
+#: includes/Admin/DocsContent.php:315
 msgid "Effect"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:299
+#: includes/Admin/DocsContent.php:317
 msgid "Settings → PDF Viewer"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:300
-msgid "Default height (800px), initial zoom (fit width), and which toolbar buttons show: toolbar, download, print, full screen, search, sidebar. \"Version 1 blocks\" shows PDF blocks made with version 1 in the built-in viewer instead of Google's viewer. It is on for new installs; sites upgraded from version 1 keep Google's viewer until you switch it on (recommended: faster, and nothing is sent to Google)."
+#: includes/Admin/DocsContent.php:318
+msgid "Default height (800px), initial zoom (fit width), and which toolbar parts show: toolbar (page navigation and zoom, switched together), download, print, full screen, search, sidebar. \"Version 1 blocks\" shows PDF blocks made with version 1 in the built-in viewer instead of Google's viewer. It is on for new installs; sites upgraded from version 1 keep Google's viewer until you switch it on (recommended: faster, and nothing is sent to Google)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:302
+#: includes/Admin/DocsContent.php:320
 msgid "Settings → Post to PDF"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:303
-msgid "Button (post types, text, placement, alignment, download or open), Header & footer, Page & protection (orientation, text size, margins, PDF permissions), Style (theme styles, custom CSS) and Watermark. The button appears only on the post types you tick."
+#: includes/Admin/DocsContent.php:321
+msgid "Button (post types, text, placement, alignment, download or open), Header & footer, Page & protection (orientation, text size, margins, PDF permissions), Style (theme styles, custom CSS) and, with Pro, Watermark. Pages are A4. The button appears only on the post types you tick."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:305
+#: includes/Admin/DocsContent.php:323
 msgid "Settings → Advanced"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:307
+#: includes/Admin/DocsContent.php:325
 msgid "<strong>Permissions</strong>: roles that manage, publish or draft documents."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:308
+#: includes/Admin/DocsContent.php:326
 msgid "<strong>PDF cache</strong> (on) and <strong>Generation limit</strong> (20 PDFs per visitor per minute) for Post to PDF."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:309
+#: includes/Admin/DocsContent.php:327
 msgid "<strong>When deleting the plugin</strong> (off): also delete documents, categories, settings and (with Pro) logs. Leave off unless you are removing the plugin for good."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:312
+#: includes/Admin/DocsContent.php:330
 msgid "Settings → Access & Pro, Fields, License"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:314
+#: includes/Admin/DocsContent.php:332
 msgid "Access"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:314
+#: includes/Admin/DocsContent.php:332
 msgid "Restricted documents in lists (lock or hide), protect files automatically (on), share link lifetime (7 days)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:315
+#: includes/Admin/DocsContent.php:333
 msgid "Secure viewer"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:315
-msgid "Which documents use it (off / restricted / all), watermark pattern, block downloads, stamp downloads."
+#: includes/Admin/DocsContent.php:333
+msgid "Which documents use it (only where switched on / all restricted / all), watermark pattern, block downloads, stamp downloads."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:316
+#: includes/Admin/DocsContent.php:334
 msgid "Activity log"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:316
+#: includes/Admin/DocsContent.php:334
 msgid "Log activity, reading time, searches, logged-out visitors; keep entries for 365 days."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:317
-msgid "Email gate"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:317
-msgid "Default (off), organization field, heading, consent text, remember visitors (30 days), webhook, lead retention, new-lead email."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:318
-msgid "Review & submissions"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:318
-msgid "Review reminder emails and recipients; who can submit, new submission status, file types and size."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:319
-#: includes/Admin/DocsContent.php:470
-msgid "Acknowledgements"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:319
-msgid "Default statement; reminder emails."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:320
-msgid "Notifications"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:320
-msgid "Webhook URLs, events and signing secret; Slack/Teams webhook and events; email subscriptions."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:321
-msgid "AI assistant"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:321
-msgid "On/off; allow restricted documents."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:322
-msgid "Documents per person per day (0 = no limit); Cloudflare Turnstile keys."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:323
-msgid "Fields"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:323
-msgid "Custom fields for documents."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:324
-msgid "License"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:324
-msgid "Licence key for updates."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:325
-msgid "Section"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:325
-msgid "What it controls"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:331
-msgid "How-to guides"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:333
-msgid "Step-by-step answers to common tasks."
+#: includes/Admin/DocsContent.php:335
+msgid "Office previews"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:335
-msgid "Publish a policy library with filters"
+msgid "Preview Word, Excel and PowerPoint files with Microsoft Office Online (off)."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:336
+msgid "Email gate"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:336
+msgid "Default (off), organization field, heading, consent text, remember visitors (30 days), webhook, lead retention, new-lead email."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:337
-msgid "Create a \"Policies\" category and add your policies to it."
+msgid "Review & submissions"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:337
+msgid "Review reminder emails and recipients; who can submit, new submission status, file types and size."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:338
-msgid "On a new page, add a Document Library block. Under Documents to include, choose the Policies category."
+#: includes/Admin/DocsContent.php:489
+msgid "Acknowledgements"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:338
+msgid "Default statement; reminder emails."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:339
-msgid "Under Search and filters tick Tag, Year and Sort order; turn on Let visitors pick several if visitors should combine tags."
+msgid "Notifications"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:339
+msgid "Webhook URLs, events and signing secret; Slack/Teams webhook and events; email subscriptions."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:340
-msgid "Add a Document Search block to your header (Appearance → Editor) pointing to this page."
+msgid "AI assistant"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:340
+msgid "On/off; allow restricted documents."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:341
+msgid "Documents per person per day (0 = no limit); Cloudflare Turnstile keys."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:342
+msgid "Fields"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:342
+msgid "Custom fields for documents."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:343
-msgid "Replace a file without breaking links"
+msgid "License"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:343
+msgid "Licence key for updates."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:344
-msgid "Open the document and use Replace in the Document file panel. The document keeps its page and download address, so links in emails and other pages keep working. With Pro, the previous file is kept in the version history."
+msgid "Section"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:346
-msgid "Link to a specific page of a PDF"
+#: includes/Admin/DocsContent.php:344
+msgid "What it controls"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:347
-msgid "Add <code>#page=</code> and the page number to the document page address, for example <code>/documents/annual-report/#page=12</code>. In a PDF Viewer block, set the starting page."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:349
-msgid "Make documents members-only"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:351
-msgid "Edit the category (or document) and set \"Who can open these documents\" to logged-in users or chosen roles."
+#: includes/Admin/DocsContent.php:350
+msgid "How-to guides"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:352
-msgid "Leave \"Protect files automatically\" on so the files move to private storage."
+msgid "Step-by-step answers to common tasks."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:353
-msgid "Check Tools → Site Health: the Document Engine protection test must pass. On nginx, add the rule it shows."
+#: includes/Admin/DocsContent.php:354
+msgid "Publish a policy library with filters"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:356
-msgid "Share a document with someone outside your site"
+msgid "Create a \"Policies\" category and add your policies to it."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:357
-msgid "Open the document, go to Access & security → Share link, type the recipient's name, tick \"Email me when it is first opened\", and create the link. Send it; it expires after the set number of days. Revoke it from the same panel."
+msgid "On a new page, add a Document Library block. Under Documents to include, choose the Policies category."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:358
+msgid "Under Search and filters tick Tag, Year and Sort order; turn on Let visitors pick several if visitors should combine tags."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:359
-msgid "Make staff confirm they read a policy"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:361
-msgid "Open the policy, go to Read & confirm, switch it on, choose the roles and a deadline."
+msgid "Add a Document Search block to your header (Appearance → Editor) pointing to this page."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:362
-msgid "Add a Required Reading block to your staff page."
+msgid "Replace a file without breaking links"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:363
-msgid "Follow progress in Reports → Acknowledgements, send reminders, and export the evidence CSV."
+msgid "Open the document and use Replace in the Document file panel. The document keeps its page and download address, so links in emails and other pages keep working. With Pro, the previous file is kept in the version history."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:365
+msgid "Link to a specific page of a PDF"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:366
-msgid "Build a register with reference numbers"
+msgid "Add <code>#page=</code> and the page number to the document page address, for example <code>/documents/annual-report/#page=12</code>. In a PDF Viewer block, set the starting page."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:368
-msgid "In Settings → Fields add \"Reference\" (text, Column and Sort) and \"Department\" (choice list, Column and Filter)."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:369
-msgid "Fill them in the Details panel, or import a CSV with cf:reference and cf:department columns."
+msgid "Make documents members-only"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:370
-msgid "In a Document Library block, tick the Reference and Department columns and the Department filter."
+msgid "Edit the category (or document) and set \"Who can open these documents\" to logged-in users or chosen roles."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:373
-msgid "Move from Download Monitor, WPDM or Barn2"
+#: includes/Admin/DocsContent.php:371
+msgid "Leave \"Protect files automatically\" on so the files move to private storage."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:372
+msgid "Check Tools → Site Health: the Document Engine protection test must pass. On nginx, add the rule it shows."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:375
-msgid "Keep the old plugin active. Open Migrate, pick the source and run the preview."
+msgid "Share a document with someone outside your site"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:376
-msgid "Run the migration. Check a few documents and pages that used the old shortcodes."
+msgid "Open the document, go to Access & security → Share link, type the recipient's name, tick \"Email me when it is first opened\", and create the link. Send it; it expires after the set number of days. Revoke it from the same panel."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:377
-msgid "Deactivate the old plugin. Its shortcodes and download links keep working through Document Engine."
+#: includes/Admin/DocsContent.php:378
+msgid "Make staff confirm they read a policy"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:384
-msgid "Troubleshooting"
+#: includes/Admin/DocsContent.php:380
+msgid "Open the policy, go to Read & confirm, switch it on, choose the roles and a deadline."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:386
-msgid "Common problems and how to fix them."
+#: includes/Admin/DocsContent.php:381
+msgid "Add a Required Reading block to your staff page."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:382
+msgid "Follow progress in Reports → Acknowledgements, send reminders, and export the evidence CSV."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:385
+msgid "Build a register with reference numbers"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:387
+msgid "In Settings → Fields add \"Reference\" (text, Column and Sort) and \"Department\" (choice list, Column and Filter)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:388
-msgid "Document pages show \"Page not found\""
+msgid "Fill them in the Details panel, or import a CSV with cf:reference and cf:department columns."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:389
-msgid "Go to Settings → Permalinks and click Save (this refreshes the site's addresses). Also check that another page or post type does not use the same address as the URL prefix in Settings → Documents."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:391
-msgid "Someone cannot see the Documents menu or a screen"
+msgid "In a Document Library block, tick the Reference and Department columns and the Department filter."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:392
-msgid "Check their role in Settings → Advanced → Permissions. Reports and Tools only appear for roles allowed to use them; Settings needs an administrator. Related screens are grouped: Categories holds Tags, Reports holds Activity, Searches, Leads, Acknowledgements and Format requests, Tools holds Import, Migrate and Handbook PDF."
+msgid "Move from Download Monitor, WPDM or Barn2"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:394
-msgid "The PDF viewer is blank or shows an error"
+msgid "Keep the old plugin active. Open Migrate, pick the source and run the preview."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:395
+msgid "Run the migration. Check a few documents and pages that used the old shortcodes."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:396
-msgid "External PDFs: the other site must allow cross-site loading (CORS). Upload the file instead."
+msgid "Deactivate the old plugin. Its shortcodes and download links keep working through Document Engine."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:397
-msgid "Mixed content: a site on https cannot load a PDF from http."
+#: includes/Admin/DocsContent.php:403
+msgid "Troubleshooting"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:398
-msgid "Security or caching plugins that combine or delay JavaScript can break the viewer; exclude the Document Engine viewer script."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:401
-msgid "Download counts do not go up"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:402
-msgid "Downloads are counted when the file is requested through the document link. Check that Download counter is on, and that links point to the document (not directly to the file in /wp-content/uploads/). Requests from known bots are not counted."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:404
-msgid "Post to PDF fails or looks wrong"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:406
-msgid "Blank or error: raise PHP's memory limit (256 MB recommended) and check that the mbstring and gd extensions are installed."
+#: includes/Admin/DocsContent.php:405
+msgid "Common problems and how to fix them."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:407
-msgid "\"Too many PDF requests\": the per-visitor limit in Settings → Advanced was reached; wait a minute or raise the limit."
+msgid "Document pages show \"Page not found\""
 msgstr ""
 
 #: includes/Admin/DocsContent.php:408
-msgid "Styling: try \"Theme styles\" off and add custom CSS in Settings → Post to PDF → Style."
+msgid "Go to Settings → Permalinks and click Save (this refreshes the site's addresses). Also check that another page or post type does not use the same address as the URL prefix in Settings → Documents."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:410
+msgid "Someone cannot see the Documents menu or a screen"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:411
-msgid "Emails do not arrive"
+msgid "Check their role in Settings → Advanced → Permissions. Reports and Tools only appear for roles allowed to use them; Settings needs an administrator. Related screens are grouped: Categories holds Tags, Reports holds Activity, Searches, Leads, Acknowledgements and Format requests, Tools holds Import, Migrate and Handbook PDF."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:412
-msgid "Format requests, reminders and notifications use WordPress's email. If other WordPress emails (like password resets) also fail, install an SMTP plugin to send through a real mail service."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:414
-msgid "Site Health says protected files can be downloaded directly"
+#: includes/Admin/DocsContent.php:413
+msgid "The PDF viewer is blank or shows an error"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:415
-msgid "Your web server ignores .htaccess files (common on nginx). Add the rule shown in the Site Health test to the site's nginx configuration and reload nginx, or ask your host. Until then, anyone who learns a protected file's exact address could download it."
+msgid "External PDFs: the other site must allow cross-site loading (CORS). Upload the file instead."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:418
-msgid "Members see the wrong list, or a page cache shows private content"
+#: includes/Admin/DocsContent.php:416
+msgid "Mixed content: a site on https cannot load a PDF from http."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:419
-msgid "Pages with personal lists (My Documents, Required Reading) tell caching plugins not to cache them. For library pages that show restricted documents differently to members, exclude logged-in users from your page cache (most caching plugins do this by default)."
+#: includes/Admin/DocsContent.php:417
+msgid "Security or caching plugins that combine or delay JavaScript can break the viewer; exclude the Document Engine viewer script."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:420
+msgid "Download counts do not go up"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:421
-msgid "Search does not find words inside a file"
+msgid "Downloads are counted when the file is requested through the document link. Check that Download counter is on, and that links point to the document (not directly to the file in /wp-content/uploads/). Requests from known bots are not counted."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:422
-msgid "File text is indexed in the background after upload; large files can take a minute. Run <code>wp dengine reindex</code> to rebuild it. Scanned PDFs (images of text) contain no text to index."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:424
-msgid "Pro licence or updates do not work"
+#: includes/Admin/DocsContent.php:423
+msgid "Post to PDF fails or looks wrong"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:425
-msgid "Check the key in Settings → License (it shows the status and renewal date). If it says the key \"has reached its site limit\", deactivate it on another site or upgrade the licence. Your server must be able to reach the store over https. Pro keeps working without an active licence; only updates need one."
+msgid "Blank or error: raise PHP's memory limit (256 MB recommended) and check that the mbstring and gd extensions are installed."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:426
+msgid "\"Too many PDF requests\": the per-visitor limit in Settings → Advanced was reached; wait a minute or raise the limit."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:427
+msgid "Styling: try \"Theme styles\" off and add custom CSS in Settings → Post to PDF → Style."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:430
+msgid "Emails do not arrive"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:431
-msgid "FAQ"
+msgid "Format requests, reminders and notifications use WordPress's email. If other WordPress emails (like password resets) also fail, install an SMTP plugin to send through a real mail service."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:433
-msgid "Short answers to frequent questions."
+msgid "Site Health says protected files can be downloaded directly"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:435
-msgid "Is the free version limited in time or in number of documents?"
+#: includes/Admin/DocsContent.php:434
+msgid "Your web server ignores .htaccess files (common on nginx). Add the rule shown in the Site Health test to the site's nginx configuration and reload nginx, or ask your host. Until then, anyone who learns a protected file's exact address could download it."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:436
-msgid "No. The free plugin has no time limit and no document limit."
+#: includes/Admin/DocsContent.php:437
+msgid "Members see the wrong list, or a page cache shows private content"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:438
-msgid "Does it work with my theme and page builder?"
+msgid "Pages with personal lists (My Documents, Required Reading) tell caching plugins not to cache them. For library pages that show restricted documents differently to members, exclude logged-in users from your page cache (most caching plugins do this by default)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:439
-msgid "Libraries use your theme's fonts and colors and adapt to the space they get. Blocks work in the block editor and site editor; Elementor has its own widgets; shortcodes work anywhere else. Templates can be overridden in your theme (see Developers)."
+#: includes/Admin/DocsContent.php:440
+msgid "Search does not find words inside a file"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:441
-msgid "Will my version 1 shortcodes and blocks keep working?"
+msgid "File text is indexed in the background after upload; large files can take a minute, and files over 30 MB are skipped. Run <code>wp dengine reindex</code> to rebuild it. Scanned PDFs (images of text), older .doc, .xls and .ppt files and files linked from other sites contain no text Pro can read."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:442
-msgid "Yes. Version 1 shortcodes, the PDF block, settings and the settings page address are kept."
+#: includes/Admin/DocsContent.php:443
+msgid "Pro licence or updates do not work"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:444
-msgid "Can I keep documents private with the free plugin?"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:445
-msgid "You can keep documents as drafts or private posts (only editors see them), but a published document can be downloaded by anyone who has the link. Member-only access, private file storage and share links are Pro features."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:447
-msgid "What happens when I uninstall?"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:448
-msgid "By default nothing is deleted, so you can reinstall without losing documents. To remove everything, turn on Settings → Advanced → When deleting the plugin before deleting it. Uploaded files in the Media Library are never deleted."
+msgid "Check the key in Settings → License (it shows the status and renewal date). If it says the key \"has reached its site limit\", deactivate it on another site or upgrade the licence. Your server must be able to reach the store over https. Pro keeps working without an active licence; only updates need one."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:450
-msgid "What happens if my Pro licence expires?"
+msgid "FAQ"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:451
-msgid "Pro keeps working; you stop receiving updates and support until you renew."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:453
-msgid "Does it support multisite?"
+#: includes/Admin/DocsContent.php:452
+msgid "Short answers to frequent questions."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:454
-msgid "The plugin works per site: activate it on each site that needs it; every site keeps its own documents and settings."
+msgid "Is the free version limited in time or in number of documents?"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:455
+msgid "No. The free plugin has no time limit and no document limit."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:457
+msgid "Does it work with my theme and page builder?"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:458
+msgid "Libraries use your theme's fonts and colors and adapt to the space they get. Blocks work in the block editor and site editor; Elementor has its own widgets; shortcodes work anywhere else. Templates can be overridden in your theme (see Developers)."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:460
-msgid "Security & privacy"
+msgid "Will my version 1 shortcodes and blocks keep working?"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:462
-msgid "What is stored, what leaves your site, and who can see it."
+#: includes/Admin/DocsContent.php:461
+msgid "Yes. Version 1 shortcodes, the PDF block, settings and the settings page address are kept."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:463
+msgid "Can I keep documents private with the free plugin?"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:464
-msgid "Data the plugin stores"
+msgid "You can keep documents as drafts or private posts (only editors see them), or password-protected (the download asks for the password). A published document without a password can be downloaded by anyone who has the link, and in every case the file stays in the public uploads folder, so anyone who has its exact address could open it. Member-only access, private file storage and share links are Pro features."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:466
-msgid "Documents, categories, tags"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:466
-msgid "WordPress posts, terms and post meta (file, type, size, download count)."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:466
-#: includes/Admin/DocsContent.php:467
-#: includes/Admin/ProPage.php:170
-msgid "Free"
+msgid "What happens when I uninstall?"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:467
-msgid "Name, email, requested format, message. Visible to editors and administrators."
-msgstr ""
-
-#: includes/Admin/DocsContent.php:468
-msgid "Activity log, reading sessions, searches"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:468
-msgid "Document, event, time, user ID for logged-in users; a daily-rotating hash for visitors. No IP addresses. Deleted after the retention period."
+msgid "By default nothing is deleted, so you can reinstall without losing documents. To remove everything, turn on Settings → Advanced → When deleting the plugin before deleting it. Uploaded files in the Media Library are never deleted."
 msgstr ""
 
 #: includes/Admin/DocsContent.php:469
-msgid "Leads"
-msgstr ""
-
-#: includes/Admin/DocsContent.php:469
-msgid "Name, email, organization, document, time. Deleted after the lead retention period if set."
+msgid "What happens if my Pro licence expires?"
 msgstr ""
 
 #: includes/Admin/DocsContent.php:470
+msgid "Pro keeps working; you stop receiving updates and support until you renew."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:472
+msgid "Does it support multisite?"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:473
+msgid "The plugin works per site: activate it on each site that needs it; every site keeps its own documents and settings."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:479
+msgid "Security & privacy"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:481
+msgid "What is stored, what leaves your site, and who can see it."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:483
+msgid "Data the plugin stores"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:485
+msgid "Documents, categories, tags"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:485
+msgid "WordPress posts, terms and post meta (file, type, size, download count)."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:485
+#: includes/Admin/DocsContent.php:486
+#: includes/Admin/ProPage.php:174
+msgid "Free"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:486
+msgid "Name, email, requested format, message. Visible to editors and administrators."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:487
+msgid "Activity log, reading sessions, searches"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:487
+msgid "Document, event, time, user ID for logged-in users; a daily-rotating hash for visitors. No IP addresses. Deleted after the retention period."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:488
+msgid "Leads"
+msgstr ""
+
+#: includes/Admin/DocsContent.php:488
+msgid "Name, email, organization, document, time. Deleted after the lead retention period if set."
+msgstr ""
+
+#: includes/Admin/DocsContent.php:489
 msgid "User, name, time, statement, file fingerprint, IP address and browser (kept as evidence)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:471
+#: includes/Admin/DocsContent.php:490
 #: includes/Admin/Settings/Advanced.php:61
 msgid "Data"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:471
+#: includes/Admin/DocsContent.php:490
 msgid "What"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:471
+#: includes/Admin/DocsContent.php:490
 msgid "Edition"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:472
+#: includes/Admin/DocsContent.php:491
 msgid "Format requests, and with Pro leads, activity, searches, reading sessions and acknowledgements, are included in Tools → Export Personal Data and Erase Personal Data."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:474
+#: includes/Admin/DocsContent.php:493
 msgid "External services"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:475
+#: includes/Admin/DocsContent.php:494
 msgid "The free plugin does not contact external services on its own. The viewer, PDF generation and QR codes run on your site. Exceptions you control:"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:477
+#: includes/Admin/DocsContent.php:496
 msgid "Version 1 PDF blocks on sites upgraded from version 1 keep using Google's document viewer (which loads the PDF from Google) until you switch on Settings → PDF Viewer → Version 1 blocks. New installs use the built-in viewer."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:478
+#: includes/Admin/DocsContent.php:497
 msgid "Documents that link to external files load them from that site."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:479
+#: includes/Admin/DocsContent.php:498
 msgid "Pro: the licence server (activation and updates), your webhook and Slack/Teams URLs, Cloudflare Turnstile when switched on, and the AI provider you connected in WordPress when you use the assistant."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:482
+#: includes/Admin/DocsContent.php:501
 msgid "How access is enforced"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:484
+#: includes/Admin/DocsContent.php:503
 msgid "Every download and view goes through the document file server, which checks the document is published and (with Pro) that the person may open it."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:485
+#: includes/Admin/DocsContent.php:504
 msgid "Admin actions check both a permission and a security token (nonce)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:486
+#: includes/Admin/DocsContent.php:505
 msgid "Pro checks access on the server for every download, preview, REST request, search result and AI ability; hiding a button is never the only protection."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:487
+#: includes/Admin/DocsContent.php:506
 msgid "With Pro, restricted files are moved to a private folder; on nginx you must add the server rule (see Troubleshooting)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:494
+#: includes/Admin/DocsContent.php:513
 msgid "Developers"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:496
+#: includes/Admin/DocsContent.php:515
 msgid "Shortcodes, blocks, templates, hooks, REST routes."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:498
+#: includes/Admin/DocsContent.php:517
 msgid "Shortcodes"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:500
+#: includes/Admin/DocsContent.php:519
 msgid "id, layout (table|grid|folders), categories, tags, include, exclude, file_types, per_page, orderby (date|title|modified|downloads|menu_order|rand), order, columns, grid_columns, search, filters (category,tag,type,year,author,sort, cf_key with Pro), multi_filters, show_thumbnails, show_excerpt, link_to (document|file|none), pagination, folder_limit, open_folders, class"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:501
+#: includes/Admin/DocsContent.php:520
 msgid "id, style (card|button), label, show_meta"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:502
+#: includes/Admin/DocsContent.php:521
 msgid "mode (recent|updated|popular|related), count, category, title, show_meta, document"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:503
+#: includes/Admin/DocsContent.php:522
 msgid "page, placeholder, button"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:504
+#: includes/Admin/DocsContent.php:523
 msgid "id (document), file (attachment), url, height, width, toolbar, download, print, fullscreen, page, zoom"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:505
+#: includes/Admin/DocsContent.php:524
 msgid "Post to PDF button"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:507
-#: includes/Admin/Documents.php:210
+#: includes/Admin/DocsContent.php:526
+#: includes/Admin/Documents.php:246
 msgid "Shortcode"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:507
+#: includes/Admin/DocsContent.php:526
 msgid "Attributes"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:509
+#: includes/Admin/DocsContent.php:528
 msgid "Template overrides"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:510
+#: includes/Admin/DocsContent.php:529
 msgid "Copy a file from the plugin's <code>templates/</code> folder to a <code>document_engine/</code> folder in your theme, keeping the sub-folder (for example <code>document_engine/document/single.php</code>). Filter the folder name with <code>document_engine_template_path</code>."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:512
+#: includes/Admin/DocsContent.php:531
 msgid "Main hooks"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:514
+#: includes/Admin/DocsContent.php:533
 msgid "Filter: may this user view/download this document (Pro adds its rules here)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:515
+#: includes/Admin/DocsContent.php:534
 msgid "Action before a file is sent."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:516
+#: includes/Admin/DocsContent.php:535
 msgid "Filter the download file name."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:517
+#: includes/Admin/DocsContent.php:536
 msgid "Filter the WP_Query arguments of a library."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:518
+#: includes/Admin/DocsContent.php:537
 msgid "Add library columns and their cell markup."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:519
+#: includes/Admin/DocsContent.php:538
 msgid "Add library filters."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:520
+#: includes/Admin/DocsContent.php:539
 msgid "Action when a visitor searches a library."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:521
+#: includes/Admin/DocsContent.php:540
 msgid "Filter the viewer's settings."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:522
+#: includes/Admin/DocsContent.php:541
 msgid "Action below the summary card on document pages."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:523
+#: includes/Admin/DocsContent.php:542
 msgid "Action after a document is saved."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:524
+#: includes/Admin/DocsContent.php:543
 msgid "Arrange the Documents menu."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:525
+#: includes/Admin/DocsContent.php:544
 msgid "Add abilities; change the document data they return."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:526
+#: includes/Admin/DocsContent.php:545
 msgid "Hook"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:526
+#: includes/Admin/DocsContent.php:545
 msgid "Use"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:528
+#: includes/Admin/DocsContent.php:547
 msgid "REST routes"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:530
+#: includes/Admin/DocsContent.php:549
 msgid "Rendered library results (used by the library script)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:531
+#: includes/Admin/DocsContent.php:550
 msgid "Preview popup content; 403 if the visitor may not open the document."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:532
+#: includes/Admin/DocsContent.php:551
 msgid "Document search for editor pickers (needs editing permission)."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:533
+#: includes/Admin/DocsContent.php:552
 msgid "Standard WordPress REST for documents."
 msgstr ""
 
-#: includes/Admin/DocsContent.php:535
+#: includes/Admin/DocsContent.php:554
 msgid "Route"
 msgstr ""
 
-#: includes/Admin/DocsContent.php:535
+#: includes/Admin/DocsContent.php:554
 msgid "Purpose"
 msgstr ""
 
-#: includes/Admin/Documents.php:59
+#: includes/Admin/Documents.php:95
 msgid "Filter by category"
 msgstr ""
 
-#: includes/Admin/Documents.php:65
+#: includes/Admin/Documents.php:101
 #: includes/Library/Library.php:142
 msgid "All categories"
 msgstr ""
 
-#: includes/Admin/Documents.php:72
+#: includes/Admin/Documents.php:108
 msgid "Filter by file type"
 msgstr ""
 
-#: includes/Admin/Documents.php:73
-#: includes/Library/Library.php:161
+#: includes/Admin/Documents.php:109
+#: includes/Library/Library.php:172
 msgid "All file types"
 msgstr ""
 
-#: includes/Admin/Documents.php:111
+#: includes/Admin/Documents.php:147
 #: includes/Assets.php:93
 msgid "File"
 msgstr ""
 
-#: includes/Admin/Documents.php:116
+#: includes/Admin/Documents.php:152
 #: includes/Admin/Upsell.php:129
 msgid "Activity"
 msgstr ""
 
-#: includes/Admin/Documents.php:118
+#: includes/Admin/Documents.php:154
 #: includes/Integrations/Elementor/LibraryWidget.php:55
 #: includes/Library/Library.php:142
-#: includes/Library/Query.php:61
-#: includes/Library/Query.php:88
+#: includes/Library/Query.php:63
+#: includes/Library/Query.php:90
 msgid "Category"
 msgstr ""
 
-#: includes/Admin/Documents.php:121
+#: includes/Admin/Documents.php:157
 #: includes/Documents/PostType.php:104
-#: includes/Library/Query.php:62
+#: includes/Library/Query.php:64
 msgid "Tags"
 msgstr ""
 
-#: includes/Admin/Documents.php:123
-#: includes/Library/Query.php:66
+#: includes/Admin/Documents.php:159
+#: includes/Library/Query.php:68
 msgid "Updated"
 msgstr ""
 
-#: includes/Admin/Documents.php:158
+#: includes/Admin/Documents.php:194
 msgid "No file"
 msgstr ""
 
-#: includes/Admin/Documents.php:174
+#: includes/Admin/Documents.php:210
 msgid "Published"
 msgstr ""
 
-#: includes/Admin/Documents.php:174
+#: includes/Admin/Documents.php:210
 msgid "Scheduled"
 msgstr ""
 
-#: includes/Admin/Documents.php:174
+#: includes/Admin/Documents.php:210
 msgid "Draft"
 msgstr ""
 
-#: includes/Admin/Documents.php:174
+#: includes/Admin/Documents.php:210
 msgid "Pending review"
 msgstr ""
 
-#: includes/Admin/Documents.php:174
+#: includes/Admin/Documents.php:210
 msgid "Private"
 msgstr ""
 
-#: includes/Admin/Documents.php:216
+#: includes/Admin/Documents.php:252
 msgid "Document title (filled in from the file name if left empty)"
 msgstr ""
 
-#: includes/Admin/Documents.php:281
+#: includes/Admin/Documents.php:317
 #: assets/build/document-editor.js:1
 msgid "Document file"
 msgstr ""
 
-#: includes/Admin/Documents.php:300
+#: includes/Admin/Documents.php:336
 msgid "No file selected"
 msgstr ""
 
-#: includes/Admin/Documents.php:301
+#: includes/Admin/Documents.php:337
 #: assets/build/document-editor.js:1
 msgid "Upload or choose file"
 msgstr ""
 
-#: includes/Admin/Documents.php:304
+#: includes/Admin/Documents.php:340
 msgid "…or link to a file elsewhere"
 msgstr ""
 
-#: includes/Admin/Documents.php:308
+#: includes/Admin/Documents.php:344
 #: assets/build/document-editor.js:1
 msgid "When visitors click Download"
 msgstr ""
 
-#: includes/Admin/Documents.php:310
+#: includes/Admin/Documents.php:346
 msgid "Site default"
 msgstr ""
 
-#: includes/Admin/Documents.php:311
+#: includes/Admin/Documents.php:347
 #: assets/build/document-editor.js:1
 msgid "Download the file"
 msgstr ""
 
-#: includes/Admin/Documents.php:312
+#: includes/Admin/Documents.php:348
 #: assets/build/document-editor.js:1
 msgid "Open in the browser"
 msgstr ""
 
-#: includes/Admin/Documents.php:320
+#: includes/Admin/Documents.php:356
 #: assets/build/document-editor.js:1
 msgid "Choose document file"
 msgstr ""
 
-#: includes/Admin/Documents.php:340
+#: includes/Admin/Documents.php:376
 msgid "Create documents"
 msgstr ""
 
-#: includes/Admin/Documents.php:348
+#: includes/Admin/Documents.php:384
 msgid "Create document"
 msgstr ""
 
 #. translators: %d: number of documents
-#: includes/Admin/Documents.php:418
+#: includes/Admin/Documents.php:454
 #, php-format
 msgid "%d document created."
 msgid_plural "%d documents created."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/Documents.php:420
+#: includes/Admin/Documents.php:456
 #: includes/Admin/Migrate.php:182
 msgid "View documents"
 msgstr ""
@@ -2170,7 +2251,7 @@ msgstr ""
 #: includes/Admin/Main.php:65
 #: includes/Admin/Main.php:103
 #: includes/Admin/Main.php:104
-#: includes/Admin/ProPage.php:150
+#: includes/Admin/ProPage.php:154
 #: includes/Admin/UI.php:90
 msgid "Free vs Pro"
 msgstr ""
@@ -2475,11 +2556,11 @@ msgid "Control who sees what"
 msgstr ""
 
 #: includes/Admin/ProPage.php:66
-msgid "Restrict documents and categories to logged-in users, roles, specific people or a password"
+msgid "Restrict documents and categories to logged-in users, roles or specific people"
 msgstr ""
 
 #: includes/Admin/ProPage.php:67
-msgid "Protected storage: files move out of the public uploads folder and are only served through signed, expiring links"
+msgid "Protected storage: files move out of the public uploads folder and are only served to people allowed to open them"
 msgstr ""
 
 #: includes/Admin/ProPage.php:68
@@ -2490,286 +2571,304 @@ msgstr ""
 msgid "Email gate: ask for name and email (with consent) before a download, with CSV export and webhooks"
 msgstr ""
 
-#: includes/Admin/ProPage.php:71
-msgid "Know what happens"
+#: includes/Admin/ProPage.php:70
+msgid "Accept terms: everyone agrees to your licence or disclaimer before opening a document, and each acceptance is logged"
 msgstr ""
 
 #: includes/Admin/ProPage.php:72
-msgid "Audit log of every view, download and denied request, per user, with CSV export and retention settings"
+msgid "Know what happens"
 msgstr ""
 
 #: includes/Admin/ProPage.php:73
+msgid "Audit log of every view, download and denied request, per user, with CSV export and retention settings"
+msgstr ""
+
+#: includes/Admin/ProPage.php:74
 msgid "Analytics dashboard: trends, top documents, most active users"
 msgstr ""
 
-#: includes/Admin/ProPage.php:75
+#: includes/Admin/ProPage.php:76
 msgid "Keep documents current"
 msgstr ""
 
-#: includes/Admin/ProPage.php:76
+#: includes/Admin/ProPage.php:77
 msgid "Versions: upload a new file without changing the link, see history and restore"
 msgstr ""
 
-#: includes/Admin/ProPage.php:77
+#: includes/Admin/ProPage.php:78
 msgid "Expiry and review dates with reminder emails"
 msgstr ""
 
-#: includes/Admin/ProPage.php:78
-msgid "Search inside PDF, Word, Excel and PowerPoint files and automatic PDF thumbnails"
-msgstr ""
-
-#: includes/Admin/ProPage.php:80
-msgid "Work faster"
+#: includes/Admin/ProPage.php:79
+msgid "Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and OpenDocument files, and automatic PDF thumbnails"
 msgstr ""
 
 #: includes/Admin/ProPage.php:81
-msgid "Bulk import by drag and drop or CSV"
+msgid "Work faster"
 msgstr ""
 
 #: includes/Admin/ProPage.php:82
-#: includes/Admin/ProPage.php:104
-msgid "Download several documents as one ZIP"
+msgid "Bulk import by drag and drop or CSV"
 msgstr ""
 
 #: includes/Admin/ProPage.php:83
-msgid "Front-end document submission with moderation"
+msgid "Download several documents as one ZIP"
 msgstr ""
 
 #: includes/Admin/ProPage.php:84
-msgid "Handbook PDF: combine many posts into one PDF with a cover and contents"
+msgid "Front-end document submission with moderation"
 msgstr ""
 
 #: includes/Admin/ProPage.php:85
-msgid "Watermarks (text or image) on generated PDFs"
+msgid "Handbook PDF: combine many posts into one PDF with a cover and contents"
 msgstr ""
 
 #: includes/Admin/ProPage.php:86
-#: includes/Admin/ProPage.php:141
+msgid "Watermarks (text or image) on generated PDFs"
+msgstr ""
+
+#: includes/Admin/ProPage.php:87
+#: includes/Admin/ProPage.php:145
 msgid "WP-CLI commands"
 msgstr ""
 
-#: includes/Admin/ProPage.php:98
+#: includes/Admin/ProPage.php:99
 msgid "Documents and libraries"
 msgstr ""
 
-#: includes/Admin/ProPage.php:99
+#: includes/Admin/ProPage.php:100
 msgid "Documents with their own pages, file details and a download counter"
 msgstr ""
 
-#: includes/Admin/ProPage.php:100
+#: includes/Admin/ProPage.php:101
 msgid "Libraries as a table, grid or folders, with instant search"
 msgstr ""
 
-#: includes/Admin/ProPage.php:101
+#: includes/Admin/ProPage.php:102
 msgid "Filters by category, tag, file type, year and author, with multi-select and counts"
 msgstr ""
 
-#: includes/Admin/ProPage.php:102
+#: includes/Admin/ProPage.php:103
+msgid "Sort by clicking column headings; page numbers or a \"Load more\" button"
+msgstr ""
+
+#: includes/Admin/ProPage.php:104
 msgid "Your own fields (reference, department, dates…) as columns, filters and sort options, including ACF fields"
 msgstr ""
 
-#: includes/Admin/ProPage.php:103
-#: includes/Admin/Upsell.php:88
-msgid "Search inside PDF, Word, Excel and PowerPoint files"
-msgstr ""
-
 #: includes/Admin/ProPage.php:105
-msgid "Bulk upload and CSV import, including updates by ID"
+msgid "Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and OpenDocument files"
 msgstr ""
 
 #: includes/Admin/ProPage.php:106
-msgid "\"My documents\" page for clients or staff"
+msgid "Download several documents from a table library as one ZIP"
+msgstr ""
+
+#: includes/Admin/ProPage.php:107
+msgid "Bulk upload and CSV import, including updates by ID"
 msgstr ""
 
 #: includes/Admin/ProPage.php:108
-msgid "Viewing"
-msgstr ""
-
-#: includes/Admin/ProPage.php:109
-msgid "Built-in PDF viewer with search, thumbnails, outline and links"
+msgid "\"My documents\" page for clients or staff"
 msgstr ""
 
 #: includes/Admin/ProPage.php:110
-msgid "Preview popup for PDFs, images, audio and video"
+msgid "Viewing"
 msgstr ""
 
 #: includes/Admin/ProPage.php:111
-msgid "QR code for every document"
+msgid "Built-in PDF viewer with search, thumbnails, outline and links"
 msgstr ""
 
 #: includes/Admin/ProPage.php:112
-msgid "Secure viewer: no download or print, a watermark with the reader's name on every page"
+msgid "Preview popup for PDFs, images, audio and video"
 msgstr ""
 
 #: includes/Admin/ProPage.php:113
-msgid "Downloaded PDFs stamped with the reader's details"
+msgid "Word, Excel and PowerPoint previews with Microsoft Office Online (opt-in)"
+msgstr ""
+
+#: includes/Admin/ProPage.php:114
+msgid "QR code for every document"
 msgstr ""
 
 #: includes/Admin/ProPage.php:115
-msgid "Access and sharing"
+msgid "Secure viewer for PDFs: no download or print, a watermark with the reader's name on every page"
 msgstr ""
 
 #: includes/Admin/ProPage.php:116
-msgid "Draft, private and password-protected documents"
-msgstr ""
-
-#: includes/Admin/ProPage.php:117
-msgid "Members-only documents by role, person or whole category"
+msgid "Downloaded PDFs stamped with the reader's details"
 msgstr ""
 
 #: includes/Admin/ProPage.php:118
-msgid "Private file storage, so file addresses can't be shared"
+msgid "Access and sharing"
 msgstr ""
 
 #: includes/Admin/ProPage.php:119
-msgid "Expiring share links, named per recipient, with open tracking"
+msgid "Draft, private and password-protected documents"
 msgstr ""
 
 #: includes/Admin/ProPage.php:120
-msgid "Email gate: name and email before download, with leads export"
+msgid "Members-only documents by role, person or whole category"
 msgstr ""
 
 #: includes/Admin/ProPage.php:121
-msgid "Daily download limits and Cloudflare Turnstile on forms"
+msgid "Private file storage, so file addresses can't be shared"
+msgstr ""
+
+#: includes/Admin/ProPage.php:122
+msgid "Expiring share links, named per recipient, with open tracking"
 msgstr ""
 
 #: includes/Admin/ProPage.php:123
-msgid "Compliance and insight"
+msgid "Email gate: name and email before download, with leads export"
 msgstr ""
 
 #: includes/Admin/ProPage.php:124
-msgid "Accessible format requests from visitors"
+msgid "Accept terms (licence or disclaimer) before opening, with each acceptance logged"
 msgstr ""
 
 #: includes/Admin/ProPage.php:125
-msgid "Activity log: views, downloads and blocked attempts, with CSV export"
-msgstr ""
-
-#: includes/Admin/ProPage.php:126
-msgid "Reading analytics: time per page and how far people read"
+msgid "Daily download limits and Cloudflare Turnstile on forms"
 msgstr ""
 
 #: includes/Admin/ProPage.php:127
-msgid "Search insights: what visitors look for and don't find"
+msgid "Compliance and insight"
 msgstr ""
 
 #: includes/Admin/ProPage.php:128
-msgid "Read and confirm, with reminders and evidence export"
+msgid "Accessible format requests from visitors"
 msgstr ""
 
 #: includes/Admin/ProPage.php:129
-msgid "Version history, review dates and automatic expiry"
+msgid "Activity log: views, downloads and blocked attempts, with CSV export"
+msgstr ""
+
+#: includes/Admin/ProPage.php:130
+msgid "Reading analytics: time per page and how far people read"
 msgstr ""
 
 #: includes/Admin/ProPage.php:131
-msgid "Publishing and integrations"
+msgid "Search insights: what visitors look for and don't find"
 msgstr ""
 
 #: includes/Admin/ProPage.php:132
-msgid "Post to PDF button with header, footer, custom CSS and PDF permissions"
+msgid "Read and confirm, with reminders and evidence export"
 msgstr ""
 
 #: includes/Admin/ProPage.php:133
-msgid "Text and image watermarks on Post to PDF"
-msgstr ""
-
-#: includes/Admin/ProPage.php:134
-msgid "Blocks, shortcodes and Elementor widgets"
+msgid "Version history, review dates and automatic expiry"
 msgstr ""
 
 #: includes/Admin/ProPage.php:135
-msgid "Move from Download Monitor, WordPress Download Manager or Barn2"
+msgid "Publishing and integrations"
 msgstr ""
 
 #: includes/Admin/ProPage.php:136
-msgid "Command palette and read-only abilities for AI agents"
+msgid "Post to PDF button with header, footer, custom CSS and PDF permissions"
 msgstr ""
 
 #: includes/Admin/ProPage.php:137
-msgid "Handbook PDF: many posts in one PDF with cover and contents"
+msgid "Text and image watermarks on Post to PDF"
 msgstr ""
 
 #: includes/Admin/ProPage.php:138
-msgid "AI assistant that suggests titles, summaries and tags"
+msgid "Blocks, shortcodes and Elementor widgets"
 msgstr ""
 
 #: includes/Admin/ProPage.php:139
-msgid "Webhooks, Slack and Teams posts, email subscriptions"
+msgid "Move from Download Monitor, WordPress Download Manager or Barn2"
 msgstr ""
 
 #: includes/Admin/ProPage.php:140
+msgid "Command palette and read-only abilities for AI agents"
+msgstr ""
+
+#: includes/Admin/ProPage.php:141
+msgid "Handbook PDF: many posts in one PDF with cover and contents"
+msgstr ""
+
+#: includes/Admin/ProPage.php:142
+msgid "AI assistant that suggests titles, summaries and tags"
+msgstr ""
+
+#: includes/Admin/ProPage.php:143
+msgid "Webhooks, Slack and Teams posts, email subscriptions"
+msgstr ""
+
+#: includes/Admin/ProPage.php:144
 msgid "Front-end document submissions"
 msgstr ""
 
-#: includes/Admin/ProPage.php:148
+#: includes/Admin/ProPage.php:152
 msgid "Included"
 msgstr ""
 
-#: includes/Admin/ProPage.php:149
+#: includes/Admin/ProPage.php:153
 msgid "Not included"
 msgstr ""
 
-#: includes/Admin/ProPage.php:150
+#: includes/Admin/ProPage.php:154
 msgid "Everything in the free plugin stays free, with no limits on documents or time. Pro is an add-on for sites that need to control access, prove who read what, and manage documents at scale."
 msgstr ""
 
-#: includes/Admin/ProPage.php:155
+#: includes/Admin/ProPage.php:159
 msgid "Add Pro when you need it"
 msgstr ""
 
-#: includes/Admin/ProPage.php:156
+#: includes/Admin/ProPage.php:160
 msgid "Pro installs next to this plugin. Your documents, pages and settings stay exactly as they are."
 msgstr ""
 
-#: includes/Admin/ProPage.php:159
+#: includes/Admin/ProPage.php:163
 msgid "See plans"
 msgstr ""
 
-#: includes/Admin/ProPage.php:160
+#: includes/Admin/ProPage.php:164
 msgid "I have a licence key"
 msgstr ""
 
-#: includes/Admin/ProPage.php:174
+#: includes/Admin/ProPage.php:178
 msgid "Learn more"
 msgstr ""
 
-#: includes/Admin/ProPage.php:186
+#: includes/Admin/ProPage.php:190
 msgid "Pro plans"
 msgstr ""
 
-#: includes/Admin/ProPage.php:187
+#: includes/Admin/ProPage.php:191
 msgid "Every plan includes every Pro feature. Plans differ only in the number of websites and the support."
 msgstr ""
 
-#: includes/Admin/ProPage.php:191
+#: includes/Admin/ProPage.php:195
 msgid "Most popular"
 msgstr ""
 
-#: includes/Admin/ProPage.php:194
+#: includes/Admin/ProPage.php:198
 msgid "per year"
 msgstr ""
 
 #. translators: %s: plan name
-#: includes/Admin/ProPage.php:197
+#: includes/Admin/ProPage.php:201
 #, php-format
 msgid "Buy %s"
 msgstr ""
 
 #. translators: %s: lifetime price
-#: includes/Admin/ProPage.php:201
+#: includes/Admin/ProPage.php:205
 #, php-format
 msgid "or $%s once, for life"
 msgstr ""
 
-#: includes/Admin/ProPage.php:202
+#: includes/Admin/ProPage.php:206
 msgid "Buy lifetime"
 msgstr ""
 
-#: includes/Admin/ProPage.php:206
+#: includes/Admin/ProPage.php:210
 msgid "Prices in US dollars. Secure checkout on store.mantrabrain.com."
 msgstr ""
 
-#: includes/Admin/ProPage.php:206
+#: includes/Admin/ProPage.php:210
 msgid "Refund policy"
 msgstr ""
 
@@ -2905,77 +3004,93 @@ msgstr ""
 msgid "A preview popup"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:89
+#. translators: %s: example date
+#: includes/Admin/Settings/General.php:92
+#, php-format
+msgid "Short (%s)"
+msgstr ""
+
+#. translators: %s: example date in the site's format
+#: includes/Admin/Settings/General.php:94
+#, php-format
+msgid "Your site's date format (%s)"
+msgstr ""
+
+#: includes/Admin/Settings/General.php:96
+msgid "How dates appear in libraries, lists and document cards. Change your site's format under Settings → General."
+msgstr ""
+
+#: includes/Admin/Settings/General.php:102
 msgid "Document pages"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:89
+#: includes/Admin/Settings/General.php:102
 msgid "Each document can have its own page with its description, the PDF viewer and a download button."
 msgstr ""
 
-#: includes/Admin/Settings/General.php:92
+#: includes/Admin/Settings/General.php:105
 msgid "Give each document its own page"
 msgstr ""
 
 #. translators: %s: example URL
-#: includes/Admin/Settings/General.php:101
+#: includes/Admin/Settings/General.php:114
 #, php-format
 msgid "Document pages live at %s"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:110
+#: includes/Admin/Settings/General.php:123
 msgid "Show PDFs in the viewer on their document page"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:117
+#: includes/Admin/Settings/General.php:130
 msgid "List related documents (same category or tags) under each document page"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:124
+#: includes/Admin/Settings/General.php:137
 msgid "Include documents in site search results"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:134
+#: includes/Admin/Settings/General.php:147
 msgid "Each document can change this in its sidebar."
 msgstr ""
 
-#: includes/Admin/Settings/General.php:136
+#: includes/Admin/Settings/General.php:149
 msgid "Downloads the file"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:137
+#: includes/Admin/Settings/General.php:150
 msgid "Opens the file in the browser (PDFs, images, text)"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:142
+#: includes/Admin/Settings/General.php:155
 msgid "Count downloads"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:143
+#: includes/Admin/Settings/General.php:156
 msgid "Search engines, link previews and repeated range requests are not counted."
 msgstr ""
 
-#: includes/Admin/Settings/General.php:150
+#: includes/Admin/Settings/General.php:163
 msgid "Accessibility"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:150
+#: includes/Admin/Settings/General.php:163
 msgid "Laws such as ADA Title II, the UK accessibility regulations and the European Accessibility Act expect public bodies and many businesses to provide documents in an accessible format when someone asks."
 msgstr ""
 
-#: includes/Admin/Settings/General.php:153
+#: includes/Admin/Settings/General.php:166
 msgid "Show \"Request an accessible version\" on document pages"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:154
+#: includes/Admin/Settings/General.php:167
 msgid "Visitors choose a format (accessible PDF, Word, large print…) and leave their email. Requests are listed in the Documents menu under Format requests (Reports → Format requests with Pro)."
 msgstr ""
 
-#: includes/Admin/Settings/General.php:160
+#: includes/Admin/Settings/General.php:173
 msgid "Send requests to"
 msgstr ""
 
-#: includes/Admin/Settings/General.php:161
+#: includes/Admin/Settings/General.php:174
 msgid "Empty uses the site admin email."
 msgstr ""
 
@@ -2993,7 +3108,7 @@ msgid "Page & protection"
 msgstr ""
 
 #: includes/Admin/Settings/PDF.php:45
-#: includes/Admin/Settings/PDF.php:134
+#: includes/Admin/Settings/PDF.php:147
 #: includes/Integrations/Elementor/DownloadWidget.php:50
 msgid "Style"
 msgstr ""
@@ -3007,126 +3122,150 @@ msgid "Size and spacing of every generated page."
 msgstr ""
 
 #: includes/Admin/Settings/PDF.php:90
-msgid "Orientation"
+msgid "Paper size"
 msgstr ""
 
 #: includes/Admin/Settings/PDF.php:95
-msgid "Portrait"
+msgid "A4 (210 × 297 mm)"
 msgstr ""
 
 #: includes/Admin/Settings/PDF.php:96
-msgid "Landscape"
+msgid "US Letter (8.5 × 11 in)"
+msgstr ""
+
+#: includes/Admin/Settings/PDF.php:97
+msgid "US Legal (8.5 × 14 in)"
+msgstr ""
+
+#: includes/Admin/Settings/PDF.php:98
+msgid "A5 (148 × 210 mm)"
 msgstr ""
 
 #: includes/Admin/Settings/PDF.php:99
-#: includes/Admin/Settings/PDF.php:165
+msgid "A3 (297 × 420 mm)"
+msgstr ""
+
+#: includes/Admin/Settings/PDF.php:103
+msgid "Orientation"
+msgstr ""
+
+#: includes/Admin/Settings/PDF.php:108
+msgid "Portrait"
+msgstr ""
+
+#: includes/Admin/Settings/PDF.php:109
+msgid "Landscape"
+msgstr ""
+
+#: includes/Admin/Settings/PDF.php:112
 #: includes/Admin/Settings/PDF.php:178
+#: includes/Admin/Settings/PDF.php:191
 msgid "Text size"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:100
+#: includes/Admin/Settings/PDF.php:113
 msgid "Left margin"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:101
+#: includes/Admin/Settings/PDF.php:114
 msgid "Right margin"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:102
+#: includes/Admin/Settings/PDF.php:115
 msgid "Top margin"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:102
+#: includes/Admin/Settings/PDF.php:115
 msgid "Leave room for the header."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:103
+#: includes/Admin/Settings/PDF.php:116
 msgid "Bottom margin"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:103
+#: includes/Admin/Settings/PDF.php:116
 msgid "Leave room for the footer."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:104
+#: includes/Admin/Settings/PDF.php:117
 msgid "Header distance"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:104
+#: includes/Admin/Settings/PDF.php:117
 msgid "Space between the top of the page and the header."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:106
+#: includes/Admin/Settings/PDF.php:119
 #: includes/Integrations/Elementor/LibraryWidget.php:52
 msgid "Columns"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:107
+#: includes/Admin/Settings/PDF.php:120
 msgid "Fill columns one after another instead of balancing their length ([document_engine_pdf_columns])"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:114
+#: includes/Admin/Settings/PDF.php:127
 msgid "Protection"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:114
+#: includes/Admin/Settings/PDF.php:127
 msgid "Encrypt PDFs and choose what readers may do with them."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:116
+#: includes/Admin/Settings/PDF.php:129
 msgid "Protect PDFs"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:117
+#: includes/Admin/Settings/PDF.php:130
 msgid "Encrypt generated PDFs"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:123
+#: includes/Admin/Settings/PDF.php:136
 msgid "Readers may"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:125
+#: includes/Admin/Settings/PDF.php:138
 msgid "Protection is applied when at least one permission is selected."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:134
+#: includes/Admin/Settings/PDF.php:147
 msgid "Make PDFs match your brand."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:136
+#: includes/Admin/Settings/PDF.php:149
 msgid "Theme styles"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:137
+#: includes/Admin/Settings/PDF.php:150
 msgid "Include your theme's stylesheet (custom CSS below still wins)"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:143
+#: includes/Admin/Settings/PDF.php:156
 msgid "Custom CSS"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:144
+#: includes/Admin/Settings/PDF.php:157
 msgid "Applied to every PDF. Example: <code>h2 { color: #1d4ed8; }</code>"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:161
+#: includes/Admin/Settings/PDF.php:174
 msgid "Header"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:161
+#: includes/Admin/Settings/PDF.php:174
 msgid "Shown at the top of every page."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:162
+#: includes/Admin/Settings/PDF.php:175
 msgid "Logo"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:162
+#: includes/Admin/Settings/PDF.php:175
 msgid "PNG or JPG, shown on the left."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:163
 #: includes/Admin/Settings/PDF.php:176
+#: includes/Admin/Settings/PDF.php:189
 #: includes/Integrations/Elementor/ListWidget.php:49
 #: includes/Integrations/Elementor/ViewerWidget.php:54
 #: includes/Integrations/Elementor/ViewerWidget.php:55
@@ -3134,100 +3273,100 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:163
 #: includes/Admin/Settings/PDF.php:176
+#: includes/Admin/Settings/PDF.php:189
 msgid "Post title"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:164
 #: includes/Admin/Settings/PDF.php:177
+#: includes/Admin/Settings/PDF.php:190
 msgid "Page numbers"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:165
 #: includes/Admin/Settings/PDF.php:178
+#: includes/Admin/Settings/PDF.php:191
 msgid "Empty uses the page text size."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:168
+#: includes/Admin/Settings/PDF.php:181
 msgid "Footer"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:168
+#: includes/Admin/Settings/PDF.php:181
 msgid "Shown at the bottom of every page."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:170
+#: includes/Admin/Settings/PDF.php:183
 msgid "Footer text"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:172
+#: includes/Admin/Settings/PDF.php:185
 msgid "For example your organization name or a disclaimer. Allowed HTML: a, br, em, strong, hr, p, h1–h6."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:193
+#: includes/Admin/Settings/PDF.php:206
 msgid "Download PDF button"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:193
+#: includes/Admin/Settings/PDF.php:206
 msgid "Adds a button to the chosen content types. You can also place it anywhere with the Save as PDF block or [document_engine_pdf_button]."
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:195
+#: includes/Admin/Settings/PDF.php:208
 msgid "Show on"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:201
+#: includes/Admin/Settings/PDF.php:214
 #: includes/Integrations/Elementor/DownloadWidget.php:51
 msgid "Button text"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:204
+#: includes/Admin/Settings/PDF.php:217
 #: includes/Helpers/settings.php:6
 msgid "Download PDF"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:207
+#: includes/Admin/Settings/PDF.php:220
 msgid "Placement"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:211
+#: includes/Admin/Settings/PDF.php:224
 msgid "Above the content"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:212
+#: includes/Admin/Settings/PDF.php:225
 msgid "Below the content"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:217
+#: includes/Admin/Settings/PDF.php:230
 msgid "Alignment"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:221
+#: includes/Admin/Settings/PDF.php:234
 msgid "Left"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:222
+#: includes/Admin/Settings/PDF.php:235
 msgid "Center"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:223
+#: includes/Admin/Settings/PDF.php:236
 msgid "Right"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:228
+#: includes/Admin/Settings/PDF.php:241
 msgid "When clicked"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:232
+#: includes/Admin/Settings/PDF.php:245
 msgid "Download the PDF"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:233
+#: includes/Admin/Settings/PDF.php:246
 msgid "Open the PDF in a new tab"
 msgstr ""
 
-#: includes/Admin/Settings/PDF.php:256
+#: includes/Admin/Settings/PDF.php:269
 msgid "Preview PDF"
 msgstr ""
 
@@ -3404,6 +3543,10 @@ msgstr ""
 
 #: includes/Admin/Upsell.php:87
 msgid "Review and expiry dates with reminder emails"
+msgstr ""
+
+#: includes/Admin/Upsell.php:88
+msgid "Search inside PDF, Word, Excel and PowerPoint files"
 msgstr ""
 
 #: includes/Admin/Upsell.php:103
@@ -3693,7 +3836,7 @@ msgid "No documents found in Trash."
 msgstr ""
 
 #: includes/Documents/PostType.php:57
-#: includes/Library/Query.php:58
+#: includes/Library/Query.php:60
 msgid "Thumbnail"
 msgstr ""
 
@@ -3867,7 +4010,7 @@ msgstr ""
 
 #: includes/Integrations/Abilities.php:55
 #: includes/Library/Library.php:124
-#: includes/Library/SearchBox.php:85
+#: includes/Library/SearchBox.php:113
 msgid "Search documents"
 msgstr ""
 
@@ -3909,31 +4052,31 @@ msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
 #: includes/Library/Library.php:152
-#: includes/Library/Query.php:89
+#: includes/Library/Query.php:91
 msgid "Tag"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:161
-#: includes/Library/Query.php:90
+#: includes/Library/Library.php:172
+#: includes/Library/Query.php:92
 msgid "File type"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:167
-#: includes/Library/Query.php:91
+#: includes/Library/Library.php:178
+#: includes/Library/Query.php:93
 msgid "Year"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:173
-#: includes/Library/Query.php:67
-#: includes/Library/Query.php:92
+#: includes/Library/Library.php:184
+#: includes/Library/Query.php:69
+#: includes/Library/Query.php:94
 msgid "Author"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Query.php:93
+#: includes/Library/Query.php:95
 msgid "Sort order"
 msgstr ""
 
@@ -3950,7 +4093,7 @@ msgid "Order by"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:57
-#: includes/Library/Query.php:59
+#: includes/Library/Query.php:61
 msgid "Title"
 msgstr ""
 
@@ -4041,7 +4184,7 @@ msgid "— Choose a document —"
 msgstr ""
 
 #: includes/Library/Library.php:126
-#: includes/Library/SearchBox.php:88
+#: includes/Library/SearchBox.php:116
 msgid "Search documents…"
 msgstr ""
 
@@ -4049,99 +4192,116 @@ msgstr ""
 msgid "All tags"
 msgstr ""
 
-#: includes/Library/Library.php:167
+#: includes/Library/Library.php:178
 msgid "All years"
 msgstr ""
 
-#: includes/Library/Library.php:173
+#: includes/Library/Library.php:184
 msgid "All authors"
 msgstr ""
 
-#: includes/Library/Library.php:181
+#: includes/Library/Library.php:197
 msgid "Sort by"
 msgstr ""
 
-#: includes/Library/Library.php:181
+#: includes/Library/Library.php:197
 msgid "Default order"
 msgstr ""
 
-#: includes/Library/Library.php:184
-#: includes/Library/SearchBox.php:90
+#: includes/Library/Library.php:203
+#: includes/Library/SearchBox.php:118
 msgid "Search"
 msgstr ""
 
 #. translators: %s: search terms
-#: includes/Library/Library.php:341
+#: includes/Library/Library.php:393
 #, php-format
 msgid "“%s”"
 msgstr ""
 
 #. translators: %s: number of documents
-#: includes/Library/Library.php:375
+#: includes/Library/Library.php:427
 #, php-format
 msgid "%s document"
 msgid_plural "%s documents"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Library/Library.php:379
+#: includes/Library/Library.php:431
 msgid "Remove filter"
 msgstr ""
 
-#: includes/Library/Library.php:382
+#: includes/Library/Library.php:434
 msgid "Clear all"
 msgstr ""
 
-#: includes/Library/Library.php:416
+#: includes/Library/Library.php:468
 msgid "Other documents"
 msgstr ""
 
 #. translators: %d: number of documents
-#: includes/Library/Library.php:454
+#: includes/Library/Library.php:506
 #, php-format
 msgid "Show all %d documents"
 msgstr ""
 
-#: includes/Library/Library.php:488
+#. translators: %s: column name
+#: includes/Library/Library.php:560
+#, php-format
+msgid "Sort by %s"
+msgstr ""
+
+#: includes/Library/Library.php:569
+#: includes/Library/Library.php:578
 msgid "Documents pages"
 msgstr ""
 
+#. translators: 1: documents shown, 2: total documents
+#: includes/Library/Library.php:571
+#, php-format
+msgid "Showing %1$s of %2$s documents"
+msgstr ""
+
+#: includes/Library/Library.php:573
+msgid "Load more"
+msgstr ""
+
 #. translators: 1: current page, 2: total pages, 3: number of documents
-#: includes/Library/Library.php:491
+#: includes/Library/Library.php:581
 #, php-format
 msgid "Page %1$d of %2$d · %3$s documents"
 msgstr ""
 
-#: includes/Library/Library.php:499
+#: includes/Library/Library.php:589
 msgid "Previous"
 msgstr ""
 
-#: includes/Library/Library.php:514
+#: includes/Library/Library.php:604
 msgid "Next"
 msgstr ""
 
-#: includes/Library/Library.php:609
+#: includes/Library/Library.php:699
 #: templates/library/grid.php:35
 msgid "Members only"
 msgstr ""
 
 #. translators: %s: document title
-#: includes/Library/Library.php:669
+#: includes/Library/Library.php:759
 #, php-format
 msgid "View %s"
 msgstr ""
 
-#: includes/Library/Library.php:671
+#: includes/Library/Library.php:761
 msgid "View"
 msgstr ""
 
 #. translators: 1: Download/Open, 2: document title
-#: includes/Library/Library.php:677
+#: includes/Library/Library.php:767
 #, php-format
 msgid "%1$s %2$s"
 msgstr ""
 
-#: includes/Library/Library.php:715
+#: includes/Library/Library.php:809
 msgid "Choose a published document for this download block."
 msgstr ""
 
@@ -4153,44 +4313,60 @@ msgstr ""
 msgid "No documents to list yet."
 msgstr ""
 
-#: includes/Library/Query.php:49
+#: includes/Library/Query.php:51
 msgid "Table"
 msgstr ""
 
-#: includes/Library/Query.php:50
+#: includes/Library/Query.php:52
 msgid "Grid"
 msgstr ""
 
-#: includes/Library/Query.php:51
+#: includes/Library/Query.php:53
 msgid "Folders"
 msgstr ""
 
-#: includes/Library/Query.php:60
+#: includes/Library/Query.php:62
 msgid "Description"
 msgstr ""
 
-#: includes/Library/Query.php:63
+#: includes/Library/Query.php:65
 msgid "Type"
 msgstr ""
 
-#: includes/Library/Query.php:64
+#: includes/Library/Query.php:66
 msgid "Size"
 msgstr ""
 
-#: includes/Library/Query.php:100
+#: includes/Library/Query.php:102
 msgid "Newest first"
 msgstr ""
 
-#: includes/Library/Query.php:101
+#: includes/Library/Query.php:103
 msgid "Oldest first"
 msgstr ""
 
-#: includes/Library/Query.php:102
+#: includes/Library/Query.php:104
 msgid "Title A–Z"
 msgstr ""
 
-#: includes/Library/Query.php:103
+#: includes/Library/Query.php:105
 msgid "Title Z–A"
+msgstr ""
+
+#: includes/Library/Query.php:117
+msgid "Least recently updated"
+msgstr ""
+
+#: includes/Library/Query.php:118
+msgid "Least downloaded"
+msgstr ""
+
+#: includes/Library/Query.php:119
+msgid "Largest first"
+msgstr ""
+
+#: includes/Library/Query.php:120
+msgid "Smallest first"
 msgstr ""
 
 #: includes/Library/Rest.php:64
@@ -4203,11 +4379,11 @@ msgstr ""
 msgid "You do not have access to this document."
 msgstr ""
 
-#: includes/Library/Rest.php:95
+#: includes/Library/Rest.php:98
 msgid "Invalid library settings."
 msgstr ""
 
-#: includes/Library/SearchBox.php:68
+#: includes/Library/SearchBox.php:96
 msgid "Choose the page with your document library for this search box."
 msgstr ""
 

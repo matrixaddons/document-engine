@@ -121,3 +121,34 @@ if (!function_exists('document_engine_enqueue_frontend')) {
         }
     }
 }
+
+if (!function_exists('document_engine_office_embed_url')) {
+    /**
+     * Microsoft Office Online viewer URL for a Word, Excel or PowerPoint document, or '' when not available.
+     *
+     * Off unless enabled (Document Engine Pro, or the `document_engine_office_preview` filter). Microsoft
+     * fetches the file from its public address, so only documents anyone may open, on a public site, qualify.
+     */
+    function document_engine_office_embed_url(\MatrixAddons\DocumentEngine\Documents\Document $document)
+    {
+        if (!apply_filters('document_engine_office_preview', false, $document) || !$document->has_file()) {
+            return '';
+        }
+        $limits = array('doc' => 10, 'docx' => 10, 'odt' => 10, 'ppt' => 10, 'pptx' => 10, 'pps' => 10, 'ppsx' => 10, 'odp' => 10, 'xls' => 5, 'xlsx' => 5, 'ods' => 5);
+        $ext = $document->get_extension();
+        if (!isset($limits[$ext]) || ($document->get_size() && $document->get_size() > $limits[$ext] * MB_IN_BYTES)) {
+            return '';
+        }
+        $post = $document->get_post();
+        if ($post->post_status !== 'publish' || $post->post_password !== '' || !\MatrixAddons\DocumentEngine\Documents\FileServer::can_access($document, 0, 'view')) {
+            return '';
+        }
+        $src = $document->is_external() ? $document->get_external_url() : $document->get_download_url(array('view' => 1));
+        $host = (string)wp_parse_url($src, PHP_URL_HOST);
+        if ($host === '' || in_array($host, array('localhost', '127.0.0.1', '::1'), true) || preg_match('/\.(local|test|localhost)$/', $host)) {
+            return ''; // Microsoft can't reach private or local addresses.
+        }
+        return (string)apply_filters('document_engine_office_embed_url', 'https://view.officeapps.live.com/op/embed.aspx?src=' . rawurlencode($src), $document);
+    }
+}
+

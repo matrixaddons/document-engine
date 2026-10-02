@@ -103,6 +103,10 @@ class DocsContent
                             __('<strong>Shareable</strong>: the page address carries the search and filters (for example <code>?dl_cat=policies,forms</code>).', 'document-engine'),
                             __('<strong>Columns</strong> (table) or card details (grid): thumbnail, title, description, category, tags, type, size, date, updated, author, downloads, download button.', 'document-engine'),
                             __('Several libraries on one page each keep their own search and filters.', 'document-engine'),
+                            __('<strong>Sorting</strong>: visitors click the Title, Date, Updated, Size or Downloads heading of a table to sort; a second click reverses the order. Switch it off in the block settings (Sort by clicking column headings).', 'document-engine'),
+                            __('<strong>Pagination</strong>: page numbers, or a <strong>"Load more"</strong> button that adds the next documents below the ones already shown (block setting Pagination style, or <code>pagination_style="load-more"</code>).', 'document-engine'),
+                            __('<strong>Dates</strong> use a short format (Sep 25, 2026) or your site\'s date format: Settings → Documents → Dates.', 'document-engine'),
+                            __('<strong>Google Analytics</strong>: if your site loads GA4 or Google Tag Manager, every download sends a <code>file_download</code> event with the document name.', 'document-engine'),
                         )),
                         array('note', __('Folder view lists each category as a folder. When a visitor searches or filters, it switches to a flat result list.', 'document-engine')),
                     )),
@@ -138,7 +142,7 @@ class DocsContent
                         array('p', __('Settings → Documents → <strong>Related documents</strong> adds a related list under each document page automatically.', 'document-engine')),
                     )),
                     'search-box' => array(__('Search box for your header or sidebar', 'document-engine'), false, array(
-                        array('p', __('The Document Search block (or <code>[document_engine_search page="123"]</code>) shows a search field anywhere. Choose the page that holds your library; searches land there with results already filtered. It finds the library on that page automatically.', 'document-engine')),
+                        array('p', __('The Document Search block (or <code>[document_engine_search page="123"]</code>) shows a search field anywhere. Choose the page that holds your library; searches land there with results already filtered. If you do not choose one, it uses the first published page with a Document Library.', 'document-engine')),
                     )),
                     'qr' => array(__('QR codes', 'document-engine'), false, array(
                         array('p', __('Every published document has a QR code in the editor sidebar (Document file panel → QR code → Show). Download it as PNG or SVG for printed notices, posters or meeting packs. The code points to the document\'s page.', 'document-engine')),
@@ -147,7 +151,7 @@ class DocsContent
                         array('p', __('Adds a "Download PDF" button to posts, pages or other post types that turns the content into a PDF, generated on your server.', 'document-engine')),
                         array('ul', array(
                             __('Choose where the button appears in Settings → Post to PDF → Button (post types, text, placement, alignment, download or open).', 'document-engine'),
-                            __('Header and footer (logo, title, page numbers), orientation, margins and text size (pages are A4), theme styles or custom CSS.', 'document-engine'),
+                            __('Header and footer (logo, title, page numbers), paper size (A4, US Letter, US Legal, A5 or A3), orientation, margins and text size, theme styles or custom CSS. Sites in a right-to-left language get right-to-left PDFs.', 'document-engine'),
                             __('Protection: optionally stop readers printing, copying or editing the PDF (PDF permissions).', 'document-engine'),
                             __('Document Engine Pro adds text and image watermarks, with placeholders such as {name} and {date}, and Handbook PDFs that combine many posts.', 'document-engine'),
                             __('Content shortcodes: <code>[document_engine_pdf_remove]</code> hides content from the PDF, <code>[document_engine_pdf_page_break]</code> starts a new page, <code>[document_engine_pdf_columns]</code> and <code>[document_engine_pdf_column_break]</code> lay out columns.', 'document-engine'),
@@ -215,6 +219,19 @@ class DocsContent
                     )),
                     'gate' => array(__('Email gate and leads', 'document-engine'), true, array(
                         array('p', __('Ask for a name and email (and optionally organization) before a download, with your consent text. Switch it on per document or for all documents. Logged-in users and visitors who already filled the form (for a number of days) go straight through. Leads are listed under Reports → Leads, can be exported, sent to a webhook or emailed to you, and deleted after a retention period.', 'document-engine')),
+                    )),
+                    'terms' => array(__('Accept terms before opening', 'document-engine'), true, array(
+                        array('p', __('Ask everyone, logged in or not, to tick "I agree" to your terms (a licence, disclaimer, embargo or confidentiality notice) before a document opens. Switch it on per document (Access & security → Accept terms) or for all documents, and set the heading, the terms and the checkbox text in Settings → Access & Pro → Email gate & terms.', 'document-engine')),
+                        array('ul', array(
+                            __('The document page shows the terms instead of the viewer until they are accepted; direct file links go to the same form.', 'document-engine'),
+                            __('Each acceptance is recorded in the activity log ("Accepted terms") with the person or visitor and the date.', 'document-engine'),
+                            __('Acceptance is remembered per document. Changing the wording of the terms asks everyone again.', 'document-engine'),
+                            __('Editors who can edit the document are never asked. With an email gate too, visitors give their details first, then accept the terms.', 'document-engine'),
+                        )),
+                    )),
+                    'office-preview' => array(__('Office previews (Word, Excel, PowerPoint)', 'document-engine'), true, array(
+                        array('p', __('Switch on Settings → Access & Pro → Office previews to show Word, Excel and PowerPoint files on their document page and in the preview popup, using Microsoft\'s free Office Online viewer.', 'document-engine')),
+                        array('note', __('Microsoft downloads the file from your site to display it, so only documents anyone may open are previewed: restricted, secure-viewer, email-gate and terms documents never are. Files up to 10 MB (Word, PowerPoint) or 5 MB (Excel). Your site must be reachable from the internet, so previews don\'t appear on local or staging sites. Mention Microsoft in your privacy policy.', 'document-engine')),
                     )),
                     'analytics' => array(__('Activity, reading analytics and searches', 'document-engine'), true, array(
                         array('ul', array(
@@ -294,6 +311,7 @@ class DocsContent
                             array(__('Download counter', 'document-engine'), __('On', 'document-engine'), __('Counts downloads (known bots are ignored).', 'document-engine')),
                             array(__('Format requests', 'document-engine'), __('Off', 'document-engine'), __('Accessible format request form; requests go to the email you set.', 'document-engine')),
                             array(__('Library: layout, per page, View button, View opens', 'document-engine'), __('Table, 20, on, page', 'document-engine'), __('Defaults for new libraries.', 'document-engine')),
+                            array(__('Dates', 'document-engine'), __('Short', 'document-engine'), __('Short dates (Sep 25, 2026) or your site\'s date format in libraries, lists and cards.', 'document-engine')),
                         ), array(__('Setting', 'document-engine'), __('Default', 'document-engine'), __('Effect', 'document-engine'))),
                     )),
                     'settings-viewer' => array(__('Settings → PDF Viewer', 'document-engine'), false, array(
@@ -314,6 +332,7 @@ class DocsContent
                             array(__('Access', 'document-engine'), __('Restricted documents in lists (lock or hide), protect files automatically (on), share link lifetime (7 days).', 'document-engine')),
                             array(__('Secure viewer', 'document-engine'), __('Which documents use it (only where switched on / all restricted / all), watermark pattern, block downloads, stamp downloads.', 'document-engine')),
                             array(__('Activity log', 'document-engine'), __('Log activity, reading time, searches, logged-out visitors; keep entries for 365 days.', 'document-engine')),
+                            array(__('Office previews', 'document-engine'), __('Preview Word, Excel and PowerPoint files with Microsoft Office Online (off).', 'document-engine')),
                             array(__('Email gate', 'document-engine'), __('Default (off), organization field, heading, consent text, remember visitors (30 days), webhook, lead retention, new-lead email.', 'document-engine')),
                             array(__('Review & submissions', 'document-engine'), __('Review reminder emails and recipients; who can submit, new submission status, file types and size.', 'document-engine')),
                             array(__('Acknowledgements', 'document-engine'), __('Default statement; reminder emails.', 'document-engine')),

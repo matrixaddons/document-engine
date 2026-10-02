@@ -67,6 +67,7 @@ class ProPage
                 __('Protected storage: files move out of the public uploads folder and are only served to people allowed to open them', 'document-engine'),
                 __('Secure viewer: hide download and print, block copying, and stamp each page with the viewer\'s name, email and time', 'document-engine'),
                 __('Email gate: ask for name and email (with consent) before a download, with CSV export and webhooks', 'document-engine'),
+                __('Accept terms: everyone agrees to your licence or disclaimer before opening a document, and each acceptance is logged', 'document-engine'),
             ),
             __('Know what happens', 'document-engine') => array(
                 __('Audit log of every view, download and denied request, per user, with CSV export and retention settings', 'document-engine'),
@@ -99,6 +100,7 @@ class ProPage
                 array(__('Documents with their own pages, file details and a download counter', 'document-engine'), true, true, 'documents'),
                 array(__('Libraries as a table, grid or folders, with instant search', 'document-engine'), true, true, 'library'),
                 array(__('Filters by category, tag, file type, year and author, with multi-select and counts', 'document-engine'), true, true, 'library'),
+                array(__('Sort by clicking column headings; page numbers or a "Load more" button', 'document-engine'), true, true, 'library'),
                 array(__('Your own fields (reference, department, dates…) as columns, filters and sort options, including ACF fields', 'document-engine'), false, true, 'fields'),
                 array(__('Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and OpenDocument files', 'document-engine'), false, true, 'ai'),
                 array(__('Download several documents from a table library as one ZIP', 'document-engine'), false, true, 'portal'),
@@ -108,6 +110,7 @@ class ProPage
             __('Viewing', 'document-engine') => array(
                 array(__('Built-in PDF viewer with search, thumbnails, outline and links', 'document-engine'), true, true, 'viewer'),
                 array(__('Preview popup for PDFs, images, audio and video', 'document-engine'), true, true, 'preview'),
+                array(__('Word, Excel and PowerPoint previews with Microsoft Office Online (opt-in)', 'document-engine'), false, true, 'office-preview'),
                 array(__('QR code for every document', 'document-engine'), true, true, 'qr'),
                 array(__('Secure viewer for PDFs: no download or print, a watermark with the reader\'s name on every page', 'document-engine'), false, true, 'secure'),
                 array(__('Downloaded PDFs stamped with the reader\'s details', 'document-engine'), false, true, 'secure'),
@@ -118,6 +121,7 @@ class ProPage
                 array(__('Private file storage, so file addresses can\'t be shared', 'document-engine'), false, true, 'access'),
                 array(__('Expiring share links, named per recipient, with open tracking', 'document-engine'), false, true, 'share'),
                 array(__('Email gate: name and email before download, with leads export', 'document-engine'), false, true, 'gate'),
+                array(__('Accept terms (licence or disclaimer) before opening, with each acceptance logged', 'document-engine'), false, true, 'terms'),
                 array(__('Daily download limits and Cloudflare Turnstile on forms', 'document-engine'), false, true, 'protection'),
             ),
             __('Compliance and insight', 'document-engine') => array(

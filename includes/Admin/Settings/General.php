@@ -82,6 +82,19 @@ class General extends Setting_Base
                         'popup' => __('A preview popup', 'document-engine'),
                     ),
                 ),
+                array(
+                    'title' => __('Dates', 'document-engine'),
+                    'id' => 'document_engine_date_format',
+                    'type' => 'select',
+                    'default' => 'short',
+                    'options' => array(
+                        /* translators: %s: example date */
+                        'short' => sprintf(__('Short (%s)', 'document-engine'), wp_date('M j, Y')),
+                        /* translators: %s: example date in the site's format */
+                        'site' => sprintf(__('Your site\'s date format (%s)', 'document-engine'), wp_date((string)get_option('date_format', 'F j, Y'))),
+                    ),
+                    'desc' => __('How dates appear in libraries, lists and document cards. Change your site\'s format under Settings → General.', 'document-engine'),
+                ),
                 array('type' => 'sectionend', 'id' => 'document_engine_library_options'),
             );
         } else {

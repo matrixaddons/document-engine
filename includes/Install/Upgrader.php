@@ -48,6 +48,10 @@ class Upgrader
             }
         }
 
+        if ($stored !== '' && version_compare($stored, '2.0.6', '<')) {
+            \MatrixAddons\DocumentEngine\Admin\Documents::repair_file_meta();
+        }
+
         update_option(self::OPTION, DOCUMENT_ENGINE_VERSION);
         update_option('document_engine_flush_rewrite', 'yes');
 

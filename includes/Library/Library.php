@@ -157,6 +157,17 @@ class Library
                 if (!empty($settings['file_types'])) {
                     $labels = array_intersect_key($labels, array_flip($settings['file_types']));
                 }
+                // Only the kinds of file this site has, with counts like categories and tags.
+                $counts = self::type_counts();
+                $picked = Query::values($state['type']);
+                foreach ($labels as $group => $label) {
+                    $n = isset($counts[$group]) ? $counts[$group] : 0;
+                    if (!$n && !in_array($group, $picked, true)) {
+                        unset($labels[$group]);
+                        continue;
+                    }
+                    $labels[$group] = $label . ' (' . number_format_i18n($n) . ')';
+                }
                 if (count($labels) > 1) {
                     $choice('type', __('File type', 'document-engine'), __('All file types', 'document-engine'), $labels);
                 }
@@ -178,7 +189,15 @@ class Library
              */
             do_action('document_engine_library_controls', $settings, $state, $uid, $p);
             if (in_array('sort', $filters, true)) {
-                self::select($uid . '-sort', $p . 'sort', __('Sort by', 'document-engine'), __('Default order', 'document-engine'), Query::sort_options(), $state['sort']);
+                $sorts = Query::sort_options();
+                // A heading-only order (e.g. largest first) stays selected after a reload.
+                if ($state['sort'] !== '' && !isset($sorts[$state['sort']])) {
+                    $sorts[$state['sort']] = Query::sort_keys()[$state['sort']];
+                }
+                self::select($uid . '-sort', $p . 'sort', __('Sort by', 'document-engine'), __('Default order', 'document-engine'), $sorts, $state['sort']);
+            } elseif (!empty($settings['sortable'])) {
+                // Keeps the order chosen by clicking a column heading when visitors then search or filter.
+                echo '<input type="hidden" name="' . esc_attr($p) . 'sort" value="' . esc_attr($state['sort']) . '">';
             }
             ?>
             <button type="submit" class="dengine-button dengine-library__submit"><?php esc_html_e('Search', 'document-engine'); ?></button>
@@ -233,6 +252,39 @@ class Library
             $options[(string)$year] = (string)$year;
         }
         return $options;
+    }
+
+    /**
+     * Published documents per file-type group (pdf, word, image…), cached until a document changes.
+     */
+    private static function type_counts()
+    {
+        $counts = get_transient('dengine_library_types');
+        if (!is_array($counts)) {
+            global $wpdb;
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT pm.meta_value AS ext, COUNT(*) AS n FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE pm.meta_key = %s AND p.post_type = %s AND p.post_status = 'publish' GROUP BY pm.meta_value",
+                Document::META_FILE_TYPE,
+                PostType::POST_TYPE
+            ));
+            $counts = array();
+            $known = Query::all_known_extensions();
+            foreach ((array)$rows as $row) {
+                $group = 'other';
+                if (in_array($row->ext, $known, true)) {
+                    foreach (array_keys(document_engine_file_type_groups_labels()) as $g) {
+                        if ($g !== 'other' && in_array($row->ext, Query::extensions_for_group($g), true)) {
+                            $group = $g;
+                            break;
+                        }
+                    }
+                }
+                $counts[$group] = (isset($counts[$group]) ? $counts[$group] : 0) + (int)$row->n;
+            }
+            set_transient('dengine_library_types', $counts, DAY_IN_SECONDS);
+        }
+        return $counts;
     }
 
     private static function author_options()
@@ -482,9 +534,47 @@ class Library
         document_engine_get_template('library/folder-list.php', array('settings' => $settings, 'documents' => $documents));
     }
 
+    /**
+     * A table heading: a link that sorts by the column (and reverses on a second click) when sortable.
+     */
+    public static function column_heading($column, $label, $settings, $state)
+    {
+        $map = Query::sortable_columns();
+        if (empty($settings['sortable']) || !isset($map[$column])) {
+            return array('', esc_html($label));
+        }
+        list($orderby, $first) = $map[$column];
+        $current = $state['sort'] !== '' ? explode('-', $state['sort']) : array($settings['orderby'], $settings['order']);
+        $active = $current[0] === $orderby;
+        $dir = $active ? $current[1] : '';
+        $next = $active ? ($dir === 'asc' ? 'desc' : 'asc') : $first;
+        $key = $orderby . '-' . $next;
+        if (!array_key_exists($key, Query::sort_keys())) {
+            return array('', esc_html($label));
+        }
+        $aria = $active ? ($dir === 'asc' ? 'ascending' : 'descending') : 'none';
+        $arrow = $active ? ($dir === 'asc' ? '↑' : '↓') : '↕';
+        $html = '<a class="dengine-sort' . ($active ? ' is-active' : '') . '" data-dengine-nav href="' . esc_url(self::url_for($settings, array_merge($state, array('sort' => $key, 'page' => 1)))) . '">'
+            . esc_html($label) . '<span class="dengine-sort__icon" aria-hidden="true">' . $arrow . '</span>'
+            /* translators: %s: column name */
+            . '<span class="screen-reader-text">' . esc_html(sprintf(__('Sort by %s', 'document-engine'), $label)) . '</span></a>';
+        return array($aria, $html);
+    }
+
     private static function render_pagination($settings, $state, $pages, $total)
     {
         $current = min($state['page'], $pages);
+        if ($settings['pagination_style'] === 'load-more') {
+            $shown = min($total, $current * $settings['per_page']);
+            echo '<nav class="dengine-pagination dengine-pagination--more" aria-label="' . esc_attr__('Documents pages', 'document-engine') . '">';
+            /* translators: 1: documents shown, 2: total documents */
+            echo '<span class="dengine-pagination__summary" aria-live="polite">' . esc_html(sprintf(__('Showing %1$s of %2$s documents', 'document-engine'), number_format_i18n($shown), number_format_i18n($total))) . '</span>';
+            if ($current < $pages) {
+                echo '<a class="dengine-button dengine-button--ghost dengine-load-more" data-page="' . esc_attr($current + 1) . '" href="' . esc_url(self::url_for($settings, array_merge($state, array('page' => $current + 1)))) . '" rel="next">' . esc_html__('Load more', 'document-engine') . '</a>';
+            }
+            echo '</nav>';
+            return;
+        }
         echo '<nav class="dengine-pagination" aria-label="' . esc_attr__('Documents pages', 'document-engine') . '">';
         echo '<span class="dengine-pagination__summary">'
             /* translators: 1: current page, 2: total pages, 3: number of documents */
@@ -689,6 +779,9 @@ class Library
      */
     public static function previewable(Document $document)
     {
+        if (document_engine_office_embed_url($document) !== '') {
+            return true;
+        }
         if (!$document->has_file() || ($document->is_external() && !$document->is_pdf())) {
             return false;
         }
@@ -701,7 +794,8 @@ class Library
      */
     public static function short_date(Document $document, $modified = false)
     {
-        $format = apply_filters('document_engine_short_date_format', 'M j, Y');
+        $format = get_option('document_engine_date_format', 'short') === 'site' ? (string)get_option('date_format', 'M j, Y') : 'M j, Y';
+        $format = apply_filters('document_engine_short_date_format', $format);
         return $modified ? get_the_modified_date($format, $document->get_post()) : get_the_date($format, $document->get_post());
     }
 

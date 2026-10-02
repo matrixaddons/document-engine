@@ -87,6 +87,19 @@ class PDF extends Setting_Base
             $settings = array(
                 array('title' => __('Page', 'document-engine'), 'type' => 'title', 'desc' => __('Size and spacing of every generated page.', 'document-engine'), 'id' => 'document_engine_pdf_page_options'),
                 array(
+                    'title' => __('Paper size', 'document-engine'),
+                    'id' => 'document_engine_pdf_page_size',
+                    'type' => 'select',
+                    'default' => 'A4',
+                    'options' => array(
+                        'A4' => __('A4 (210 × 297 mm)', 'document-engine'),
+                        'Letter' => __('US Letter (8.5 × 11 in)', 'document-engine'),
+                        'Legal' => __('US Legal (8.5 × 14 in)', 'document-engine'),
+                        'A5' => __('A5 (148 × 210 mm)', 'document-engine'),
+                        'A3' => __('A3 (297 × 420 mm)', 'document-engine'),
+                    ),
+                ),
+                array(
                     'title' => __('Orientation', 'document-engine'),
                     'id' => 'document_engine_pdf_page_orientation',
                     'type' => 'select',

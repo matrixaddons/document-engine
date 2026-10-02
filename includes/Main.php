@@ -63,12 +63,14 @@ final class Main
         \MatrixAddons\DocumentEngine\Migrate\Compat::init();
         \MatrixAddons\DocumentEngine\Accessibility\Requests::init();
         \MatrixAddons\DocumentEngine\Integrations\Elementor\Widgets::init();
+        \MatrixAddons\DocumentEngine\Integrations\Analytics::init();
         Rest::init();
         Viewer::init();
         Cache::init();
         Diagnostics\SiteHealth::init();
         new Template();
 
+        \MatrixAddons\DocumentEngine\Admin\Documents::init_sync();
         if (is_admin()) {
             new \MatrixAddons\DocumentEngine\Admin\Main();
         }

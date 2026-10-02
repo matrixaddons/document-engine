@@ -116,6 +116,28 @@ function Edit({ attributes, setAttributes, clientId }) {
 						/>
 					)}
 					{a.layout !== 'folders' && <ToggleControl __nextHasNoMarginBottom label={__('Pagination', 'document-engine')} checked={a.pagination} onChange={(pagination) => setAttributes({ pagination })} />}
+					{a.layout !== 'folders' && a.pagination && (
+						<SelectControl
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
+							label={__('Pagination style', 'document-engine')}
+							value={a.paginationStyle || 'numbers'}
+							options={[
+								{ label: __('Page numbers', 'document-engine'), value: 'numbers' },
+								{ label: __('"Load more" button', 'document-engine'), value: 'load-more' },
+							]}
+							onChange={(paginationStyle) => setAttributes({ paginationStyle })}
+						/>
+					)}
+					{a.layout === 'table' && (
+						<ToggleControl
+							__nextHasNoMarginBottom
+							label={__('Sort by clicking column headings', 'document-engine')}
+							help={__('Title, date, size and downloads headings sort the table; a second click reverses the order.', 'document-engine')}
+							checked={a.sortable !== false}
+							onChange={(sortable) => setAttributes({ sortable })}
+						/>
+					)}
 					<SelectControl
 						__next40pxDefaultSize
 						__nextHasNoMarginBottom

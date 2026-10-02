@@ -36,6 +36,8 @@ class Query
             'show_excerpt' => true,
             'link_to' => get_option('document_engine_single_pages', 'yes') === 'yes' ? 'document' : 'file',
             'pagination' => true,
+            'pagination_style' => 'numbers',
+            'sortable' => true,
             'folder_limit' => 50,
             'open_folders' => false,
             'multi_filters' => false,
@@ -107,6 +109,33 @@ class Query
     }
 
     /**
+     * Every accepted sort: the dropdown's options plus the reverse orders used by clickable column headings.
+     */
+    public static function sort_keys()
+    {
+        return self::sort_options() + array(
+            'modified-asc' => __('Least recently updated', 'document-engine'),
+            'downloads-asc' => __('Least downloaded', 'document-engine'),
+            'size-desc' => __('Largest first', 'document-engine'),
+            'size-asc' => __('Smallest first', 'document-engine'),
+        );
+    }
+
+    /**
+     * Table columns visitors can sort by clicking the heading: column => array(orderby, first direction).
+     */
+    public static function sortable_columns()
+    {
+        return apply_filters('document_engine_library_sortable_columns', array(
+            'title' => array('title', 'asc'),
+            'date' => array('date', 'desc'),
+            'updated' => array('modified', 'desc'),
+            'downloads' => array('downloads', 'desc'),
+            'size' => array('size', 'desc'),
+        ));
+    }
+
+    /**
      * Cleans raw settings from a block, shortcode or REST request.
      */
     public static function normalize($atts)
@@ -150,6 +179,8 @@ class Query
             'show_excerpt' => $bool($atts['show_excerpt']),
             'link_to' => in_array($atts['link_to'], array('document', 'file', 'none'), true) ? $atts['link_to'] : 'document',
             'pagination' => $bool($atts['pagination']),
+            'pagination_style' => in_array($atts['pagination_style'], array('numbers', 'load-more'), true) ? $atts['pagination_style'] : 'numbers',
+            'sortable' => $bool($atts['sortable']),
             'folder_limit' => max(1, min(100, absint($atts['folder_limit']) ?: 50)),
             'open_folders' => $bool($atts['open_folders']),
             'multi_filters' => $bool($atts['multi_filters']),
@@ -199,7 +230,7 @@ class Query
             'type' => $many('type', 'sanitize_key'),
             'year' => preg_match('/^(19|20)\d\d$/', $get('year')) ? $get('year') : '',
             'author' => (string)absint($get('author')) === $get('author') ? $get('author') : '',
-            'sort' => array_key_exists($sort, self::sort_options()) ? $sort : '',
+            'sort' => array_key_exists($sort, self::sort_keys()) ? $sort : '',
             'page' => max(1, absint($get('p'))),
         );
         /**
@@ -240,7 +271,17 @@ class Query
         if ($state['sort'] !== '') {
             list($orderby, $order) = explode('-', $state['sort']);
         }
-        if ($orderby === 'downloads') {
+        if ($orderby === 'size') {
+            $args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+                'relation' => 'AND',
+                array(
+                    'relation' => 'OR',
+                    'dengine_size' => array('key' => Document::META_FILE_SIZE, 'compare' => 'EXISTS', 'type' => 'NUMERIC'),
+                    array('key' => Document::META_FILE_SIZE, 'compare' => 'NOT EXISTS'),
+                ),
+            );
+            $args['orderby'] = array('dengine_size' => strtoupper($order), 'title' => 'ASC');
+        } elseif ($orderby === 'downloads') {
             // Documents never downloaded have no row yet, so include them via NOT EXISTS.
             $args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 'relation' => 'AND',
@@ -340,7 +381,7 @@ class Query
         }));
     }
 
-    private static function all_known_extensions()
+    public static function all_known_extensions()
     {
         $all = array();
         foreach (array_keys(document_engine_file_type_groups_labels()) as $group) {

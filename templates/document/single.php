@@ -73,5 +73,7 @@ $meta = array_filter(array(
     ?>
     <?php if ($show_viewer) :
         echo Viewer::render(array('documentId' => $document->get_id())); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    endif; ?>
+    elseif (get_option('document_engine_single_viewer', 'yes') === 'yes' && ($office = document_engine_office_embed_url($document)) !== '') : ?>
+        <iframe class="dengine-office" src="<?php echo esc_url($office); ?>" title="<?php echo esc_attr($document->get_title()); ?>" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    <?php endif; ?>
 </div>

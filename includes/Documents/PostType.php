@@ -206,6 +206,7 @@ class PostType
     public static function flush_library_cache()
     {
         delete_transient('dengine_library_years');
+        delete_transient('dengine_library_types');
     }
 
     public static function single_content($content)

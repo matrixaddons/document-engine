@@ -69,7 +69,10 @@ class Rest
         $group = document_engine_file_type_group($document->get_extension());
         $src = $document->get_download_url(array('view' => 1));
         $title = $document->get_title();
-        if ($group === 'pdf') {
+        $office = document_engine_office_embed_url($document);
+        if ($office !== '') {
+            $html = '<iframe class="dengine-preview__media dengine-office" src="' . esc_url($office) . '" title="' . esc_attr($title) . '" loading="lazy" referrerpolicy="no-referrer"></iframe>';
+        } elseif ($group === 'pdf') {
             $html = \MatrixAddons\DocumentEngine\Viewer\Viewer::render(array('documentId' => $document->get_id(), 'height' => '78vh'));
         } elseif ($group === 'image') {
             $html = '<img class="dengine-preview__media" src="' . esc_url($src) . '" alt="' . esc_attr($title) . '">';

@@ -103,6 +103,17 @@ if (!function_exists('document_engine_pdf_footer_show_pagination')) {
     }
 }
 
+if (!function_exists('document_engine_pdf_page_size')) {
+    /**
+     * Paper size for Post to PDF: A4 (default), Letter, Legal, A5 or A3.
+     */
+    function document_engine_pdf_page_size()
+    {
+        $size = (string)get_option('document_engine_pdf_page_size', 'A4');
+        return in_array($size, array('A4', 'Letter', 'Legal', 'A5', 'A3'), true) ? $size : 'A4';
+    }
+}
+
 if (!function_exists('document_engine_pdf_page_orientation')) {
     function document_engine_pdf_page_orientation()
     {

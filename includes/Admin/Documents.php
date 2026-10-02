@@ -12,6 +12,44 @@ defined('ABSPATH') || exit;
  */
 class Documents
 {
+    /**
+     * File type and size must be recorded however a document is saved: the block editor (REST),
+     * WP-CLI, imports and front-end forms are not admin requests, so these hooks load everywhere.
+     */
+    public static function init_sync()
+    {
+        $type = PostType::POST_TYPE;
+        add_action("save_post_{$type}", array(__CLASS__, 'save_post'), 20, 2);
+        add_action("rest_after_insert_{$type}", array(__CLASS__, 'after_rest_insert'));
+    }
+
+    /**
+     * Records the missing file type and size of documents saved before 2.0.6 (the block editor skipped it).
+     */
+    public static function repair_file_meta()
+    {
+        global $wpdb;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $ids = $wpdb->get_col($wpdb->prepare(
+            "SELECT p.ID FROM {$wpdb->posts} p INNER JOIN {$wpdb->postmeta} f ON f.post_id = p.ID AND f.meta_key = %s AND f.meta_value > 0
+             LEFT JOIN {$wpdb->postmeta} t ON t.post_id = p.ID AND t.meta_key = %s
+             WHERE p.post_type = %s AND (t.meta_value IS NULL OR t.meta_value = '') LIMIT 500",
+            Document::META_FILE_ID,
+            Document::META_FILE_TYPE,
+            PostType::POST_TYPE
+        ));
+        foreach ($ids as $id) {
+            $document = Document::get((int)$id);
+            if ($document) {
+                $document->sync_file_meta();
+            }
+        }
+        if ($ids) {
+            PostType::flush_library_cache();
+        }
+        return count($ids);
+    }
+
     public static function init()
     {
         $type = PostType::POST_TYPE;
@@ -21,8 +59,6 @@ class Documents
         add_filter("manage_edit-{$type}_sortable_columns", array(__CLASS__, 'sortable'));
         add_action('pre_get_posts', array(__CLASS__, 'sort_by_downloads'));
 
-        add_action("save_post_{$type}", array(__CLASS__, 'save_post'), 20, 2);
-        add_action("rest_after_insert_{$type}", array(__CLASS__, 'after_rest_insert'));
         add_action('add_meta_boxes', array(__CLASS__, 'meta_box'));
 
         add_filter('bulk_actions-upload', array(__CLASS__, 'media_bulk_action'));

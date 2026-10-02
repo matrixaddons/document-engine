@@ -19,7 +19,8 @@ $labels = Query::columns();
         <tr>
             <?php foreach ($settings['columns'] as $column) : ?>
                 <?php $hidden_label = in_array($column, array('actions', 'select'), true); ?>
-                <th scope="col" class="dengine-col--<?php echo esc_attr($column); ?>"><?php echo esc_html($hidden_label ? '' : $labels[$column]); ?><?php if ($hidden_label) : ?><span class="screen-reader-text"><?php echo esc_html($labels[$column]); ?></span><?php endif; ?></th>
+                <?php list($aria_sort, $heading) = $hidden_label ? array('', '') : Library::column_heading($column, $labels[$column], $settings, isset($state) ? $state : Query::state($settings)); ?>
+                <th scope="col" class="dengine-col--<?php echo esc_attr($column); ?>"<?php echo $aria_sort ? ' aria-sort="' . esc_attr($aria_sort) . '"' : ''; ?>><?php echo $heading; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in column_heading() ?><?php if ($hidden_label) : ?><span class="screen-reader-text"><?php echo esc_html($labels[$column]); ?></span><?php endif; ?></th>
             <?php endforeach; ?>
         </tr>
         </thead>
