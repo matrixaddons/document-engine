@@ -108,8 +108,10 @@ class Template
         $id = absint(get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG));
         if (!is_singular() || (int)get_queried_object_id() !== $id) {
             $permalink = get_permalink($id);
-            if ($permalink) {
-                wp_safe_redirect(add_query_arg(DOCUMENT_ENGINE_QUERY_VAR_SLUG, $id, $permalink), 302);
+            // Once only: when the post's own address isn't a single-post view either (the Posts page, a shop
+            // archive, a page another plugin takes over), show that page instead of redirecting forever.
+            if ($permalink && empty($_GET['dengine_pdf_r'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                wp_safe_redirect(add_query_arg(array(DOCUMENT_ENGINE_QUERY_VAR_SLUG => $id, 'dengine_pdf_r' => 1), $permalink), 302);
                 exit;
             }
             return;

@@ -302,19 +302,19 @@ All attributes are listed in **Documents → Docs → Developers**.
 == Changelog ==
 
 = 2.2.0 - 2026-10-03 =
-* New - Migrate from Simple Download Monitor and Simple File List (closed on WordPress.org in July 2026): files, descriptions, categories (Simple File List folders become nested categories), dates and download counts. Old shortcodes and download links keep working.
+* New - Migrate from Simple Download Monitor and Simple File List (closed on WordPress.org in July 2026): files, descriptions, categories (Simple File List folders become nested categories), dates and download counts. Old shortcodes and download links keep working. Imported titles are plain text, and files are only copied from Simple File List's folder inside uploads.
 * New - Post to PDF fonts: Sans, Serif or Monospaced, or your own .ttf/.otf font (for example for Chinese, Japanese or Korean), for all text or only for characters the main font lacks.
 * Improved - Pro suggestions are now contextual and quiet: only for administrators, on Document Engine's own screens, never in the first week, one at a time and each dismissible for good. The extra "Upgrade to Pro" button in the header is gone, and Pro previews show example data.
 * Improved - Block themes get a "Single Document" template: document pages no longer show the blog post byline or a "More posts" list. A theme's own template still wins.
 * Improved - Right-to-left languages: the admin screens, block editor panels and the Post to PDF button now load right-to-left styles too; every screen was checked mirrored. Keyboard: every control shows a visible focus ring.
 * Improved - Layout and readability: the documents list keeps titles readable with many columns, library filters wrap inside narrow content columns, muted text meets contrast guidelines in themes with grey body text, and the Docs and settings screens fit phones.
 * Improved - Password-protected documents: download links go to the password form (they asked visitors to log in), and libraries label them "Password".
-* Security - Post to PDF fetches images and styles itself through WordPress' safe HTTP API (no internal addresses, no redirects to them) and never uses the request's host name; encoded or unquoted image addresses, and images inside SVG files, are handled too.
+* Security - Post to PDF fetches images and stylesheets itself through WordPress' safe HTTP API (no internal addresses, no redirects to them), within a time limit, and never uses the request's host name; encoded or unquoted image addresses, and images inside SVG files, are handled too. Videos, iframes and scripts are left out, and files in protected or private folders are never embedded.
 * Security - PDFs are only generated on the post's own address, so plugins that protect a page by checking the requested page always run first.
 * Security - Creating documents from Media Library files checks that you may use each file; the Pro installer only accepts HTTPS packages.
 * Fixed - The document editor shows the real name and type of files in protected storage (it showed the download address).
 * Fixed - Downloads of missing files are no longer counted; the viewer frees its memory when the preview closes; keyboard focus stays in place after sorting, filtering or paging a library; the full-screen fallback can be left with Escape.
-* Fixed - Save as PDF buttons placed in a theme template, synced pattern or Elementor layout work; attachment pages no longer show a button that did nothing.
+* Fixed - Save as PDF buttons placed in a theme template, synced pattern or Elementor layout work, for the content those layouts show (a single-post template: posts; a page template: pages); attachment pages no longer show a button that did nothing.
 * Fixed - PDF footer "post title" option, the columns shortcode (equal columns) and [document_engine_pdf_remove tag="…"] (it switched the shortcode off for the rest of the page).
 * Fixed - The daily clean-up now also runs on updated sites and network sites; theme template overrides are re-checked after a theme switch; files of trashed documents are hidden like private ones; PHP warnings for unusual search addresses; "Recently updated" order on the dashboard; untranslated PDF texts.
 

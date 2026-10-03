@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-03T03:37:31+00:00\n"
+"POT-Creation-Date: 2026-10-03T06:42:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -2439,7 +2439,7 @@ msgid "The migration stopped because of an error. Run it again to continue where
 msgstr ""
 
 #: includes/Admin/Migrate.php:183
-#: includes/Helpers/main.php:99
+#: includes/Helpers/main.php:140
 msgid "Edit"
 msgstr ""
 
@@ -4263,40 +4263,40 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: includes/Helpers/main.php:76
+#: includes/Helpers/main.php:117
 msgid "post"
 msgstr ""
 
-#: includes/Helpers/main.php:77
+#: includes/Helpers/main.php:118
 msgid "page"
 msgstr ""
 
-#: includes/Helpers/main.php:96
+#: includes/Helpers/main.php:137
 msgid "Copy text"
 msgstr ""
 
-#: includes/Helpers/main.php:97
+#: includes/Helpers/main.php:138
 #: templates/viewer/viewer.php:56
 msgid "Print"
 msgstr ""
 
-#: includes/Helpers/main.php:98
+#: includes/Helpers/main.php:139
 msgid "Print in high quality"
 msgstr ""
 
-#: includes/Helpers/main.php:100
+#: includes/Helpers/main.php:141
 msgid "Add comments"
 msgstr ""
 
-#: includes/Helpers/main.php:101
+#: includes/Helpers/main.php:142
 msgid "Fill in forms"
 msgstr ""
 
-#: includes/Helpers/main.php:102
+#: includes/Helpers/main.php:143
 msgid "Extract for accessibility"
 msgstr ""
 
-#: includes/Helpers/main.php:103
+#: includes/Helpers/main.php:144
 msgid "Rearrange pages"
 msgstr ""
 
@@ -4716,48 +4716,48 @@ msgid_plural "%d more files were not imported; only the main file was."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Migrate/Migrator.php:260
+#: includes/Migrate/Migrator.php:261
 msgid "Kept as a draft: it was for members only on the old plugin."
 msgstr ""
 
-#: includes/Migrate/Migrator.php:265
+#: includes/Migrate/Migrator.php:266
 msgid "Kept as a draft because its file could not be moved."
 msgstr ""
 
 #. translators: %s: list of locks such as "paid, email"
-#: includes/Migrate/Migrator.php:271
+#: includes/Migrate/Migrator.php:272
 #, php-format
 msgid "Kept as a draft without its file: on the old plugin it had a lock (%s). Set who may open it, attach the file and publish."
 msgstr ""
 
-#: includes/Migrate/Migrator.php:411
+#: includes/Migrate/Migrator.php:412
 msgid "Its file was left in the old plugin's private folder, because the Media Library is public. Attach it once the document's access is set."
 msgstr ""
 
-#: includes/Migrate/Migrator.php:440
+#: includes/Migrate/Migrator.php:441
 msgid "Its file was not attached, because it is shared with public pages. Attach a copy once the document's access is set."
 msgstr ""
 
 #. translators: %s: file name
-#: includes/Migrate/Migrator.php:563
+#: includes/Migrate/Migrator.php:564
 #, php-format
 msgid "The file %s was not copied: only document, image, audio, video and archive files from this site's uploads folder are moved."
 msgstr ""
 
 #. translators: %s: file name
-#: includes/Migrate/Migrator.php:568
+#: includes/Migrate/Migrator.php:569
 #, php-format
 msgid "The file %s was not copied: this site has no storage space left."
 msgstr ""
 
 #. translators: %s: file name
-#: includes/Migrate/Migrator.php:583
+#: includes/Migrate/Migrator.php:584
 #, php-format
 msgid "The file %s was not copied: there is no private storage for members-only files."
 msgstr ""
 
 #. translators: %s: file name
-#: includes/Migrate/Migrator.php:590
+#: includes/Migrate/Migrator.php:591
 #, php-format
 msgid "The file %s could not be copied to the Media Library."
 msgstr ""

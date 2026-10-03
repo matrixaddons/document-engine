@@ -204,7 +204,8 @@ class Migrator
         $post_id = wp_insert_post(wp_slash(array(
             'post_type' => PostType::POST_TYPE,
             'post_status' => 'draft',
-            'post_title' => $item['title'],
+            // Titles from another plugin's data are plain text (migrations run as an admin, who may post HTML).
+            'post_title' => sanitize_text_field(wp_strip_all_tags((string)$item['title'])),
             'post_content' => $item['content'],
             'post_excerpt' => $item['excerpt'],
             'post_author' => $item['author'] ?: get_current_user_id(),

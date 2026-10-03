@@ -401,7 +401,15 @@ class Sources
     {
         $settings = get_option('eeSFL_Settings_1');
         $dir = is_array($settings) && !empty($settings['FileListDir']) ? (string)$settings['FileListDir'] : 'wp-content/uploads/simple-file-list/';
-        return array('dir' => trailingslashit(ABSPATH . ltrim($dir, '/')));
+        $root = realpath(ABSPATH . ltrim(str_replace('\\', '/', $dir), '/'));
+        $uploads = realpath(wp_upload_dir()['basedir']);
+        // Simple File List keeps its files in the uploads folder. Its stored settings aren't trusted to point
+        // anywhere else (backups, wp-content): files outside uploads are not copied unless a filter allows it.
+        $allowed = $root && strpos($dir, '..') === false && $uploads && strpos(trailingslashit($root), trailingslashit($uploads)) === 0;
+        if (!apply_filters('document_engine_migrate_sfl_root_allowed', $allowed, $root)) {
+            return array('dir' => '');
+        }
+        return array('dir' => trailingslashit($root));
     }
 
     /**
@@ -420,7 +428,7 @@ class Sources
             if ($path === '' || strpos($path, '..') !== false || strpos(basename($path), '.') === false || strpos($path, '_eeSFL_Thumbnails') !== false) {
                 continue;
             }
-            $files[(int)sprintf('%u', crc32('sfl:' . $path))] = $entry + array('FilePath' => $path);
+            $files[(int)sprintf('%u', crc32('sfl:' . $path))] = array_merge($entry, array('FilePath' => $path));
         }
         return $files;
     }
@@ -490,7 +498,7 @@ class Sources
             'thumbnail_id' => 0,
             'categories' => $folder !== '.' && $folder !== '' ? array(self::sfl_folder_id($folder)) : array(),
             'tags' => array(),
-            'file' => array('ref' => $settings['dir'] . $path, 'roots' => array($settings['dir'])),
+            'file' => $settings['dir'] !== '' ? array('ref' => $settings['dir'] . $path, 'roots' => array($settings['dir'])) : null,
             'extra_files' => 0,
             'downloads' => 0,
             'version' => '',

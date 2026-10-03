@@ -162,14 +162,15 @@ class Generate_PDF
         $pdf_footer_html = ob_get_clean();
         $mpdf->SetHTMLFooter(self::localize_assets($pdf_footer_html));
 
-        $mpdf->WriteHTML(apply_filters('document_engine_before_content', ''));
+        // Filter output goes through the same rules: mPDF itself only opens local files.
+        $mpdf->WriteHTML(self::localize_assets(apply_filters('document_engine_before_content', '')));
         ob_start();
         document_engine_get_template('pdf-index.php');
 
         $main_html = ob_get_clean();
 
         $mpdf->WriteHTML(self::localize_assets($main_html));
-        $mpdf->WriteHTML(apply_filters('document_engine_after_content', ''));
+        $mpdf->WriteHTML(self::localize_assets(apply_filters('document_engine_after_content', '')));
 
         global $post;
 
@@ -234,6 +235,7 @@ class Generate_PDF
 
     /** Remote assets fetched for the PDF being built: url => local temp path ('' when refused). */
     private static $fetched = array();
+    private static $fetch_started = 0.0;
 
     /**
      * Makes every asset mPDF will read a local file, so mPDF itself never makes a network request.
@@ -246,13 +248,22 @@ class Generate_PDF
     public static function localize_assets($html)
     {
         $html = (string)$html;
-        // <img src>, <link href>, and src/background on any tag (mPDF also reads <watermarkimage src>, td background…).
+        // Embeds a PDF can't show: never fetched (they only slowed PDFs down or timed them out).
+        $html = preg_replace('#<(iframe|script|video|audio|embed|noscript)\b[^>]*>.*?</\1\s*>#is', '', $html);
+        $html = preg_replace('#<(iframe|script|video|audio|source|track|embed)\b[^>]*/?>#i', '', $html);
+        // Only what mPDF reads: <img src>, <link rel=stylesheet href>, background on table cells and blocks,
+        // <object data>, <input type=image src>, <watermarkimage src>. Anything else is left for mPDF to ignore.
         $html = preg_replace_callback('#<([a-z][a-z0-9-]*)\b([^>]*)>#i', function ($tag) {
             $name = strtolower($tag[1]);
+            if ($name === 'link' && !preg_match('#\brel\s*=\s*["\']?[^"\'>]*\bstylesheet\b#i', $tag[2])) {
+                return ''; // Feeds, REST, prefetch, icons: not stylesheets, not fetched.
+            }
             $attrs = preg_replace_callback('#(\s)(src|href|background|data)(\s*=\s*)(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'>]+))#i', function ($a) use ($name) {
                 $attr = strtolower($a[2]);
-                if (($attr === 'href' && $name !== 'link') || ($attr === 'data' && $name !== 'object')) {
-                    return $a[0]; // Links and data-* style values are not fetched.
+                $reads = array('src' => array('img', 'input', 'watermarkimage', 'image'), 'href' => array('link'), 'data' => array('object'),
+                    'background' => array('body', 'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'div'));
+                if (!in_array($name, $reads[$attr], true)) {
+                    return $a[0]; // Not something mPDF loads: never fetched.
                 }
                 $raw = isset($a[6]) && $a[6] !== '' ? $a[6] : (isset($a[5]) && $a[5] !== '' ? $a[5] : (isset($a[4]) ? $a[4] : ''));
                 $url = trim(html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
@@ -304,10 +315,11 @@ class Generate_PDF
             return ''; // file:, php:, ftp:, gopher:… never.
         }
         if (!preg_match('#^(https?:)?//#i', $url)) {
+            if (is_file($url) && self::inside_allowed_dir($url)) {
+                return realpath($url); // Already a local path we produced (header logo, watermark image…).
+            }
             if (strpos($url, '/') === 0) {
                 $url = home_url($url); // Site-relative: resolve against this site, never the request's Host header.
-            } elseif (is_readable($url) && self::inside_allowed_dir($url)) {
-                return $url; // Already a local path we produced (header logo etc.).
             } else {
                 return '';
             }
@@ -321,7 +333,7 @@ class Generate_PDF
                     if (strpos($url, $candidate . '/') === 0) {
                         $path = $dir . strtok(substr($url, strlen($candidate)), '?#');
                         $real = realpath($path);
-                        if ($real && strpos($real, realpath($dir)) === 0 && is_file($real) && !preg_match('/\.(php\d?|phtml|phar)$/i', $real)) {
+                        if ($real && is_file($real) && self::inside_allowed_dir($real) && !preg_match('/\.(php\d?|phtml|phar)$/i', $real)) {
                             return $real;
                         }
                         return '';
@@ -332,15 +344,33 @@ class Generate_PDF
         return self::fetch_remote($url, $kind);
     }
 
+    /**
+     * Inside wp-content, wp-includes or the plugin's own temp folder, and not in a folder whose
+     * files are kept private (Pro's protected storage, other plugins' protected uploads, backups).
+     */
     private static function inside_allowed_dir($path)
     {
         $real = realpath($path);
         if (!$real) {
             return false;
         }
-        foreach (array(WP_CONTENT_DIR, ABSPATH . WPINC, get_temp_dir()) as $dir) {
+        $blocked = (array)apply_filters('document_engine_pdf_blocked_asset_dirs', array('document-engine-private', 'woocommerce_uploads', 'edd', 'sdm-uploads', 'wpdm-files', 'download-manager-files', 'updraft', 'ai1wm-backups', 'backups', 'backup', 'upgrade'));
+        $content = trailingslashit((string)realpath(WP_CONTENT_DIR));
+        if (strpos($real, $content) === 0) {
+            $first = explode('/', str_replace('\\', '/', substr($real, strlen($content))));
+            $upload = trailingslashit((string)realpath(wp_upload_dir()['basedir']));
+            $relative = strpos($real, $upload) === 0 ? explode('/', substr($real, strlen($upload))) : array();
+            foreach ($blocked as $name) {
+                // A top-level wp-content folder (plugins, themes, backups…) or an uploads folder (protected storage…).
+                if ((isset($first[0]) && stripos($first[0], $name) === 0 && $first[0] !== 'uploads') || (isset($relative[0]) && stripos($relative[0], $name) === 0)) {
+                    return false;
+                }
+            }
+        }
+        $dirs = array(WP_CONTENT_DIR, ABSPATH . WPINC, document_engine()->get_tmp_pdf_dir(true, false));
+        foreach ($dirs as $dir) {
             $d = realpath($dir);
-            if ($d && strpos($real, $d) === 0) {
+            if ($d && strpos($real, trailingslashit($d)) === 0) {
                 return true;
             }
         }
@@ -356,6 +386,13 @@ class Generate_PDF
             return self::$fetched[$url];
         }
         self::$fetched[$url] = '';
+        // A total budget: a page full of remote images can't run past PHP's time limit.
+        if (self::$fetch_started === 0.0) {
+            self::$fetch_started = microtime(true);
+        }
+        if (microtime(true) - self::$fetch_started > (float)apply_filters('document_engine_pdf_fetch_budget', 20)) {
+            return '';
+        }
         if (!wp_http_validate_url($url) || !apply_filters('document_engine_pdf_allow_remote_asset', true, $url) || count(self::$fetched) > 50) {
             return '';
         }
@@ -404,6 +441,7 @@ class Generate_PDF
             }
         }
         self::$fetched = array();
+        self::$fetch_started = 0.0;
     }
 
     private static function headers($title, $action, $length)
