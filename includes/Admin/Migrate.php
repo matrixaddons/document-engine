@@ -214,6 +214,16 @@ class Migrate
             <ul class="dengine-a-migrate__log" hidden></ul>
         </form>
         <?php
+        // T5: after a finished migration (never before or during it), what Pro would add for these documents.
+        if ($done && $p['done']) {
+            $text = $p['restricted']
+                /* translators: %s: number of members-only items */
+                ? sprintf(_n('%s item was members-only in the old plugin and is now a draft. Document Engine Pro keeps documents restricted by role, person or category, with their files in private storage.', '%s items were members-only in the old plugin and are now drafts. Document Engine Pro keeps documents restricted by role, person or category, with their files in private storage.', $p['restricted'], 'document-engine'), number_format_i18n($p['restricted']))
+                : __('Your documents are in. Document Engine Pro adds versions, review-by dates and an activity log of who opened what.', 'document-engine');
+            echo Nudges::card('t5-migrate', $text, Upsell::url($p['restricted'] ? 'access' : 'activity')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+        ?>
+        <?php
         UI::card_end();
         self::script();
     }

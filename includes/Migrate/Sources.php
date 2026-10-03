@@ -47,6 +47,24 @@ class Sources
                 'tag' => 'wpdmtag',
                 'plugin' => array('download-manager/download-manager.php'),
             ),
+            'sdm' => array(
+                'label' => 'Simple Download Monitor',
+                'description' => __('Downloads, their file, description, categories, tags, version and download counts.', 'document-engine'),
+                'post_type' => 'sdm_downloads',
+                'category' => 'sdm_categories',
+                'tag' => 'sdm_tags',
+                'plugin' => array('simple-download-monitor/main.php'),
+            ),
+            // Simple File List keeps files in a folder (no posts): folders become nested categories.
+            'sfl' => array(
+                'label' => 'Simple File List',
+                'description' => __('Files and folders of Simple File List, with descriptions, display names and dates. Folders become categories.', 'document-engine'),
+                'kind' => 'sfl',
+                'post_type' => '',
+                'category' => 'sfl_folder',
+                'tag' => '',
+                'plugin' => array('simple-file-list/simple-file-list.php'),
+            ),
         ));
     }
 
@@ -71,6 +89,9 @@ class Sources
         if (!$source) {
             return 0;
         }
+        if (($source['kind'] ?? '') === 'sfl') {
+            return count(self::sfl_files());
+        }
         $in = implode(',', array_fill(0, count(self::statuses()), '%s'));
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
         return (int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = %s AND post_status IN ($in)", array_merge(array($source['post_type']), self::statuses())));
@@ -85,6 +106,13 @@ class Sources
         $source = self::get($key);
         if (!$source) {
             return array();
+        }
+        if (($source['kind'] ?? '') === 'sfl') {
+            $ids = array_values(array_filter(array_keys(self::sfl_files()), function ($id) use ($after_id) {
+                return $id > (int)$after_id;
+            }));
+            sort($ids);
+            return array_slice($ids, 0, (int)$limit);
         }
         $in = implode(',', array_fill(0, count(self::statuses()), '%s'));
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
@@ -114,6 +142,10 @@ class Sources
     public static function term($term_id, $taxonomy)
     {
         global $wpdb;
+        if ($taxonomy === 'sfl_folder') {
+            $folders = self::sfl_folders();
+            return isset($folders[(int)$term_id]) ? (object)$folders[(int)$term_id] : null;
+        }
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery
         return $wpdb->get_row($wpdb->prepare(
             "SELECT t.term_id, t.name, t.slug, tt.description, tt.parent FROM {$wpdb->terms} t INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = t.term_id WHERE t.term_id = %d AND tt.taxonomy = %s",
@@ -125,6 +157,10 @@ class Sources
     public static function item($key, $post_id)
     {
         $source = self::get($key);
+        if ($source && ($source['kind'] ?? '') === 'sfl') {
+            $item = self::sfl_item((int)$post_id);
+            return $item ? apply_filters('document_engine_migrate_item', $item, $key, null) : null;
+        }
         $post = get_post($post_id);
         if (!$source || !$post || $post->post_type !== $source['post_type']) {
             return null;
@@ -183,6 +219,40 @@ class Sources
                 $item['downloads'] = $count;
                 break;
             }
+        }
+        return $item;
+    }
+
+    private static function read_sdm($post, $item)
+    {
+        global $wpdb;
+        $url = trim((string)get_post_meta($post->ID, 'sdm_upload', true));
+        if ($url !== '') {
+            $uploads = wp_upload_dir(null, false);
+            // SDM's protected folder (uploads/sdm-uploads) may be copied from too.
+            $item['file'] = array('ref' => $url, 'roots' => array(trailingslashit($uploads['basedir']) . 'sdm-uploads/'));
+        }
+        $description = (string)get_post_meta($post->ID, 'sdm_description', true);
+        if ($description !== '' && trim($item['content']) === '') {
+            $item['content'] = $description;
+        }
+        $item['version'] = (string)get_post_meta($post->ID, 'sdm_item_version', true);
+        $table = $wpdb->prefix . 'sdm_downloads';
+        $count = 0;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($table))) === $table) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            $count = (int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE post_id = %d", $post->ID));
+        }
+        $item['downloads'] = $count + (int)get_post_meta($post->ID, 'sdm_count_offset', true);
+        $thumb = (string)get_post_meta($post->ID, 'sdm_upload_thumbnail', true);
+        if (!$item['thumbnail_id'] && $thumb !== '') {
+            $item['thumbnail_id'] = (int)attachment_url_to_postid($thumb);
+        }
+        // "Only logged-in users can download" (site-wide), unless this download allows visitors.
+        $options = get_option('sdm_downloads_options');
+        if (is_array($options) && !empty($options['only_logged_in_can_download']) && !get_post_meta($post->ID, 'sdm_item_anonymous_can_download', true)) {
+            $item['access'] = array('mode' => 'logged_in', 'roles' => array());
         }
         return $item;
     }
@@ -322,5 +392,120 @@ class Sources
             $dirs[] = trailingslashit($base) . $user->user_login . '/';
         }
         return $dirs;
+    }
+
+    /**
+     * Simple File List: settings of list 1 (the free plugin has one list).
+     */
+    private static function sfl_settings()
+    {
+        $settings = get_option('eeSFL_Settings_1');
+        $dir = is_array($settings) && !empty($settings['FileListDir']) ? (string)$settings['FileListDir'] : 'wp-content/uploads/simple-file-list/';
+        $root = realpath(ABSPATH . ltrim(str_replace('\\', '/', $dir), '/'));
+        $uploads = realpath(wp_upload_dir()['basedir']);
+        // Simple File List keeps its files in the uploads folder. Its stored settings aren't trusted to point
+        // anywhere else (backups, wp-content): files outside uploads are not copied unless a filter allows it.
+        $allowed = $root && strpos($dir, '..') === false && $uploads && strpos(trailingslashit($root), trailingslashit($uploads)) === 0;
+        if (!apply_filters('document_engine_migrate_sfl_root_allowed', $allowed, $root)) {
+            return array('dir' => '');
+        }
+        return array('dir' => trailingslashit($root));
+    }
+
+    /**
+     * Files of the list: id (stable, from the path) => entry. Folders and thumbnails are left out.
+     */
+    public static function sfl_files()
+    {
+        static $files = null;
+        if ($files !== null) {
+            return $files;
+        }
+        $files = array();
+        $list = get_option('eeSFL_FileList_1');
+        foreach (is_array($list) ? $list : array() as $entry) {
+            $path = is_array($entry) && isset($entry['FilePath']) ? ltrim(str_replace('\\', '/', (string)$entry['FilePath']), '/') : '';
+            if ($path === '' || strpos($path, '..') !== false || strpos(basename($path), '.') === false || strpos($path, '_eeSFL_Thumbnails') !== false) {
+                continue;
+            }
+            $files[(int)sprintf('%u', crc32('sfl:' . $path))] = array_merge($entry, array('FilePath' => $path));
+        }
+        return $files;
+    }
+
+    /**
+     * Folders as virtual terms: id => term_id, name, slug, description, parent.
+     */
+    private static function sfl_folders()
+    {
+        static $folders = null;
+        if ($folders !== null) {
+            return $folders;
+        }
+        $folders = array();
+        foreach (self::sfl_files() as $entry) {
+            $parts = explode('/', dirname(ltrim($entry['FilePath'], '/')));
+            $path = '';
+            $parent = 0;
+            foreach ($parts as $part) {
+                if ($part === '.' || $part === '') {
+                    break;
+                }
+                $path = ltrim($path . '/' . $part, '/');
+                $id = (int)sprintf('%u', crc32('sfl-folder:' . $path));
+                $folders[$id] = array('term_id' => $id, 'name' => $part, 'slug' => sanitize_title($path), 'description' => '', 'parent' => $parent);
+                $parent = $id;
+            }
+        }
+        return $folders;
+    }
+
+    public static function sfl_folder_id($path)
+    {
+        $path = trim(str_replace('\\', '/', (string)$path), '/');
+        return $path === '' ? 0 : (int)sprintf('%u', crc32('sfl-folder:' . $path));
+    }
+
+    private static function sfl_item($id)
+    {
+        $files = self::sfl_files();
+        if (!isset($files[$id])) {
+            return null;
+        }
+        $entry = $files[$id];
+        $path = $entry['FilePath'];
+        $name = isset($entry['FileNiceName']) && trim((string)$entry['FileNiceName']) !== '' ? html_entity_decode((string)$entry['FileNiceName'], ENT_QUOTES, 'UTF-8') : '';
+        if ($name === '') {
+            $name = ucfirst(trim(preg_replace('/[-_]+/', ' ', pathinfo($path, PATHINFO_FILENAME))));
+        }
+        $added = !empty($entry['FileDateAdded']) ? strtotime((string)$entry['FileDateAdded']) : 0;
+        $changed = !empty($entry['FileDateChanged']) ? strtotime((string)$entry['FileDateChanged']) : $added;
+        $date = $added ? $added : time();
+        $settings = self::sfl_settings();
+        $folder = dirname($path);
+        return array(
+            'id' => $id,
+            'title' => $name,
+            'content' => isset($entry['FileDescription']) ? wp_kses_post(html_entity_decode((string)$entry['FileDescription'], ENT_QUOTES, 'UTF-8')) : '',
+            'excerpt' => '',
+            'status' => 'publish',
+            'date' => wp_date('Y-m-d H:i:s', $date),
+            'date_gmt' => gmdate('Y-m-d H:i:s', $date),
+            'modified' => wp_date('Y-m-d H:i:s', $changed ? $changed : $date),
+            'modified_gmt' => gmdate('Y-m-d H:i:s', $changed ? $changed : $date),
+            'author' => get_current_user_id(),
+            'menu_order' => 0,
+            'thumbnail_id' => 0,
+            'categories' => $folder !== '.' && $folder !== '' ? array(self::sfl_folder_id($folder)) : array(),
+            'tags' => array(),
+            'file' => $settings['dir'] !== '' ? array('ref' => $settings['dir'] . $path, 'roots' => array($settings['dir'])) : null,
+            'extra_files' => 0,
+            'downloads' => 0,
+            'version' => '',
+            'password' => '',
+            'access' => array(),
+            'locked' => array(),
+            'slug' => sanitize_title($name),
+        );
     }
 }

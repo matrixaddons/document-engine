@@ -34,6 +34,9 @@ class Compat
         if (isset($done['wpdm'], $_GET['wpdmdl']) && !Migrator::source_active('wpdm')) {
             $target = Migrator::existing('wpdm', absint($_GET['wpdmdl']));
             $download = true;
+        } elseif (isset($done['sdm'], $_GET['smd_process_download'], $_GET['download_id']) && !Migrator::source_active('sdm')) {
+            $target = Migrator::existing('sdm', absint($_GET['download_id']));
+            $download = true;
         } elseif (isset($done['dlm'], $_GET['download']) && !Migrator::source_active('dlm') && is_numeric($_GET['download'])) {
             $target = Migrator::existing('dlm', absint($_GET['download']));
             $download = true;
@@ -49,6 +52,7 @@ class Compat
                 'download' => array('dlm', 'wpdm'),
                 'document' => array('barn2'),
                 'dlp_document' => array('barn2'),
+                'sdm_downloads' => array('sdm'),
             ));
             if (preg_match('#^([a-z0-9_-]+)/([^/]+)/?$#i', $path, $m) && isset($prefixes[$m[1]])) {
                 foreach ((array)$prefixes[$m[1]] as $key) {
@@ -98,6 +102,8 @@ class Compat
             'barn2' => array('doc_library' => 'library'),
             'dlm' => array('download' => 'download', 'downloads' => 'library'),
             'wpdm' => array('wpdm_package' => 'download', 'wpdm_packages' => 'library', 'wpdm_all_packages' => 'library'),
+            'sfl' => array('eeSFL' => 'library'),
+            'sdm' => array('sdm_download' => 'download', 'sdm_download_link' => 'download', 'sdm_show_all_dl' => 'library', 'sdm_show_dl_from_category' => 'library', 'sdm_latest_downloads' => 'library', 'sdm_popular_downloads' => 'popular', 'sdm_search_form' => 'search', 'sdm_download_counter' => 'counter'),
         );
         foreach ($map as $key => $shortcodes) {
             if (!isset($done[$key])) {
@@ -109,6 +115,18 @@ class Compat
                     continue;
                 }
                 add_shortcode($tag, function ($atts) use ($key, $kind) {
+                    if ($kind === 'popular') {
+                        $atts = array_merge(is_array($atts) ? $atts : array(), array('orderby' => 'downloads', 'order' => 'desc'));
+                        return self::library($atts, $key);
+                    }
+                    if ($kind === 'search') {
+                        return \MatrixAddons\DocumentEngine\Library\SearchBox::render(array());
+                    }
+                    if ($kind === 'counter') {
+                        $document_id = isset($atts['id']) ? Migrator::existing($key, absint($atts['id'])) : 0;
+                        $document = $document_id ? \MatrixAddons\DocumentEngine\Documents\Document::get($document_id) : null;
+                        return $document ? esc_html(number_format_i18n($document->get_download_count())) : '';
+                    }
                     return $kind === 'library' ? self::library($atts, $key) : self::download($key, $atts);
                 });
             }
@@ -130,13 +148,20 @@ class Compat
     {
         $atts = is_array($atts) ? $atts : array();
         $args = array();
-        foreach (array('doc_category', 'category', 'categories') as $name) {
+        // Simple File List: [eeSFL showfolder="Folder/Sub"] shows one folder (now a category).
+        if ($key === 'sfl' && !empty($atts['showfolder'])) {
+            $map = (array)get_option(Migrator::OPTION_TERMS, array());
+            $map_key = 'sfl:sfl_folder:' . Sources::sfl_folder_id((string)$atts['showfolder']);
+            $term = isset($map[$map_key]) ? get_term((int)$map[$map_key], \MatrixAddons\DocumentEngine\Documents\PostType::CATEGORY) : null;
+            $args['categories'] = $term && !is_wp_error($term) ? $term->slug : '__none__';
+        }
+        foreach (array('doc_category', 'category', 'categories', 'category_slug', 'category_id') as $name) {
             if (!empty($atts[$name])) {
                 $args['categories'] = implode(',', self::map_categories($key, preg_split('/[,|+]/', (string)$atts[$name])));
                 break;
             }
         }
-        foreach (array('rows_per_page', 'per_page', 'number') as $name) {
+        foreach (array('rows_per_page', 'per_page', 'number', 'items_per_page') as $name) {
             if (!empty($atts[$name])) {
                 $args['per_page'] = absint($atts[$name]);
                 break;

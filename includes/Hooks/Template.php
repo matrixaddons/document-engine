@@ -24,6 +24,10 @@ class Template
         if (is_archive() || is_front_page() || is_home()) {
             return $content;
         }
+        // Attachment pages had PDFs in 1.x; they can't be exported any more, so no button (1.x settings may still tick them).
+        if (get_post_type() === 'attachment') {
+            return $content;
+        }
 
         if (document_engine_pdf_is_valid_post_type()) {
 
@@ -96,6 +100,20 @@ class Template
     {
 
         if (!document_engine_pdf_is_valid_post_type()) {
+            return;
+        }
+
+        // Only on the post's own address, so plugins that protect a post by checking the requested page
+        // (membership, content restriction, maintenance) have run for this post first.
+        $id = absint(get_query_var(DOCUMENT_ENGINE_QUERY_VAR_SLUG));
+        if (!is_singular() || (int)get_queried_object_id() !== $id) {
+            $permalink = get_permalink($id);
+            // Once only: when the post's own address isn't a single-post view either (the Posts page, a shop
+            // archive, a page another plugin takes over), show that page instead of redirecting forever.
+            if ($permalink && empty($_GET['dengine_pdf_r'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                wp_safe_redirect(add_query_arg(array(DOCUMENT_ENGINE_QUERY_VAR_SLUG => $id, 'dengine_pdf_r' => 1), $permalink), 302);
+                exit;
+            }
             return;
         }
 

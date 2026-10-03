@@ -5,13 +5,26 @@ import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button, TextControl, SelectControl, Notice } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch, dispatch } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
 import qrcode from 'qrcode-generator';
 import { __, sprintf } from '@wordpress/i18n';
 import './editor-panels.scss';
 
 const cfg = window.DocumentEngineEditor || {};
+const nudges = cfg.nudges || {};
+
+// Records a suggestion as dismissed (or shown once) for this user.
+function dismissNudge(id) {
+	if (!nudges.ajax) {
+		return;
+	}
+	const body = new FormData();
+	body.append('action', 'dengine_dismiss_nudge');
+	body.append('nonce', nudges.nonce);
+	body.append('id', id);
+	window.fetch(nudges.ajax, { method: 'POST', body, credentials: 'same-origin' }).catch(() => {});
+}
 const PANEL_ID = 'document-engine-document-file/dengine-file';
 
 function titleFromFilename(name) {
@@ -146,6 +159,7 @@ function DocumentFilePanel() {
 	const panelOpen = useSelect((select) => select('core/editor').isEditorPanelOpened(PANEL_ID), []);
 
 	const fileId = meta._dengine_file_id || 0;
+	const [privateDismissed, setPrivateDismissed] = useState(false);
 	const media = useSelect((select) => (fileId ? select('core').getMedia(fileId, { context: 'view' }) : null), [fileId]);
 
 	useEffect(() => {
@@ -164,7 +178,7 @@ function DocumentFilePanel() {
 	useEffect(() => {
 		// Name untitled documents after their file (also makes the post saveable).
 		if (media && !title) {
-			const name = media.source_url ? media.source_url.split('/').pop() : '';
+			const name = media.dengine_file_name || (media.source_url ? media.source_url.split('/').pop() : '');
 			editPost({ title: titleFromFilename(name) || media.title?.rendered || '' });
 		}
 	}, [media]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -176,15 +190,26 @@ function DocumentFilePanel() {
 	const setMeta = (changes) => editPost({ meta: { ...meta, ...changes } });
 
 	const onSelect = (item) => {
+		// T4: replacing the file of a published document keeps the link; the old file isn't kept (Pro keeps versions).
+		if (published && fileId > 0 && item.id !== fileId && nudges.versions) {
+			dispatch('core/notices').createNotice('info', __('File replaced. The document\'s link stays the same, but the previous file isn\'t kept. Pro keeps every version so you can restore it.', 'document-engine'), {
+				isDismissible: true,
+				actions: [{ label: __('See how Pro does this', 'document-engine'), url: nudges.versions }],
+			});
+			dismissNudge('t4-versions');
+			nudges.versions = '';
+		}
 		setMeta({ _dengine_file_id: item.id, _dengine_file_url: '' });
 		if (!title) {
 			editPost({ title: titleFromFilename(item.filename || item.title || '') || item.title });
 		}
 	};
 
-	const fileName = media ? decodeURIComponent(media.source_url?.split('/').pop() || '') : '';
+	// Protected files' URLs are the download link (?dengine_download=…): use the stored file name.
+	const urlName = media ? decodeURIComponent((media.source_url || '').split('?')[0].split('/').pop() || '') : '';
+	const fileName = media ? media.dengine_file_name || (urlName.includes('.') ? urlName : '') || media.title?.raw || media.title?.rendered || '' : '';
 	const size = media?.media_details?.filesize;
-	const ext = fileName.includes('.') ? fileName.split('.').pop() : '';
+	const ext = fileName.includes('.') ? fileName.split('.').pop() : (media?.mime_type || '').split('/').pop().replace(/^vnd\..*|^octet-stream$/, '');
 	const url = meta._dengine_file_url || '';
 	let host = '';
 	try {
@@ -288,9 +313,16 @@ function DocumentFilePanel() {
 				</div>
 				{published && !hiddenPage && <QrCode url={permalink} name={slug} />}
 				{hiddenPage && fileId > 0 && !cfg.isPro && (
-					<p className="dengine-side__text">
-						{__('Only people who can edit documents can open this document\'s page and download link. The file itself stays in the public uploads folder, so anyone who has its direct file address could still download it. Pro can move files of private documents to protected storage.', 'document-engine')}
-					</p>
+					<div className="dengine-side__text">
+						<p>{__('Only people who can edit documents can open this document\'s page and download link. The file itself stays in the public uploads folder, so anyone who has its direct file address could still download it.', 'document-engine')}</p>
+						{nudges.privateFile && !privateDismissed && (
+							<p>
+								{__('Pro moves files of restricted documents to private storage.', 'document-engine')}{' '}
+								<a href={nudges.privateFile}>{__('See how Pro does this', 'document-engine')}</a>{' · '}
+								<Button variant="link" onClick={() => { dismissNudge('t1-private-file'); setPrivateDismissed(true); }}>{__('Don\'t show again', 'document-engine')}</Button>
+							</p>
+						)}
+					</div>
 				)}
 			</div>
 		</PluginDocumentSettingPanel>
@@ -299,42 +331,3 @@ function DocumentFilePanel() {
 
 registerPlugin('document-engine-document-file', { render: DocumentFilePanel });
 
-/**
- * Free only: a quiet preview of what Pro adds for this document.
- */
-function ProPreviewPanel() {
-	const postType = useSelect((select) => select('core/editor').getCurrentPostType(), []);
-	const preview = (window.DocumentEngineEditor || {}).proPreview;
-	if (postType !== 'dengine_document' || !preview) {
-		return null;
-	}
-	return (
-		<PluginDocumentSettingPanel
-			name="dengine-pro-preview"
-			title={
-				<>
-					{preview.title} <span className="dengine-pro-badge">Pro</span>
-				</>
-			}
-			className="dengine-pro-preview"
-		>
-			<div className="dengine-side dengine-side__pro">
-				<p className="dengine-side__text">{preview.text}</p>
-				{Array.isArray(preview.points) && preview.points.length > 0 && (
-					<ul>
-						{preview.points.map((point) => (
-							<li key={point}>{point}</li>
-						))}
-					</ul>
-				)}
-				<div className="dengine-side__row">
-					<Button variant="secondary" size="compact" href={preview.url}>
-						{preview.button}
-					</Button>
-				</div>
-			</div>
-		</PluginDocumentSettingPanel>
-	);
-}
-
-registerPlugin('document-engine-pro-preview', { render: ProPreviewPanel });

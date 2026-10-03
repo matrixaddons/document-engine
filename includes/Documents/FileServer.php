@@ -42,7 +42,7 @@ class FileServer
         }
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery
         $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT m.meta_value AS file_id, p.ID AS doc FROM {$wpdb->postmeta} m INNER JOIN {$wpdb->posts} p ON p.ID = m.post_id WHERE m.meta_key = %s AND p.post_type = %s AND (p.post_status NOT IN ('publish', 'trash', 'auto-draft') OR p.post_password <> '') LIMIT 50000",
+            "SELECT m.meta_value AS file_id, p.ID AS doc FROM {$wpdb->postmeta} m INNER JOIN {$wpdb->posts} p ON p.ID = m.post_id WHERE m.meta_key = %s AND p.post_type = %s AND (p.post_status NOT IN ('publish', 'auto-draft') OR p.post_password <> '') LIMIT 50000",
             Document::META_FILE_ID,
             PostType::POST_TYPE
         ));
@@ -148,27 +148,30 @@ class FileServer
          */
         do_action('document_engine_before_serve_document', $document, $context);
 
+        $path = $document->get_file_path();
+        $url = $document->get_file_url();
+        $local = $path !== '' && file_exists($path);
+        if (!$local && ($url === '' || !wp_http_validate_url($url))) {
+            // Nothing to serve: don't count a download or fire download hooks for a missing file.
+            self::fail(404, __('The file for this document is missing.', 'document-engine'));
+        }
+
         self::record($document, $context, array('inline' => $inline));
 
-        $path = $document->get_file_path();
-
-        if ($path !== '' && file_exists($path)) {
+        if ($local) {
             // Public Media Library files are redirected to when nothing needs PHP in the middle.
             // Files of drafts, private or password-protected documents are always streamed, so their raw address is never handed out.
             $public = $document->get_post()->post_status === 'publish' && $document->get_post()->post_password === '';
-            $redirect = $public && $inline && $document->get_file_url() !== '' && !apply_filters('document_engine_stream_file', false, $document, $context);
+            // Files kept in protected storage (Document Engine Pro, even after Pro is switched off) can't be linked to directly.
+            $private_file = (bool)get_post_meta($document->get_file_id(), '_dengine_protected', true) || strpos(wp_normalize_path($path), '/document-engine-private') !== false;
+            $redirect = $public && $inline && !$private_file && $document->get_file_url() !== '' && !apply_filters('document_engine_stream_file', false, $document, $context);
             if ($redirect) {
                 self::redirect($document->get_file_url());
             }
             self::stream($path, $document, $inline);
         }
 
-        $url = $document->get_file_url();
-        if ($url !== '' && wp_http_validate_url($url)) {
-            self::redirect($url);
-        }
-
-        self::fail(404, __('The file for this document is missing.', 'document-engine'));
+        self::redirect($url);
     }
 
     /**
@@ -302,6 +305,14 @@ class FileServer
         // Drafts, scheduled and private documents: don't confirm they exist or show their title.
         if (!in_array($post->post_status, array('publish'), true)) {
             self::fail(404, __('This document could not be found.', 'document-engine'), is_user_logged_in() ? '' : wp_login_url($document->get_download_url()));
+        }
+        // Password-protected: the WordPress password form is the way in, not a login.
+        if ($post->post_password !== '' && post_password_required($post)) {
+            if (get_option('document_engine_single_pages', 'yes') === 'yes') {
+                wp_safe_redirect(get_permalink($post), 303);
+                exit;
+            }
+            self::notice_page($document->get_title(), '<div class="dengine-access">' . get_the_password_form($post) . '</div>', 200);
         }
         if (get_option('document_engine_single_pages', 'yes') === 'yes' && $post->post_status === 'publish' && $post->post_password === '') {
             wp_safe_redirect(get_permalink($post), 303);

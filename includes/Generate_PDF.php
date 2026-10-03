@@ -48,11 +48,16 @@ class Generate_PDF
             @set_time_limit(120); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
         }
 
-        $mpdf = self::build_mpdf();
+        try {
+            $mpdf = self::build_mpdf();
 
-        do_action('document_engine_before_generate_pdf', $mpdf, $post);
+            do_action('document_engine_before_generate_pdf', $mpdf, $post);
 
-        $content = $mpdf->Output('', 'S');
+            $content = $mpdf->Output('', 'S');
+        } finally {
+            // Temporary copies of fetched images and styles are removed even if mPDF fails.
+            self::cleanup_assets();
+        }
 
         Cache::put($post->ID, $content);
 
@@ -106,7 +111,7 @@ class Generate_PDF
 
         $document_engine_pdf_temp_dir = document_engine()->get_tmp_pdf_dir(true, false);
 
-        $mpdf_config = apply_filters('document_engine_pdf_config', [
+        $mpdf_config = apply_filters('document_engine_pdf_config', array_merge([
             'tempDir' => $document_engine_pdf_temp_dir,
             'default_font_size' => $document_engine_font_size,
             'format' => $format,
@@ -119,9 +124,15 @@ class Generate_PDF
             'fontdata' => $document_engine_pdf_font_data,
             // Right-to-left sites (Arabic, Hebrew, Persian) get right-to-left PDFs; the bundled DejaVu fonts cover those scripts.
             'directionality' => is_rtl() ? 'rtl' : 'ltr',
-        ]);
+            // Images and styles are copied to local files first (localize_assets), so mPDF itself never
+            // opens URLs: its local-file path would otherwise fopen() http:// links found inside SVGs.
+            'whitelistStreamWrappers' => ['file'],
+        ], self::font_config($document_engine_pdf_font_dir, $document_engine_pdf_font_data)));
 
-        $mpdf = apply_filters('document_engine_pdf_mpdf_instance', new Mpdf($mpdf_config));
+        // mPDF's own fetches (e.g. images inside SVGs) go through WordPress' SSRF-safe HTTP API.
+        $mpdf = apply_filters('document_engine_pdf_mpdf_instance', new Mpdf($mpdf_config, \MatrixAddons\DocumentEngine\Pdf\SafeHttpClient::container()));
+        // Relative URLs resolve against this site, never the visitor's Host header.
+        $mpdf->SetBasePath(home_url('/'));
 
         if (document_engine_pdf_page_enable_protection()) {
             $grant_permissions = array_keys(array_filter(document_engine_pdf_page_protected_permissions(), function ($value) {
@@ -151,14 +162,15 @@ class Generate_PDF
         $pdf_footer_html = ob_get_clean();
         $mpdf->SetHTMLFooter(self::localize_assets($pdf_footer_html));
 
-        $mpdf->WriteHTML(apply_filters('document_engine_before_content', ''));
+        // Filter output goes through the same rules: mPDF itself only opens local files.
+        $mpdf->WriteHTML(self::localize_assets(apply_filters('document_engine_before_content', '')));
         ob_start();
         document_engine_get_template('pdf-index.php');
 
         $main_html = ob_get_clean();
 
         $mpdf->WriteHTML(self::localize_assets($main_html));
-        $mpdf->WriteHTML(apply_filters('document_engine_after_content', ''));
+        $mpdf->WriteHTML(self::localize_assets(apply_filters('document_engine_after_content', '')));
 
         global $post;
 
@@ -170,50 +182,266 @@ class Generate_PDF
     }
 
     /**
-     * Points <img src> and <link href> at files on disk instead of this site's URLs, so mPDF
-     * reads them directly rather than downloading them over HTTP on every PDF.
+     * The chosen font, and the site's own font file (from the Media Library) as main or fallback font.
      */
-    public static function localize_assets($html)
+    public static function font_config($font_dir, $font_data)
     {
-        // Filtering this off keeps URLs as they are; the remote-host check below always runs.
-        $map = apply_filters('document_engine_pdf_localize_assets', true) ? array(
-            untrailingslashit(content_url()) => untrailingslashit(WP_CONTENT_DIR),
-            untrailingslashit(includes_url()) => untrailingslashit(ABSPATH . WPINC),
-        ) : array();
-        $html = preg_replace_callback('#<(img|link)\b[^>]*>#i', function ($tag) use ($map) {
-            return preg_replace_callback('#\b(src|href)=(["\'])([^"\']+)\2#i', function ($attr) use ($map) {
-                $url = html_entity_decode($attr[3], ENT_QUOTES);
-                foreach ($map as $prefix => $dir) {
-                    foreach (array($prefix, set_url_scheme($prefix, 'http'), set_url_scheme($prefix, 'https')) as $candidate) {
-                        if (strpos($url, $candidate . '/') === 0) {
-                            $path = $dir . strtok(substr($url, strlen($candidate)), '?#');
-                            if (file_exists($path) && strpos(realpath($path), realpath($dir)) === 0) {
-                                return $attr[1] . '=' . $attr[2] . $path . $attr[2];
-                            }
-                        }
-                    }
-                }
-                // Remote files: only public hosts (no internal or private addresses; mPDF fetches them from the server).
-                return self::safe_remote($url) ? $attr[0] : $attr[1] . '=' . $attr[2] . $attr[2];
-            }, $tag[0]);
-        }, $html);
-        // CSS url(...) in style attributes and <style> blocks.
-        return preg_replace_callback('#url\(\s*(["\']?)(https?:)?//([^)"\']+)\1\s*\)#i', function ($m) {
-            $url = ($m[2] !== '' ? $m[2] : 'https:') . '//' . html_entity_decode($m[3], ENT_QUOTES);
-            return self::safe_remote($url) ? $m[0] : 'url()';
-        }, $html);
+        $choice = (string)get_option('document_engine_pdf_font', 'dejavusans');
+        $config = array();
+        if (in_array($choice, array('dejavusans', 'dejavuserif', 'dejavusansmono'), true)) {
+            $config['default_font'] = $choice;
+        }
+        $path = self::custom_font_path();
+        if ($path !== '') {
+            $font_dir = array_merge((array)$font_dir, array(dirname($path)));
+            $font_data['dengineuser'] = array('R' => basename($path), 'useOTL' => 0xFF);
+            $config['fontDir'] = $font_dir;
+            $config['fontdata'] = $font_data;
+            if ($choice === 'custom' || get_option('document_engine_pdf_font_use', 'fallback') === 'all') {
+                $config['default_font'] = 'dengineuser';
+            } else {
+                // Characters the main font lacks are drawn with the site's font.
+                $config['useSubstitutions'] = true;
+                $config['backupSubsFont'] = array('dengineuser');
+                $config['backupSIPFont'] = 'dengineuser';
+            }
+        } elseif ($choice === 'custom') {
+            $config['default_font'] = 'dejavusans';
+        }
+        return $config;
     }
 
     /**
-     * Whether mPDF may fetch this URL: local files were already mapped; anything else must be a public http(s) host.
+     * Local path of the font file set in Settings → Post to PDF, if it's a .ttf/.otf inside uploads.
      */
-    private static function safe_remote($url)
+    public static function custom_font_path()
     {
+        $url = (string)get_option('document_engine_pdf_font_file', '');
+        if ($url === '') {
+            return '';
+        }
+        $uploads = wp_upload_dir();
+        $base = set_url_scheme($uploads['baseurl'], 'https');
+        $candidate = set_url_scheme($url, 'https');
+        if (strpos($candidate, $base . '/') !== 0) {
+            return '';
+        }
+        $path = realpath($uploads['basedir'] . '/' . ltrim(strtok(substr($candidate, strlen($base)), '?#'), '/'));
+        if (!$path || strpos($path, realpath($uploads['basedir'])) !== 0 || !is_file($path) || !preg_match('/\.(ttf|otf)$/i', $path)) {
+            return '';
+        }
+        return $path;
+    }
+
+    /** Remote assets fetched for the PDF being built: url => local temp path ('' when refused). */
+    private static $fetched = array();
+    private static $fetch_started = 0.0;
+
+    /**
+     * Makes every asset mPDF will read a local file, so mPDF itself never makes a network request.
+     *
+     * Files on this site are mapped to their path on disk. Other http(s) assets are downloaded by
+     * WordPress (wp_safe_remote_get refuses private and internal addresses on every redirect) into
+     * a temporary file. Attribute values and CSS are entity-decoded first, so encoded or unquoted
+     * URLs can't slip past; anything still remote afterwards is removed.
+     */
+    public static function localize_assets($html)
+    {
+        $html = (string)$html;
+        // Embeds a PDF can't show: never fetched (they only slowed PDFs down or timed them out).
+        $html = preg_replace('#<(iframe|script|video|audio|embed|noscript)\b[^>]*>.*?</\1\s*>#is', '', $html);
+        $html = preg_replace('#<(iframe|script|video|audio|source|track|embed)\b[^>]*/?>#i', '', $html);
+        // Only what mPDF reads: <img src>, <link rel=stylesheet href>, background on table cells and blocks,
+        // <object data>, <input type=image src>, <watermarkimage src>. Anything else is left for mPDF to ignore.
+        $html = preg_replace_callback('#<([a-z][a-z0-9-]*)\b([^>]*)>#i', function ($tag) {
+            $name = strtolower($tag[1]);
+            if ($name === 'link' && !preg_match('#\brel\s*=\s*["\']?[^"\'>]*\bstylesheet\b#i', $tag[2])) {
+                return ''; // Feeds, REST, prefetch, icons: not stylesheets, not fetched.
+            }
+            $attrs = preg_replace_callback('#(\s)(src|href|background|data)(\s*=\s*)(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'>]+))#i', function ($a) use ($name) {
+                $attr = strtolower($a[2]);
+                $reads = array('src' => array('img', 'input', 'watermarkimage', 'image'), 'href' => array('link'), 'data' => array('object'),
+                    'background' => array('body', 'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'div'));
+                if (!in_array($name, $reads[$attr], true)) {
+                    return $a[0]; // Not something mPDF loads: never fetched.
+                }
+                $raw = isset($a[6]) && $a[6] !== '' ? $a[6] : (isset($a[5]) && $a[5] !== '' ? $a[5] : (isset($a[4]) ? $a[4] : ''));
+                $url = trim(html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+                $local = self::local_asset($url, $name === 'link' ? 'css' : 'binary');
+                return $a[1] . $a[2] . '="' . esc_attr($local) . '"';
+            }, $tag[2]);
+            // Inline style attributes: decode entities, then make every url(...) local.
+            $attrs = preg_replace_callback('#(\s)style\s*=\s*(?:"([^"]*)"|\'([^\']*)\')#i', function ($a) {
+                $css = html_entity_decode(isset($a[3]) && $a[3] !== '' ? $a[3] : $a[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                return $a[1] . 'style="' . esc_attr(self::localize_css($css)) . '"';
+            }, $attrs);
+            return '<' . $tag[1] . $attrs . '>';
+        }, $html);
+        // <style> blocks.
+        $html = preg_replace_callback('#(<style\b[^>]*>)(.*?)(</style>)#is', function ($m) {
+            return $m[1] . self::localize_css(html_entity_decode($m[2], ENT_QUOTES | ENT_HTML5, 'UTF-8')) . $m[3];
+        }, $html);
+        return $html;
+    }
+
+    /**
+     * Rewrites url(...) and @import in CSS to local files (or removes them).
+     */
+    private static function localize_css($css)
+    {
+        $css = preg_replace_callback('#url\(\s*(["\']?)(.*?)\1\s*\)#is', function ($m) {
+            $url = trim($m[2]);
+            if ($url === '' || stripos($url, 'data:') === 0) {
+                return $m[0];
+            }
+            $local = self::local_asset($url, 'binary');
+            return $local === '' ? 'none' : 'url("' . str_replace('"', '', $local) . '")';
+        }, (string)$css);
+        return preg_replace_callback('#@import\s+(["\'])(.*?)\1#i', function ($m) {
+            $local = self::local_asset(trim($m[2]), 'css');
+            return $local === '' ? '' : '@import "' . str_replace('"', '', $local) . '"';
+        }, $css);
+    }
+
+    /**
+     * A local path (or a data: URI / relative value kept as is) for an asset URL; '' when it may not be used.
+     */
+    private static function local_asset($url, $kind)
+    {
+        if ($url === '' || stripos($url, 'data:') === 0) {
+            return $url;
+        }
+        if (preg_match('#^[a-z][a-z0-9+.-]*:#i', $url) && !preg_match('#^https?:#i', $url)) {
+            return ''; // file:, php:, ftp:, gopher:… never.
+        }
         if (!preg_match('#^(https?:)?//#i', $url)) {
-            return true; // Relative paths, data: URIs and local file paths are not network requests.
+            if (is_file($url) && self::inside_allowed_dir($url)) {
+                return realpath($url); // Already a local path we produced (header logo, watermark image…).
+            }
+            if (strpos($url, '/') === 0) {
+                $url = home_url($url); // Site-relative: resolve against this site, never the request's Host header.
+            } else {
+                return '';
+            }
         }
         $url = strpos($url, '//') === 0 ? 'https:' . $url : $url;
-        return (bool)apply_filters('document_engine_pdf_allow_remote_asset', (bool)wp_http_validate_url($url), $url);
+
+        // Files on this site: read from disk.
+        if (apply_filters('document_engine_pdf_localize_assets', true)) {
+            foreach (array(untrailingslashit(content_url()) => untrailingslashit(WP_CONTENT_DIR), untrailingslashit(includes_url()) => untrailingslashit(ABSPATH . WPINC)) as $prefix => $dir) {
+                foreach (array(set_url_scheme($prefix, 'http'), set_url_scheme($prefix, 'https')) as $candidate) {
+                    if (strpos($url, $candidate . '/') === 0) {
+                        $path = $dir . strtok(substr($url, strlen($candidate)), '?#');
+                        $real = realpath($path);
+                        if ($real && is_file($real) && self::inside_allowed_dir($real) && !preg_match('/\.(php\d?|phtml|phar)$/i', $real)) {
+                            return $real;
+                        }
+                        return '';
+                    }
+                }
+            }
+        }
+        return self::fetch_remote($url, $kind);
+    }
+
+    /**
+     * Inside wp-content, wp-includes or the plugin's own temp folder, and not in a folder whose
+     * files are kept private (Pro's protected storage, other plugins' protected uploads, backups).
+     */
+    private static function inside_allowed_dir($path)
+    {
+        $real = realpath($path);
+        if (!$real) {
+            return false;
+        }
+        $blocked = (array)apply_filters('document_engine_pdf_blocked_asset_dirs', array('document-engine-private', 'woocommerce_uploads', 'edd', 'sdm-uploads', 'wpdm-files', 'download-manager-files', 'updraft', 'ai1wm-backups', 'backups', 'backup', 'upgrade'));
+        $content = trailingslashit((string)realpath(WP_CONTENT_DIR));
+        if (strpos($real, $content) === 0) {
+            $first = explode('/', str_replace('\\', '/', substr($real, strlen($content))));
+            $upload = trailingslashit((string)realpath(wp_upload_dir()['basedir']));
+            $relative = strpos($real, $upload) === 0 ? explode('/', substr($real, strlen($upload))) : array();
+            foreach ($blocked as $name) {
+                // A top-level wp-content folder (plugins, themes, backups…) or an uploads folder (protected storage…).
+                if ((isset($first[0]) && stripos($first[0], $name) === 0 && $first[0] !== 'uploads') || (isset($relative[0]) && stripos($relative[0], $name) === 0)) {
+                    return false;
+                }
+            }
+        }
+        $dirs = array(WP_CONTENT_DIR, ABSPATH . WPINC, document_engine()->get_tmp_pdf_dir(true, false));
+        foreach ($dirs as $dir) {
+            $d = realpath($dir);
+            if ($d && strpos($real, trailingslashit($d)) === 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Downloads a remote asset with WordPress' SSRF-safe HTTP API into a temporary file.
+     */
+    private static function fetch_remote($url, $kind)
+    {
+        if (isset(self::$fetched[$url])) {
+            return self::$fetched[$url];
+        }
+        self::$fetched[$url] = '';
+        // A total budget: a page full of remote images can't run past PHP's time limit.
+        if (self::$fetch_started === 0.0) {
+            self::$fetch_started = microtime(true);
+        }
+        if (microtime(true) - self::$fetch_started > (float)apply_filters('document_engine_pdf_fetch_budget', 20)) {
+            return '';
+        }
+        if (!wp_http_validate_url($url) || !apply_filters('document_engine_pdf_allow_remote_asset', true, $url) || count(self::$fetched) > 50) {
+            return '';
+        }
+        $response = wp_safe_remote_get($url, array('timeout' => 8, 'redirection' => 3, 'limit_response_size' => 5 * MB_IN_BYTES, 'reject_unsafe_urls' => true));
+        if (is_wp_error($response) || (int)wp_remote_retrieve_response_code($response) !== 200) {
+            return '';
+        }
+        $body = (string)wp_remote_retrieve_body($response);
+        $type = strtolower((string)wp_remote_retrieve_header($response, 'content-type'));
+        if ($body === '') {
+            return '';
+        }
+        if ($kind === 'css') {
+            if (strpos($type, 'css') === false && strpos($type, 'text/plain') === false) {
+                return '';
+            }
+            $body = self::localize_css($body); // A remote stylesheet's own url()s go through the same rules.
+            $ext = 'css';
+        } else {
+            $info = function_exists('getimagesizefromstring') ? @getimagesizefromstring($body) : false; // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+            $svg = strpos($type, 'svg') !== false || preg_match('#^\s*(<\?xml[^>]*>\s*)?<svg\b#i', substr($body, 0, 400));
+            if (!$info && !$svg) {
+                return '';
+            }
+            $ext = $svg ? 'svg' : image_type_to_extension($info[2], false);
+        }
+        // The plugin's own (non-public) temp folder and an unguessable, per-request name: no shared predictable paths.
+        $dir = trailingslashit(document_engine()->get_tmp_pdf_dir(true, false)) . 'assets';
+        wp_mkdir_p($dir);
+        $path = $dir . '/' . wp_generate_password(24, false) . '.' . preg_replace('/[^a-z0-9]/', '', (string)$ext);
+        if (file_put_contents($path, $body) === false) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+            return '';
+        }
+        self::$fetched[$url] = $path;
+        return $path;
+    }
+
+    /**
+     * Removes the temporary files of fetched remote assets.
+     */
+    public static function cleanup_assets()
+    {
+        foreach (self::$fetched as $path) {
+            if ($path !== '' && is_file($path)) {
+                @unlink($path); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.unlink_unlink
+            }
+        }
+        self::$fetched = array();
+        self::$fetch_started = 0.0;
     }
 
     private static function headers($title, $action, $length)

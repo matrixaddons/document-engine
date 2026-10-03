@@ -696,7 +696,7 @@ class Library
                 $html = '<span class="dengine-title">' . $icon . '<span class="dengine-title__text">'
                     . ($url ? '<a class="dengine-title__link" href="' . esc_url($url) . '">' . $title . '</a>' : '<span class="dengine-title__link">' . $title . '</span>');
                 if (!FileServer::can_access($document, null, 'list')) {
-                    $html .= ' <span class="dengine-pill dengine-pill--locked">' . document_engine_ui_icon('lock') . esc_html__('Members only', 'document-engine') . '</span>';
+                    $html .= ' <span class="dengine-pill dengine-pill--locked">' . document_engine_ui_icon('lock') . esc_html(self::lock_label($document)) . '</span>';
                 }
                 $meta = array_filter(array($document->get_type_label(), $document->get_size_label(), self::short_date($document)));
                 $html .= '<span class="dengine-title__meta">' . esc_html(implode(' · ', $meta)) . '</span></span></span>';
@@ -777,6 +777,14 @@ class Library
     /**
      * Files the preview popup can show: PDFs in the viewer, images, audio and video natively.
      */
+    /**
+     * Why a listed document is locked: a WordPress password, or membership (Pro rules).
+     */
+    public static function lock_label(Document $document)
+    {
+        return $document->get_post()->post_password !== '' ? __('Password', 'document-engine') : __('Members only', 'document-engine');
+    }
+
     public static function previewable(Document $document)
     {
         if (document_engine_office_embed_url($document) !== '') {

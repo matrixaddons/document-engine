@@ -4,7 +4,7 @@ Tags: document library, pdf viewer, embed pdf, download manager, document manage
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,19 +73,19 @@ The free plugin is complete on its own. **Document Engine Pro** adds control, pr
 
 = Document pages =
 
-Every document gets a clean page with its file type, size, last update, categories, a download button and, for PDFs, the viewer. Pages are indexed by search engines and can be switched off. Templates can be overridden in your theme.
+Every document gets a clean page with its file type, size, last update, categories, a download button and, for PDFs, the viewer. Pages can be switched off, and templates overridden in your theme.
 
 = Post to PDF =
 
 * A **["Download PDF" button](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-any-post-as-a-pdf#feature-any-post-as-a-pdf)** on the post types you choose, placed before or after the content, or anywhere with the **Save as PDF block** or `[document_engine_pdf_button]`.
-* Header logo, title and page numbers, footer text, **paper size** (A4, Letter, Legal, A5, A3), orientation, margins, text size, custom CSS or your theme's styles. Right-to-left languages are supported.
+* Header logo, title and page numbers, footer text, **paper size** (A4, Letter, Legal, A5, A3), **your own fonts** (including Chinese, Japanese, Korean), orientation, margins, custom CSS. Right-to-left languages are supported.
 * Optional **PDF protection** (print, copy and edit permissions).
 * PDF-only shortcodes for page breaks, columns and content hidden from the PDF.
 * **Fast and safe**: generated PDFs are cached, each visitor has a per-minute limit, and only public content is exported (never private or password-protected posts).
 
 = Moving from another plugin =
 
-[Document Engine copies your documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-move-in-one-click#feature-move-in-one-click) from **Document Library (Barn2)**, **Download Monitor** and **WordPress Download Manager**: titles, descriptions, categories, tags, files, download counts, dates and passwords. You see a preview first, the original data is never changed, and old shortcodes and download links keep working afterwards.
+[Document Engine copies your documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=free-feature-move-in-one-click#feature-move-in-one-click) from **Document Library (Barn2)**, **Download Monitor**, **WordPress Download Manager**, **Simple Download Monitor** and **Simple File List**: titles, descriptions, categories, tags, files, download counts, dates and passwords. You see a preview first, the original data is never changed, and old shortcodes and download links keep working afterwards.
 
 = For editors and admins =
 
@@ -122,17 +122,17 @@ Screenshots and details of every feature are on the [Document Engine Pro page](h
 
 **Access control**
 
-* **[Members-only documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-decide-who-can-open-each-document#pro-decide-who-can-open-each-document)** by logged-in users, roles or named people, per document or for a whole category (sub-categories follow).
+* **[Members-only documents](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-decide-who-can-open-each-document#pro-decide-who-can-open-each-document)** by logged-in users, roles, named people or **membership levels** (Paid Memberships Pro, WooCommerce Memberships), per document or category.
 * Restricted documents shown **with a lock** or **hidden** from people who can't open them, and left out of site search, feeds and file-content search.
 * **[Private file storage](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-decide-who-can-open-each-document#pro-decide-who-can-open-each-document)** for restricted files, with a **Site Health test** that checks the folder really is private (and shows the nginx rule when it isn't).
-* **[Share links](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-decide-who-can-open-each-document#pro-decide-who-can-open-each-document)** for people without an account: expiring, **named per recipient**, with **open tracking**, an optional **email on first open**, and one-click revoke.
+* **[Share links](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-decide-who-can-open-each-document#pro-decide-who-can-open-each-document)** for people without an account: expiring, **named per recipient**, with **open tracking**, **single-use or limited uses**, an optional email on first open, and one-click revoke.
 * **["My documents" block](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-my-documents-zip-and-subscriptions#pro-my-documents-zip-and-subscriptions)**: a client or staff area listing the documents shared with the signed-in person, with what's new since their last visit.
 
 **Secure viewing and downloads**
 
 * **[Secure viewer for PDFs](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-secure-viewer-and-stamped-copies#pro-secure-viewer-and-stamped-copies)**: read-only, with no download, print or copy buttons, and the **reader's name, email and date watermarked on every page**.
 * **[Stamped PDF downloads](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-secure-viewer-and-stamped-copies#pro-secure-viewer-and-stamped-copies)**: every downloaded PDF carries the reader's details.
-* **[Email gate](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-email-gate#pro-email-gate)**: name and email (and optionally organisation) with your consent text before a download; returning visitors pass straight through. Leads are listed, exported to CSV, emailed to you or sent to a webhook, and deleted after a retention period you choose.
+* **[Email gate](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=feature-pro-email-gate#pro-email-gate)**: name and email (and optionally organisation) with your consent text before a download; returning visitors pass straight through. Leads are listed, exported to CSV, emailed to you or sent to a webhook (Zapier, Make), and deleted after your retention period.
 * **Accept terms**: everyone ticks "I agree" to your licence or disclaimer before opening a document; each acceptance is logged.
 * **Office previews** (opt-in): Word, Excel and PowerPoint files shown with Microsoft's viewer, on the document page and in the popup.
 * **[Abuse protection](https://matrixaddons.com/plugins/document-engine/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=document-engine-pro&utm_content=compare-abuse#compare)**: a daily limit on how many different documents one person can open, and **Cloudflare Turnstile** on the email gate, request and submission forms.
@@ -222,9 +222,25 @@ With the free plugin you can keep documents as drafts, private posts or password
 
 Yes. Your settings, the five PDF shortcodes, the PDF Viewer block and the settings page link all keep working. The Post to PDF settings are now under **Documents → Settings → Post to PDF**.
 
-= Can I move from Download Monitor, WordPress Download Manager or Barn2's Document Library? =
+= Can I move from Download Monitor, WordPress Download Manager, Barn2's Document Library, Simple Download Monitor or Simple File List? =
 
-Yes, from **Documents → Tools → Migrate**. Files, categories, tags, dates, download counts and passwords come across; the old shortcodes keep working and old download links redirect. The original plugin's data isn't changed.
+Yes, from **Documents → Tools → Migrate**. Files, categories, tags, dates, download counts and passwords come across; the old shortcodes keep working and old download links redirect. The original plugin's data isn't changed. Simple File List (closed on WordPress.org in July 2026) folders become nested categories, and `[eeSFL]` pages keep working.
+
+= Can I stop people downloading a PDF? =
+
+Hiding the viewer's download and print buttons doesn't stop a determined visitor: browsers can still save the file. Document Engine Pro's secure viewer shows the PDF read-only with the reader's name on every page, and keeps the file out of the public uploads folder.
+
+= Does it work with membership plugins? =
+
+Free: documents can be private or password-protected. Pro restricts documents by role (which works with MemberPress, Restrict Content Pro and other plugins that give members a role), by named people, or by Paid Memberships Pro level or WooCommerce Memberships plan.
+
+= Can documents be stored in the cloud (Amazon S3, Cloudflare R2)? =
+
+Document Engine keeps files in your Media Library, so a media offload plugin can move public files to a bucket. With Pro, exclude the protected documents folder from offloading; Site Health warns you if an offload plugin is active.
+
+= Can PDFs use Chinese, Japanese or Korean text? =
+
+Yes: upload a font that has those characters (for example Noto Sans SC) to the Media Library and choose it in **Settings → Post to PDF → Page & protection**.
 
 = Can I show PDFs hosted on another website? =
 
@@ -232,7 +248,7 @@ Yes, if that website allows it (CORS). If it doesn't, visitors see a link to ope
 
 = Does it work with my theme and page builder? =
 
-Libraries use your theme's fonts and colours and adapt to the space they get. Blocks work in the block and site editors, Elementor has its own widgets, and shortcodes work everywhere else. Copy any file from the plugin's `templates` folder to `your-theme/document_engine/` to change it, and adjust colours with CSS custom properties such as `--dengine-accent`.
+Libraries use your theme's fonts and colours and adapt to the space they get. Blocks work in the block and site editors, Elementor has its own widgets, and shortcodes work everywhere else, including Divi, Bricks, Beaver Builder and WPBakery. Copy any file from the plugin's `templates` folder to `your-theme/document_engine/` to change it, and adjust colours with CSS custom properties such as `--dengine-accent`.
 
 = Is it accessible? =
 
@@ -284,6 +300,23 @@ All attributes are listed in **Documents → Docs → Developers**.
 10. Step-by-step documentation inside WordPress (Documents → Docs).
 
 == Changelog ==
+
+= 2.2.0 - 2026-10-03 =
+* New - Migrate from Simple Download Monitor and Simple File List (closed on WordPress.org in July 2026): files, descriptions, categories (Simple File List folders become nested categories), dates and download counts. Old shortcodes and download links keep working. Imported titles are plain text, and files are only copied from Simple File List's folder inside uploads.
+* New - Post to PDF fonts: Sans, Serif or Monospaced, or your own .ttf/.otf font (for example for Chinese, Japanese or Korean), for all text or only for characters the main font lacks.
+* Improved - Pro suggestions are now contextual and quiet: only for administrators, on Document Engine's own screens, never in the first week, one at a time and each dismissible for good. The extra "Upgrade to Pro" button in the header is gone, and Pro previews show example data.
+* Improved - Block themes get a "Single Document" template: document pages no longer show the blog post byline or a "More posts" list. A theme's own template still wins.
+* Improved - Right-to-left languages: the admin screens, block editor panels and the Post to PDF button now load right-to-left styles too; every screen was checked mirrored. Keyboard: every control shows a visible focus ring.
+* Improved - Layout and readability: the documents list keeps titles readable with many columns, library filters wrap inside narrow content columns, muted text meets contrast guidelines in themes with grey body text, and the Docs and settings screens fit phones.
+* Improved - Password-protected documents: download links go to the password form (they asked visitors to log in), and libraries label them "Password".
+* Security - Post to PDF fetches images and stylesheets itself through WordPress' safe HTTP API (no internal addresses, no redirects to them), within a time limit, and never uses the request's host name; encoded or unquoted image addresses, and images inside SVG files, are handled too. Videos, iframes and scripts are left out, and files in protected or private folders are never embedded.
+* Security - PDFs are only generated on the post's own address, so plugins that protect a page by checking the requested page always run first.
+* Security - Creating documents from Media Library files checks that you may use each file; the Pro installer only accepts HTTPS packages.
+* Fixed - The document editor shows the real name and type of files in protected storage (it showed the download address).
+* Fixed - Downloads of missing files are no longer counted; the viewer frees its memory when the preview closes; keyboard focus stays in place after sorting, filtering or paging a library; the full-screen fallback can be left with Escape.
+* Fixed - Save as PDF buttons placed in a theme template, synced pattern or Elementor layout work, for the content those layouts show (a single-post template: posts; a page template: pages); attachment pages no longer show a button that did nothing.
+* Fixed - PDF footer "post title" option, the columns shortcode (equal columns) and [document_engine_pdf_remove tag="…"] (it switched the shortcode off for the rest of the page).
+* Fixed - The daily clean-up now also runs on updated sites and network sites; theme template overrides are re-checked after a theme switch; files of trashed documents are hidden like private ones; PHP warnings for unusual search addresses; "Recently updated" order on the dashboard; untranslated PDF texts.
 
 = 2.1.0 - 2026-10-02 =
 * New - Sort a table library by clicking a column heading (title, date, updated, size, downloads); a second click reverses the order.
@@ -356,6 +389,9 @@ All attributes are listed in **Documents → Docs → Developers**.
 * Fixed - Setting page design
 
 == Upgrade Notice ==
+
+= 2.2.0 =
+Migrate from Simple File List and Simple Download Monitor, your own PDF fonts, and security fixes for Post to PDF. Recommended for everyone.
 
 = 2.1.0 =
 Click-to-sort columns, "Load more", PDF paper sizes and Google Analytics download events. Fixes the file type and size of documents created in the block editor. Recommended for Document Engine Pro users.

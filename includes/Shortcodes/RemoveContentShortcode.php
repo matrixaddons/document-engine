@@ -31,17 +31,23 @@ class RemoveContentShortcode
 
         $tag = sanitize_text_field($shortcode_atts['tag']);
 
-        if ($tag !== '' && !document_engine_pdf_is_valid_post_type()) {
-            remove_shortcode($tag);
-            add_shortcode($tag, '__return_false');
-            echo do_shortcode($content);
-
-        } else if (document_engine_pdf_is_valid_post_type()) {
-
-            echo '';
+        $in_pdf = document_engine_pdf_is_valid_post_type();
+        if ($tag === '') {
+            // No tag: the content shows on the page and is left out of the PDF.
+            echo $in_pdf ? '' : do_shortcode($content); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        } elseif ($in_pdf) {
+            // With a tag: in the PDF, that shortcode is left out of this content only; it is restored afterwards.
+            global $shortcode_tags;
+            $saved = isset($shortcode_tags[$tag]) ? $shortcode_tags[$tag] : null;
+            $shortcode_tags[$tag] = '__return_empty_string';
+            echo do_shortcode($content); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            if ($saved !== null) {
+                $shortcode_tags[$tag] = $saved;
+            } else {
+                unset($shortcode_tags[$tag]);
+            }
         } else {
-
-            echo do_shortcode($content);
+            echo do_shortcode($content); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
 
     }

@@ -61,7 +61,20 @@ class Viewer extends Setting_Base
             array('desc' => __('Print button', 'document-engine'), 'id' => 'document_engine_viewer_print', 'type' => 'checkbox', 'default' => 'yes', 'checkboxgroup' => ''),
             array('desc' => __('Full screen button', 'document-engine'), 'id' => 'document_engine_viewer_fullscreen', 'type' => 'checkbox', 'default' => 'yes', 'checkboxgroup' => ''),
             array('desc' => __('Search inside the document', 'document-engine'), 'id' => 'document_engine_viewer_search', 'type' => 'checkbox', 'default' => 'yes', 'checkboxgroup' => ''),
-            array('desc' => __('Page thumbnails and outline sidebar', 'document-engine'), 'id' => 'document_engine_viewer_sidebar', 'type' => 'checkbox', 'default' => 'yes', 'checkboxgroup' => 'end'),
+            array(
+                'desc' => __('Page thumbnails and outline sidebar', 'document-engine'),
+                'id' => 'document_engine_viewer_sidebar',
+                'type' => 'checkbox',
+                'default' => 'yes',
+                'checkboxgroup' => 'end',
+                // T2 (static): hiding the buttons is not protection.
+                'desc_tip' => __('Hiding the Download or Print button doesn\'t stop downloads: browsers can still save the file.', 'document-engine')
+                    . (\MatrixAddons\DocumentEngine\Admin\Nudges::can_show('t2-viewer', false) ? ' ' . sprintf(
+                        /* translators: %s: link to the Pro preview */
+                        __('Document Engine Pro\'s secure viewer shows a PDF read-only, with the reader\'s name on every page. %s', 'document-engine'),
+                        '<a href="' . esc_url(\MatrixAddons\DocumentEngine\Admin\Upsell::url('access')) . '">' . esc_html__('See how Pro does this', 'document-engine') . '</a>'
+                    ) : ''),
+            ),
             array(
                 'title' => __('Version 1 blocks', 'document-engine'),
                 'desc' => __('Use this viewer for PDF Viewer (classic) blocks', 'document-engine'),

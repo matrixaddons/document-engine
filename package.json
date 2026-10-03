@@ -1,10 +1,11 @@
 {
   "name": "document-engine",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "license": "GPL-2.0-or-later",
   "scripts": {
-    "build": "wp-scripts build && npm run pdfjs",
+    "build": "wp-scripts build && npm run pdfjs && npm run rtl",
+    "rtl": "rtlcss assets/admin/css/admin.css assets/admin/css/admin-rtl.css && rtlcss assets/css/frontend.css assets/css/frontend-rtl.css",
     "start": "wp-scripts start",
     "lint:js": "wp-scripts lint-js assets/src",
     "lint:css": "wp-scripts lint-style 'assets/src/**/*.scss'",

@@ -130,6 +130,7 @@ class Upsell
                 $features = self::features();
                 UI::page_start($features[$feature]['title'], esc_html__('Available in Document Engine Pro.', 'document-engine'));
                 self::preview($features[$feature]);
+                echo self::sample($feature); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 UI::page_end();
             });
         }
@@ -142,6 +143,7 @@ class Upsell
         $feature = isset($features[$key]) ? $features[$key] : $features['access'];
         UI::page_start($feature['title'], esc_html__('Available in Document Engine Pro.', 'document-engine'));
         self::preview($feature);
+        echo self::sample($key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         UI::page_end();
     }
 
@@ -184,6 +186,83 @@ class Upsell
     {
         $features = self::features();
         self::preview($features['access']);
+        echo self::sample('access'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+
+    /**
+     * What the Pro screen looks like, filled with clearly labelled example data (not the site's data).
+     */
+    public static function sample($key)
+    {
+        $kpi = function ($icon, $label, $value) {
+            return '<div class="dengine-a-kpi"><span class="dengine-a-kpi__label">' . UI::icon($icon, 16) . esc_html($label) . '</span><span class="dengine-a-kpi__value">' . esc_html($value) . '</span></div>';
+        };
+        $rows = function ($head, $rows) {
+            $html = '<div class="dengine-a-table-wrap"><table class="dengine-a-table"><thead><tr>';
+            foreach ($head as $h) {
+                $html .= '<th scope="col">' . esc_html($h) . '</th>';
+            }
+            $html .= '</tr></thead><tbody>';
+            foreach ($rows as $row) {
+                $html .= '<tr>';
+                foreach ($row as $cell) {
+                    $html .= '<td>' . esc_html($cell) . '</td>';
+                }
+                $html .= '</tr>';
+            }
+            return $html . '</tbody></table></div>';
+        };
+        ob_start();
+        UI::card_start(__('What it looks like', 'document-engine') . ' ', '', '<span class="dengine-a-example">' . esc_html__('Example data', 'document-engine') . '</span>');
+        echo '<div class="dengine-a-sample" aria-label="' . esc_attr__('Example of the Pro screen, not your data', 'document-engine') . '">';
+        if ($key === 'activity') {
+            $tiles = '<div class="dengine-a-kpis">' . $kpi('viewer', __('Views', 'document-engine'), '498') . $kpi('download', __('Downloads', 'document-engine'), '385') . $kpi('users', __('People', 'document-engine'), '61') . $kpi('lock', __('Blocked', 'document-engine'), '3') . '</div>';
+            echo $tiles; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $kpi()
+            $table = $rows(
+                array(__('When', 'document-engine'), __('Event', 'document-engine'), __('Document', 'document-engine'), __('Who', 'document-engine')),
+                array(
+                    array(__('2 minutes ago', 'document-engine'), __('Viewed', 'document-engine'), __('Code of Conduct', 'document-engine'), 'Sam Carter'),
+                    array(__('1 hour ago', 'document-engine'), __('Downloaded', 'document-engine'), __('Budget 2026/27', 'document-engine'), 'Priya Shah'),
+                    array(__('3 hours ago', 'document-engine'), __('Blocked', 'document-engine'), __('Staff Handbook', 'document-engine'), __('Visitor', 'document-engine')),
+                    array(__('Yesterday', 'document-engine'), __('Share link', 'document-engine'), __('Annual Report', 'document-engine'), __('External auditor', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'import') {
+            $table = $rows(
+                array('title', 'file_url', 'category', 'cf:reference', __('Result', 'document-engine')),
+                array(
+                    array('Expenses Policy', '…/expenses-policy.pdf', 'policies', 'RC-COR-121', __('Created', 'document-engine')),
+                    array('Planning Minutes, May', '…/minutes-may.pdf', 'meeting-minutes', 'RC-DEM-044', __('Created', 'document-engine')),
+                    array('Budget 2026/27', '…/budget-v2.pdf', 'reports', 'RC-FIN-002', __('Updated (new version)', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'leads') {
+            $table = $rows(
+                array(__('When', 'document-engine'), __('Name', 'document-engine'), __('Email', 'document-engine'), __('Document', 'document-engine')),
+                array(
+                    array(__('Today', 'document-engine'), 'Alex Morgan', 'alex@example.org', __('Park Masterplan', 'document-engine')),
+                    array(__('Yesterday', 'document-engine'), 'Jo Lee', 'jo@example.com', __('Annual Report', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } else {
+            $table = $rows(
+                array(__('Setting', 'document-engine'), __('This document', 'document-engine')),
+                array(
+                    array(__('Who can open it', 'document-engine'), __('Logged-in users', 'document-engine')),
+                    array(__('Private file storage', 'document-engine'), __('On (the file is out of the public uploads folder)', 'document-engine')),
+                    array(__('Secure viewer', 'document-engine'), __('On: read-only, "Sam Carter · sam@example.org" on every page', 'document-engine')),
+                    array(__('Share link', 'document-engine'), __('External auditor · expires in 7 days · opened twice', 'document-engine')),
+                    array(__('Read and confirm', 'document-engine'), __('5 of 6 staff confirmed · due 10 October', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        }
+        echo '</div>';
+        UI::card_end();
+        return ob_get_clean();
     }
 
     /**
@@ -194,18 +273,13 @@ class Upsell
         if (!wp_script_is('document-engine-document-editor', 'enqueued')) {
             return;
         }
+        // Contextual only (T1: a private or password document's file is still public; T4: replacing a file).
         wp_add_inline_script('document-engine-document-editor', 'window.DocumentEngineEditor = Object.assign(window.DocumentEngineEditor || {}, ' . wp_json_encode(array(
-            'proPreview' => array(
-                'title' => __('Access & security', 'document-engine'),
-                'text' => __('Control who can open this document and prove who read it.', 'document-engine'),
-                'points' => array(
-                    __('Members, roles or named people only', 'document-engine'),
-                    __('Private file storage and expiring share links', 'document-engine'),
-                    __('Watermarked secure viewer', 'document-engine'),
-                    __('"I have read and understood" confirmations', 'document-engine'),
-                ),
-                'button' => __('See what Pro adds', 'document-engine'),
-                'url' => self::url('access'),
+            'nudges' => array(
+                'privateFile' => Nudges::can_show('t1-private-file') ? self::url('access') : '',
+                'versions' => Nudges::can_show('t4-versions') ? self::url('import') : '',
+                'ajax' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('dengine_nudge'),
             ),
         )) . ');', 'before');
     }

@@ -24,7 +24,8 @@ if (!function_exists('document_engine_pdf_is_valid_post_type')) {
             $post = get_post($pdf_post_id);
             $offered = in_array($post_type, $enabled, true)
                 || has_block('document-engine/pdf-button', $post)
-                || has_shortcode((string)$post->post_content, apply_filters('document_engine_pdf_button_shortcode_tag', 'document_engine_pdf_button'));
+                || has_shortcode((string)$post->post_content, apply_filters('document_engine_pdf_button_shortcode_tag', 'document_engine_pdf_button'))
+                || in_array($post_type, document_engine_pdf_layout_post_types(), true);
             $can_generate = (bool)$offered;
         }
 
@@ -32,6 +33,76 @@ if (!function_exists('document_engine_pdf_is_valid_post_type')) {
 
     }
 }
+if (!function_exists('document_engine_pdf_layout_post_types')) {
+    /**
+     * Post types that show a Save as PDF button from outside their content: a block theme template
+     * (single → posts, single-{type} → that type, page → pages, singular/index → every viewable type),
+     * or a template part, synced pattern or Elementor layout (posts and pages; filterable).
+     * Cached; cleared when one of those is saved.
+     *
+     * @return string[]
+     */
+    function document_engine_pdf_layout_post_types()
+    {
+        $types = get_transient('dengine_pdf_button_layout_types');
+        if (!is_array($types)) {
+            global $wpdb;
+            $block = '%' . $wpdb->esc_like('wp:document-engine/pdf-button') . '%';
+            $code = '%' . $wpdb->esc_like('[document_engine_pdf_button') . '%';
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT post_type, post_name FROM {$wpdb->posts} WHERE post_type IN ('wp_template', 'wp_template_part', 'wp_block') AND post_status = 'publish' AND (post_content LIKE %s OR post_content LIKE %s)",
+                $block,
+                $code
+            ));
+            $elementor = (bool)$wpdb->get_var($wpdb->prepare("SELECT meta_id FROM {$wpdb->postmeta} WHERE meta_key = '_elementor_data' AND meta_value LIKE %s LIMIT 1", $code)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $viewable = array_values(array_filter(get_post_types(array('public' => true)), 'is_post_type_viewable'));
+            $types = array();
+            $shared = $elementor;
+            foreach ((array)$rows as $row) {
+                if ($row->post_type !== 'wp_template') {
+                    $shared = true; // A part or pattern: which templates use it isn't known here.
+                    continue;
+                }
+                $slug = (string)$row->post_name;
+                if (in_array($slug, array('singular', 'index'), true)) {
+                    $types = array_merge($types, $viewable);
+                } elseif ($slug === 'single') {
+                    $types[] = 'post';
+                } elseif ($slug === 'page' || strpos($slug, 'page-') === 0) {
+                    $types[] = 'page';
+                } elseif (strpos($slug, 'single-') === 0) {
+                    foreach ($viewable as $type) {
+                        if ($slug === 'single-' . $type || strpos($slug, 'single-' . $type . '-') === 0) {
+                            $types[] = $type;
+                        }
+                    }
+                }
+            }
+            if ($shared) {
+                $types = array_merge($types, (array)apply_filters('document_engine_pdf_shared_layout_post_types', array('post', 'page')));
+            }
+            $types = array_values(array_unique(array_map('strval', $types)));
+            set_transient('dengine_pdf_button_layout_types', $types, DAY_IN_SECONDS);
+        }
+        return (array)apply_filters('document_engine_pdf_layout_post_types', $types);
+    }
+    add_action('save_post', function ($post_id, $post) {
+        if (in_array($post->post_type, array('wp_template', 'wp_template_part', 'wp_block'), true) || get_post_meta($post_id, '_elementor_data', true)) {
+            delete_transient('dengine_pdf_button_layout_types');
+        }
+    }, 10, 2);
+}
+if (!function_exists('document_engine_pdf_button_in_layouts')) {
+    /**
+     * Kept for code written against 2.2 betas: whether any layout shows a Save as PDF button.
+     */
+    function document_engine_pdf_button_in_layouts()
+    {
+        return count(document_engine_pdf_layout_post_types()) > 0;
+    }
+}
+
 if (!function_exists('document_engine_get_available_post_types')) {
     function document_engine_get_available_post_types()
     {
@@ -45,7 +116,6 @@ if (!function_exists('document_engine_get_available_post_types')) {
         $post_types_updated = array(
             array('id' => 'post', 'title' => __('post', 'document-engine')),
             array('id' => 'page', 'title' => __('page', 'document-engine')),
-            array('id' => 'attachment', 'title' => __('attachment', 'document-engine')),
         );
 
         foreach ($post_types as $post_type) {

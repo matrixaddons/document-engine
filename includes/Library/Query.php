@@ -144,16 +144,16 @@ class Query
         $atts = shortcode_atts($d, is_array($atts) ? $atts : array());
 
         $bool = function ($v) {
-            return is_bool($v) ? $v : in_array(strtolower((string)$v), array('1', 'true', 'yes', 'on'), true);
+            return is_bool($v) ? $v : (is_scalar($v) && in_array(strtolower((string)$v), array('1', 'true', 'yes', 'on'), true));
         };
         $list = function ($v) {
-            $items = is_array($v) ? $v : explode(',', (string)$v);
+            $items = is_array($v) ? $v : explode(',', is_scalar($v) ? (string)$v : '');
             return array_values(array_filter(array_map(function ($i) {
-                return sanitize_title(trim((string)$i));
+                return is_scalar($i) ? sanitize_title(trim((string)$i)) : '';
             }, $items), 'strlen'));
         };
         $ids = function ($v) {
-            $items = is_array($v) ? $v : explode(',', (string)$v);
+            $items = is_array($v) ? $v : explode(',', is_scalar($v) ? (string)$v : '');
             return array_values(array_filter(array_map('absint', $items)));
         };
 
@@ -161,7 +161,7 @@ class Query
         $columns = array_keys(self::columns());
 
         $out = array(
-            'id' => preg_replace('/[^a-z0-9]/', '', strtolower((string)$atts['id'])) ?: 'dl',
+            'id' => preg_replace('/[^a-z0-9]/', '', strtolower(is_scalar($atts['id']) ? (string)$atts['id'] : '')) ?: 'dl',
             'layout' => in_array($atts['layout'], $layouts, true) ? $atts['layout'] : 'table',
             'categories' => $list($atts['categories']),
             'tags' => $list($atts['tags']),
@@ -170,7 +170,7 @@ class Query
             'file_types' => array_values(array_intersect($list($atts['file_types']), array_keys(document_engine_file_type_groups_labels()))),
             'per_page' => max(1, min(100, absint($atts['per_page']) ?: 20)),
             'orderby' => in_array($atts['orderby'], array('date', 'title', 'modified', 'downloads', 'menu_order', 'rand'), true) ? $atts['orderby'] : 'date',
-            'order' => strtolower((string)$atts['order']) === 'asc' ? 'asc' : 'desc',
+            'order' => is_scalar($atts['order']) && strtolower((string)$atts['order']) === 'asc' ? 'asc' : 'desc',
             'columns' => array_values(array_intersect($list($atts['columns']), $columns)),
             'grid_columns' => max(1, min(6, absint($atts['grid_columns']) ?: 3)),
             'search' => $bool($atts['search']),
@@ -184,7 +184,7 @@ class Query
             'folder_limit' => max(1, min(100, absint($atts['folder_limit']) ?: 50)),
             'open_folders' => $bool($atts['open_folders']),
             'multi_filters' => $bool($atts['multi_filters']),
-            'class' => implode(' ', array_map('sanitize_html_class', preg_split('/\s+/', (string)$atts['class']))),
+            'class' => implode(' ', array_map('sanitize_html_class', preg_split('/\s+/', is_scalar($atts['class']) ? (string)$atts['class'] : ''))),
         );
 
         if (empty($out['columns'])) {
@@ -203,13 +203,13 @@ class Query
         $p = $settings['id'] . '_';
 
         $get = function ($key) use ($source, $p) {
-            return isset($source[$p . $key]) ? sanitize_text_field(wp_unslash((string)$source[$p . $key])) : '';
+            return isset($source[$p . $key]) && is_scalar($source[$p . $key]) ? sanitize_text_field(wp_unslash((string)$source[$p . $key])) : '';
         };
 
         // Category, tag and type take several values ("a,b", or a[]=… from a form without JavaScript).
         $many = function ($key, $clean) use ($source, $p) {
             $raw = isset($source[$p . $key]) ? $source[$p . $key] : '';
-            $items = is_array($raw) ? $raw : explode(',', (string)$raw);
+            $items = is_array($raw) ? $raw : explode(',', is_scalar($raw) ? (string)$raw : '');
             $out = array();
             foreach ($items as $item) {
                 if (is_scalar($item)) {

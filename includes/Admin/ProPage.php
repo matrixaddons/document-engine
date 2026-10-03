@@ -117,9 +117,9 @@ class ProPage
             ),
             __('Access and sharing', 'document-engine') => array(
                 array(__('Draft, private and password-protected documents', 'document-engine'), true, true, 'faq-private'),
-                array(__('Members-only documents by role, person or whole category', 'document-engine'), false, true, 'access'),
+                array(__('Members-only documents by role, person, whole category or membership level (Paid Memberships Pro, WooCommerce Memberships)', 'document-engine'), false, true, 'access'),
                 array(__('Private file storage, so file addresses can\'t be shared', 'document-engine'), false, true, 'access'),
-                array(__('Expiring share links, named per recipient, with open tracking', 'document-engine'), false, true, 'share'),
+                array(__('Expiring share links, named per recipient, with open tracking and single-use or limited uses', 'document-engine'), false, true, 'share'),
                 array(__('Email gate: name and email before download, with leads export', 'document-engine'), false, true, 'gate'),
                 array(__('Accept terms (licence or disclaimer) before opening, with each acceptance logged', 'document-engine'), false, true, 'terms'),
                 array(__('Daily download limits and Cloudflare Turnstile on forms', 'document-engine'), false, true, 'protection'),
@@ -133,10 +133,10 @@ class ProPage
                 array(__('Version history, review dates and automatic expiry', 'document-engine'), false, true, 'versions'),
             ),
             __('Publishing and integrations', 'document-engine') => array(
-                array(__('Post to PDF button with header, footer, custom CSS and PDF permissions', 'document-engine'), true, true, 'post-to-pdf'),
+                array(__('Post to PDF button with header, footer, paper sizes, your own fonts (including Chinese, Japanese, Korean), custom CSS and PDF permissions', 'document-engine'), true, true, 'post-to-pdf'),
                 array(__('Text and image watermarks on Post to PDF', 'document-engine'), false, true, 'post-to-pdf'),
                 array(__('Blocks, shortcodes and Elementor widgets', 'document-engine'), true, true, 'blocks'),
-                array(__('Move from Download Monitor, WordPress Download Manager or Barn2', 'document-engine'), true, true, 'migrate'),
+                array(__('Move from Download Monitor, WordPress Download Manager, Barn2, Simple Download Monitor or Simple File List', 'document-engine'), true, true, 'migrate'),
                 array(__('Command palette and read-only abilities for AI agents', 'document-engine'), true, true, 'palette'),
                 array(__('Handbook PDF: many posts in one PDF with cover and contents', 'document-engine'), false, true, 'portal'),
                 array(__('AI assistant that suggests titles, summaries and tags', 'document-engine'), false, true, 'ai'),
@@ -158,6 +158,11 @@ class ProPage
                 <div>
                     <h3 class="dengine-a-card__title"><?php esc_html_e('Add Pro when you need it', 'document-engine'); ?></h3>
                     <p class="dengine-a-card__desc"><?php esc_html_e('Pro installs next to this plugin. Your documents, pages and settings stay exactly as they are.', 'document-engine'); ?></p>
+                    <ul class="dengine-a-checklist dengine-a-checklist--plain">
+                        <li><?php echo UI::icon('check', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e('From $79 a year for one site, or pay once. Every plan includes every Pro feature.', 'document-engine'); ?></span></li>
+                        <li><?php echo UI::icon('check', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e('If your licence expires, Pro keeps working; only updates and support stop.', 'document-engine'); ?></span></li>
+                        <li><?php echo UI::icon('check', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e('14-day money-back guarantee.', 'document-engine'); ?></span></li>
+                    </ul>
                 </div>
                 <div class="dengine-a-vs__actions">
                     <a class="dengine-a-btn dengine-a-btn--primary" href="#pricing"><?php esc_html_e('See plans', 'document-engine'); ?></a>

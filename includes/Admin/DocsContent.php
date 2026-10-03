@@ -136,6 +136,7 @@ class DocsContent
                             array(__('Save as PDF', 'document-engine'), __('The Post to PDF button, placed where you want it.', 'document-engine')),
                         ), array(__('Block', 'document-engine'), __('What it does', 'document-engine'))),
                         array('p', __('Elementor users get four widgets with the same options: Document Library, Document List, Document Download and PDF Viewer.', 'document-engine')),
+                        array('p', __('Other page builders (Divi, Bricks, Beaver Builder, WPBakery, Oxygen, Breakdance): add a shortcode or text module with <code>[document_engine_library]</code>, <code>[document_engine_search]</code>, <code>[document_engine_documents]</code>, <code>[document_engine_document id="123"]</code> or <code>[document_engine_viewer id="123"]</code>. All options of the blocks are available as shortcode attributes (see the shortcode reference).', 'document-engine')),
                     )),
                     'lists' => array(__('Document lists and related documents', 'document-engine'), false, array(
                         array('p', __('The Document List block and <code>[document_engine_documents]</code> show a few documents in a compact list: newest, recently updated, most downloaded, or related to a document (sharing its categories or tags).', 'document-engine')),
@@ -152,6 +153,7 @@ class DocsContent
                         array('ul', array(
                             __('Choose where the button appears in Settings → Post to PDF → Button (post types, text, placement, alignment, download or open).', 'document-engine'),
                             __('Header and footer (logo, title, page numbers), paper size (A4, US Letter, US Legal, A5 or A3), orientation, margins and text size, theme styles or custom CSS. Sites in a right-to-left language get right-to-left PDFs.', 'document-engine'),
+                            __('Fonts: Sans, Serif or Monospaced (DejaVu, covering Latin, Greek, Cyrillic, Arabic and Hebrew), or your own .ttf/.otf font from the Media Library, for all text or only for characters the main font lacks (for example Chinese, Japanese or Korean).', 'document-engine'),
                             __('Protection: optionally stop readers printing, copying or editing the PDF (PDF permissions).', 'document-engine'),
                             __('Document Engine Pro adds text and image watermarks, with placeholders such as {name} and {date}, and Handbook PDFs that combine many posts.', 'document-engine'),
                             __('Content shortcodes: <code>[document_engine_pdf_remove]</code> hides content from the PDF, <code>[document_engine_pdf_page_break]</code> starts a new page, <code>[document_engine_pdf_columns]</code> and <code>[document_engine_pdf_column_break]</code> lay out columns.', 'document-engine'),
@@ -164,7 +166,8 @@ class DocsContent
                         array('note', __('The form has spam protection (a time check, a hidden field and limits per visitor, per document and per day). Requests contain names and emails; they are included in WordPress\'s personal data export and erase tools.', 'document-engine')),
                     )),
                     'migrate' => array(__('Migrate from another plugin', 'document-engine'), false, array(
-                        array('p', __('Documents → Tools → Migrate copies documents from Download Monitor, WordPress Download Manager and Barn2 Document Library into Document Engine: titles, descriptions, categories, tags, files, download counts and dates.', 'document-engine')),
+                        array('p', __('Documents → Tools → Migrate copies documents from Download Monitor, WordPress Download Manager, Barn2 Document Library, Simple Download Monitor and Simple File List into Document Engine: titles, descriptions, categories, tags, files, download counts and dates. Simple File List folders become nested categories.', 'document-engine')),
+                        array('note', __('Simple File List was closed on WordPress.org in July 2026 for a security issue. Migrating copies its files into the Media Library; after checking the result, deactivate and delete Simple File List. Pages with [eeSFL] (including showfolder="…") keep working and show the matching documents.', 'document-engine')),
                         array('ul', array(
                             __('Run a preview first: it shows how many items will be copied and flags locked items (paid, email- or captcha-gated) that need attention.', 'document-engine'),
                             __('The original plugin\'s data is not changed. Running it again skips items already copied.', 'document-engine'),
@@ -202,16 +205,19 @@ class DocsContent
                         array('note', __('Deactivating Pro returns the site to the free features. Pro data (access rules, logs, acknowledgements) stays in the database unless you delete it on uninstall.', 'document-engine')),
                     )),
                     'access' => array(__('Access control and private files', 'document-engine'), true, array(
-                        array('p', __('Decide who can open each document: everyone, logged-in users, users with chosen roles, or named people. Set it per document (Access & security panel) or for a whole category (on the category screen); documents follow their categories unless they have their own rule.', 'document-engine')),
+                        array('p', __('Decide who can open each document: everyone, logged-in users, users with chosen roles, named people, or members of Paid Memberships Pro levels and WooCommerce Memberships plans. Set it per document (Access & security panel) or for a whole category (on the category screen); documents follow their categories unless they have their own rule.', 'document-engine')),
+                        array('note', __('Membership plugins: with Paid Memberships Pro or WooCommerce Memberships active, pick their levels or plans directly ("Members of these membership levels"). Plugins that give members a WordPress role, such as MemberPress and Restrict Content Pro, work with "Users with these roles". If the membership plugin is switched off, documents limited to its levels stay closed.', 'document-engine')),
                         array('ul', array(
                             __('Restricted documents are shown with a lock, or hidden from people who cannot open them (Settings → Access & Pro → Access).', 'document-engine'),
                             __('<strong>Protected storage</strong>: files of restricted documents move to a private uploads folder, so the file address alone cannot be used to download them. A Site Health test checks that the folder really is private.', 'document-engine'),
                             __('Logged-out visitors are asked to log in; logged-in people without access see a clear message.', 'document-engine'),
                             __('Restricted documents are left out of site search, feeds, library results (when set to hide) and file-content search for people who cannot open them.', 'document-engine'),
+                            __('<strong>Cloud storage</strong>: files stay on your server. If a media offload plugin (WP Offload Media, Media Cloud, Infinite Uploads…) copies uploads to a bucket, exclude the protected documents folder from offloading; Site Health warns you when one is active.', 'document-engine'),
                         )),
                     )),
                     'share' => array(__('Share links', 'document-engine'), true, array(
                         array('p', __('Give someone without an account access to one document for a limited time (Access & security panel → Share link). Name the link after the recipient to see when they opened it; optionally get an email on the first open. Revoke a link at any time. Links default to Settings → Access & Pro → Share links last (7 days).', 'document-engine')),
+                        array('p', __('<strong>Uses allowed</strong>: limit a named link to one use (single use), 3, 5 or 10. Each download, or each time the document is opened in the viewer, is one use; after the last one the link stops working. The editor shows how many uses are left.', 'document-engine')),
                     )),
                     'secure' => array(__('Secure viewer and stamped downloads', 'document-engine'), true, array(
                         array('p', __('Secure mode shows a PDF in the viewer only: no download, print or copy buttons, and each page carries a watermark with the reader\'s name, email and date (pattern in Settings → Access & Pro → Secure viewer). Downloads of secure documents are blocked. Only PDFs can be shown in secure mode; other secure files can be neither viewed nor downloaded. Optionally, downloaded PDFs of other documents can be stamped with the reader\'s details.', 'document-engine')),

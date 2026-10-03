@@ -39,6 +39,7 @@ class Assets
             array('document-engine-font-awesome'),
             DOCUMENT_ENGINE_VERSION
         );
+        wp_style_add_data('document-engine-frontend', 'rtl', 'replace');
 
         $documents = self::asset('documents');
         wp_register_style('document-engine-documents', DOCUMENT_ENGINE_ASSETS_URI . 'build/documents.css', array(), $documents['version']);
@@ -107,6 +108,7 @@ class Assets
         wp_set_script_translations('document-engine-pdf-block', 'document-engine', DOCUMENT_ENGINE_ABSPATH . 'languages');
 
         wp_register_style('document-engine-blocks-editor', DOCUMENT_ENGINE_ASSETS_URI . 'build/blocks.min.css', array('document-engine-documents'), $pdf_block_dependencies['version']);
+        wp_style_add_data('document-engine-blocks-editor', 'rtl', 'replace');
     }
 
     public function editor_assets()
@@ -120,6 +122,8 @@ class Assets
             'newDocumentUrl' => current_user_can('edit_dengine_documents') ? admin_url('post-new.php?post_type=' . Documents\PostType::POST_TYPE) : '',
             'pdfButtonText' => document_engine_pdf_button_text(),
             'pdfButtonAlignment' => document_engine_pdf_button_alignment(),
+            // T9: one muted line in the library's filter settings (administrators, without Pro).
+            'proFieldsUrl' => \MatrixAddons\DocumentEngine\Admin\Nudges::can_show('t9-fields', false) ? \MatrixAddons\DocumentEngine\Admin\ProPage::url() : '',
         ));
 
         $screen = function_exists('get_current_screen') ? get_current_screen() : null;
@@ -127,6 +131,7 @@ class Assets
             $editor = self::asset('document-editor');
             wp_enqueue_script('document-engine-document-editor', DOCUMENT_ENGINE_ASSETS_URI . 'build/document-editor.js', $editor['dependencies'], $editor['version'], true);
             wp_enqueue_style('document-engine-document-editor', DOCUMENT_ENGINE_ASSETS_URI . 'build/document-editor.css', array('wp-components'), $editor['version']);
+            wp_style_add_data('document-engine-document-editor', 'rtl', 'replace');
             wp_localize_script('document-engine-document-editor', 'DocumentEngineEditor', array(
                 'defaultBehavior' => get_option('document_engine_link_behavior', 'download'),
                 'isPro' => defined('DOCUMENT_ENGINE_PRO_FILE'),

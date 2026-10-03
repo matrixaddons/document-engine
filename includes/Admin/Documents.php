@@ -413,8 +413,15 @@ class Documents
     public static function create_from_attachment($attachment_id, $args = array())
     {
         $attachment = get_post($attachment_id);
-        if (!$attachment) {
+        if (!$attachment || $attachment->post_type !== 'attachment') {
             return 0;
+        }
+        // Same rule as linking a file in the editor: only files this user may edit (their own uploads, for authors).
+        if (is_user_logged_in() && !wp_doing_cron()) {
+            $allowed = (bool)apply_filters('document_engine_can_use_attachment', current_user_can('edit_post', $attachment_id), $attachment_id, 0);
+            if (!$allowed) {
+                return 0;
+            }
         }
         $file = (string)get_attached_file($attachment_id);
         // Media Library titles default to the raw file name; tidy those up.
@@ -422,7 +429,7 @@ class Documents
         if ($title === '' || sanitize_title($title) === sanitize_title(pathinfo($file, PATHINFO_FILENAME))) {
             $title = self::title_from_file($file);
         }
-        $post_id = wp_insert_post(array_merge(array(
+        $post_id = wp_insert_post(wp_slash(array_merge(array(
             'post_type' => PostType::POST_TYPE,
             'post_status' => 'publish',
             'post_title' => $title,
@@ -432,9 +439,13 @@ class Documents
                 Document::META_FILE_ID => $attachment_id,
                 Document::META_DOWNLOADS => 0,
             ),
-        ), $args), true);
+        ), $args)), true);
 
         if (is_wp_error($post_id)) {
+            return 0;
+        }
+        if ((int)get_post_meta($post_id, Document::META_FILE_ID, true) !== (int)$attachment_id) {
+            wp_delete_post($post_id, true); // The file link was refused: don't leave an empty document behind.
             return 0;
         }
         $document = Document::get($post_id);
@@ -453,7 +464,13 @@ class Documents
                 /* translators: %d: number of documents */
                 _n('%d document created.', '%d documents created.', $count, 'document-engine'),
                 $count
-            )) . ' <a href="' . esc_url(admin_url('edit.php?post_type=' . PostType::POST_TYPE)) . '">' . esc_html__('View documents', 'document-engine') . '</a></p></div>';
+            )) . ' <a href="' . esc_url(admin_url('edit.php?post_type=' . PostType::POST_TYPE)) . '">' . esc_html__('View documents', 'document-engine') . '</a></p>';
+            // T3: a large batch is the moment bulk import matters (shown once per user, inside this result notice).
+            if ($count >= 20 && Nudges::can_show('t3-bulk')) {
+                Nudges::once('t3-bulk');
+                echo '<p>' . esc_html__('Moving a whole archive? Document Engine Pro imports hundreds of files at once, or from a spreadsheet with categories and your own fields.', 'document-engine') . ' <a href="' . esc_url(Upsell::url('import')) . '">' . esc_html__('See how Pro does this', 'document-engine') . '</a></p>';
+            }
+            echo '</div>';
         }
     }
 }

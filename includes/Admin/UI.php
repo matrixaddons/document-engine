@@ -92,9 +92,6 @@ class UI
                 <?php foreach ($links as $link) : ?>
                     <a href="<?php echo esc_url($link['url']); ?>" <?php echo strpos($link['url'], admin_url()) === 0 ? '' : 'target="_blank" rel="noopener"'; ?>><?php echo self::icon(isset($link['icon']) ? $link['icon'] : 'external', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo esc_html($link['label']); ?></a>
                 <?php endforeach; ?>
-                <?php if (!self::is_pro()) : ?>
-                    <a class="dengine-a-top__pro" href="<?php echo esc_url(ProPage::store_url('header') . '#pricing'); ?>" target="_blank" rel="noopener"><?php echo self::icon('star', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e('Upgrade to Pro', 'document-engine'); ?></a>
-                <?php endif; ?>
             </nav>
         </div>
         <?php
@@ -173,5 +170,7 @@ class UI
     public static function enqueue()
     {
         wp_enqueue_style('document-engine-admin', DOCUMENT_ENGINE_ASSETS_URI . 'admin/css/admin.css', array(), DOCUMENT_ENGINE_VERSION);
+        // Right-to-left sites: admin-rtl.css is generated from admin.css by "npm run rtl".
+        wp_style_add_data('document-engine-admin', 'rtl', 'replace');
     }
 }

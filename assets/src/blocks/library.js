@@ -150,6 +150,12 @@ function Edit({ attributes, setAttributes, clientId }) {
 						]}
 						onChange={(linkTo) => setAttributes({ linkTo })}
 					/>
+					{cfg.proFieldsUrl && (
+						<p className="components-base-control__help" style={{ marginTop: 12 }}>
+							{__('Columns and filters from your own fields (reference, department…) come with Document Engine Pro.', 'document-engine')}{' '}
+							<a href={cfg.proFieldsUrl} target="_blank" rel="noopener noreferrer">{__('Compare', 'document-engine')}</a>
+						</p>
+					)}
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>

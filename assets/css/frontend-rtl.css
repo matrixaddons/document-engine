@@ -1,0 +1,29 @@
+.document-engine-pdf-button-container {
+    width: 100% !important;
+    float: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    display: block;
+    margin: 0 auto;
+}
+
+a.document-engine-pdf-button {
+    display: inline-block;
+}
+
+a.document-engine-pdf-button:link, a.document-engine-pdf-button:visited {
+
+}
+
+a.document-engine-pdf-button:hover {
+
+}
+
+a.document-engine-pdf-button span.document-engine-pdf-button-icon {
+    font-size: 140%;
+    margin-left: 5px;
+}
+
+.document-engine-pdf-content {
+}
