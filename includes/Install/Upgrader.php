@@ -17,6 +17,15 @@ class Upgrader
     public static function init()
     {
         add_action('init', array(__CLASS__, 'maybe_upgrade'), 5);
+        // Updates and network subsites never run the activation hook: make sure the daily clean-up exists.
+        add_action('admin_init', array(__CLASS__, 'ensure_cron'));
+    }
+
+    public static function ensure_cron()
+    {
+        if (!wp_next_scheduled('document_engine_daily')) {
+            wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'document_engine_daily');
+        }
     }
 
     public static function is_legacy_site()

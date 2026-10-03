@@ -18,6 +18,8 @@ class PostType
         add_action('init', array(__CLASS__, 'register'), 5);
         add_action('init', array(__CLASS__, 'register_meta'), 6);
         add_action('init', array(__CLASS__, 'maybe_flush'), 99);
+        add_action('rest_api_init', array(__CLASS__, 'register_file_name'));
+        add_action('init', array(__CLASS__, 'register_template'), 20);
         add_filter('the_content', array(__CLASS__, 'single_content'), 20);
         add_action('save_post_' . self::POST_TYPE, array(__CLASS__, 'flush_library_cache'));
         add_action('deleted_post', array(__CLASS__, 'flush_library_cache'));
@@ -28,6 +30,52 @@ class PostType
         add_filter('post_type_link', array(__CLASS__, 'external_permalink'), 10, 2);
         add_filter('the_excerpt', array(__CLASS__, 'search_excerpt'));
         add_filter('get_the_excerpt', array(__CLASS__, 'search_plain_excerpt'), 20, 2);
+    }
+
+    /**
+     * Block themes: a template for document pages, so they don't use the blog post template (author
+     * byline, post categories, "More posts"). The theme's own single-dengine_document template, or
+     * one edited in the Site Editor, still wins.
+     */
+    public static function register_template()
+    {
+        if (!function_exists('register_block_template') || !apply_filters('document_engine_register_block_template', true)) {
+            return;
+        }
+        register_block_template('document-engine//single-' . self::POST_TYPE, array(
+            'title' => __('Single Document', 'document-engine'),
+            'description' => __('Displays a single document: its title, details, viewer and download button.', 'document-engine'),
+            'post_types' => array(self::POST_TYPE),
+            'content' => '<!-- wp:template-part {"slug":"header","tagName":"header"} /-->'
+                . '<!-- wp:group {"tagName":"main","style":{"spacing":{"margin":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} --><main class="wp-block-group" style="margin-top:var(--wp--preset--spacing--60);margin-bottom:var(--wp--preset--spacing--60)">'
+                . '<!-- wp:post-title {"level":1} /-->'
+                . '<!-- wp:post-content {"layout":{"type":"constrained"}} /-->'
+                . '<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}},"layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} --><div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--50)">'
+                . '<!-- wp:post-navigation-link {"type":"previous","showTitle":true,"arrow":"arrow"} /-->'
+                . '<!-- wp:post-navigation-link {"showTitle":true,"arrow":"arrow"} /-->'
+                . '</div><!-- /wp:group -->'
+                . '</main><!-- /wp:group -->'
+                . '<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->',
+        ));
+    }
+
+    /**
+     * The real file name of an attachment, for the document editor: protected files' URLs are the
+     * download link, so the name can't be read from them. Only for people who may edit the file.
+     */
+    public static function register_file_name()
+    {
+        register_rest_field('attachment', 'dengine_file_name', array(
+            'get_callback' => function ($item) {
+                $id = isset($item['id']) ? (int)$item['id'] : 0;
+                if (!$id || !current_user_can('edit_post', $id)) {
+                    return '';
+                }
+                $file = get_attached_file($id);
+                return $file ? wp_basename($file) : '';
+            },
+            'schema' => array('type' => 'string', 'context' => array('view', 'edit'), 'readonly' => true),
+        ));
     }
 
     public static function register()

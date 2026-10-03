@@ -44,6 +44,9 @@ class Viewer {
 		this.current = 1;
 		this.baseViewport = null;
 		this.pdf = null;
+		this.observers = [];
+		this.timers = [];
+		this.destroyed = false;
 		this.lib = null;
 		this.secure = !!this.config.secure;
 		this.renderTokens = 0;
@@ -76,6 +79,7 @@ class Viewer {
 				{ rootMargin: '400px 0px' }
 			);
 			io.observe(el);
+			this.observers.push(io);
 		} else {
 			this.load();
 		}
@@ -88,6 +92,9 @@ class Viewer {
 	async load() {
 		try {
 			this.lib = await loadPdfjs();
+			if (this.destroyed) {
+				return;
+			}
 			const task = this.lib.getDocument({
 				url: this.config.src,
 				cMapUrl: settings.cMapUrl,
@@ -109,7 +116,12 @@ class Viewer {
 					update(pass);
 				}
 			};
+			this.task = task;
 			this.pdf = await task.promise;
+			if (this.destroyed) {
+				this.pdf.destroy();
+				return;
+			}
 			const first = await this.pdf.getPage(1);
 			this.baseViewport = first.getViewport({ scale: 1 });
 			this.setupPages();
@@ -189,12 +201,13 @@ class Viewer {
 			{ root: this.pagesEl, rootMargin: '800px 0px' }
 		);
 		this.pages.forEach((p) => this.pageObserver.observe(p));
+		this.observers.push(this.pageObserver);
 
 		this.pagesEl.addEventListener('scroll', debounce(() => this.trackPage(), 60), { passive: true });
 
 		if ('ResizeObserver' in window) {
 			let lastWidth = this.pagesEl.clientWidth;
-			new ResizeObserver(
+			const ro = new ResizeObserver(
 				debounce(() => {
 					const width = this.pagesEl.clientWidth;
 					if (Math.abs(width - lastWidth) > 4 && ['page-width', 'page-fit', 'auto'].includes(this.mode)) {
@@ -202,7 +215,9 @@ class Viewer {
 						this.relayout();
 					}
 				}, 150)
-			).observe(this.pagesEl);
+			);
+			ro.observe(this.pagesEl);
+			this.observers.push(ro);
 		}
 
 		this.layout();
@@ -402,9 +417,11 @@ class Viewer {
 			this.tracking.session = (this.tracking.session + '0000000000000000').slice(0, 16);
 		}
 		if ('IntersectionObserver' in window) {
-			new IntersectionObserver((entries) => {
+			const vis = new IntersectionObserver((entries) => {
 				this.tracking.visible = entries.some((e) => e.isIntersecting);
-			}, { threshold: 0.2 }).observe(this.pagesEl);
+			}, { threshold: 0.2 });
+			vis.observe(this.pagesEl);
+			this.observers.push(vis);
 		} else {
 			this.tracking.visible = true;
 		}
@@ -420,15 +437,16 @@ class Viewer {
 				window.fetch(track.url, { method: 'POST', body, credentials: 'same-origin', keepalive: true, headers: { 'Content-Type': 'application/json' } }).catch(() => {});
 			}
 		};
-		setInterval(() => {
+		this.sendTracking = send;
+		this.timers.push(setInterval(() => {
 			if (document.visibilityState === 'visible' && this.tracking.visible) {
 				const page = this.current;
 				this.tracking.times[page] = (this.tracking.times[page] || 0) + 1;
 				this.tracking.max = Math.max(this.tracking.max, page);
 				this.tracking.dirty = true;
 			}
-		}, 1000);
-		setInterval(() => send(false), 20000);
+		}, 1000));
+		this.timers.push(setInterval(() => send(false), 20000));
 		document.addEventListener('visibilitychange', () => {
 			if (document.visibilityState === 'hidden') {
 				send(true);
@@ -635,6 +653,7 @@ class Viewer {
 			io.observe(button);
 		}
 		this.markThumb();
+		this.observers.push(io);
 	}
 
 	async renderThumb(button, width) {
@@ -811,14 +830,72 @@ class Viewer {
 		document.body.appendChild(frame);
 	}
 
+	/**
+	 * Browsers without the Fullscreen API (or that refuse it): fill the window with CSS; Escape leaves.
+	 */
+	enterFallbackFullscreen() {
+		this.el.classList.add('is-fullscreen');
+		this.el.querySelector('[data-action="fullscreen"]')?.setAttribute('aria-pressed', 'true');
+		this.onFallbackKey = (e) => {
+			if (e.key === 'Escape') {
+				this.exitFallbackFullscreen();
+			}
+		};
+		document.addEventListener('keydown', this.onFallbackKey);
+		setTimeout(() => this.relayout(), 100);
+	}
+
+	exitFallbackFullscreen() {
+		this.el.classList.remove('is-fullscreen');
+		this.el.querySelector('[data-action="fullscreen"]')?.setAttribute('aria-pressed', 'false');
+		if (this.onFallbackKey) {
+			document.removeEventListener('keydown', this.onFallbackKey);
+			this.onFallbackKey = null;
+		}
+		setTimeout(() => this.relayout(), 100);
+	}
+
+	/**
+	 * Frees the PDF, observers and timers (preview popup closed, library results replaced).
+	 */
+	destroy() {
+		if (this.destroyed) {
+			return;
+		}
+		this.destroyed = true;
+		if (this.sendTracking) {
+			this.sendTracking(true);
+		}
+		this.observers.forEach((o) => o.disconnect());
+		this.timers.forEach((t) => clearInterval(t));
+		this.observers = [];
+		this.timers = [];
+		if (this.onFallbackKey) {
+			document.removeEventListener('keydown', this.onFallbackKey);
+		}
+		try {
+			if (this.pdf) {
+				this.pdf.destroy();
+			} else if (this.task) {
+				this.task.destroy();
+			}
+		} catch (e) {}
+		this.pdf = null;
+		this.el.dengineViewer = null;
+	}
+
 	toggleFullscreen() {
 		const button = this.el.querySelector('[data-action="fullscreen"]');
 		if (document.fullscreenElement === this.el) {
 			document.exitFullscreen();
+		} else if (this.el.classList.contains('is-fullscreen')) {
+			this.exitFallbackFullscreen();
+			return;
 		} else if (this.el.requestFullscreen) {
-			this.el.requestFullscreen().catch(() => this.el.classList.toggle('is-fullscreen'));
+			this.el.requestFullscreen().catch(() => this.enterFallbackFullscreen());
 		} else {
-			this.el.classList.toggle('is-fullscreen');
+			this.enterFallbackFullscreen();
+			return;
 		}
 		document.addEventListener(
 			'fullscreenchange',

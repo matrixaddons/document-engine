@@ -24,7 +24,8 @@ if (!function_exists('document_engine_pdf_is_valid_post_type')) {
             $post = get_post($pdf_post_id);
             $offered = in_array($post_type, $enabled, true)
                 || has_block('document-engine/pdf-button', $post)
-                || has_shortcode((string)$post->post_content, apply_filters('document_engine_pdf_button_shortcode_tag', 'document_engine_pdf_button'));
+                || has_shortcode((string)$post->post_content, apply_filters('document_engine_pdf_button_shortcode_tag', 'document_engine_pdf_button'))
+                || document_engine_pdf_button_in_layouts();
             $can_generate = (bool)$offered;
         }
 
@@ -32,6 +33,35 @@ if (!function_exists('document_engine_pdf_is_valid_post_type')) {
 
     }
 }
+if (!function_exists('document_engine_pdf_button_in_layouts')) {
+    /**
+     * Whether a Save as PDF button sits outside post content: a theme template or template part,
+     * a synced pattern, or an Elementor layout. Cached; cleared when one of those is saved.
+     */
+    function document_engine_pdf_button_in_layouts()
+    {
+        $found = get_transient('dengine_pdf_button_layouts');
+        if ($found === false) {
+            global $wpdb;
+            $block = '%' . $wpdb->esc_like('wp:document-engine/pdf-button') . '%';
+            $code = '%' . $wpdb->esc_like('[document_engine_pdf_button') . '%';
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $found = (int)(bool)$wpdb->get_var($wpdb->prepare(
+                "SELECT ID FROM {$wpdb->posts} WHERE post_type IN ('wp_template', 'wp_template_part', 'wp_block') AND post_status = 'publish' AND (post_content LIKE %s OR post_content LIKE %s) LIMIT 1",
+                $block,
+                $code
+            )) || (bool)$wpdb->get_var($wpdb->prepare("SELECT meta_id FROM {$wpdb->postmeta} WHERE meta_key = '_elementor_data' AND meta_value LIKE %s LIMIT 1", $code)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            set_transient('dengine_pdf_button_layouts', $found ? 1 : 0, DAY_IN_SECONDS);
+        }
+        return (bool)$found;
+    }
+    add_action('save_post', function ($post_id, $post) {
+        if (in_array($post->post_type, array('wp_template', 'wp_template_part', 'wp_block'), true) || get_post_meta($post_id, '_elementor_data', true)) {
+            delete_transient('dengine_pdf_button_layouts');
+        }
+    }, 10, 2);
+}
+
 if (!function_exists('document_engine_get_available_post_types')) {
     function document_engine_get_available_post_types()
     {
@@ -45,7 +75,6 @@ if (!function_exists('document_engine_get_available_post_types')) {
         $post_types_updated = array(
             array('id' => 'post', 'title' => __('post', 'document-engine')),
             array('id' => 'page', 'title' => __('page', 'document-engine')),
-            array('id' => 'attachment', 'title' => __('attachment', 'document-engine')),
         );
 
         foreach ($post_types as $post_type) {

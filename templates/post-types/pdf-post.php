@@ -28,7 +28,7 @@ if ($the_query->have_posts()) {
 
 } else {
 
-    echo '<h2>no results found</h2>';
+    echo '<h2>' . esc_html__('No results found', 'document-engine') . '</h2>';
 }
 
 wp_reset_postdata();

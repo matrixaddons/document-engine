@@ -110,6 +110,37 @@ class PDF extends Setting_Base
                     ),
                 ),
                 array('title' => __('Text size', 'document-engine'), 'id' => 'document_engine_pdf_page_font_size', 'type' => 'number', 'suffix' => 'pt', 'default' => 12, 'custom_attributes' => array('min' => 6, 'max' => 36)),
+                array(
+                    'title' => __('Font', 'document-engine'),
+                    'id' => 'document_engine_pdf_font',
+                    'type' => 'select',
+                    'default' => 'dejavusans',
+                    'options' => array(
+                        'dejavusans' => __('Sans (DejaVu Sans)', 'document-engine'),
+                        'dejavuserif' => __('Serif (DejaVu Serif)', 'document-engine'),
+                        'dejavusansmono' => __('Monospaced (DejaVu Sans Mono)', 'document-engine'),
+                        'custom' => __('Your own font (below)', 'document-engine'),
+                    ),
+                    'desc' => __('The built-in fonts cover Latin, Greek, Cyrillic, Arabic and Hebrew. For Chinese, Japanese, Korean or other scripts, upload a font that has them (for example Noto Sans SC) and use it below.', 'document-engine'),
+                ),
+                array(
+                    'title' => __('Your own font', 'document-engine'),
+                    'id' => 'document_engine_pdf_font_file',
+                    'type' => 'url',
+                    'default' => '',
+                    'placeholder' => 'https://…/wp-content/uploads/…/NotoSansSC-Regular.ttf',
+                    'desc' => __('Upload a .ttf or .otf file to the Media Library (administrators can) and paste its address here.', 'document-engine'),
+                ),
+                array(
+                    'title' => __('Use your font for', 'document-engine'),
+                    'id' => 'document_engine_pdf_font_use',
+                    'type' => 'select',
+                    'default' => 'fallback',
+                    'options' => array(
+                        'fallback' => __('Only characters the main font doesn\'t have (for example Chinese, Japanese, Korean)', 'document-engine'),
+                        'all' => __('All text', 'document-engine'),
+                    ),
+                ),
                 array('title' => __('Left margin', 'document-engine'), 'id' => 'document_engine_pdf_page_margin_left', 'type' => 'number', 'suffix' => 'mm', 'default' => 15, 'custom_attributes' => array('min' => 0)),
                 array('title' => __('Right margin', 'document-engine'), 'id' => 'document_engine_pdf_page_margin_right', 'type' => 'number', 'suffix' => 'mm', 'default' => 15, 'custom_attributes' => array('min' => 0)),
                 array('title' => __('Top margin', 'document-engine'), 'desc' => __('Leave room for the header.', 'document-engine'), 'id' => 'document_engine_pdf_page_margin_top', 'type' => 'number', 'suffix' => 'mm', 'default' => 50, 'custom_attributes' => array('min' => 0)),
@@ -163,6 +194,16 @@ class PDF extends Setting_Base
                 ),
                 array('type' => 'sectionend', 'id' => 'document_engine_pdf_style'),
             );
+            // T8 (static): watermarks are a Pro feature; shown as information, not as a control that looks like it works.
+            if (\MatrixAddons\DocumentEngine\Admin\Nudges::can_show('t8-watermark', false)) {
+                $settings[] = array(
+                    'title' => __('Watermark (Document Engine Pro)', 'document-engine'),
+                    'type' => 'title',
+                    'desc' => esc_html__('Add a text or image watermark to every PDF, with placeholders such as {name} and {date}.', 'document-engine') . ' <a href="' . esc_url(\MatrixAddons\DocumentEngine\Admin\ProPage::url()) . '">' . esc_html__('Compare Free and Pro', 'document-engine') . '</a>',
+                    'id' => 'document_engine_pdf_watermark_pro',
+                );
+                $settings[] = array('type' => 'sectionend', 'id' => 'document_engine_pdf_watermark_pro');
+            }
 
         } else if ('header_footer' === $current_section) {
             $allowed = array(

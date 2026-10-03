@@ -4,10 +4,11 @@ if (!function_exists('document_engine_get_template')) {
 
     function document_engine_get_template($template_name, $args = array(), $template_path = '', $default_path = '')
     {
-        $cache_key = sanitize_key(implode('-', array('template', $template_name, $template_path, $default_path)));
+        // Keyed by theme and plugin version, so a theme switch or update never reuses an old location.
+        $cache_key = sanitize_key(implode('-', array('template', $template_name, $template_path, $default_path, get_stylesheet(), DOCUMENT_ENGINE_VERSION)));
         $template = (string)wp_cache_get($cache_key, 'document-engine');
 
-        if (!$template) {
+        if (!$template || !file_exists($template)) {
             $template = document_engine_locate_template($template_name, $template_path, $default_path);
             wp_cache_set($cache_key, $template, 'document-engine');
         }

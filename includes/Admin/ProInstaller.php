@@ -168,7 +168,7 @@ class ProInstaller
             $package = esc_url_raw($info->package);
             // Only install packages served by our store (or hosts the store is configured to use, e.g. a CDN).
             $allowed_hosts = (array)apply_filters('document_engine_pro_package_hosts', array(wp_parse_url(self::store_url(), PHP_URL_HOST)));
-            if (!in_array(wp_parse_url($package, PHP_URL_HOST), $allowed_hosts, true) || !in_array(wp_parse_url($package, PHP_URL_SCHEME), array('https', 'http'), true)) {
+            if (!in_array(wp_parse_url($package, PHP_URL_HOST), $allowed_hosts, true) || wp_parse_url($package, PHP_URL_SCHEME) !== 'https') {
                 self::back(false, __('The download link did not come from our store, so it was not installed.', 'document-engine'));
             }
 

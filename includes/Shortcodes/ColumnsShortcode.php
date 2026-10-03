@@ -41,11 +41,10 @@ class ColumnsShortcode
 
 
         if (document_engine_pdf_is_valid_post_type()) {
-            $columns = sanitize_text_field($shortcode_attributes['columns']);
-            $equal_columns = (boolean)($shortcode_attributes['equal_columns']);
-            $vAlign = $equal_columns == true ? 'vAlign="justify"' : '';
+            $columns = max(1, absint($shortcode_attributes['columns']));
+            $equal_columns = in_array(strtolower((string)$shortcode_attributes['equal_columns']), array('1', 'yes', 'true', 'on'), true);
             $gap = absint($shortcode_attributes['gap']);
-            echo '<columns column-count="' . esc_attr($columns) . '" ' . esc_attr($vAlign) . ' column-gap="' . esc_attr($gap) . '" />' . do_shortcode($content) . '<columns column-count="1">';
+            echo '<columns column-count="' . esc_attr($columns) . '"' . ($equal_columns ? ' vAlign="justify"' : '') . ' column-gap="' . esc_attr($gap) . '" />' . do_shortcode($content) . '<columns column-count="1">';
         } else {
             remove_shortcode('document_engine_pdf_column_break');
             add_shortcode('document_engine_pdf_column_break', '__return_false');

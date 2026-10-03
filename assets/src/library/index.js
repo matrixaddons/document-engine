@@ -86,7 +86,20 @@ class Library {
 				throw new Error(String(response.status));
 			}
 			const data = await response.json();
+			this.results.querySelectorAll('[data-dengine-viewer]').forEach((el) => el.dengineViewer?.destroy());
+			// Keep keyboard focus: was it inside the results (pagination, chips, a sort heading)?
+			const active = document.activeElement;
+			const focusedSort = active && active.closest && active.closest('th') ? active.closest('th').className : '';
+			const hadFocus = active && this.el.contains(active) && !(this.form && this.form.contains(active));
 			this.results.innerHTML = data.html;
+			if (hadFocus) {
+				const again = focusedSort ? this.results.querySelector('th.' + focusedSort.split(' ').join('.') + ' .dengine-sort') : null;
+				const target = again || this.results;
+				if (!again) {
+					this.results.setAttribute('tabindex', '-1');
+				}
+				target.focus({ preventScroll: true });
+			}
 			if (push) {
 				window.history.pushState({ dengineLibrary: this.config.id }, '', pageUrl.toString());
 			} else if (replace) {
@@ -350,6 +363,7 @@ function previewDialog() {
 		}
 	});
 	dialog.addEventListener('close', () => {
+		dialog.querySelectorAll('.dengine-preview__body [data-dengine-viewer]').forEach((el) => el.dengineViewer?.destroy());
 		dialog.querySelector('.dengine-preview__body').innerHTML = '';
 		document.body.classList.remove('dengine-preview-open');
 		if (dialog.opener) {

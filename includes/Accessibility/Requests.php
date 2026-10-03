@@ -332,6 +332,10 @@ class Requests
             return;
         }
         echo '<div class="notice notice-info"><p>' . esc_html__('Visitors ask for documents in formats they can use. Email the requester the alternative version (reply to the notification email), then mark the request done.', 'document-engine') . '</p></div>';
+        // T7: once requests arrive, catching inaccessible PDFs before someone has to ask.
+        if (self::has_requests()) {
+            echo \MatrixAddons\DocumentEngine\Admin\Nudges::card('t7-a11y-check', __('Document Engine Pro\'s PDF accessibility check flags untagged, scanned or untitled PDFs in your documents list, before someone has to ask for another format.', 'document-engine'), \MatrixAddons\DocumentEngine\Admin\ProPage::url()); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
     }
 
     public static function columns($columns)

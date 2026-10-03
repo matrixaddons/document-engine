@@ -103,8 +103,11 @@ class Dashboard
             echo '<div class="dengine-a-notice dengine-a-notice--success" role="status">' . UI::icon('check', 16) . esc_html($installed['message']) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
 
+        // At most one: the review request, or a usage milestone (admins only, after the first week).
+        echo Nudges::dashboard(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
         echo '<div class="dengine-a-kpis">';
-        echo self::stat('documents', __('Published documents', 'document-engine'), number_format_i18n($published), '', admin_url('edit.php?post_type=' . $type)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo self::stat('documents', __('Documents', 'document-engine'), number_format_i18n($published), __('Published', 'document-engine'), admin_url('edit.php?post_type=' . $type)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo self::stat('download', __('Downloads', 'document-engine'), number_format_i18n($downloads), __('All time', 'document-engine')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo self::stat('folder', __('Categories', 'document-engine'), number_format_i18n($categories), '', admin_url('edit-tags.php?taxonomy=' . PostType::CATEGORY . '&post_type=' . $type)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo self::stat('bell', __('Awaiting review', 'document-engine'), number_format_i18n($pending), '', admin_url('edit.php?post_status=pending&post_type=' . $type)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -122,6 +125,30 @@ class Dashboard
         ));
         UI::card_start(__('Most downloaded', 'document-engine'), '', UI::button(__('All documents', 'document-engine'), admin_url('edit.php?post_type=' . $type), 'link'));
         self::doc_table($top, 'downloads');
+        if ($top) {
+            // T6: counts are free; who read what is Pro.
+            echo Nudges::card('t6-downloads', __('These are download counts. Pro\'s activity log shows <strong>who</strong> opened each document, when, and for how long.', 'document-engine'), Upsell::url('activity')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+        UI::card_end();
+
+        // Library managers see everyone's drafts; others see published documents and their own drafts.
+        $recent_args = array('post_type' => $type, 'post_status' => array('publish', 'pending', 'draft'), 'numberposts' => 5, 'orderby' => 'modified', 'dengine_skip_access' => true);
+        if (!current_user_can('edit_others_dengine_documents')) {
+            $own = get_posts(array_merge($recent_args, array('author' => get_current_user_id())));
+            $published = get_posts(array_merge($recent_args, array('post_status' => 'publish')));
+            $recent = array_values(array_reduce(array_merge($own, $published), function ($all, $p) {
+                $all[$p->ID] = $p;
+                return $all;
+            }, array()));
+            usort($recent, function ($a, $b) {
+                return strcmp($b->post_modified_gmt, $a->post_modified_gmt);
+            });
+            $recent = array_slice($recent, 0, 5); // Newest first, then the top five.
+        } else {
+            $recent = get_posts($recent_args);
+        }
+        UI::card_start(__('Recently updated', 'document-engine'));
+        self::doc_table($recent, 'modified');
         UI::card_end();
         echo '</div><div>';
 
@@ -139,24 +166,6 @@ class Dashboard
         echo '</div>';
         UI::card_end();
 
-        // Library managers see everyone's drafts; others see published documents and their own drafts.
-        $recent_args = array('post_type' => $type, 'post_status' => array('publish', 'pending', 'draft'), 'numberposts' => 5, 'orderby' => 'modified', 'dengine_skip_access' => true);
-        if (!current_user_can('edit_others_dengine_documents')) {
-            $own = get_posts(array_merge($recent_args, array('author' => get_current_user_id())));
-            $published = get_posts(array_merge($recent_args, array('post_status' => 'publish')));
-            $recent = array_slice(array_values(array_reduce(array_merge($own, $published), function ($all, $p) {
-                $all[$p->ID] = $p;
-                return $all;
-            }, array())), 0, 5);
-            usort($recent, function ($a, $b) {
-                return strcmp($b->post_modified_gmt, $a->post_modified_gmt);
-            });
-        } else {
-            $recent = get_posts($recent_args);
-        }
-        UI::card_start(__('Recently updated', 'document-engine'));
-        self::doc_table($recent, 'modified');
-        UI::card_end();
 
         do_action('document_engine_dashboard_sidebar');
         echo '</div></div>';
@@ -186,6 +195,10 @@ class Dashboard
             echo '<li class="' . ($step[0] ? 'is-done' : '') . '"><span class="dengine-a-checklist__mark">' . ($step[0] ? UI::icon('check', 14) : '') . '</span><div><a href="' . esc_url($step[3]) . '">' . esc_html($step[1]) . '</a><p>' . esc_html($step[2]) . '</p></div></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
         echo '</ol>';
+        // Free first: one optional line once the core steps are done (nothing pre-ticked, nothing installed).
+        if ($steps[0][0] && $steps[1][0] && Nudges::can_show('onboarding-pro', false)) {
+            echo '<p class="dengine-a-help">' . esc_html__('Need members-only documents or proof that staff read a policy?', 'document-engine') . ' <a href="' . esc_url(ProPage::url()) . '">' . esc_html__('Compare Free and Pro', 'document-engine') . '</a></p>';
+        }
         UI::card_end();
     }
 

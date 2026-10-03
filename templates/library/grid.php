@@ -32,7 +32,7 @@ defined('ABSPATH') || exit;
                 <div class="dengine-card__media<?php echo has_post_thumbnail($document->get_post()) ? ' has-image' : ''; ?>">
                     <?php echo $document->get_thumbnail_html('medium'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <?php if ($document->get_type_label() !== '') : ?><span class="dengine-card__badge"><?php echo esc_html($document->get_type_label()); ?></span><?php endif; ?>
-                    <?php if ($locked) : ?><span class="dengine-pill dengine-pill--locked dengine-card__lock"><?php echo document_engine_ui_icon('lock'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php esc_html_e('Members only', 'document-engine'); ?></span><?php endif; ?>
+                    <?php if ($locked) : ?><span class="dengine-pill dengine-pill--locked dengine-card__lock"><?php echo document_engine_ui_icon('lock'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo esc_html(\MatrixAddons\DocumentEngine\Library\Library::lock_label($document)); ?></span><?php endif; ?>
                 </div>
             <?php endif; ?>
             <div class="dengine-card__body">

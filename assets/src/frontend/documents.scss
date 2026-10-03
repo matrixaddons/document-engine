@@ -20,8 +20,8 @@
 	--dengine-text: currentColor;
 	--dengine-border: rgb(15 23 42 / .12);
 	--dengine-border: color-mix(in srgb, currentColor 14%, transparent);
-	--dengine-muted: rgb(15 23 42 / .62);
-	--dengine-muted: color-mix(in srgb, currentColor 62%, transparent);
+	--dengine-muted: rgb(15 23 42 / .75);
+	--dengine-muted: color-mix(in srgb, currentColor 75%, transparent);
 	--dengine-surface: rgb(15 23 42 / .035);
 	--dengine-surface: color-mix(in srgb, currentColor 4%, transparent);
 	--dengine-accent-soft: color-mix(in srgb, var(--dengine-accent) 10%, transparent);
@@ -161,13 +161,15 @@ a.dengine-chip:hover { background: var(--dengine-accent-soft); color: var(--deng
 	container: dengine-library / inline-size;
 
 	&__controls {
-		display: grid;
-		grid-template-columns: minmax(220px, 1fr);
-		grid-auto-flow: column;
-		grid-auto-columns: minmax(150px, max-content);
+		// Wraps inside narrow content columns (block themes' constrained layout), not only on small screens.
+		display: flex;
+		flex-wrap: wrap;
 		gap: .6rem;
 		align-items: center;
 		margin-bottom: .9rem;
+
+		> * { flex: 1 1 150px; min-width: 0; }
+		> .dengine-field--search { flex: 3 1 220px; }
 
 		select,
 		input[type="search"] {
@@ -520,6 +522,7 @@ a.dengine-chip:hover { background: var(--dengine-accent-soft); color: var(--deng
 
 @container dengine-library (max-width: 640px) {
 	.dengine-library__controls {
+		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-auto-flow: row;
 
@@ -1025,7 +1028,7 @@ a.dengine-chip:hover { background: var(--dengine-accent-soft); color: var(--deng
 
 	input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 	&__icon { color: var(--dengine-accent); }
-	&__title { font-weight: 600; }
+	&__title { font-size: .95rem; font-weight: 600; line-height: 1.4; }
 	&__hint { font-size: .82rem; color: var(--dengine-muted); }
 	&__file { font-size: .88rem; font-weight: 600; color: var(--dengine-accent); }
 	&:hover, &.is-over { border-color: var(--dengine-accent); background: var(--dengine-accent-soft); }
@@ -1640,7 +1643,7 @@ body.dengine-preview-open { overflow: hidden; }
 	--dengine-accent: var(--wp--preset--color--primary, #2458d6);
 	--dengine-accent-contrast: #fff;
 	--dengine-border: rgb(15 23 42 / .12);
-	--dengine-muted: rgb(15 23 42 / .62);
+	--dengine-muted: rgb(15 23 42 / .75);
 	--dengine-radius: 10px;
 	--dengine-control: 38px;
 	width: min(1100px, calc(100vw - 32px));
