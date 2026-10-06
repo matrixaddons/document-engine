@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-03T06:42:09+00:00\n"
+"POT-Creation-Date: 2026-10-06T01:22:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -94,214 +94,214 @@ msgstr ""
 msgid "Search requests"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:107
+#: includes/Accessibility/Requests.php:117
 msgid "Need this document in another format?"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:107
-#: includes/Accessibility/Requests.php:144
+#: includes/Accessibility/Requests.php:117
 #: includes/Accessibility/Requests.php:154
+#: includes/Accessibility/Requests.php:164
 msgid "Request an accessible version"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:120
+#: includes/Accessibility/Requests.php:130
 msgid "Not available"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:120
+#: includes/Accessibility/Requests.php:130
 msgid "This request form is not available."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:135
+#: includes/Accessibility/Requests.php:145
 msgid "Request received"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:136
+#: includes/Accessibility/Requests.php:146
 msgid "Thank you. We have your request."
 msgstr ""
 
 #. translators: %s: email address
-#: includes/Accessibility/Requests.php:138
+#: includes/Accessibility/Requests.php:148
 #, php-format
 msgid "We will send the document to %s as soon as it is ready."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:140
+#: includes/Accessibility/Requests.php:150
 msgid "Back to the document"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:155
+#: includes/Accessibility/Requests.php:165
 msgid "Tell us the format that works for you and we will send it to you by email."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:161
+#: includes/Accessibility/Requests.php:171
 msgid "Your name"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:162
+#: includes/Accessibility/Requests.php:172
 msgid "Email address"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:163
+#: includes/Accessibility/Requests.php:173
 msgid "Format you need"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:170
+#: includes/Accessibility/Requests.php:180
 msgid "Anything else we should know?"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:170
+#: includes/Accessibility/Requests.php:180
 msgid "(optional)"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:174
+#: includes/Accessibility/Requests.php:184
 msgid "Send request"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:175
+#: includes/Accessibility/Requests.php:185
 msgid "We only use your details to send you this document."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:215
+#: includes/Accessibility/Requests.php:225
 msgid "Your session expired. Please try again."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:218
-#: includes/Accessibility/Requests.php:248
+#: includes/Accessibility/Requests.php:228
+#: includes/Accessibility/Requests.php:258
 msgid "Your request could not be sent."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:221
+#: includes/Accessibility/Requests.php:231
 msgid "Please wait a moment and send the form again."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:234
+#: includes/Accessibility/Requests.php:244
 msgid "Too many requests right now. Please try again later or contact us directly."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:239
+#: includes/Accessibility/Requests.php:249
 msgid "Please enter your name."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:242
+#: includes/Accessibility/Requests.php:252
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:245
+#: includes/Accessibility/Requests.php:255
 msgid "Please choose a format."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:273
+#: includes/Accessibility/Requests.php:283
 msgid "Your request could not be saved. Please try again."
 msgstr ""
 
 #. translators: %s: document title
-#: includes/Accessibility/Requests.php:280
+#: includes/Accessibility/Requests.php:290
 #, php-format
 msgid "Accessible format requested: %s"
 msgstr ""
 
 #. translators: 1: name, 2: email
-#: includes/Accessibility/Requests.php:283
+#: includes/Accessibility/Requests.php:293
 #, php-format
 msgid "%1$s (%2$s) asked for this document in another format."
 msgstr ""
 
 #. translators: %s: document title
-#: includes/Accessibility/Requests.php:286
+#: includes/Accessibility/Requests.php:296
 #, php-format
 msgid "Document: %s"
 msgstr ""
 
 #. translators: %s: format
-#: includes/Accessibility/Requests.php:288
+#: includes/Accessibility/Requests.php:298
 #, php-format
 msgid "Format: %s"
 msgstr ""
 
 #. translators: %s: note
-#: includes/Accessibility/Requests.php:291
+#: includes/Accessibility/Requests.php:301
 #, php-format
 msgid "Note: %s"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:334
+#: includes/Accessibility/Requests.php:344
 msgid "Visitors ask for documents in formats they can use. Email the requester the alternative version (reply to the notification email), then mark the request done."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:337
+#: includes/Accessibility/Requests.php:347
 msgid "Document Engine Pro's PDF accessibility check flags untagged, scanned or untitled PDFs in your documents list, before someone has to ask for another format."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:344
-#: includes/Accessibility/Requests.php:438
+#: includes/Accessibility/Requests.php:354
+#: includes/Accessibility/Requests.php:448
 msgid "Request"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:345
+#: includes/Accessibility/Requests.php:355
 msgid "Requested by"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:346
+#: includes/Accessibility/Requests.php:356
 msgid "Status"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:347
+#: includes/Accessibility/Requests.php:357
 msgid "Received"
 msgstr ""
 
 #. translators: %s: time ago
-#: includes/Accessibility/Requests.php:363
+#: includes/Accessibility/Requests.php:373
 #: includes/Admin/Dashboard.php:227
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:368
+#: includes/Accessibility/Requests.php:378
 msgid "Done"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:368
+#: includes/Accessibility/Requests.php:378
 #: includes/Library/Library.php:764
 #: assets/build/document-editor.js:1
 msgid "Open"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:388
+#: includes/Accessibility/Requests.php:398
 msgid "Open document"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:390
+#: includes/Accessibility/Requests.php:400
 msgid "Reopen"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:390
+#: includes/Accessibility/Requests.php:400
 msgid "Mark done"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:402
-#: includes/Admin/Migrate.php:82
-#: includes/Admin/Migrate.php:240
+#: includes/Accessibility/Requests.php:412
+#: includes/Admin/Migrate.php:88
+#: includes/Admin/Migrate.php:246
 msgid "Sorry, you are not allowed to do that."
 msgstr ""
 
-#: includes/Accessibility/Requests.php:428
-#: includes/Accessibility/Requests.php:435
-#: includes/Accessibility/Requests.php:454
+#: includes/Accessibility/Requests.php:438
+#: includes/Accessibility/Requests.php:445
+#: includes/Accessibility/Requests.php:464
 #: includes/Admin/DocsContent.php:163
 msgid "Accessible format requests"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:439
+#: includes/Accessibility/Requests.php:449
 #: includes/Admin/Upsell.php:243
 msgid "Name"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:440
+#: includes/Accessibility/Requests.php:450
 msgid "Note"
 msgstr ""
 
-#: includes/Accessibility/Requests.php:441
+#: includes/Accessibility/Requests.php:451
 #: includes/Integrations/Elementor/LibraryWidget.php:57
 #: includes/Library/Query.php:67
 msgid "Date"
@@ -991,7 +991,7 @@ msgstr ""
 
 #: includes/Admin/DocsContent.php:168
 #: includes/Admin/Migrate.php:33
-#: includes/Admin/Migrate.php:93
+#: includes/Admin/Migrate.php:99
 msgid "Migrate from another plugin"
 msgstr ""
 
@@ -2280,7 +2280,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Admin/Documents.php:467
-#: includes/Admin/Migrate.php:182
+#: includes/Admin/Migrate.php:188
 msgid "View documents"
 msgstr ""
 
@@ -2325,53 +2325,53 @@ msgid "Migrate"
 msgstr ""
 
 #. translators: %s: plugin name
-#: includes/Admin/Migrate.php:68
+#: includes/Admin/Migrate.php:74
 #, php-format
 msgid "Moving from %s?"
 msgstr ""
 
 #. translators: %s: number of documents
-#: includes/Admin/Migrate.php:71
+#: includes/Admin/Migrate.php:77
 #, php-format
 msgid "We found %s document you can bring over, with its file, categories and download count."
 msgid_plural "We found %s documents you can bring over, with their files, categories and download counts."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/Migrate.php:75
+#: includes/Admin/Migrate.php:81
 msgid "Review and migrate"
 msgstr ""
 
-#: includes/Admin/Migrate.php:94
+#: includes/Admin/Migrate.php:100
 msgid "Bring documents over with their files, categories, tags, dates and download counts. The old plugin's data is only read, never changed, and running this again skips anything already moved."
 msgstr ""
 
-#: includes/Admin/Migrate.php:98
+#: includes/Admin/Migrate.php:104
 msgid "Sources"
 msgstr ""
 
-#: includes/Admin/Migrate.php:111
+#: includes/Admin/Migrate.php:117
 msgid "Nothing to migrate"
 msgstr ""
 
-#: includes/Admin/Migrate.php:112
+#: includes/Admin/Migrate.php:118
 msgid "No documents from Document Library (Barn2), Download Monitor or WordPress Download Manager were found on this site."
 msgstr ""
 
-#: includes/Admin/Migrate.php:132
+#: includes/Admin/Migrate.php:138
 msgid "Found"
 msgstr ""
 
-#: includes/Admin/Migrate.php:133
+#: includes/Admin/Migrate.php:139
 msgid "Already moved"
 msgstr ""
 
-#: includes/Admin/Migrate.php:134
+#: includes/Admin/Migrate.php:140
 msgid "To move"
 msgstr ""
 
 #. translators: %s: number
-#: includes/Admin/Migrate.php:141
+#: includes/Admin/Migrate.php:147
 #, php-format
 msgid "%s item is for members only. It keeps that restriction and its file is moved to protected storage."
 msgid_plural "%s items are for members only. They keep that restriction and their files are moved to protected storage."
@@ -2379,7 +2379,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number
-#: includes/Admin/Migrate.php:143
+#: includes/Admin/Migrate.php:149
 #, php-format
 msgid "%s item is for members only. It is imported as a draft so it is not made public. Document Engine Pro can keep it restricted."
 msgid_plural "%s items are for members only. They are imported as drafts so they are not made public. Document Engine Pro can keep them restricted."
@@ -2387,7 +2387,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number
-#: includes/Admin/Migrate.php:147
+#: includes/Admin/Migrate.php:153
 #, php-format
 msgid "%s item had a lock this plugin does not copy (paid, email or captcha). It is imported as a draft without its file, for you to review."
 msgid_plural "%s items had a lock this plugin does not copy (paid, email or captcha). They are imported as drafts without their files, for you to review."
@@ -2395,7 +2395,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number
-#: includes/Admin/Migrate.php:151
+#: includes/Admin/Migrate.php:157
 #, php-format
 msgid "%s item has a password. It keeps it as a WordPress page password."
 msgid_plural "%s items have a password. They keep it as a WordPress page password."
@@ -2403,83 +2403,83 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number
-#: includes/Admin/Migrate.php:155
+#: includes/Admin/Migrate.php:161
 #, php-format
 msgid "%s item holds more than one file. Only its main file is moved; the list after the move shows which."
 msgid_plural "%s items hold more than one file. Only their main file is moved; the list after the move shows which."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/Migrate.php:157
+#: includes/Admin/Migrate.php:163
 msgid "Files already in the Media Library are reused. Files kept elsewhere on this server are copied into the Media Library, and links to other websites stay links."
 msgstr ""
 
-#: includes/Admin/Migrate.php:158
+#: includes/Admin/Migrate.php:164
 msgid "Pages that use the old plugin's shortcodes keep working after you deactivate it; they show the moved documents."
 msgstr ""
 
-#: includes/Admin/Migrate.php:160
+#: includes/Admin/Migrate.php:166
 msgid "The old plugin is still active. You can leave it on while you check the result."
 msgstr ""
 
 #. translators: 1: done, 2: total
-#: includes/Admin/Migrate.php:178
+#: includes/Admin/Migrate.php:184
 #, php-format
 msgid "Checked %1$s of %2$s"
 msgstr ""
 
 #. translators: 1: moved, 2: skipped, 3: failed
-#: includes/Admin/Migrate.php:180
+#: includes/Admin/Migrate.php:186
 #, php-format
 msgid "Finished: %1$s moved, %2$s skipped (already moved or members only), %3$s failed."
 msgstr ""
 
-#: includes/Admin/Migrate.php:181
+#: includes/Admin/Migrate.php:187
 msgid "The migration stopped because of an error. Run it again to continue where it stopped."
 msgstr ""
 
-#: includes/Admin/Migrate.php:183
+#: includes/Admin/Migrate.php:189
 #: includes/Helpers/main.php:140
 msgid "Edit"
 msgstr ""
 
-#: includes/Admin/Migrate.php:184
+#: includes/Admin/Migrate.php:190
 msgid "The migration is still running. Leave anyway?"
 msgstr ""
 
-#: includes/Admin/Migrate.php:191
+#: includes/Admin/Migrate.php:197
 msgid "Skip members-only items"
 msgstr ""
 
-#: includes/Admin/Migrate.php:196
+#: includes/Admin/Migrate.php:202
 msgid "Everything has been moved"
 msgstr ""
 
 #. translators: %s: number
-#: includes/Admin/Migrate.php:202
+#: includes/Admin/Migrate.php:208
 #, php-format
 msgid "Move %s document"
 msgid_plural "Move %s documents"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/Migrate.php:207
+#: includes/Admin/Migrate.php:213
 msgid "View moved documents"
 msgstr ""
 
 #. translators: %s: number of members-only items
-#: includes/Admin/Migrate.php:221
+#: includes/Admin/Migrate.php:227
 #, php-format
 msgid "%s item was members-only in the old plugin and is now a draft. Document Engine Pro keeps documents restricted by role, person or category, with their files in private storage."
 msgid_plural "%s items were members-only in the old plugin and are now drafts. Document Engine Pro keeps documents restricted by role, person or category, with their files in private storage."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Admin/Migrate.php:222
+#: includes/Admin/Migrate.php:228
 msgid "Your documents are in. Document Engine Pro adds versions, review-by dates and an activity log of who opened what."
 msgstr ""
 
-#: includes/Admin/Migrate.php:244
+#: includes/Admin/Migrate.php:250
 msgid "Unknown source."
 msgstr ""
 

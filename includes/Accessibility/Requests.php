@@ -82,10 +82,20 @@ class Requests
         ));
     }
 
+    /**
+     * Whether any requests were received: the screen stays reachable after the feature is switched
+     * off (they hold names and email addresses). Asked while the post type is being registered, so
+     * wp_count_posts() (which needs a registered type) can't be used.
+     */
     private static function has_requests()
     {
-        $counts = wp_count_posts(self::POST_TYPE);
-        return isset($counts->private) && (int)$counts->private > 0;
+        static $has = null;
+        if ($has === null) {
+            global $wpdb;
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $has = (bool)$wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_status = 'private' LIMIT 1", self::POST_TYPE));
+        }
+        return $has;
     }
 
     public static function query_vars($vars)

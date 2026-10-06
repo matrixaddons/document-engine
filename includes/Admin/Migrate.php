@@ -63,6 +63,12 @@ class Migrate
         }
         $key = key($pending);
         $source = Sources::get($key);
+        // What is still to move (a migration may have been run part way).
+        $preview = Migrator::preview($key);
+        $pending[$key] = isset($preview['remaining']) ? (int)$preview['remaining'] : $pending[$key];
+        if ($pending[$key] < 1) {
+            return;
+        }
         UI::card_start(
             /* translators: %s: plugin name */
             sprintf(__('Moving from %s?', 'document-engine'), $source['label']),
