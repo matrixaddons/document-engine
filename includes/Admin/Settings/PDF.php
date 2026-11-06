@@ -199,7 +199,7 @@ class PDF extends Setting_Base
                 $settings[] = array(
                     'title' => __('Watermark (Document Engine Pro)', 'document-engine'),
                     'type' => 'title',
-                    'desc' => esc_html__('Add a text or image watermark to every PDF, with placeholders such as {name} and {date}.', 'document-engine') . ' <a href="' . esc_url(\MatrixAddons\DocumentEngine\Admin\ProPage::url()) . '">' . esc_html__('Compare Free and Pro', 'document-engine') . '</a>',
+                    'desc' => esc_html__('Add a text or image watermark to every PDF, with placeholders such as {name} and {date}.', 'document-engine') . ' <a href="' . esc_url(\MatrixAddons\DocumentEngine\Admin\ProPage::url('t8-watermark')) . '">' . esc_html__('Compare Free and Pro', 'document-engine') . '</a>',
                     'id' => 'document_engine_pdf_watermark_pro',
                 );
                 $settings[] = array('type' => 'sectionend', 'id' => 'document_engine_pdf_watermark_pro');

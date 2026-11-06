@@ -120,6 +120,11 @@ if (!function_exists('document_engine_get_available_post_types')) {
 
         foreach ($post_types as $post_type) {
 
+            // Documents have their own files and are never exported as PDFs, so don't offer them.
+            if ($post_type === 'dengine_document') {
+                continue;
+            }
+
             $post_types_updated[] = array('id' => $post_type, 'title' => $post_type);
 
 

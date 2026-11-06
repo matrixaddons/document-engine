@@ -33,7 +33,8 @@ class Template
 
             remove_shortcode('document_engine_pdf_button');
 
-            return str_replace("[document_engine_pdf_button]", "", $content);
+            // With or without attributes, the button has no place in the PDF.
+            return preg_replace('/\[document_engine_pdf_button\b[^\]]*\]/', '', $content);
 
         }
 

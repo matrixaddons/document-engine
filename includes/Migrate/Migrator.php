@@ -381,6 +381,11 @@ class Migrator
             }
             $path = self::local_path_for_url($ref, $uploads);
             if ($path === '') {
+                // On this site but gone from disk: a link would be dead. Elsewhere: keep the link.
+                $here = strtolower((string)wp_parse_url(home_url(), PHP_URL_HOST));
+                if ($here !== '' && strtolower((string)wp_parse_url($ref, PHP_URL_HOST)) === $here) {
+                    return null;
+                }
                 return array('url' => $ref);
             }
         } else {

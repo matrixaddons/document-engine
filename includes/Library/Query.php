@@ -130,6 +130,7 @@ class Query
             'title' => array('title', 'asc'),
             'date' => array('date', 'desc'),
             'updated' => array('modified', 'desc'),
+            'modified' => array('modified', 'desc'),
             'downloads' => array('downloads', 'desc'),
             'size' => array('size', 'desc'),
         ));

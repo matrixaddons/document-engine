@@ -34,6 +34,7 @@ class UI
             'help' => '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h0"/>',
             'star' => '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
             'check' => '<path d="M5 12l5 5 9-10"/>',
+            'clock' => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
             'lock' => '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
             'plus' => '<path d="M12 5v14M5 12h14"/>',
             'search' => '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',

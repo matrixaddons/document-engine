@@ -9,8 +9,12 @@ defined('ABSPATH') || exit;
 /**
  * Contextual Pro suggestions and the review request, kept within WordPress.org guideline 11:
  * only for administrators, only on Document Engine's own screens, inline (never modals or
- * site-wide notices), at most one per screen, each dismissible for good, nothing in the first
- * 7 days, and nothing at all once Pro is active.
+ * site-wide notices), at most one per screen, each dismissible for good, and nothing at all once
+ * Pro is active.
+ *
+ * Passive prompts wait out the first 7 days. Prompts that answer something the admin just did
+ * (marked $contextual = false: made a document private, finished a migration, replaced a file)
+ * don't: a migration happens on day one, so a quiet period would hide them from nearly everyone.
  */
 class Nudges
 {
@@ -60,7 +64,7 @@ class Nudges
      * Whether a suggestion may be shown to the current user now.
      *
      * @param string $id         Suggestion id (also the utm_content of its link).
-     * @param bool   $contextual False for static "Pro" labels, which ignore the quiet period.
+     * @param bool   $contextual False for static "Pro" labels and replies to the admin's own action, which ignore the quiet period.
      */
     public static function can_show($id, $contextual = true)
     {
@@ -74,19 +78,11 @@ class Nudges
     }
 
     /**
-     * A link to the Pro page on our site, attributed to the suggestion (no tracking in the plugin itself).
-     */
-    public static function store_link($id, $anchor = 'pro')
-    {
-        return ProPage::store_url('suggestion') . '&utm_content=' . rawurlencode($id) . '#' . $anchor;
-    }
-
-    /**
      * Inline card: a fact, what Pro does about it, one link, and "Don't show again".
      */
-    public static function card($id, $text, $link_url = '', $link_label = '', $once_per_screen = true)
+    public static function card($id, $text, $link_url = '', $link_label = '', $once_per_screen = true, $contextual = true)
     {
-        if (!self::can_show($id) || ($once_per_screen && self::$shown_on_screen)) {
+        if (!self::can_show($id, $contextual) || ($once_per_screen && self::$shown_on_screen)) {
             return '';
         }
         self::$shown_on_screen = true;
@@ -146,7 +142,7 @@ class Nudges
         }
         $published = (int)wp_count_posts(PostType::POST_TYPE)->publish;
 
-        if (self::days_installed() >= 21 && $published >= 5 && !self::is_dismissed('review') && self::has_library_page()) {
+        if (self::days_installed() >= 14 && $published >= 3 && !self::is_dismissed('review') && self::has_library_page()) {
             self::$shown_on_screen = true;
             return '<div class="dengine-nudge dengine-nudge--review" data-dengine-nudge="review">'
                 . '<p class="dengine-nudge__text">' . esc_html__('Is Document Engine working well for you? A short review on WordPress.org helps other councils, schools and teams find it, and tells us what to improve.', 'document-engine') . '</p>'
@@ -166,9 +162,12 @@ class Nudges
         }
 
         $pick = '';
-        if ($published >= 25 && !self::is_dismissed('m-25-documents')) {
+        // Someone is waiting on a decision, or several people edit: that's when sign-off starts to matter.
+        if (self::team_size() >= 3 && !self::is_dismissed('m-team')) {
+            $pick = 'm-team';
+        } elseif ($published >= 10 && !self::is_dismissed('m-25-documents')) {
             $pick = 'm-25-documents';
-        } elseif (self::total_downloads() >= 1000 && !self::is_dismissed('m-1000-downloads')) {
+        } elseif (self::total_downloads() >= 250 && !self::is_dismissed('m-1000-downloads')) {
             $pick = 'm-1000-downloads';
         }
         if ($pick === '') {
@@ -179,16 +178,33 @@ class Nudges
         return self::milestone_card($pick, $published);
     }
 
+    /**
+     * People whose role can add or edit documents.
+     */
+    private static function team_size()
+    {
+        $roles = array();
+        foreach (wp_roles()->role_objects as $key => $role) {
+            if ($role->has_cap('edit_dengine_documents')) {
+                $roles[] = $key;
+            }
+        }
+        return $roles ? count(get_users(array('role__in' => $roles, 'fields' => 'ID', 'number' => 3))) : 0;
+    }
+
     private static function milestone_card($id, $published)
     {
+        if ($id === 'm-team') {
+            return self::card($id, __('Several people can edit your documents. Pro adds publishing approval and a history of who changed what.', 'document-engine'), Upsell::url('governance', $id));
+        }
         if ($id === 'm-25-documents') {
             /* translators: %s: number of published documents */
             $text = sprintf(__('Your library has %s documents. Pro adds review-by dates and versions, so it stays current as it grows.', 'document-engine'), number_format_i18n($published));
-            return self::card($id, $text, Upsell::url('import'));
+            return self::card($id, $text, Upsell::url('versions', $id));
         }
         /* translators: %s: total downloads */
         $text = sprintf(__('Your documents have been downloaded %s times. Pro shows who opened what, and for how long.', 'document-engine'), number_format_i18n(self::total_downloads()));
-        return self::card($id, $text, Upsell::url('activity'));
+        return self::card($id, $text, Upsell::url('activity', $id));
     }
 
     private static function total_downloads()

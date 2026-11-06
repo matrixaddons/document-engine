@@ -270,6 +270,10 @@ class Generate_PDF
                 $local = self::local_asset($url, $name === 'link' ? 'css' : 'binary');
                 return $a[1] . $a[2] . '="' . esc_attr($local) . '"';
             }, $tag[2]);
+            // An image that may not be used leaves nothing behind, not mPDF's broken-image mark.
+            if ($name === 'img' && preg_match('#\ssrc=""#i', $attrs)) {
+                return '';
+            }
             // Inline style attributes: decode entities, then make every url(...) local.
             $attrs = preg_replace_callback('#(\s)style\s*=\s*(?:"([^"]*)"|\'([^\']*)\')#i', function ($a) {
                 $css = html_entity_decode(isset($a[3]) && $a[3] !== '' ? $a[3] : $a[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');

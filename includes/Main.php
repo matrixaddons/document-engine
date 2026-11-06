@@ -51,9 +51,29 @@ final class Main
         add_action('init', array('\MatrixAddons\DocumentEngine\Shortcodes', 'init'));
 
         Upgrader::init();
+        // Post to PDF fonts: administrators may upload .ttf/.otf files to the Media Library, in wp-admin and from the block editor (REST).
+        add_filter('upload_mimes', function ($mimes) {
+            if (current_user_can('manage_options')) {
+                $mimes['ttf'] = 'font/ttf';
+                $mimes['otf'] = 'font/otf';
+            }
+            return $mimes;
+        });
+        add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename) {
+            if (current_user_can('manage_options') && empty($data['type']) && preg_match('/\.(ttf|otf)$/i', (string)$filename, $m)) {
+                $head = (string)file_get_contents($file, false, null, 0, 4); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+                // TrueType (00 01 00 00 / "true") or OpenType ("OTTO") signatures only.
+                if (in_array($head, array("\x00\x01\x00\x00", 'true', 'OTTO'), true)) {
+                    $ext = strtolower($m[1]);
+                    $data = array('ext' => $ext, 'type' => 'font/' . $ext, 'proper_filename' => false);
+                }
+            }
+            return $data;
+        }, 10, 3);
         PostType::init();
         Documents\Capabilities::init();
         FileServer::init();
+        \MatrixAddons\DocumentEngine\Documents\AddonGuard::init();
         Assets::init();
         Blocks::init();
         Library::init();

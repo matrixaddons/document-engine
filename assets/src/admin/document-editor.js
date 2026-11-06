@@ -160,6 +160,7 @@ function DocumentFilePanel() {
 
 	const fileId = meta._dengine_file_id || 0;
 	const [privateDismissed, setPrivateDismissed] = useState(false);
+	const [moreDismissed, setMoreDismissed] = useState(false);
 	const media = useSelect((select) => (fileId ? select('core').getMedia(fileId, { context: 'view' }) : null), [fileId]);
 
 	useEffect(() => {
@@ -312,6 +313,13 @@ function DocumentFilePanel() {
 					/>
 				</div>
 				{published && !hiddenPage && <QrCode url={permalink} name={slug} />}
+				{published && !hiddenPage && fileId > 0 && !cfg.isPro && nudges.moreFiles && !moreDismissed && (
+					<p className="dengine-side__text">
+						{__('Need this document in Word as well, or with appendices? Pro adds more files to one document.', 'document-engine')}{' '}
+						<a href={nudges.moreFiles}>{__('See how Pro does this', 'document-engine')}</a>{' · '}
+						<Button variant="link" onClick={() => { dismissNudge('t10-more-files'); setMoreDismissed(true); }}>{__('Don\'t show again', 'document-engine')}</Button>
+					</p>
+				)}
 				{hiddenPage && fileId > 0 && !cfg.isPro && (
 					<div className="dengine-side__text">
 						<p>{__('Only people who can edit documents can open this document\'s page and download link. The file itself stays in the public uploads folder, so anyone who has its direct file address could still download it.', 'document-engine')}</p>

@@ -151,7 +151,10 @@ class FileServer
         $path = $document->get_file_path();
         $url = $document->get_file_url();
         $local = $path !== '' && file_exists($path);
-        if (!$local && ($url === '' || !wp_http_validate_url($url))) {
+        // A Media Library file gone from this server (an offload plugin's remote copy still counts as there).
+        $uploads = wp_get_upload_dir();
+        $gone = !$local && $document->get_file_id() > 0 && !empty($uploads['baseurl']) && strpos($url, $uploads['baseurl']) === 0;
+        if ($gone || (!$local && ($url === '' || !wp_http_validate_url($url)))) {
             // Nothing to serve: don't count a download or fire download hooks for a missing file.
             self::fail(404, __('The file for this document is missing.', 'document-engine'));
         }

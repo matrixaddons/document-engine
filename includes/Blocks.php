@@ -213,7 +213,7 @@ class Blocks
 
     public function render_pdf_button($attributes)
     {
-        if (!is_singular()) {
+        if (!is_singular() || document_engine_pdf_is_valid_post_type()) {
             return '';
         }
         $atts = array();

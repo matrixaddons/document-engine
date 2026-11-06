@@ -72,7 +72,7 @@ class Viewer extends Setting_Base
                     . (\MatrixAddons\DocumentEngine\Admin\Nudges::can_show('t2-viewer', false) ? ' ' . sprintf(
                         /* translators: %s: link to the Pro preview */
                         __('Document Engine Pro\'s secure viewer shows a PDF read-only, with the reader\'s name on every page. %s', 'document-engine'),
-                        '<a href="' . esc_url(\MatrixAddons\DocumentEngine\Admin\Upsell::url('access')) . '">' . esc_html__('See how Pro does this', 'document-engine') . '</a>'
+                        '<a href="' . esc_url(\MatrixAddons\DocumentEngine\Admin\Upsell::url('access', 't2-viewer')) . '">' . esc_html__('See how Pro does this', 'document-engine') . '</a>'
                     ) : ''),
             ),
             array(

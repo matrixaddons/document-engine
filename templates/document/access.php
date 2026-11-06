@@ -24,7 +24,7 @@ $back = wp_get_referer();
     <h2 class="dengine-access__title"><?php echo esc_html($heading); ?></h2>
     <p class="dengine-access__text"><?php echo esc_html($text); ?></p>
     <p class="dengine-access__actions">
-        <?php if ($login) : ?>
+        <?php if ($login && apply_filters('document_engine_access_show_login', true, $document)) : ?>
             <a class="dengine-button" href="<?php echo esc_url(wp_login_url($return)); ?>"><?php esc_html_e('Log in', 'document-engine'); ?></a>
             <?php if (get_option('users_can_register')) : ?>
                 <a class="dengine-button dengine-button--ghost" href="<?php echo esc_url(wp_registration_url()); ?>"><?php esc_html_e('Create an account', 'document-engine'); ?></a>

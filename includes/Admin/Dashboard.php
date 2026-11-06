@@ -97,12 +97,6 @@ class Dashboard
             'dengine-a--dashboard'
         );
 
-        $installed = get_transient('dengine_install_pro_' . get_current_user_id());
-        if (is_array($installed) && !empty($installed['ok'])) {
-            delete_transient('dengine_install_pro_' . get_current_user_id());
-            echo '<div class="dengine-a-notice dengine-a-notice--success" role="status">' . UI::icon('check', 16) . esc_html($installed['message']) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        }
-
         // At most one: the review request, or a usage milestone (admins only, after the first week).
         echo Nudges::dashboard(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
@@ -127,7 +121,7 @@ class Dashboard
         self::doc_table($top, 'downloads');
         if ($top) {
             // T6: counts are free; who read what is Pro.
-            echo Nudges::card('t6-downloads', __('These are download counts. Pro\'s activity log shows <strong>who</strong> opened each document, when, and for how long.', 'document-engine'), Upsell::url('activity')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo Nudges::card('t6-downloads', __('These are download counts. Pro\'s activity log shows <strong>who</strong> opened each document, when, and for how long.', 'document-engine'), Upsell::url('activity', 't6-downloads')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
         UI::card_end();
 

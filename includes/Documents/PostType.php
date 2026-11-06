@@ -17,6 +17,9 @@ class PostType
     {
         add_action('init', array(__CLASS__, 'register'), 5);
         add_action('init', array(__CLASS__, 'register_meta'), 6);
+        add_action('init', array(__CLASS__, 'archive_rewrites'), 7);
+        add_action('template_redirect', array(__CLASS__, 'no_single_pages'), 2);
+        add_filter('rest_request_before_callbacks', array(__CLASS__, 'rest_guard_file'), 10, 3);
         add_action('init', array(__CLASS__, 'maybe_flush'), 99);
         add_action('rest_api_init', array(__CLASS__, 'register_file_name'));
         add_action('init', array(__CLASS__, 'register_template'), 20);
@@ -162,6 +165,60 @@ class PostType
             'capabilities' => array('manage_terms' => 'manage_dengine_categories', 'edit_terms' => 'manage_dengine_categories', 'delete_terms' => 'manage_dengine_categories', 'assign_terms' => 'edit_dengine_documents'),
             'rewrite' => array('slug' => $slug . '/tag', 'with_front' => false),
         )));
+    }
+
+    /**
+     * "Give each document its own page" off: the page isn't served, its address goes to the file.
+     */
+    public static function no_single_pages()
+    {
+        if (!is_singular(self::POST_TYPE) || get_option('document_engine_single_pages', 'yes') === 'yes' || current_user_can('edit_post', get_queried_object_id())) {
+            return;
+        }
+        $document = Document::get(get_queried_object_id());
+        if ($document && $document->has_file()) {
+            wp_safe_redirect($document->get_download_url(), 302);
+            exit;
+        }
+    }
+
+    /**
+     * A clear answer instead of a database error when someone picks a file they may not use.
+     */
+    public static function rest_guard_file($response, $handler, $request)
+    {
+        if (is_wp_error($response) || !$request instanceof \WP_REST_Request || !in_array($request->get_method(), array('POST', 'PUT', 'PATCH'), true) || strpos($request->get_route(), '/wp/v2/' . self::POST_TYPE) !== 0) {
+            return $response;
+        }
+        $meta = $request->get_param('meta');
+        $file = is_array($meta) && isset($meta[Document::META_FILE_ID]) ? absint($meta[Document::META_FILE_ID]) : 0;
+        if ($file > 0 && (get_post_type($file) !== 'attachment' || !current_user_can('edit_post', $file))) {
+            // Already this document's file: nothing is changing.
+            if ((int)get_post_meta((int)$request->get_param('id'), Document::META_FILE_ID, true) !== $file && !apply_filters('document_engine_can_use_attachment', false, $file, (int)$request->get_param('id'))) {
+                return new \WP_Error('dengine_file_not_allowed', __('You can only use files you uploaded yourself. Upload this file again, or ask an editor to attach it.', 'document-engine'), array('status' => 403));
+            }
+        }
+        return $response;
+    }
+
+    /**
+     * Category and tag archives live under the document slug, where the document rules would claim them
+     * first (a 404, though sitemaps list them). Priority over those rules.
+     */
+    public static function archive_rewrites()
+    {
+        $slug = sanitize_title(get_option('document_engine_documents_slug', 'documents'));
+        $slug = $slug !== '' ? $slug : 'documents';
+        foreach (array(self::CATEGORY => 'category', self::TAG => 'tag') as $taxonomy => $base) {
+            $tax = get_taxonomy($taxonomy);
+            if (!$tax || empty($tax->query_var)) {
+                continue;
+            }
+            $var = $tax->query_var;
+            add_rewrite_rule("^{$slug}/{$base}/(.+?)/feed/(feed|rdf|rss|rss2|atom)/?\$", "index.php?{$var}=\$matches[1]&feed=\$matches[2]", 'top');
+            add_rewrite_rule("^{$slug}/{$base}/(.+?)/page/?([0-9]{1,})/?\$", "index.php?{$var}=\$matches[1]&paged=\$matches[2]", 'top');
+            add_rewrite_rule("^{$slug}/{$base}/(.+?)/?\$", "index.php?{$var}=\$matches[1]", 'top');
+        }
     }
 
     public static function register_meta()

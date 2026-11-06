@@ -36,7 +36,7 @@ class DocsContent
                         array('p', __('It also includes Post to PDF: a "Download PDF" button that turns posts and pages into PDFs.', 'document-engine')),
                         array('ul', array(
                             __('<strong>Free</strong>: documents, libraries (table, grid, folders) with instant search and filters, the PDF viewer, preview popups, lists, search box, QR codes, Post to PDF, format requests, migration from other plugins, Elementor widgets.', 'document-engine'),
-                            __('<strong>Pro</strong>: access control and private files, share links, secure viewer, email gate, activity and reading analytics, versions, review and expiry dates, read-and-confirm, notifications, import, custom fields, client portal, handbook PDFs, AI assistant, abuse protection.', 'document-engine'),
+                            __('<strong>Pro</strong>: access control and private files, share links, secure viewer, email gate, activity and reading analytics, versions, review and expiry dates, read-and-confirm, approvals, change history, legal hold, retention, notifications, import, custom fields, client portal, handbook PDFs, AI assistant, abuse protection.', 'document-engine'),
                         )),
                     )),
                     'install' => array(__('Install and activate', 'document-engine'), false, array(
@@ -84,6 +84,7 @@ class DocsContent
                 'intro' => __('Everything included in the free plugin.', 'document-engine'),
                 'articles' => array(
                     'documents' => array(__('Documents and document pages', 'document-engine'), false, array(
+                        array('p', __('With Pro, a document can have more files: the same report as PDF and Word, or appendices. Add them in the document\'s "More files" panel. They follow its access rules and show on its page and in libraries. View-only documents don\'t offer them.', 'document-engine')),
                         array('p', __('Documents are a post type with categories and tags. Each has a file (uploaded, from the Media Library, or an external link), a download counter and, when <strong>Pages</strong> is on, its own page showing the file type, size, last update, categories, a download button and, for PDFs, the viewer.', 'document-engine')),
                         array('ul', array(
                             __('<strong>Where</strong>: Documents → All Documents and Add New Document.', 'document-engine'),
@@ -135,7 +136,7 @@ class DocsContent
                             array(__('PDF Viewer', 'document-engine'), __('Show a PDF from a document, the Media Library or a URL.', 'document-engine')),
                             array(__('Save as PDF', 'document-engine'), __('The Post to PDF button, placed where you want it.', 'document-engine')),
                         ), array(__('Block', 'document-engine'), __('What it does', 'document-engine'))),
-                        array('p', __('Elementor users get four widgets with the same options: Document Library, Document List, Document Download and PDF Viewer.', 'document-engine')),
+                        array('p', __('Elementor users get four widgets with the main options: Document Library, Document List, Document Download and PDF Viewer. For every option, use the matching shortcode in a Shortcode widget.', 'document-engine')),
                         array('p', __('Other page builders (Divi, Bricks, Beaver Builder, WPBakery, Oxygen, Breakdance): add a shortcode or text module with <code>[document_engine_library]</code>, <code>[document_engine_search]</code>, <code>[document_engine_documents]</code>, <code>[document_engine_document id="123"]</code> or <code>[document_engine_viewer id="123"]</code>. All options of the blocks are available as shortcode attributes (see the shortcode reference).', 'document-engine')),
                     )),
                     'lists' => array(__('Document lists and related documents', 'document-engine'), false, array(
@@ -198,7 +199,7 @@ class DocsContent
                 'articles' => array(
                     'install-pro' => array(__('Install Pro and activate your licence', 'document-engine'), true, array(
                         array('ol', array(
-                            __('Buy Pro, then either download the Pro ZIP from your account and upload it under Plugins → Add New → Upload Plugin, or enter your licence key at the bottom of Documents → Free vs Pro to install it in one step.', 'document-engine'),
+                            __('Buy Pro, then download the Pro ZIP from your store account and upload it under Plugins → Add New → Upload Plugin. Activate it.', 'document-engine'),
                             __('Keep the free plugin active; Pro builds on it.', 'document-engine'),
                             __('Enter the licence key in Documents → Settings → License. An active licence gives you updates from the Plugins screen.', 'document-engine'),
                         )),
@@ -206,6 +207,8 @@ class DocsContent
                     )),
                     'access' => array(__('Access control and private files', 'document-engine'), true, array(
                         array('p', __('Decide who can open each document: everyone, logged-in users, users with chosen roles, named people, or members of Paid Memberships Pro levels and WooCommerce Memberships plans. Set it per document (Access & security panel) or for a whole category (on the category screen); documents follow their categories unless they have their own rule.', 'document-engine')),
+                        array('p', __('A whole category can also use one shared password ("Anyone with the password"), for parents, a committee or a club: no accounts are needed, and visitors enter it once on each device. Changing the password asks everyone again.', 'document-engine')),
+                        array('p', __('If Pro is switched off, restricted and view-only documents stay closed to visitors, and a notice lets administrators turn Pro back on or choose to open them.', 'document-engine')),
                         array('note', __('Membership plugins: with Paid Memberships Pro or WooCommerce Memberships active, pick their levels or plans directly ("Members of these membership levels"). Plugins that give members a WordPress role, such as MemberPress and Restrict Content Pro, work with "Users with these roles". If the membership plugin is switched off, documents limited to its levels stay closed.', 'document-engine')),
                         array('ul', array(
                             __('Restricted documents are shown with a lock, or hidden from people who cannot open them (Settings → Access & Pro → Access).', 'document-engine'),
@@ -270,6 +273,7 @@ class DocsContent
                         array('p', __('The Submit Document block lets chosen roles upload documents from the front end. Submissions are saved as pending (or published) with allowed file types and a size limit (Settings → Access & Pro → Review & submissions).', 'document-engine')),
                     )),
                     'import' => array(__('Bulk and CSV import', 'document-engine'), true, array(
+                        array('p', __('To export, use Export CSV at the bottom of Tools → Import: every document\'s details in the same columns, so you can edit the sheet and import it back by ID. Files aren\'t included.', 'document-engine')),
                         array('p', __('Documents → Tools → Import: drop many files at once to create one document per file, or import a CSV spreadsheet (title, file_url or attachment_id, category, tags, description, status, id, and cf:key columns for custom fields). Rows with an id update that document. Also available as <code>wp dengine import</code>.', 'document-engine')),
                     )),
                     'fields' => array(__('Custom fields', 'document-engine'), true, array(
@@ -295,8 +299,19 @@ class DocsContent
                     'protection' => array(__('Abuse protection', 'document-engine'), true, array(
                         array('p', __('Limit how many different documents one person can download or view per day (ZIP downloads included), and add Cloudflare Turnstile to the email gate, format request and submission forms (Settings → Access & Pro → Abuse protection).', 'document-engine')),
                     )),
+                    'governance' => array(__('Governance: approvals, change history, legal hold, retention', 'document-engine'), true, array(
+                        array('p', __('Set these up under Documents → Settings → Access & Pro → Governance. Apart from the change history, they are off until you switch them on.', 'document-engine')),
+                        array('table', array(
+                            array(__('Publishing approval', 'document-engine'), __('Only approvers can make a document live. Everyone else\'s goes to Pending, with its file private, and waits in Reports → Approvals. Approvers are administrators, library managers and the category\'s managers. Each approval stores who, when and the SHA-256 fingerprint of the file. With "Separation of duties" nobody approves a document they wrote or sent for approval, and any file change on a live document needs a second person, so you need two approvers. Changing the files of a live document takes it offline for re-approval (optional); edits to its text do not.', 'document-engine')),
+                            array(__('Change history', 'document-engine'), __('Reports → Change history lists who published, trashed, replaced a file, changed access, approved, exported data or changed settings. "Check the chain" recalculates every entry\'s hash and names the first one that was edited or removed. This detects tampering; it cannot prevent it, and someone with full database access could rebuild the chain, so send a copy to your log system with "Send a copy to" if you need independent evidence.', 'document-engine')),
+                            array(__('Legal hold', 'document-engine'), __('In the document\'s Governance panel. While it is on, its files are frozen and nobody can trash or delete the document or its files, including administrators, WP-CLI and scheduled clean-ups. It also stands while Pro is off, and survives uninstalling. Library managers can set and release it, and both are recorded. A database administrator can still bypass it.', 'document-engine')),
+                            array(__('Retention', 'document-engine'), __('On a category\'s edit screen: after a number of days, flag for review, unpublish or move to Trash. It runs daily in batches of 200, skips documents on hold, and never deletes permanently. A document in several categories follows the longest rule. The screen shows how many documents are past the rule, and <code>wp dengine retention --dry-run</code> lists them.', 'document-engine')),
+                            array(__('Category managers', 'document-engine'), __('On a category\'s edit screen: named people can edit, trash and approve documents in that category and its sub-categories. They need a role that can upload files if they will replace files.', 'document-engine')),
+                        ), array(__('Feature', 'document-engine'), __('How it works', 'document-engine'))),
+                        array('p', __('Reporting API, read-only, for a user who can view reports, with a WordPress Application Password: <code>GET /wp-json/document-engine-pro/v1/reports/changes</code>, <code>/reports/changes/verify</code>, <code>/reports/activity</code>, <code>/reports/acknowledgements</code> and <code>/reports/pending</code>. Lists take <code>page</code>, <code>per_page</code> (up to 200), <code>from</code> and <code>to</code>, and return totals in the <code>X-WP-Total</code> header.', 'document-engine')),
+                    )),
                     'cli' => array(__('WP-CLI', 'document-engine'), true, array(
-                        array('code', "wp dengine list [--category=<slug>] [--format=table|csv|json|ids]\nwp dengine import <file.csv> [--link-only]\nwp dengine stats [--days=30] [--document=<id>]\nwp dengine reindex [<id>...]\nwp dengine protect\nwp dengine share <id> [--days=<days>]"),
+                        array('code', "wp dengine list [--category=<slug>] [--format=table|csv|json|ids]\nwp dengine import <file.csv> [--link-only]\nwp dengine stats [--days=30] [--document=<id>]\nwp dengine reindex [<id>...]\nwp dengine protect\nwp dengine share <id> [--days=<days>]\nwp dengine audit [--verify] [--action=<action>] [--limit=50] [--format=table|csv|json]\nwp dengine approve <id>... [--note=<note>]\nwp dengine hold <id> [--release] [--reason=<reason>]\nwp dengine retention [--dry-run]"),
                     )),
                 ),
             ),
@@ -324,7 +339,7 @@ class DocsContent
                         array('p', __('Default height (800px), initial zoom (fit width), and which toolbar parts show: toolbar (page navigation and zoom, switched together), download, print, full screen, search, sidebar. "Version 1 blocks" shows PDF blocks made with version 1 in the built-in viewer instead of Google\'s viewer. It is on for new installs; sites upgraded from version 1 keep Google\'s viewer until you switch it on (recommended: faster, and nothing is sent to Google).', 'document-engine')),
                     )),
                     'settings-pdf' => array(__('Settings → Post to PDF', 'document-engine'), false, array(
-                        array('p', __('Button (post types, text, placement, alignment, download or open), Header & footer, Page & protection (orientation, text size, margins, PDF permissions), Style (theme styles, custom CSS) and, with Pro, Watermark. Pages are A4. The button appears only on the post types you tick.', 'document-engine')),
+                        array('p', __('Button (post types, text, placement, alignment, download or open), Header & footer, Page & protection (orientation, text size, margins, PDF permissions), Style (theme styles, custom CSS) and, with Pro, Watermark. Pages use the paper size you choose. The button appears only on the post types you tick.', 'document-engine')),
                     )),
                     'settings-advanced' => array(__('Settings → Advanced', 'document-engine'), false, array(
                         array('ul', array(
@@ -493,8 +508,23 @@ class DocsContent
                             array(__('Activity log, reading sessions, searches', 'document-engine'), __('Document, event, time, user ID for logged-in users; a daily-rotating hash for visitors. No IP addresses. Deleted after the retention period.', 'document-engine'), __('Pro', 'document-engine')),
                             array(__('Leads', 'document-engine'), __('Name, email, organization, document, time. Deleted after the lead retention period if set.', 'document-engine'), __('Pro', 'document-engine')),
                             array(__('Acknowledgements', 'document-engine'), __('User, name, time, statement, file fingerprint, IP address and browser (kept as evidence).', 'document-engine'), __('Pro', 'document-engine')),
+                            array(__('Change history', 'document-engine'), __('Staff user ID and username, what changed, time; IP address only if you switch it on. An erasure request removes the username and IP address and keeps the entry.', 'document-engine'), __('Pro', 'document-engine')),
                         ), array(__('Data', 'document-engine'), __('What', 'document-engine'), __('Edition', 'document-engine'))),
                         array('p', __('Format requests, and with Pro leads, activity, searches, reading sessions and acknowledgements, are included in Tools → Export Personal Data and Erase Personal Data.', 'document-engine')),
+                    )),
+                    'security-review' => array(__('Security overview for IT and procurement', 'document-engine'), false, array(
+                        array('p', __('A summary for reviewers. It describes how the software works; your organisation\'s compliance also depends on your hosting, policies and configuration.', 'document-engine')),
+                        array('table', array(
+                            array(__('Hosting', 'document-engine'), __('Self-hosted WordPress plugin. Documents, logs and personal data stay in your database and uploads folder. We have no access to them and run no service that stores them.', 'document-engine')),
+                            array(__('Source code', 'document-engine'), __('GPL-licensed PHP and JavaScript, readable in full. The free plugin is distributed through WordPress.org.', 'document-engine')),
+                            array(__('Sign-in and SSO', 'document-engine'), __('Access follows WordPress users and roles, so single sign-on plugins (SAML, OIDC) that sign people in to WordPress work without extra setup here. The plugin has no separate accounts or passwords, apart from optional shared category passwords, which are stored hashed.', 'document-engine')),
+                            array(__('Outbound connections', 'document-engine'), __('None by default in the free plugin. See External services for what Pro can contact, each only when you configure it.', 'document-engine')),
+                            array(__('File protection', 'document-engine'), __('With Pro, restricted files move to a private folder and are served only after a server-side permission check. Site Health tests the folder from outside. nginx needs one server rule.', 'document-engine')),
+                            array(__('Records', 'document-engine'), __('With Pro: activity log, change history with a verifiable hash chain, read-and-confirm evidence with file fingerprints, approvals, legal hold, and retention settings. Exports as CSV and through a read-only REST API.', 'document-engine')),
+                            array(__('Personal data', 'document-engine'), __('Connected to WordPress\'s Export and Erase Personal Data tools, with suggested privacy policy text. No IP addresses in the activity log.', 'document-engine')),
+                            array(__('Accessibility', 'document-engine'), __('Front-end and admin screens are tested with automated WCAG 2.1 AA checks and keyboard tests. Automated checks do not replace an audit.', 'document-engine')),
+                            array(__('Certifications', 'document-engine'), __('The software holds no certification of its own (SOC 2, ISO 27001). Those apply to your hosting and your organisation.', 'document-engine')),
+                        ), array(__('Topic', 'document-engine'), __('Answer', 'document-engine'))),
                     )),
                     'external' => array(__('External services', 'document-engine'), false, array(
                         array('p', __('The free plugin does not contact external services on its own. The viewer, PDF generation and QR codes run on your site. Exceptions you control:', 'document-engine')),

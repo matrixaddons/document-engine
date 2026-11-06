@@ -13,10 +13,64 @@ defined('ABSPATH') || exit;
 class ProPage
 {
     const SLUG = 'document-engine-pro';
+    /** EDD download ID of Document Engine Pro on store.mantrabrain.com. */
+    const ITEM_ID = 39061;
 
-    public static function url()
+    /**
+     * The store's address. wp-config.php can override it with DOCUMENT_ENGINE_PRO_STORE_URL.
+     */
+    public static function checkout_store_url()
     {
-        return admin_url('edit.php?post_type=' . PostType::POST_TYPE . '&page=' . self::SLUG);
+        return defined('DOCUMENT_ENGINE_PRO_STORE_URL') ? DOCUMENT_ENGINE_PRO_STORE_URL : 'https://store.mantrabrain.com';
+    }
+
+    /**
+     * The product on the store. wp-config.php can override it with DOCUMENT_ENGINE_PRO_ITEM_ID.
+     */
+    public static function item_id()
+    {
+        return defined('DOCUMENT_ENGINE_PRO_ITEM_ID') ? (int)DOCUMENT_ENGINE_PRO_ITEM_ID : self::ITEM_ID;
+    }
+
+    public static function url($from = '')
+    {
+        return admin_url('edit.php?post_type=' . PostType::POST_TYPE . '&page=' . self::SLUG . ($from !== '' ? '&from=' . rawurlencode($from) : ''));
+    }
+
+    /**
+     * Which prompt brought the admin here (carried to the store as utm_content).
+     */
+    public static function from()
+    {
+        return isset($_GET['from']) ? sanitize_key(wp_unslash($_GET['from'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    }
+
+    /**
+     * The objections every buyer has, in one line.
+     */
+    public static function reassurance()
+    {
+        $plans = self::plans();
+        /* translators: %s: lowest yearly price */
+        return sprintf(__('From $%s a year for one site, or pay once. 14-day money-back guarantee. If your licence ends, Pro keeps working; only updates and support stop.', 'document-engine'), number_format_i18n($plans[0]['yearly']));
+    }
+
+    /**
+     * What people actually come looking for, each opening a preview with example data.
+     */
+    public static function needs()
+    {
+        return array(
+            array('shield', __('Members-only documents', 'document-engine'), __('By role, person, membership level or one shared password, with the files kept private.', 'document-engine'), 'access'),
+            array('check', __('Proof that people read it', 'document-engine'), __('Read and confirm, deadlines, reminders and evidence for an inspection.', 'document-engine'), 'acks'),
+            array('clock', __('Documents that stay current', 'document-engine'), __('Versions you can restore, review dates and automatic expiry.', 'document-engine'), 'versions'),
+            array('shield', __('Sign-off and an audit trail', 'document-engine'), __('Approvals, a change history auditors can check, legal hold and retention rules.', 'document-engine'), 'governance'),
+            array('activity', __('Who opened what', 'document-engine'), __('An activity log, reading analytics and CSV exports.', 'document-engine'), 'activity'),
+            array('layout', __('A proper register', 'document-engine'), __('Your own fields as columns and filters, and several files per document.', 'document-engine'), 'fields'),
+            array('search', __('Search inside files', 'document-engine'), __('The words in your PDFs and Office files, and what people failed to find.', 'document-engine'), 'search'),
+            array('upload', __('A whole archive, moved in', 'document-engine'), __('Drag in hundreds of files, or import and export a spreadsheet.', 'document-engine'), 'import'),
+            array('users', __('Leads before download', 'document-engine'), __('Name and email with consent, sent to your CRM or a spreadsheet.', 'document-engine'), 'leads'),
+        );
     }
 
     public static function store_url($campaign = 'pro-page')
@@ -46,14 +100,44 @@ class ProPage
      */
     public static function checkout_url($price_id)
     {
-        return add_query_arg(array(
+        $url_args = self::from() !== '' ? array('utm_content' => self::from()) : array();
+        return add_query_arg($url_args + array(
             'edd_action' => 'add_to_cart',
-            'download_id' => ProInstaller::item_id(),
+            'download_id' => self::item_id(),
             'edd_options[price_id]' => (int)$price_id,
             'utm_source' => 'wp-admin',
             'utm_medium' => 'plugin',
             'utm_campaign' => 'free-vs-pro',
-        ), trailingslashit(ProInstaller::store_url()) . 'checkout/');
+        ), trailingslashit(self::checkout_store_url()) . 'checkout/');
+    }
+
+    /**
+     * How to add Pro after buying it. Pro is installed by hand: this plugin never downloads or installs other code.
+     */
+    public static function install_card()
+    {
+        $account = trailingslashit(self::checkout_store_url()) . 'account/';
+        ?>
+        <div class="dengine-a-card dengine-a-install" id="install-pro">
+            <div class="dengine-a-card__head"><div>
+                <h3 class="dengine-a-card__title"><?php esc_html_e('Already bought Pro?', 'document-engine'); ?></h3>
+                <p class="dengine-a-card__desc"><?php esc_html_e('Your documents and settings stay as they are.', 'document-engine'); ?></p>
+            </div></div>
+            <div class="dengine-a-card__body">
+                <ol>
+                    <li><?php esc_html_e('Download the Document Engine Pro zip from your store account.', 'document-engine'); ?></li>
+                    <li><?php esc_html_e('Upload it under Plugins → Add New → Upload Plugin, then activate it. Keep the free plugin active.', 'document-engine'); ?></li>
+                    <li><?php esc_html_e('Enter your licence key in Documents → Settings → License to get updates.', 'document-engine'); ?></li>
+                </ol>
+                <p>
+                    <a href="<?php echo esc_url($account); ?>" target="_blank" rel="noopener"><?php esc_html_e('Open your store account', 'document-engine'); ?></a>
+                    <?php if (current_user_can('install_plugins')) : ?>
+                        · <a href="<?php echo esc_url(admin_url('plugin-install.php?tab=upload')); ?>"><?php esc_html_e('Upload the plugin', 'document-engine'); ?></a>
+                    <?php endif; ?>
+                </p>
+            </div>
+        </div>
+        <?php
     }
 
     /**
@@ -104,7 +188,8 @@ class ProPage
                 array(__('Your own fields (reference, department, dates…) as columns, filters and sort options, including ACF fields', 'document-engine'), false, true, 'fields'),
                 array(__('Search inside PDF, Word (.docx), Excel (.xlsx), PowerPoint (.pptx) and OpenDocument files', 'document-engine'), false, true, 'ai'),
                 array(__('Download several documents from a table library as one ZIP', 'document-engine'), false, true, 'portal'),
-                array(__('Bulk upload and CSV import, including updates by ID', 'document-engine'), false, true, 'import'),
+                array(__('More files on one document: PDF and Word versions, appendices', 'document-engine'), false, true, 'documents'),
+                array(__('Bulk upload, CSV import (including updates by ID) and CSV export of the register', 'document-engine'), false, true, 'import'),
                 array(__('"My documents" page for clients or staff', 'document-engine'), false, true, 'portal'),
             ),
             __('Viewing', 'document-engine') => array(
@@ -118,6 +203,7 @@ class ProPage
             __('Access and sharing', 'document-engine') => array(
                 array(__('Draft, private and password-protected documents', 'document-engine'), true, true, 'faq-private'),
                 array(__('Members-only documents by role, person, whole category or membership level (Paid Memberships Pro, WooCommerce Memberships)', 'document-engine'), false, true, 'access'),
+                array(__('One shared password for a whole category, with no accounts needed', 'document-engine'), false, true, 'access'),
                 array(__('Private file storage, so file addresses can\'t be shared', 'document-engine'), false, true, 'access'),
                 array(__('Expiring share links, named per recipient, with open tracking and single-use or limited uses', 'document-engine'), false, true, 'share'),
                 array(__('Email gate: name and email before download, with leads export', 'document-engine'), false, true, 'gate'),
@@ -131,6 +217,14 @@ class ProPage
                 array(__('Search insights: what visitors look for and don\'t find', 'document-engine'), false, true, 'analytics'),
                 array(__('Read and confirm, with reminders and evidence export', 'document-engine'), false, true, 'acks'),
                 array(__('Version history, review dates and automatic expiry', 'document-engine'), false, true, 'versions'),
+            ),
+            __('Governance', 'document-engine') => array(
+                array(__('Choose which roles manage all documents, publish their own, or only draft', 'document-engine'), true, true, ''),
+                array(__('Publishing approval, with separation of duties and a fingerprint of the approved file', 'document-engine'), false, true, 'governance'),
+                array(__('Change history of who changed what, with a chain you can check, CSV export and a copy to your log system', 'document-engine'), false, true, 'governance'),
+                array(__('Legal hold, and retention rules per category', 'document-engine'), false, true, 'governance'),
+                array(__('Category managers: delegate one category without opening the whole library', 'document-engine'), false, true, 'governance'),
+                array(__('Read-only REST API for reports, for your dashboards and compliance tools', 'document-engine'), false, true, 'governance'),
             ),
             __('Publishing and integrations', 'document-engine') => array(
                 array(__('Post to PDF button with header, footer, paper sizes, your own fonts (including Chinese, Japanese, Korean), custom CSS and PDF permissions', 'document-engine'), true, true, 'post-to-pdf'),
@@ -166,10 +260,31 @@ class ProPage
                 </div>
                 <div class="dengine-a-vs__actions">
                     <a class="dengine-a-btn dengine-a-btn--primary" href="#pricing"><?php esc_html_e('See plans', 'document-engine'); ?></a>
-                    <a class="dengine-a-btn dengine-a-btn--secondary" href="#install-pro"><?php esc_html_e('I have a licence key', 'document-engine'); ?></a>
+                    <a class="dengine-a-btn dengine-a-btn--secondary" href="#install-pro"><?php esc_html_e('Already bought Pro?', 'document-engine'); ?></a>
                 </div>
             </div>
         </div>
+        <section class="dengine-a-card" aria-labelledby="dengine-needs-title">
+            <div class="dengine-a-card__head"><div><h3 class="dengine-a-card__title" id="dengine-needs-title"><?php esc_html_e('What do you need to do?', 'document-engine'); ?></h3><p class="dengine-a-card__desc"><?php esc_html_e('See what it looks like, with example data, before you decide.', 'document-engine'); ?></p></div></div>
+            <div class="dengine-a-card__body">
+                <ul class="dengine-a-needs">
+                    <?php foreach (self::needs() as $need) : ?>
+                        <li><a href="<?php echo esc_url(Upsell::url($need[3], 'need-' . $need[3])); ?>"><?php echo UI::icon($need[0], 18); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><strong><?php echo esc_html($need[1]); ?></strong><small><?php echo esc_html($need[2]); ?></small></span></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </section>
+        <section class="dengine-a-card" aria-labelledby="dengine-it-title">
+            <div class="dengine-a-card__head"><div><h3 class="dengine-a-card__title" id="dengine-it-title"><?php esc_html_e('Getting this past IT and procurement', 'document-engine'); ?></h3><p class="dengine-a-card__desc"><?php esc_html_e('The answers security reviewers ask for first.', 'document-engine'); ?></p></div></div>
+            <div class="dengine-a-card__body">
+                <ul class="dengine-a-checklist dengine-a-checklist--plain">
+                    <li><?php echo UI::icon('check', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e('Self-hosted: documents and logs stay in your WordPress database and uploads, not on our servers.', 'document-engine'); ?></span></li>
+                    <li><?php echo UI::icon('check', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e('Open source under the GPL, so your team can read every line.', 'document-engine'); ?></span></li>
+                    <li><?php echo UI::icon('check', 16); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span><?php esc_html_e('Access follows WordPress users and roles, so single sign-on plugins that sign people in to WordPress fit in.', 'document-engine'); ?></span></li>
+                </ul>
+                <p><a href="<?php echo esc_url(Docs::url('security-review')); ?>"><?php esc_html_e('Read the security overview', 'document-engine'); ?></a> · <a href="<?php echo esc_url(add_query_arg(array('utm_source' => 'wp-admin', 'utm_medium' => 'plugin', 'utm_campaign' => 'free-vs-pro', 'utm_content' => 'it-review'), 'https://matrixaddons.com/contact-us/')); ?>" target="_blank" rel="noopener"><?php esc_html_e('Need an invoice, more than 25 sites, or a questionnaire answered? Contact us', 'document-engine'); ?></a></p>
+            </div>
+        </section>
         <?php foreach (self::comparison() as $group => $rows) : ?>
             <section class="dengine-a-card">
                 <div class="dengine-a-card__body">
@@ -214,7 +329,7 @@ class ProPage
             </div>
             <p class="dengine-a-sub dengine-a-plans__note"><?php esc_html_e('Prices in US dollars. Secure checkout on store.mantrabrain.com.', 'document-engine'); ?> <a href="https://mantrabrain.com/refund-policy/" target="_blank" rel="noopener"><?php esc_html_e('Refund policy', 'document-engine'); ?></a></p>
         </section>
-        <?php ProInstaller::form(); ?>
+        <?php self::install_card(); ?>
         <?php
         UI::page_end();
     }

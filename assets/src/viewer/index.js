@@ -366,6 +366,7 @@ class Viewer {
 					link.setAttribute('aria-label', a.url);
 				} else if (a.dest) {
 					link.href = '#';
+					link.setAttribute('aria-label', settings.i18n.internalLink || 'Go to another page of this document');
 					link.addEventListener('click', async (event) => {
 						event.preventDefault();
 						try {

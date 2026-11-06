@@ -115,7 +115,7 @@ class Migrate
             UI::empty_state(
                 'migrate',
                 __('Nothing to migrate', 'document-engine'),
-                __('No documents from Document Library (Barn2), Download Monitor or WordPress Download Manager were found on this site.', 'document-engine')
+                __('No documents from Document Library (Barn2), Download Monitor, WordPress Download Manager, Simple Download Monitor or Simple File List were found on this site.', 'document-engine')
             );
             UI::card_end();
         } else {
@@ -226,7 +226,7 @@ class Migrate
                 /* translators: %s: number of members-only items */
                 ? sprintf(_n('%s item was members-only in the old plugin and is now a draft. Document Engine Pro keeps documents restricted by role, person or category, with their files in private storage.', '%s items were members-only in the old plugin and are now drafts. Document Engine Pro keeps documents restricted by role, person or category, with their files in private storage.', $p['restricted'], 'document-engine'), number_format_i18n($p['restricted']))
                 : __('Your documents are in. Document Engine Pro adds versions, review-by dates and an activity log of who opened what.', 'document-engine');
-            echo Nudges::card('t5-migrate', $text, Upsell::url($p['restricted'] ? 'access' : 'activity')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo Nudges::card('t5-migrate', $text, Upsell::url($p['restricted'] ? 'access' : 'activity', 't5-migrate'), '', true, false); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
         ?>
         <?php

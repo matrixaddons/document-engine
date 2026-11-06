@@ -1,8 +1,10 @@
 <?php defined('ABSPATH') || exit; ?>
-<html>
+<html<?php echo is_rtl() ? ' dir="rtl"' : ''; ?>>
 <head>
+    <?php if (document_engine_pdf_use_theme_style()) : ?>
     <?php // PDF document markup for mPDF, not a web page, so the stylesheet is linked directly. ?>
     <link type="text/css" rel="stylesheet" href="<?php echo esc_url(get_bloginfo('stylesheet_url')); ?>" media="all"/><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet ?>
+    <?php endif; ?>
 
     <?php
 

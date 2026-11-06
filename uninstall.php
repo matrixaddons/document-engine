@@ -14,7 +14,10 @@ $dengine_cleanup = function () {
 
     $document_ids = $wpdb->get_col("SELECT ID FROM {$wpdb->posts} WHERE post_type IN ('dengine_document', 'dengine_request')"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
     foreach ($document_ids as $document_id) {
-        wp_delete_post((int)$document_id, true);
+        // A document on legal hold (set with Pro) is kept, even when everything else goes.
+        if (!get_post_meta((int)$document_id, '_dengine_legal_hold', true)) {
+            wp_delete_post((int)$document_id, true);
+        }
     }
 
     foreach (array('dengine_category', 'dengine_tag') as $taxonomy) {

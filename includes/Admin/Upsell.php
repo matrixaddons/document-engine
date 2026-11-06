@@ -36,6 +36,7 @@ class Upsell
             return $d;
         });
         add_action('enqueue_block_editor_assets', array(__CLASS__, 'editor_data'), 20);
+        add_action(PostType::CATEGORY . '_edit_form_fields', array(__CLASS__, 'category_row'));
     }
 
     /**
@@ -49,7 +50,7 @@ class Upsell
                 'title' => __('Access control & private files', 'document-engine'),
                 'lead' => __('Decide who can open every document — by role, by person, or for a whole category — and keep the files out of public reach.', 'document-engine'),
                 'points' => array(
-                    __('Restrict documents or entire categories to logged-in users, roles or named people', 'document-engine'),
+                    __('Restrict documents or entire categories to logged-in users, roles, named people or one shared password', 'document-engine'),
                     __('Protected storage: files move out of the public uploads folder', 'document-engine'),
                     __('Expiring share links for people without an account', 'document-engine'),
                     __('Secure viewer with per-reader watermarks; no download, print or copy', 'document-engine'),
@@ -77,6 +78,61 @@ class Upsell
                     __('Returning visitors are remembered', 'document-engine'),
                 ),
             ),
+            'versions' => array(
+                'icon' => 'clock',
+                'title' => __('Versions and review dates', 'document-engine'),
+                'lead' => __('Replace a file and keep the old one. Know which documents are out of date before someone complains.', 'document-engine'),
+                'points' => array(
+                    __('Every earlier file is kept and can be restored, with the link unchanged', 'document-engine'),
+                    __('Review-by dates with a daily reminder email', 'document-engine'),
+                    __('Unpublish on a date, automatically', 'document-engine'),
+                    __('Upload a new version straight from the documents list', 'document-engine'),
+                ),
+            ),
+            'acks' => array(
+                'icon' => 'check',
+                'title' => __('Read and confirm', 'document-engine'),
+                'lead' => __('Ask staff or members to confirm they have read a policy, and have the evidence ready for an inspection.', 'document-engine'),
+                'points' => array(
+                    __('Choose roles, set a deadline, and reminder emails go out on their own', 'document-engine'),
+                    __('A Required Reading block shows each person what they still owe', 'document-engine'),
+                    __('Export who confirmed what and when, with a fingerprint of the file', 'document-engine'),
+                    __('Start a new round after an important change', 'document-engine'),
+                ),
+            ),
+            'fields' => array(
+                'icon' => 'layout',
+                'title' => __('Your own fields and more files', 'document-engine'),
+                'lead' => __('Turn the library into a register: a reference number, a department, a meeting date, and every format of the document in one place.', 'document-engine'),
+                'points' => array(
+                    __('Text, number, date, choice, yes/no, link and email fields, or your ACF fields', 'document-engine'),
+                    __('Show them as library columns, filters with counts and sort options', 'document-engine'),
+                    __('More files on one document: PDF and Word versions, appendices', 'document-engine'),
+                    __('Export the register as a spreadsheet, edit it, import it back', 'document-engine'),
+                ),
+            ),
+            'governance' => array(
+                'icon' => 'shield',
+                'title' => __('Approvals, change history and legal hold', 'document-engine'),
+                'lead' => __('For teams who answer to auditors: nothing goes live without sign-off, every change has a name on it, and records can\'t be deleted while they matter.', 'document-engine'),
+                'points' => array(
+                    __('Publishing approval with separation of duties and a fingerprint of the file approved', 'document-engine'),
+                    __('A chained change history you can check, export, or copy to your log system', 'document-engine'),
+                    __('Legal hold and retention rules per category; nothing is ever deleted for good by a rule', 'document-engine'),
+                    __('Category managers, plus a read-only REST API for your reporting tools', 'document-engine'),
+                ),
+            ),
+            'search' => array(
+                'icon' => 'search',
+                'title' => __('Search inside files', 'document-engine'),
+                'lead' => __('Visitors find the words inside your files, not only titles and descriptions. And you see what they couldn\'t find.', 'document-engine'),
+                'points' => array(
+                    __('PDF, Word, Excel, PowerPoint, OpenDocument and plain text', 'document-engine'),
+                    __('In libraries and in your site search', 'document-engine'),
+                    __('Restricted documents never match for people who can\'t open them', 'document-engine'),
+                    __('A report of the searches that found nothing', 'document-engine'),
+                ),
+            ),
             'import' => array(
                 'icon' => 'upload',
                 'title' => __('Bulk import, versions & more', 'document-engine'),
@@ -91,9 +147,13 @@ class Upsell
         ));
     }
 
-    public static function url($feature)
+    /**
+     * @param string $feature Preview to open.
+     * @param string $from    The prompt that led here; passed on to the store so sales can be attributed without tracking in the plugin.
+     */
+    public static function url($feature, $from = '')
     {
-        return admin_url('edit.php?post_type=' . PostType::POST_TYPE . '&page=' . self::SLUG . '&feature=' . $feature);
+        return admin_url('edit.php?post_type=' . PostType::POST_TYPE . '&page=' . self::SLUG . '&feature=' . $feature . ($from !== '' ? '&from=' . rawurlencode($from) : ''));
     }
 
     public static function menu()
@@ -129,7 +189,7 @@ class Upsell
             add_submenu_page($parent, $features[$feature]['title'], $feature === 'activity' ? __('Activity', 'document-engine') : __('Import', 'document-engine'), $caps[$slug], $slug, function () use ($feature) {
                 $features = self::features();
                 UI::page_start($features[$feature]['title'], esc_html__('Available in Document Engine Pro.', 'document-engine'));
-                self::preview($features[$feature]);
+                self::preview($features[$feature], $feature);
                 echo self::sample($feature); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 UI::page_end();
             });
@@ -142,16 +202,19 @@ class Upsell
         $key = isset($_GET['feature']) ? sanitize_key($_GET['feature']) : 'access'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $feature = isset($features[$key]) ? $features[$key] : $features['access'];
         UI::page_start($feature['title'], esc_html__('Available in Document Engine Pro.', 'document-engine'));
-        self::preview($feature);
+        self::preview($feature, $key);
         echo self::sample($key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         UI::page_end();
     }
 
     /**
-     * The shared preview block: explanation, benefits, and both paths (buy / install with key).
+     * The shared preview block: explanation, benefits, and both paths (buy / how to install after buying).
      */
-    public static function preview($feature)
+    public static function preview($feature, $key = '')
     {
+        $key = $key !== '' ? $key : sanitize_key($feature['icon']);
+        $can_buy = current_user_can('manage_options');
+        $store = add_query_arg('utm_content', ProPage::from() ?: $key, ProPage::store_url('preview-' . $key)) . '#pricing';
         ?>
         <div class="dengine-a-preview">
             <div class="dengine-a-preview__main">
@@ -165,14 +228,52 @@ class Upsell
                     <?php endforeach; ?>
                 </ul>
                 <p class="dengine-a-preview__actions">
-                    <a class="dengine-a-btn dengine-a-btn--primary" href="<?php echo esc_url(ProPage::store_url('preview-' . sanitize_key($feature['icon'])) . '#pricing'); ?>" target="_blank" rel="noopener"><?php esc_html_e('See plans and pricing', 'document-engine'); ?><?php echo UI::icon('external', 14); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
-                    <a class="dengine-a-btn dengine-a-btn--secondary" href="<?php echo esc_url(ProPage::url()); ?>"><?php esc_html_e('Compare free and Pro', 'document-engine'); ?></a>
+                    <?php if ($can_buy) : ?>
+                        <a class="dengine-a-btn dengine-a-btn--primary" href="<?php echo esc_url($store); ?>" target="_blank" rel="noopener"><?php esc_html_e('See plans and pricing', 'document-engine'); ?><?php echo UI::icon('external', 14); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+                    <?php else : ?>
+                        <a class="dengine-a-btn dengine-a-btn--primary" href="<?php echo esc_url(self::ask_admin_link($feature)); ?>"><?php esc_html_e('Ask your administrator', 'document-engine'); ?></a>
+                    <?php endif; ?>
+                    <a class="dengine-a-btn dengine-a-btn--secondary" href="<?php echo esc_url(ProPage::url(ProPage::from())); ?>"><?php esc_html_e('Compare free and Pro', 'document-engine'); ?></a>
                 </p>
+                <p class="dengine-a-help"><?php echo esc_html(ProPage::reassurance()); ?></p>
             </div>
             <aside class="dengine-a-preview__side">
-                <?php ProInstaller::form(); ?>
+                <?php ProPage::install_card(); ?>
             </aside>
         </div>
+        <?php
+    }
+
+    /**
+     * The person who needs a feature often isn't the person who can buy it: a ready email to whoever is.
+     */
+    private static function ask_admin_link($feature)
+    {
+        $subject = sprintf(
+            /* translators: %s: feature name */
+            __('Could we add %s to our document library?', 'document-engine'),
+            $feature['title']
+        );
+        $body = $feature['lead'] . "\n\n" . ProPage::store_url('ask-admin') . "\n\n" . ProPage::reassurance();
+        return 'mailto:?subject=' . rawurlencode($subject) . '&body=' . rawurlencode($body);
+    }
+
+    /**
+     * Free category screen: the one place people go to restrict a whole category. A disabled row, not a working-looking one.
+     */
+    public static function category_row()
+    {
+        if (!Nudges::can_show('t11-category', false)) {
+            return;
+        }
+        ?>
+        <tr class="form-field">
+            <th scope="row"><?php esc_html_e('Who can open these documents', 'document-engine'); ?> <span class="dengine-a-pill dengine-a-pill--pro"><?php esc_html_e('Pro', 'document-engine'); ?></span></th>
+            <td>
+                <select disabled aria-label="<?php esc_attr_e('Who can open these documents (available in Pro)', 'document-engine'); ?>"><option><?php esc_html_e('Everyone', 'document-engine'); ?></option></select>
+                <p class="description"><?php esc_html_e('Pro limits a whole category to logged-in users, roles, named people or one shared password, and keeps its files private.', 'document-engine'); ?> <a href="<?php echo esc_url(self::url('access', 't11-category')); ?>"><?php esc_html_e('See how Pro does this', 'document-engine'); ?></a></p>
+            </td>
+        </tr>
         <?php
     }
 
@@ -238,6 +339,57 @@ class Upsell
                 )
             );
             echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'versions') {
+            $table = $rows(
+                array(__('Version', 'document-engine'), __('Uploaded', 'document-engine'), __('By', 'document-engine'), __('Note', 'document-engine')),
+                array(
+                    array('3', __('Today', 'document-engine'), 'Priya Shah', __('Updated for the 2026 rates', 'document-engine')),
+                    array('2', __('12 March', 'document-engine'), 'Sam Carter', __('Corrected appendix B', 'document-engine')),
+                    array('1', __('9 January', 'document-engine'), 'Sam Carter', __('First published', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'acks') {
+            $table = $rows(
+                array(__('Person', 'document-engine'), __('Status', 'document-engine'), __('When', 'document-engine'), __('File fingerprint', 'document-engine')),
+                array(
+                    array('Sam Carter', __('Confirmed', 'document-engine'), __('2 October', 'document-engine'), '9f3c…a1e4'),
+                    array('Priya Shah', __('Confirmed', 'document-engine'), __('3 October', 'document-engine'), '9f3c…a1e4'),
+                    array('Alex Morgan', __('Overdue, reminder sent', 'document-engine'), '–', '–'),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'fields') {
+            $table = $rows(
+                array(__('Document', 'document-engine'), __('Reference', 'document-engine'), __('Department', 'document-engine'), __('Files', 'document-engine')),
+                array(
+                    array(__('Expenses Policy', 'document-engine'), 'RC-COR-121', __('Finance', 'document-engine'), 'PDF · DOCX'),
+                    array(__('Planning Minutes, May', 'document-engine'), 'RC-DEM-044', __('Planning', 'document-engine'), 'PDF'),
+                    array(__('Budget 2026/27', 'document-engine'), 'RC-FIN-002', __('Finance', 'document-engine'), 'PDF · XLSX'),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'governance') {
+            $table = $rows(
+                array(__('When', 'document-engine'), __('Who', 'document-engine'), __('Change', 'document-engine'), __('Details', 'document-engine')),
+                array(
+                    array(__('Today 09:14', 'document-engine'), 'p.shah', __('Approved', 'document-engine'), __('Expenses Policy · sha256 9f3c…a1e4', 'document-engine')),
+                    array(__('Today 09:02', 'document-engine'), 's.carter', __('Sent for approval', 'document-engine'), __('Expenses Policy (draft → pending)', 'document-engine')),
+                    array(__('Yesterday', 'document-engine'), 'a.morgan', __('Access changed', 'document-engine'), __('Staff Handbook · who can open it: everyone → roles', 'document-engine')),
+                    array(__('Yesterday', 'document-engine'), 'p.shah', __('Legal hold set', 'document-engine'), __('Contract 2024-17 · dispute with supplier', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
+        } elseif ($key === 'search') {
+            $table = $rows(
+                array(__('Search', 'document-engine'), __('Searches', 'document-engine'), __('Found', 'document-engine')),
+                array(
+                    array('parking permit', '41', __('3 documents (inside the files)', 'document-engine')),
+                    array('council tax 2026', '28', __('1 document', 'document-engine')),
+                    array('allotment waiting list', '17', __('Nothing: you may want to publish this', 'document-engine')),
+                )
+            );
+            echo $table; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in $rows()
         } elseif ($key === 'leads') {
             $table = $rows(
                 array(__('When', 'document-engine'), __('Name', 'document-engine'), __('Email', 'document-engine'), __('Document', 'document-engine')),
@@ -276,8 +428,10 @@ class Upsell
         // Contextual only (T1: a private or password document's file is still public; T4: replacing a file).
         wp_add_inline_script('document-engine-document-editor', 'window.DocumentEngineEditor = Object.assign(window.DocumentEngineEditor || {}, ' . wp_json_encode(array(
             'nudges' => array(
-                'privateFile' => Nudges::can_show('t1-private-file') ? self::url('access') : '',
-                'versions' => Nudges::can_show('t4-versions') ? self::url('import') : '',
+                // These answer what the admin just did, so they don't wait for the first-week quiet period.
+                'privateFile' => Nudges::can_show('t1-private-file', false) ? self::url('access', 't1-private-file') : '',
+                'versions' => Nudges::can_show('t4-versions', false) ? self::url('versions', 't4-versions') : '',
+                'moreFiles' => Nudges::can_show('t10-more-files') ? self::url('fields', 't10-more-files') : '',
                 'ajax' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('dengine_nudge'),
             ),

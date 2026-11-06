@@ -466,9 +466,9 @@ class Documents
                 $count
             )) . ' <a href="' . esc_url(admin_url('edit.php?post_type=' . PostType::POST_TYPE)) . '">' . esc_html__('View documents', 'document-engine') . '</a></p>';
             // T3: a large batch is the moment bulk import matters (shown once per user, inside this result notice).
-            if ($count >= 20 && Nudges::can_show('t3-bulk')) {
+            if ($count >= 20 && Nudges::can_show('t3-bulk', false)) {
                 Nudges::once('t3-bulk');
-                echo '<p>' . esc_html__('Moving a whole archive? Document Engine Pro imports hundreds of files at once, or from a spreadsheet with categories and your own fields.', 'document-engine') . ' <a href="' . esc_url(Upsell::url('import')) . '">' . esc_html__('See how Pro does this', 'document-engine') . '</a></p>';
+                echo '<p>' . esc_html__('Moving a whole archive? Document Engine Pro imports hundreds of files at once, or from a spreadsheet with categories and your own fields.', 'document-engine') . ' <a href="' . esc_url(Upsell::url('import', 't3-bulk')) . '">' . esc_html__('See how Pro does this', 'document-engine') . '</a></p>';
             }
             echo '</div>';
         }

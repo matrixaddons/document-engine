@@ -158,7 +158,7 @@ class Library
                     $labels = array_intersect_key($labels, array_flip($settings['file_types']));
                 }
                 // Only the kinds of file this site has, with counts like categories and tags.
-                $counts = self::type_counts();
+                $counts = self::type_counts($settings);
                 $picked = Query::values($state['type']);
                 foreach ($labels as $group => $label) {
                     $n = isset($counts[$group]) ? $counts[$group] : 0;
@@ -257,14 +257,39 @@ class Library
     /**
      * Published documents per file-type group (pdf, word, image…), cached until a document changes.
      */
-    private static function type_counts()
+    private static function type_counts($settings = array())
     {
-        $counts = get_transient('dengine_library_types');
+        // A library limited to some categories or tags counts only what it can show.
+        $scope = array();
+        foreach (array(PostType::CATEGORY => 'categories', PostType::TAG => 'tags') as $taxonomy => $key) {
+            $slugs = empty($settings[$key]) ? array() : (array)$settings[$key];
+            $ids = array();
+            foreach ($slugs as $slug) {
+                $term = get_term_by('slug', $slug, $taxonomy);
+                if ($term) {
+                    $ids[] = (int)$term->term_taxonomy_id;
+                    foreach (is_taxonomy_hierarchical($taxonomy) ? (array)get_term_children($term->term_id, $taxonomy) : array() as $child) {
+                        $child_term = get_term($child, $taxonomy);
+                        if ($child_term instanceof \WP_Term) {
+                            $ids[] = (int)$child_term->term_taxonomy_id;
+                        }
+                    }
+                }
+            }
+            if ($slugs) {
+                $scope[] = $ids ? $ids : array(0);
+            }
+        }
+        $counts = $scope ? false : get_transient('dengine_library_types');
         if (!is_array($counts)) {
             global $wpdb;
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $where = '';
+            foreach ($scope as $ids) {
+                $where .= " AND p.ID IN (SELECT object_id FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN (" . implode(',', array_map('absint', $ids)) . '))';
+            }
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared -- $where holds only integers
             $rows = $wpdb->get_results($wpdb->prepare(
-                "SELECT pm.meta_value AS ext, COUNT(*) AS n FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE pm.meta_key = %s AND p.post_type = %s AND p.post_status = 'publish' GROUP BY pm.meta_value",
+                "SELECT pm.meta_value AS ext, COUNT(*) AS n FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE pm.meta_key = %s AND p.post_type = %s AND p.post_status = 'publish'{$where} GROUP BY pm.meta_value",
                 Document::META_FILE_TYPE,
                 PostType::POST_TYPE
             ));
@@ -282,7 +307,9 @@ class Library
                 }
                 $counts[$group] = (isset($counts[$group]) ? $counts[$group] : 0) + (int)$row->n;
             }
-            set_transient('dengine_library_types', $counts, DAY_IN_SECONDS);
+            if (!$scope) {
+                set_transient('dengine_library_types', $counts, DAY_IN_SECONDS);
+            }
         }
         return $counts;
     }
@@ -313,16 +340,26 @@ class Library
             }
         }
         $options = array();
-        $walk = function ($parent, $depth) use (&$walk, &$options, $args) {
+        // A category's count includes its sub-categories, like the results when it is picked.
+        $counts = array();
+        foreach ((array)get_terms(array_merge($args, array('pad_counts' => true))) as $term) {
+            if ($term instanceof \WP_Term) {
+                $counts[$term->term_id] = (int)$term->count;
+            }
+        }
+        $count = function ($term) use ($counts) {
+            return number_format_i18n(isset($counts[$term->term_id]) ? $counts[$term->term_id] : $term->count);
+        };
+        $walk = function ($parent, $depth) use (&$walk, &$options, $args, $count) {
             $terms = get_terms(array_merge($args, array('parent' => $parent)));
             foreach (is_array($terms) ? $terms : array() as $term) {
-                $options[$term->slug] = str_repeat('— ', $depth) . $term->name . ' (' . number_format_i18n($term->count) . ')';
+                $options[$term->slug] = str_repeat('— ', $depth) . $term->name . ' (' . $count($term) . ')';
                 $walk($term->term_id, $depth + 1);
             }
         };
         if ($roots) {
             foreach ($roots as $root) {
-                $options[$root->slug] = $root->name . ' (' . number_format_i18n($root->count) . ')';
+                $options[$root->slug] = $root->name . ' (' . $count($root) . ')';
                 $walk($root->term_id, 1);
             }
         } else {
@@ -748,7 +785,8 @@ class Library
         }
         $title = $document->get_title();
         $out = '<span class="dengine-actions">';
-        $popup = get_option('document_engine_library_preview', 'page') === 'popup' && self::previewable($document);
+        // A locked document opens on its page, where its password form is; the popup has nowhere to ask.
+        $popup = get_option('document_engine_library_preview', 'page') === 'popup' && self::previewable($document) && !post_password_required($document->get_post());
         if ($show_view && ($document->is_pdf() || $popup) && get_option('document_engine_library_view_button', 'yes') === 'yes') {
             $view_url = get_option('document_engine_single_pages', 'yes') === 'yes' ? get_permalink($document->get_post()) : $document->get_download_url(array('inline' => 1));
             if ($popup) {
@@ -782,7 +820,8 @@ class Library
      */
     public static function lock_label(Document $document)
     {
-        return $document->get_post()->post_password !== '' ? __('Password', 'document-engine') : __('Members only', 'document-engine');
+        $label = $document->get_post()->post_password !== '' ? __('Password', 'document-engine') : __('Members only', 'document-engine');
+        return (string)apply_filters('document_engine_lock_label', $label, $document);
     }
 
     public static function previewable(Document $document)

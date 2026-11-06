@@ -138,7 +138,7 @@ class Abilities
         $id = is_array($input) && isset($input['id']) ? absint($input['id']) : 0;
         $document = $id ? Document::get($id) : null;
         if (!$document || $document->get_post()->post_status !== 'publish' || post_password_required($document->get_post()) || !FileServer::can_access($document, null, 'view')) {
-            return new \WP_Error('document_engine_not_found', __('Document not found, or you are not allowed to open it.', 'document-engine'));
+            return new \WP_Error('document_engine_not_found', __('Document not found, or you are not allowed to open it.', 'document-engine'), array('status' => 404));
         }
         return self::describe($document);
     }

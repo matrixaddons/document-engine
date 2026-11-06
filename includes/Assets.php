@@ -59,6 +59,7 @@ class Assets
                 'wrongPassword' => __('That password is not correct. Please try again.', 'document-engine'),
                 /* translators: 1: page number, 2: number of pages */
                 'pageOf' => __('Page %1$d of %2$d', 'document-engine'),
+                'internalLink' => __('Go to another page of this document', 'document-engine'),
                 /* translators: 1: current match, 2: number of matches */
                 'matchOf' => __('%1$d of %2$d', 'document-engine'),
                 'noMatches' => __('No matches', 'document-engine'),
@@ -123,7 +124,7 @@ class Assets
             'pdfButtonText' => document_engine_pdf_button_text(),
             'pdfButtonAlignment' => document_engine_pdf_button_alignment(),
             // T9: one muted line in the library's filter settings (administrators, without Pro).
-            'proFieldsUrl' => \MatrixAddons\DocumentEngine\Admin\Nudges::can_show('t9-fields', false) ? \MatrixAddons\DocumentEngine\Admin\ProPage::url() : '',
+            'proFieldsUrl' => \MatrixAddons\DocumentEngine\Admin\Nudges::can_show('t9-fields', false) ? \MatrixAddons\DocumentEngine\Admin\Upsell::url('fields', 't9-fields') : '',
         ));
 
         $screen = function_exists('get_current_screen') ? get_current_screen() : null;
