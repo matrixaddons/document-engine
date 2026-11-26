@@ -15,9 +15,11 @@ if (!defined('ABSPATH')) {
 $tab_exists = isset($tabs[$current_tab]) || has_action('document_engine_sections_' . $current_tab) || has_action('document_engine_settings_' . $current_tab) || has_action('document_engine_settings_tabs_' . $current_tab);
 $current_tab_label = isset($tabs[$current_tab]) ? $tabs[$current_tab] : '';
 
+// A tab that doesn't exist (for example one from an add-on that is switched off) shows the first tab.
+// The page has already started printing here, so a redirect would only raise "headers already sent".
 if (!$tab_exists) {
-    wp_safe_redirect(admin_url('admin.php?page=document-engine-settings'));
-    exit;
+    $current_tab = (string)key($tabs); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+    $current_tab_label = isset($tabs[$current_tab]) ? $tabs[$current_tab] : '';
 }
 
 // Sections per tab, from the tab objects (add-ons extend them through the usual filters).

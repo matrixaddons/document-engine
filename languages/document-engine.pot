@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Document Engine 2.3.0\n"
+"Project-Id-Version: Document Engine 2.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/document-engine\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-06T08:34:06+00:00\n"
+"POT-Creation-Date: 2026-11-26T06:08:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -243,7 +243,7 @@ msgid "Requested by"
 msgstr ""
 
 #: includes/Accessibility/Requests.php:356
-#: includes/Admin/Upsell.php:354
+#: includes/Admin/Upsell.php:361
 msgid "Status"
 msgstr ""
 
@@ -294,12 +294,12 @@ msgid "Accessible format requests"
 msgstr ""
 
 #: includes/Accessibility/Requests.php:449
-#: includes/Admin/Upsell.php:395
+#: includes/Admin/Upsell.php:402
 msgid "Name"
 msgstr ""
 
 #: includes/Accessibility/Requests.php:450
-#: includes/Admin/Upsell.php:344
+#: includes/Admin/Upsell.php:351
 msgid "Note"
 msgstr ""
 
@@ -334,8 +334,8 @@ msgstr ""
 #: includes/Admin/DocsContent.php:589
 #: includes/Admin/ProPage.php:294
 #: includes/Admin/UI.php:86
-#: includes/Admin/Upsell.php:222
-#: includes/Admin/Upsell.php:271
+#: includes/Admin/Upsell.php:229
+#: includes/Admin/Upsell.php:278
 msgid "Pro"
 msgstr ""
 
@@ -405,7 +405,7 @@ msgid "Published"
 msgstr ""
 
 #: includes/Admin/Dashboard.php:105
-#: includes/Admin/Upsell.php:320
+#: includes/Admin/Upsell.php:327
 #: includes/Integrations/Elementor/LibraryWidget.php:57
 #: includes/Library/Query.php:70
 msgid "Downloads"
@@ -1547,7 +1547,7 @@ msgid "Short dates (Sep 25, 2026) or your site's date format in libraries, lists
 msgstr ""
 
 #: includes/Admin/DocsContent.php:336
-#: includes/Admin/Upsell.php:404
+#: includes/Admin/Upsell.php:411
 msgid "Setting"
 msgstr ""
 
@@ -1606,7 +1606,7 @@ msgid "Restricted documents in lists (lock or hide), protect files automatically
 msgstr ""
 
 #: includes/Admin/DocsContent.php:354
-#: includes/Admin/Upsell.php:408
+#: includes/Admin/Upsell.php:415
 msgid "Secure viewer"
 msgstr ""
 
@@ -2465,7 +2465,7 @@ msgstr ""
 #: includes/Admin/Documents.php:471
 #: includes/Admin/Nudges.php:94
 #: includes/Admin/Settings/Viewer.php:75
-#: includes/Admin/Upsell.php:274
+#: includes/Admin/Upsell.php:281
 #: assets/build/document-editor.js:1
 msgid "See how Pro does this"
 msgstr ""
@@ -2485,7 +2485,7 @@ msgstr ""
 
 #: includes/Admin/Main.php:73
 #: includes/Admin/Main.php:91
-#: includes/Admin/views/html-admin-settings.php:58
+#: includes/Admin/views/html-admin-settings.php:60
 msgid "Settings"
 msgstr ""
 
@@ -2534,7 +2534,7 @@ msgid "No documents from Document Library (Barn2), Download Monitor, WordPress D
 msgstr ""
 
 #: includes/Admin/Migrate.php:138
-#: includes/Admin/Upsell.php:385
+#: includes/Admin/Upsell.php:392
 msgid "Found"
 msgstr ""
 
@@ -3975,7 +3975,7 @@ msgid "Upload a new version straight from the documents list"
 msgstr ""
 
 #: includes/Admin/Upsell.php:94
-#: includes/Admin/Upsell.php:410
+#: includes/Admin/Upsell.php:417
 msgid "Read and confirm"
 msgstr ""
 
@@ -4101,396 +4101,396 @@ msgid "Import"
 msgstr ""
 
 #: includes/Admin/Upsell.php:191
-#: includes/Admin/Upsell.php:204
+#: includes/Admin/Upsell.php:211
 msgid "Available in Document Engine Pro."
 msgstr ""
 
-#: includes/Admin/Upsell.php:232
+#: includes/Admin/Upsell.php:239
 msgid "See plans and pricing"
 msgstr ""
 
-#: includes/Admin/Upsell.php:234
+#: includes/Admin/Upsell.php:241
 msgid "Ask your administrator"
 msgstr ""
 
-#: includes/Admin/Upsell.php:236
+#: includes/Admin/Upsell.php:243
 msgid "Compare free and Pro"
 msgstr ""
 
 #. translators: %s: feature name
-#: includes/Admin/Upsell.php:254
+#: includes/Admin/Upsell.php:261
 #, php-format
 msgid "Could we add %s to our document library?"
 msgstr ""
 
-#: includes/Admin/Upsell.php:271
+#: includes/Admin/Upsell.php:278
 msgid "Who can open these documents"
 msgstr ""
 
-#: includes/Admin/Upsell.php:273
+#: includes/Admin/Upsell.php:280
 msgid "Who can open these documents (available in Pro)"
 msgstr ""
 
-#: includes/Admin/Upsell.php:273
+#: includes/Admin/Upsell.php:280
 msgid "Everyone"
 msgstr ""
 
-#: includes/Admin/Upsell.php:274
+#: includes/Admin/Upsell.php:281
 msgid "Pro limits a whole category to logged-in users, roles, named people or one shared password, and keeps its files private."
 msgstr ""
 
-#: includes/Admin/Upsell.php:282
+#: includes/Admin/Upsell.php:289
 msgid "Access & security"
 msgstr ""
 
-#: includes/Admin/Upsell.php:317
+#: includes/Admin/Upsell.php:324
 msgid "What it looks like"
 msgstr ""
 
-#: includes/Admin/Upsell.php:317
+#: includes/Admin/Upsell.php:324
 msgid "Example data"
 msgstr ""
 
-#: includes/Admin/Upsell.php:318
+#: includes/Admin/Upsell.php:325
 msgid "Example of the Pro screen, not your data"
 msgstr ""
 
-#: includes/Admin/Upsell.php:320
+#: includes/Admin/Upsell.php:327
 msgid "Views"
 msgstr ""
 
-#: includes/Admin/Upsell.php:320
+#: includes/Admin/Upsell.php:327
 msgid "People"
 msgstr ""
 
-#: includes/Admin/Upsell.php:320
 #: includes/Admin/Upsell.php:327
+#: includes/Admin/Upsell.php:334
 msgid "Blocked"
 msgstr ""
 
-#: includes/Admin/Upsell.php:323
-#: includes/Admin/Upsell.php:354
-#: includes/Admin/Upsell.php:374
-#: includes/Admin/Upsell.php:395
+#: includes/Admin/Upsell.php:330
+#: includes/Admin/Upsell.php:361
+#: includes/Admin/Upsell.php:381
+#: includes/Admin/Upsell.php:402
 msgid "When"
 msgstr ""
 
-#: includes/Admin/Upsell.php:323
+#: includes/Admin/Upsell.php:330
 msgid "Event"
 msgstr ""
 
-#: includes/Admin/Upsell.php:323
-#: includes/Admin/Upsell.php:364
-#: includes/Admin/Upsell.php:395
+#: includes/Admin/Upsell.php:330
+#: includes/Admin/Upsell.php:371
+#: includes/Admin/Upsell.php:402
 #: includes/Documents/PostType.php:96
 #: includes/Integrations/Elementor/DownloadWidget.php:49
 #: includes/Integrations/Elementor/ViewerWidget.php:50
 msgid "Document"
 msgstr ""
 
-#: includes/Admin/Upsell.php:323
-#: includes/Admin/Upsell.php:374
+#: includes/Admin/Upsell.php:330
+#: includes/Admin/Upsell.php:381
 msgid "Who"
 msgstr ""
 
-#: includes/Admin/Upsell.php:325
+#: includes/Admin/Upsell.php:332
 msgid "2 minutes ago"
 msgstr ""
 
-#: includes/Admin/Upsell.php:325
+#: includes/Admin/Upsell.php:332
 msgid "Viewed"
 msgstr ""
 
-#: includes/Admin/Upsell.php:325
+#: includes/Admin/Upsell.php:332
 msgid "Code of Conduct"
 msgstr ""
 
-#: includes/Admin/Upsell.php:326
+#: includes/Admin/Upsell.php:333
 msgid "1 hour ago"
 msgstr ""
 
-#: includes/Admin/Upsell.php:326
+#: includes/Admin/Upsell.php:333
 msgid "Downloaded"
 msgstr ""
 
-#: includes/Admin/Upsell.php:326
-#: includes/Admin/Upsell.php:368
+#: includes/Admin/Upsell.php:333
+#: includes/Admin/Upsell.php:375
 msgid "Budget 2026/27"
 msgstr ""
 
-#: includes/Admin/Upsell.php:327
+#: includes/Admin/Upsell.php:334
 msgid "3 hours ago"
 msgstr ""
 
-#: includes/Admin/Upsell.php:327
+#: includes/Admin/Upsell.php:334
 msgid "Staff Handbook"
 msgstr ""
 
-#: includes/Admin/Upsell.php:327
+#: includes/Admin/Upsell.php:334
 msgid "Visitor"
 msgstr ""
 
-#: includes/Admin/Upsell.php:328
-#: includes/Admin/Upsell.php:378
-#: includes/Admin/Upsell.php:379
-#: includes/Admin/Upsell.php:398
+#: includes/Admin/Upsell.php:335
+#: includes/Admin/Upsell.php:385
+#: includes/Admin/Upsell.php:386
+#: includes/Admin/Upsell.php:405
 msgid "Yesterday"
 msgstr ""
 
-#: includes/Admin/Upsell.php:328
-#: includes/Admin/Upsell.php:409
+#: includes/Admin/Upsell.php:335
+#: includes/Admin/Upsell.php:416
 msgid "Share link"
 msgstr ""
 
-#: includes/Admin/Upsell.php:328
-#: includes/Admin/Upsell.php:398
+#: includes/Admin/Upsell.php:335
+#: includes/Admin/Upsell.php:405
 msgid "Annual Report"
 msgstr ""
 
-#: includes/Admin/Upsell.php:328
+#: includes/Admin/Upsell.php:335
 msgid "External auditor"
 msgstr ""
 
-#: includes/Admin/Upsell.php:334
+#: includes/Admin/Upsell.php:341
 msgid "Result"
 msgstr ""
 
-#: includes/Admin/Upsell.php:336
-#: includes/Admin/Upsell.php:337
+#: includes/Admin/Upsell.php:343
+#: includes/Admin/Upsell.php:344
 msgid "Created"
 msgstr ""
 
-#: includes/Admin/Upsell.php:338
+#: includes/Admin/Upsell.php:345
 msgid "Updated (new version)"
 msgstr ""
 
-#: includes/Admin/Upsell.php:344
+#: includes/Admin/Upsell.php:351
 #: includes/Diagnostics/SiteHealth.php:68
 msgid "Version"
 msgstr ""
 
-#: includes/Admin/Upsell.php:344
+#: includes/Admin/Upsell.php:351
 msgid "Uploaded"
 msgstr ""
 
-#: includes/Admin/Upsell.php:344
+#: includes/Admin/Upsell.php:351
 msgid "By"
 msgstr ""
 
-#: includes/Admin/Upsell.php:346
-#: includes/Admin/Upsell.php:397
+#: includes/Admin/Upsell.php:353
+#: includes/Admin/Upsell.php:404
 msgid "Today"
 msgstr ""
 
-#: includes/Admin/Upsell.php:346
+#: includes/Admin/Upsell.php:353
 msgid "Updated for the 2026 rates"
 msgstr ""
 
-#: includes/Admin/Upsell.php:347
+#: includes/Admin/Upsell.php:354
 msgid "12 March"
 msgstr ""
 
-#: includes/Admin/Upsell.php:347
+#: includes/Admin/Upsell.php:354
 msgid "Corrected appendix B"
 msgstr ""
 
-#: includes/Admin/Upsell.php:348
+#: includes/Admin/Upsell.php:355
 msgid "9 January"
 msgstr ""
 
-#: includes/Admin/Upsell.php:348
+#: includes/Admin/Upsell.php:355
 msgid "First published"
 msgstr ""
 
-#: includes/Admin/Upsell.php:354
+#: includes/Admin/Upsell.php:361
 msgid "Person"
 msgstr ""
 
-#: includes/Admin/Upsell.php:354
+#: includes/Admin/Upsell.php:361
 msgid "File fingerprint"
 msgstr ""
 
-#: includes/Admin/Upsell.php:356
-#: includes/Admin/Upsell.php:357
+#: includes/Admin/Upsell.php:363
+#: includes/Admin/Upsell.php:364
 msgid "Confirmed"
 msgstr ""
 
-#: includes/Admin/Upsell.php:356
+#: includes/Admin/Upsell.php:363
 msgid "2 October"
 msgstr ""
 
-#: includes/Admin/Upsell.php:357
+#: includes/Admin/Upsell.php:364
 msgid "3 October"
 msgstr ""
 
-#: includes/Admin/Upsell.php:358
+#: includes/Admin/Upsell.php:365
 msgid "Overdue, reminder sent"
 msgstr ""
 
-#: includes/Admin/Upsell.php:364
+#: includes/Admin/Upsell.php:371
 msgid "Reference"
 msgstr ""
 
-#: includes/Admin/Upsell.php:364
+#: includes/Admin/Upsell.php:371
 msgid "Department"
 msgstr ""
 
-#: includes/Admin/Upsell.php:364
+#: includes/Admin/Upsell.php:371
 msgid "Files"
 msgstr ""
 
-#: includes/Admin/Upsell.php:366
+#: includes/Admin/Upsell.php:373
 msgid "Expenses Policy"
 msgstr ""
 
-#: includes/Admin/Upsell.php:366
-#: includes/Admin/Upsell.php:368
+#: includes/Admin/Upsell.php:373
+#: includes/Admin/Upsell.php:375
 msgid "Finance"
 msgstr ""
 
-#: includes/Admin/Upsell.php:367
+#: includes/Admin/Upsell.php:374
 msgid "Planning Minutes, May"
 msgstr ""
 
-#: includes/Admin/Upsell.php:367
+#: includes/Admin/Upsell.php:374
 msgid "Planning"
 msgstr ""
 
-#: includes/Admin/Upsell.php:374
+#: includes/Admin/Upsell.php:381
 msgid "Change"
 msgstr ""
 
-#: includes/Admin/Upsell.php:374
+#: includes/Admin/Upsell.php:381
 msgid "Details"
 msgstr ""
 
-#: includes/Admin/Upsell.php:376
+#: includes/Admin/Upsell.php:383
 msgid "Today 09:14"
 msgstr ""
 
-#: includes/Admin/Upsell.php:376
+#: includes/Admin/Upsell.php:383
 msgid "Approved"
 msgstr ""
 
-#: includes/Admin/Upsell.php:376
+#: includes/Admin/Upsell.php:383
 msgid "Expenses Policy · sha256 9f3c…a1e4"
 msgstr ""
 
-#: includes/Admin/Upsell.php:377
+#: includes/Admin/Upsell.php:384
 msgid "Today 09:02"
 msgstr ""
 
-#: includes/Admin/Upsell.php:377
+#: includes/Admin/Upsell.php:384
 msgid "Sent for approval"
 msgstr ""
 
-#: includes/Admin/Upsell.php:377
+#: includes/Admin/Upsell.php:384
 msgid "Expenses Policy (draft → pending)"
 msgstr ""
 
-#: includes/Admin/Upsell.php:378
+#: includes/Admin/Upsell.php:385
 msgid "Access changed"
 msgstr ""
 
-#: includes/Admin/Upsell.php:378
+#: includes/Admin/Upsell.php:385
 msgid "Staff Handbook · who can open it: everyone → roles"
 msgstr ""
 
-#: includes/Admin/Upsell.php:379
+#: includes/Admin/Upsell.php:386
 msgid "Legal hold set"
 msgstr ""
 
-#: includes/Admin/Upsell.php:379
+#: includes/Admin/Upsell.php:386
 msgid "Contract 2024-17 · dispute with supplier"
 msgstr ""
 
-#: includes/Admin/Upsell.php:385
+#: includes/Admin/Upsell.php:392
 #: includes/Library/Library.php:203
 #: includes/Library/SearchBox.php:118
 msgid "Search"
 msgstr ""
 
-#: includes/Admin/Upsell.php:385
+#: includes/Admin/Upsell.php:392
 msgid "Searches"
 msgstr ""
 
-#: includes/Admin/Upsell.php:387
+#: includes/Admin/Upsell.php:394
 msgid "3 documents (inside the files)"
 msgstr ""
 
-#: includes/Admin/Upsell.php:388
+#: includes/Admin/Upsell.php:395
 msgid "1 document"
 msgstr ""
 
-#: includes/Admin/Upsell.php:389
+#: includes/Admin/Upsell.php:396
 msgid "Nothing: you may want to publish this"
 msgstr ""
 
-#: includes/Admin/Upsell.php:395
+#: includes/Admin/Upsell.php:402
 msgid "Email"
 msgstr ""
 
-#: includes/Admin/Upsell.php:397
+#: includes/Admin/Upsell.php:404
 msgid "Park Masterplan"
 msgstr ""
 
-#: includes/Admin/Upsell.php:404
+#: includes/Admin/Upsell.php:411
 msgid "This document"
 msgstr ""
 
-#: includes/Admin/Upsell.php:406
+#: includes/Admin/Upsell.php:413
 msgid "Who can open it"
 msgstr ""
 
-#: includes/Admin/Upsell.php:406
+#: includes/Admin/Upsell.php:413
 msgid "Logged-in users"
 msgstr ""
 
-#: includes/Admin/Upsell.php:407
+#: includes/Admin/Upsell.php:414
 msgid "Private file storage"
 msgstr ""
 
-#: includes/Admin/Upsell.php:407
+#: includes/Admin/Upsell.php:414
 msgid "On (the file is out of the public uploads folder)"
 msgstr ""
 
-#: includes/Admin/Upsell.php:408
+#: includes/Admin/Upsell.php:415
 msgid "On: read-only, \"Sam Carter · sam@example.org\" on every page"
 msgstr ""
 
-#: includes/Admin/Upsell.php:409
+#: includes/Admin/Upsell.php:416
 msgid "External auditor · expires in 7 days · opened twice"
 msgstr ""
 
-#: includes/Admin/Upsell.php:410
+#: includes/Admin/Upsell.php:417
 msgid "5 of 6 staff confirmed · due 10 October"
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:42
+#: includes/Admin/views/html-admin-settings.php:44
 msgid "How documents behave across your site: pages, links, search and download counting."
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:43
+#: includes/Admin/views/html-admin-settings.php:45
 msgid "The built-in PDF viewer runs on your own site. Nothing is sent to Google or anyone else."
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:44
+#: includes/Admin/views/html-admin-settings.php:46
 msgid "Let visitors download posts and pages as branded PDFs."
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:45
+#: includes/Admin/views/html-admin-settings.php:47
 msgid "Performance and data options."
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:46
+#: includes/Admin/views/html-admin-settings.php:48
 msgid "Access control, secure viewing, activity log, email gate and workflows."
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:47
+#: includes/Admin/views/html-admin-settings.php:49
 msgid "Activate your license for one-click updates and support."
 msgstr ""
 
-#: includes/Admin/views/html-admin-settings.php:105
+#: includes/Admin/views/html-admin-settings.php:107
 msgid "Save changes"
 msgstr ""
 

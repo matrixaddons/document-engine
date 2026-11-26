@@ -186,12 +186,19 @@ class Upsell
             if (!isset($features[$feature])) {
                 continue;
             }
-            add_submenu_page($parent, $features[$feature]['title'], $feature === 'activity' ? __('Activity', 'document-engine') : __('Import', 'document-engine'), $caps[$slug], $slug, function () use ($feature) {
+            $hook = add_submenu_page($parent, $features[$feature]['title'], $feature === 'activity' ? __('Activity', 'document-engine') : __('Import', 'document-engine'), $caps[$slug], $slug, function () use ($feature) {
                 $features = self::features();
                 UI::page_start($features[$feature]['title'], esc_html__('Available in Document Engine Pro.', 'document-engine'));
                 self::preview($features[$feature], $feature);
                 echo self::sample($feature); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 UI::page_end();
+            });
+            // Grouped screens are hidden from the menu, which leaves them without a browser title.
+            $title = $features[$feature]['title'];
+            add_action('load-' . $hook, function () use ($title) {
+                if (empty($GLOBALS['title'])) {
+                    $GLOBALS['title'] = $title; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+                }
             });
         }
     }
