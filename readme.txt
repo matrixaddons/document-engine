@@ -4,7 +4,7 @@ Tags: document library, pdf viewer, embed pdf, download manager, document manage
 Requires at least: 6.6
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -298,6 +298,11 @@ All attributes are listed in **Documents → Docs → Developers**.
 
 == Changelog ==
 
+= 2.3.2 - 2026-11-27 =
+* Fixed - Library filters ignored categories and tags whose names use other alphabets (Cyrillic, Greek, Chinese, Arabic and others) and showed every document instead.
+* Fixed - A library limited to some categories offered every tag on the site, many of which then showed nothing. Category, tag and file type filters now list only what that library contains.
+* Fixed - With Document Engine Pro hiding restricted documents, filter counts no longer include documents the visitor can't see.
+
 = 2.3.1 - 2026-11-26 =
 * Compatibility - Tested with WordPress 7.2 and its new default theme, Ipsum, on PHP 7.4, 8.3 and 8.5.
 * Fixed - Opening a settings tab that no longer exists (for example after switching off Document Engine Pro) now shows the first tab instead of logging a "headers already sent" warning.
@@ -410,6 +415,9 @@ All attributes are listed in **Documents → Docs → Developers**.
 * Fixed - Setting page design
 
 == Upgrade Notice ==
+
+= 2.3.2 =
+Fixes category and tag filters for names in other alphabets, and filter counts. Recommended for everyone using filters.
 
 = 2.3.1 =
 Ready for WordPress 7.2, with two small admin fixes.

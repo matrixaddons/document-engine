@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Document Engine 2.3.1\n"
+"Project-Id-Version: Document Engine 2.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/document-engine\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-26T06:08:32+00:00\n"
+"POT-Creation-Date: 2026-11-27T03:04:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: document-engine\n"
@@ -263,7 +263,7 @@ msgid "Done"
 msgstr ""
 
 #: includes/Accessibility/Requests.php:378
-#: includes/Library/Library.php:802
+#: includes/Library/Library.php:847
 #: assets/build/document-editor.js:1
 msgid "Open"
 msgstr ""
@@ -1497,8 +1497,8 @@ msgstr ""
 #: includes/Assets.php:83
 #: includes/Integrations/Elementor/DownloadWidget.php:48
 #: includes/Integrations/Elementor/DownloadWidget.php:51
-#: includes/Library/Library.php:802
-#: includes/Library/Library.php:865
+#: includes/Library/Library.php:847
+#: includes/Library/Library.php:910
 #: includes/Library/Query.php:71
 #: templates/viewer/viewer.php:66
 msgid "Download"
@@ -2338,7 +2338,7 @@ msgid "Filter by file type"
 msgstr ""
 
 #: includes/Admin/Documents.php:109
-#: includes/Library/Library.php:172
+#: includes/Library/Library.php:178
 msgid "All file types"
 msgstr ""
 
@@ -4405,7 +4405,7 @@ msgid "Contract 2024-17 · dispute with supplier"
 msgstr ""
 
 #: includes/Admin/Upsell.php:392
-#: includes/Library/Library.php:203
+#: includes/Library/Library.php:209
 #: includes/Library/SearchBox.php:118
 msgid "Search"
 msgstr ""
@@ -4943,25 +4943,25 @@ msgid "Filters"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:152
+#: includes/Library/Library.php:158
 #: includes/Library/Query.php:91
 msgid "Tag"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:172
+#: includes/Library/Library.php:178
 #: includes/Library/Query.php:92
 msgid "File type"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:178
+#: includes/Library/Library.php:184
 #: includes/Library/Query.php:93
 msgid "Year"
 msgstr ""
 
 #: includes/Integrations/Elementor/LibraryWidget.php:55
-#: includes/Library/Library.php:184
+#: includes/Library/Library.php:190
 #: includes/Library/Query.php:69
 #: includes/Library/Query.php:94
 msgid "Author"
@@ -5080,118 +5080,118 @@ msgstr ""
 msgid "Search documents…"
 msgstr ""
 
-#: includes/Library/Library.php:152
+#: includes/Library/Library.php:158
 msgid "All tags"
 msgstr ""
 
-#: includes/Library/Library.php:178
+#: includes/Library/Library.php:184
 msgid "All years"
 msgstr ""
 
-#: includes/Library/Library.php:184
+#: includes/Library/Library.php:190
 msgid "All authors"
 msgstr ""
 
-#: includes/Library/Library.php:197
+#: includes/Library/Library.php:203
 msgid "Sort by"
 msgstr ""
 
-#: includes/Library/Library.php:197
+#: includes/Library/Library.php:203
 msgid "Default order"
 msgstr ""
 
 #. translators: %s: search terms
-#: includes/Library/Library.php:430
+#: includes/Library/Library.php:475
 #, php-format
 msgid "“%s”"
 msgstr ""
 
 #. translators: %s: number of documents
-#: includes/Library/Library.php:464
+#: includes/Library/Library.php:509
 #, php-format
 msgid "%s document"
 msgid_plural "%s documents"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Library/Library.php:468
+#: includes/Library/Library.php:513
 msgid "Remove filter"
 msgstr ""
 
-#: includes/Library/Library.php:471
+#: includes/Library/Library.php:516
 msgid "Clear all"
 msgstr ""
 
-#: includes/Library/Library.php:505
+#: includes/Library/Library.php:550
 msgid "Other documents"
 msgstr ""
 
 #. translators: %d: number of documents
-#: includes/Library/Library.php:543
+#: includes/Library/Library.php:588
 #, php-format
 msgid "Show all %d documents"
 msgstr ""
 
 #. translators: %s: column name
-#: includes/Library/Library.php:597
+#: includes/Library/Library.php:642
 #, php-format
 msgid "Sort by %s"
 msgstr ""
 
-#: includes/Library/Library.php:606
-#: includes/Library/Library.php:615
+#: includes/Library/Library.php:651
+#: includes/Library/Library.php:660
 msgid "Documents pages"
 msgstr ""
 
 #. translators: 1: documents shown, 2: total documents
-#: includes/Library/Library.php:608
+#: includes/Library/Library.php:653
 #, php-format
 msgid "Showing %1$s of %2$s documents"
 msgstr ""
 
-#: includes/Library/Library.php:610
+#: includes/Library/Library.php:655
 msgid "Load more"
 msgstr ""
 
 #. translators: 1: current page, 2: total pages, 3: number of documents
-#: includes/Library/Library.php:618
+#: includes/Library/Library.php:663
 #, php-format
 msgid "Page %1$d of %2$d · %3$s documents"
 msgstr ""
 
-#: includes/Library/Library.php:626
+#: includes/Library/Library.php:671
 msgid "Previous"
 msgstr ""
 
-#: includes/Library/Library.php:641
+#: includes/Library/Library.php:686
 msgid "Next"
 msgstr ""
 
 #. translators: %s: document title
-#: includes/Library/Library.php:797
+#: includes/Library/Library.php:842
 #, php-format
 msgid "View %s"
 msgstr ""
 
-#: includes/Library/Library.php:799
+#: includes/Library/Library.php:844
 msgid "View"
 msgstr ""
 
 #. translators: 1: Download/Open, 2: document title
-#: includes/Library/Library.php:805
+#: includes/Library/Library.php:850
 #, php-format
 msgid "%1$s %2$s"
 msgstr ""
 
-#: includes/Library/Library.php:823
+#: includes/Library/Library.php:868
 msgid "Password"
 msgstr ""
 
-#: includes/Library/Library.php:823
+#: includes/Library/Library.php:868
 msgid "Members only"
 msgstr ""
 
-#: includes/Library/Library.php:856
+#: includes/Library/Library.php:901
 msgid "Choose a published document for this download block."
 msgstr ""
 

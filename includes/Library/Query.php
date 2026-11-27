@@ -214,7 +214,11 @@ class Query
             $out = array();
             foreach ($items as $item) {
                 if (is_scalar($item)) {
-                    $item = call_user_func($clean, sanitize_text_field(wp_unslash((string)$item)));
+                    // Category and tag slugs in other scripts (Cyrillic, Greek, Chinese…) are stored percent-encoded
+                    // ("%d1%84…"), which is what the filter sends. sanitize_text_field() strips "%xx", which emptied
+                    // them and silently dropped the filter: decode first, and let sanitize_title() encode it back.
+                    $item = (string)wp_unslash((string)$item);
+                    $item = $clean === 'sanitize_title' ? sanitize_title(rawurldecode($item)) : call_user_func($clean, sanitize_text_field($item));
                     if ($item !== '' && !in_array($item, $out, true)) {
                         $out[] = $item;
                     }

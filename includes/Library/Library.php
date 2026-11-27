@@ -137,16 +137,22 @@ class Library
                 }
             };
             if (in_array('category', $filters, true)) {
-                $terms = self::category_options($settings);
+                $terms = self::category_options($settings, $state);
                 if ($terms) {
                     $choice('cat', __('Category', 'document-engine'), __('All categories', 'document-engine'), $terms);
                 }
             }
             if (in_array('tag', $filters, true)) {
                 $tags = get_terms(array('taxonomy' => PostType::TAG, 'hide_empty' => true, 'slug' => $settings['tags'] ?: '', 'number' => 200));
+                // Only tags of documents this library can show, counted among them.
+                $tag_counts = self::scope_term_counts($settings, PostType::TAG);
+                $picked_tags = Query::values($state['tag']);
                 $options = array();
                 foreach (is_array($tags) ? $tags : array() as $tag) {
-                    $options[$tag->slug] = $tag->name . ' (' . number_format_i18n($tag->count) . ')';
+                    $n = isset($tag_counts[$tag->term_id]) ? $tag_counts[$tag->term_id] : 0;
+                    if ($n || in_array($tag->slug, $picked_tags, true)) {
+                        $options[$tag->slug] = $tag->name . ' (' . number_format_i18n($n) . ')';
+                    }
                 }
                 if ($options) {
                     $choice('tag', __('Tag', 'document-engine'), __('All tags', 'document-engine'), $options);
@@ -255,46 +261,81 @@ class Library
     }
 
     /**
+     * IDs of every document this library can show to the current visitor before any filter is picked:
+     * its own categories, tags, file types and included or excluded documents, and what the visitor may
+     * see (an add-on can hide restricted documents). Filter options and their counts come from this set,
+     * so a filter never offers something that then shows nothing.
+     *
+     * @return int[]
+     */
+    private static function scope_ids($settings)
+    {
+        static $cache = array();
+        $key = md5(wp_json_encode(array($settings, get_current_user_id())));
+        if (!isset($cache[$key])) {
+            $query = Query::run($settings, Query::state($settings, array()), array(
+                'fields' => 'ids',
+                'posts_per_page' => -1,
+                'paged' => 1,
+                'no_found_rows' => true,
+                'orderby' => 'ID',
+                'order' => 'ASC',
+                'update_post_meta_cache' => false,
+                'update_post_term_cache' => false,
+            ));
+            $cache[$key] = array_map('intval', (array)$query->posts);
+        }
+        return $cache[$key];
+    }
+
+    /**
+     * Documents per term among this library's documents. Categories count their sub-categories' documents
+     * too, once each, like the results when the category is picked.
+     *
+     * @return array term_id => count
+     */
+    private static function scope_term_counts($settings, $taxonomy)
+    {
+        $ids = self::scope_ids($settings);
+        if (!$ids) {
+            return array();
+        }
+        global $wpdb;
+        $pairs = array();
+        foreach (array_chunk($ids, 1000) as $chunk) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- the IN list holds only integers
+            $rows = $wpdb->get_results($wpdb->prepare("SELECT tr.object_id AS doc, tt.term_id AS term FROM {$wpdb->term_relationships} tr INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id WHERE tt.taxonomy = %s AND tr.object_id IN (" . implode(',', array_map('absint', $chunk)) . ')', $taxonomy));
+            foreach ((array)$rows as $row) {
+                $pairs[] = array((int)$row->doc, (int)$row->term);
+            }
+        }
+        $docs = array();
+        $hierarchical = is_taxonomy_hierarchical($taxonomy);
+        foreach ($pairs as $pair) {
+            $terms = $hierarchical ? array_merge(array($pair[1]), get_ancestors($pair[1], $taxonomy, 'taxonomy')) : array($pair[1]);
+            foreach ($terms as $term_id) {
+                $docs[(int)$term_id][$pair[0]] = true;
+            }
+        }
+        return array_map('count', $docs);
+    }
+
+    /**
      * Published documents per file-type group (pdf, word, image…), cached until a document changes.
      */
     private static function type_counts($settings = array())
     {
-        // A library limited to some categories or tags counts only what it can show.
-        $scope = array();
-        foreach (array(PostType::CATEGORY => 'categories', PostType::TAG => 'tags') as $taxonomy => $key) {
-            $slugs = empty($settings[$key]) ? array() : (array)$settings[$key];
-            $ids = array();
-            foreach ($slugs as $slug) {
-                $term = get_term_by('slug', $slug, $taxonomy);
-                if ($term) {
-                    $ids[] = (int)$term->term_taxonomy_id;
-                    foreach (is_taxonomy_hierarchical($taxonomy) ? (array)get_term_children($term->term_id, $taxonomy) : array() as $child) {
-                        $child_term = get_term($child, $taxonomy);
-                        if ($child_term instanceof \WP_Term) {
-                            $ids[] = (int)$child_term->term_taxonomy_id;
-                        }
-                    }
-                }
-            }
-            if ($slugs) {
-                $scope[] = $ids ? $ids : array(0);
-            }
+        // Counted among the documents this library can show (its categories, tags and what the visitor may see).
+        $ids = self::scope_ids($settings);
+        $counts = array();
+        if (!$ids) {
+            return $counts;
         }
-        $counts = $scope ? false : get_transient('dengine_library_types');
-        if (!is_array($counts)) {
-            global $wpdb;
-            $where = '';
-            foreach ($scope as $ids) {
-                $where .= " AND p.ID IN (SELECT object_id FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN (" . implode(',', array_map('absint', $ids)) . '))';
-            }
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared -- $where holds only integers
-            $rows = $wpdb->get_results($wpdb->prepare(
-                "SELECT pm.meta_value AS ext, COUNT(*) AS n FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE pm.meta_key = %s AND p.post_type = %s AND p.post_status = 'publish'{$where} GROUP BY pm.meta_value",
-                Document::META_FILE_TYPE,
-                PostType::POST_TYPE
-            ));
-            $counts = array();
-            $known = Query::all_known_extensions();
+        global $wpdb;
+        $known = Query::all_known_extensions();
+        foreach (array_chunk($ids, 1000) as $chunk) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- the IN list holds only integers
+            $rows = $wpdb->get_results($wpdb->prepare("SELECT meta_value AS ext, COUNT(*) AS n FROM {$wpdb->postmeta} WHERE meta_key = %s AND post_id IN (" . implode(',', array_map('absint', $chunk)) . ') GROUP BY meta_value', Document::META_FILE_TYPE));
             foreach ((array)$rows as $row) {
                 $group = 'other';
                 if (in_array($row->ext, $known, true)) {
@@ -306,9 +347,6 @@ class Library
                     }
                 }
                 $counts[$group] = (isset($counts[$group]) ? $counts[$group] : 0) + (int)$row->n;
-            }
-            if (!$scope) {
-                set_transient('dengine_library_types', $counts, DAY_IN_SECONDS);
             }
         }
         return $counts;
@@ -327,9 +365,11 @@ class Library
     /**
      * Category dropdown options, indented by depth and limited to the library's own categories.
      */
-    private static function category_options($settings)
+    private static function category_options($settings, $state = array('cat' => ''))
     {
-        $args = array('taxonomy' => PostType::CATEGORY, 'hide_empty' => true, 'orderby' => 'name');
+        // Not hide_empty: a category whose documents are all in sub-categories counts as empty in WordPress, and
+        // hiding it hid its sub-categories too. Empty ones are dropped below, by their count in this library.
+        $args = array('taxonomy' => PostType::CATEGORY, 'hide_empty' => false, 'orderby' => 'name');
         $roots = array();
         if (!empty($settings['categories'])) {
             foreach ($settings['categories'] as $slug) {
@@ -340,26 +380,31 @@ class Library
             }
         }
         $options = array();
-        // A category's count includes its sub-categories, like the results when it is picked.
-        $counts = array();
-        foreach ((array)get_terms(array_merge($args, array('pad_counts' => true))) as $term) {
-            if ($term instanceof \WP_Term) {
-                $counts[$term->term_id] = (int)$term->count;
-            }
-        }
+        // Counted among the documents this library can show, sub-categories included.
+        $counts = self::scope_term_counts($settings, PostType::CATEGORY);
+        $picked = Query::values($state['cat']);
         $count = function ($term) use ($counts) {
-            return number_format_i18n(isset($counts[$term->term_id]) ? $counts[$term->term_id] : $term->count);
+            return isset($counts[$term->term_id]) ? $counts[$term->term_id] : 0;
         };
-        $walk = function ($parent, $depth) use (&$walk, &$options, $args, $count) {
+        $walk = function ($parent, $depth) use (&$walk, &$options, $args, $count, $picked) {
             $terms = get_terms(array_merge($args, array('parent' => $parent)));
             foreach (is_array($terms) ? $terms : array() as $term) {
-                $options[$term->slug] = str_repeat('— ', $depth) . $term->name . ' (' . $count($term) . ')';
+                $n = $count($term);
+                // A category with nothing to show here is left out, unless the visitor already picked it.
+                if (!$n && !in_array($term->slug, $picked, true)) {
+                    continue;
+                }
+                $options[$term->slug] = str_repeat('— ', $depth) . $term->name . ' (' . number_format_i18n($n) . ')';
                 $walk($term->term_id, $depth + 1);
             }
         };
         if ($roots) {
             foreach ($roots as $root) {
-                $options[$root->slug] = $root->name . ' (' . $count($root) . ')';
+                $n = $count($root);
+                if (!$n && !in_array($root->slug, $picked, true)) {
+                    continue;
+                }
+                $options[$root->slug] = $root->name . ' (' . number_format_i18n($n) . ')';
                 $walk($root->term_id, 1);
             }
         } else {
